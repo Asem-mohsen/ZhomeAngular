@@ -1,0 +1,129 @@
+section.MainFooter {
+    background-color: #ededed;
+    padding-bottom: 20px;
+  }
+  .Footer {
+    margin-top: 69px;
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+  }
+  .Footer .left-footer {
+    margin-left: 36px;
+    margin-top: 90px;
+  }
+  .left-footer h2 {
+    text-align: center;
+    color: white;
+    font-size: 21px;
+    background-color: var(--MainColor);
+    width: 105px;
+    height: 105px;
+    display: grid;
+    align-items: center;
+  }
+  .left-footer h3 {
+    color: black;
+    margin-top: 22px;
+  }
+  .left-footer div.text-footer {
+    margin-top: 25px;
+  }
+  .left-footer p.Download {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .left-footer button {
+    border-radius: 28px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 150px;
+  }
+  .left-footer button i {
+    padding-right: 8px;
+    font-size: 20px;
+  }
+  .left-footer button:hover {
+  }
+  .Footer .right-footer {
+    margin-top: 90px;
+  }
+  .Footer .right-footer h3 {
+    color: black;
+    font-size: 24px;
+  }
+  .Footer .right-footer p {
+    font-size: 14px;
+  }
+  .Footer .right-footer input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    font-size: 19px;
+    width: 418px;
+  }
+  .Footer .right-footer .list {
+    display: flex;
+    margin-top: 58px;
+    gap: 118px;
+  }
+  .Footer .right-footer .list ul {
+    list-style: none;
+    padding: 0;
+  }
+  .Footer .right-footer .list li.First {
+    font-size: 23px;
+    color: black;
+  }
+  .Footer .right-footer .list li {
+    padding: 6px;
+    text-align: center;
+  }
+  .Footer .right-footer .list a {
+    color: #777777;
+  }
+  .Footer .right-footer .list a:hover {
+    color: var(--MainColor);
+  }
+  .copyright {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid white;
+    width: auto;
+    margin: auto;
+  }
+  .copyright .Lang {
+    margin-top: 20px;
+  }
+  .copyright .Lang a {
+    border: 1px solid #a8a8a8;
+    border-radius: 35px;
+    padding: 7px 24px;
+    font-size: 17px;
+    background-color: transparent;
+    display: flex;
+      place-items: center;
+      gap: 13px;
+  }
+  .copyright .Lang a img {
+    width: 30px;
+    height: 30px;
+  }
+  .copyright .copy {
+    margin-top: 30px;
+  }
+  
+  .copyright .Icons {
+    margin-top: 30px;
+  }
+  .copyright .Icons i {
+    color: #6e6e6e;
+    font-size: 21px;
+    padding-left: 8px;
+  }
+  

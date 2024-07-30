@@ -2,113 +2,7 @@
 
 
 
-.cta.ShopNowButton{
-    text-align: center;
-    display: block;
-}
-#cartDropdown p.TotalPriceCartIcon{
-    text-align: left;
-    font-size: 15px;
-    padding: 0 12px;
-}
 
-.search-popup__form button[type="submit"] {
-  background-color: var(--MainColor);
-}
-.search-popup__form button[type="submit"]:hover {
-  background-color: #302e2f;
-  color: #ffffff;
-}
-.small-sidenav-ul{
-    display: grid;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 25px;
-    color: #302e2f;
-    height: 100%;
-}
-.small-sidenav-ul li:hover a{
-    color: var(--MainColor) !important;
-}
-.cart-dropdown {
-    display: none;
-    position: fixed;
-    top: 308px;
-    right: 56px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 999;
-    max-width: 250px;
-    cursor: default;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-.minimizeCartBtn {
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 0;
-    color: red;
-}
-#cartIcon {
-    display: none;
-    position: fixed;
-    top: 254px;
-    right: 55px;
-    color: white;
-    background-color: var(--MainColor);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    /*box-shadow: -1px 1px 6px 9px #eee;*/
-    cursor: pointer;
-    z-index: 999;
-}
-#cartIcon i{
-    display: flex;
-    justify-content: center;
-    height: -webkit-fill-available;
-    align-items: center;
-}
-.cart-dropdown #productInfo{
-    display: grid;
-    text-align: left;
-    padding: 10px;
-    margin-bottom: 5px;
-    align-items: center;
-    gap: 10px;
-    cursor: default;
-        max-height: 300px;
-    overflow-y: scroll;
-}
-.cart-dropdown .cart-item{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #eeee;
-}
-.cart-dropdown .closeCartBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #c53535de;
-}
-.cart-dropdown #productInfo img{
-    width: 70px;
-    height: 70px;
-    object-fit: contain;
-}
-.cart-dropdown #productInfo p{
-    margin: 0;
-}
-
-div.dropbuttons{
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-}
 button.ContinuetoCheckoutDrop{
     margin: auto;
     display: block;
@@ -142,59 +36,7 @@ a.CartIconButton:hover{
 .cart-dropdown.active {
     display: block;
 }
-.small-sidenav{
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    border-left: 1px solid #eeee;
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
-    position: absolute;
-    right: 0;
-    width: -moz-available;
-      height: 100% !important;
-}
-a.ZhomeName{
-    color: white !important;
-    background-color: var(--MainColor);
-    font-size: 23px;
-    width: 120px;
-    text-align: center;
-    height: 91px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-.facebook-login-btn{
-  background-color: #3b5998;
-  color: white !important;
-  padding: 10px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.facebook-login-btn i{
-  color: white;
-  transition: transform 0.5s ease;
-}
-.facebook-login-btn span {
-  margin-left: 5px;
-  transition: opacity 0.5s ease;
-}
 
-.facebook-login-btn:hover i {
-  transform: translateX(70px);
-}
-
-.facebook-login-btn:hover span {
-  opacity: 0;
-}
 /* Index page */
 #StartYourSystem-Shop {
     margin-top: 66px;
@@ -3928,9 +3770,6 @@ button#downloadButton{
 .subscriptions span.asterisk {
     display:none !important;
 }
-.auth .login-form__form span.asterisk {
-    display:none !important;
-}
 
 .UserIconNotify::before{
     content: "";
@@ -4596,41 +4435,6 @@ div.BundlesButton{
 @media screen and (max-width: 767px) {
     body{
         overflow: auto !important;
-    }
-    #Zhomecontent section.auth .col-md-6.box.details{
-        display:none !important;
-
-    }
-    #Zhomecontent section.auth .wrapper{
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 30px;
-    }
-    #Zhomecontent section.auth {
-        display: block;
-    }
-    #Zhomecontent .small-sidenav {
-        display: block;
-        justify-content: center;
-        padding: 20px;
-        border-bottom: 1px solid #eeee;
-        width: -webkit-fill-available;
-        height: -webkit-fill-available;
-        position: relative;
-
-    }
-    #Zhomecontent .small-sidenav-ul {
-        display: flex;
-        justify-content: space-evenly;
-    }
-    #Zhomecontent a.ZhomeName {
-        width: 45%;
-    }
-    .auth .box .form {
-        width: 100% !important;
-    }
-    #Zhomecontent .login-form__title {
-        font-size: 29px;
     }
     .slider-one  .slider-one__slider-1 , .slider-one  .slider-one__slider-2{
         width: -webkit-fill-available !important;

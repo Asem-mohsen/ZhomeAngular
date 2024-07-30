@@ -22,4 +22,24 @@ html{
 }
 a {
   cursor: pointer;
+  text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+
+/* Icon */
+a.ZhomeName{
+    color: white !important;
+    background-color: var(--MainColor);
+    font-size: 23px;
+    width: 120px;
+    text-align: center;
+    height: 91px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 20px;
 }

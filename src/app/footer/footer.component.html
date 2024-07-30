@@ -96,6 +96,17 @@
                 <ul>
                     <li class="First">
                         @if (true){
+                            User
+                        }
+                        @else if (false){
+                            Admin
+                        }
+                        @else{
+                            User
+                        }
+                    </li>
+                    <li>
+                        @if (true){
                             <a routerLink="login">
                                 Join Us
                             </a>
@@ -150,55 +161,4 @@
     </div>
 </section>
 
-
-<!-- End -->
-<!-- <script src="{{ asset('UI/js/jquery-3.6.1.js') }}"></script>
-<script src="{{ asset('UI/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.bootstrap-touchspin.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.selectBoxIt.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('UI/js/bootoast.min.js') }}"></script>
-<script src="{{ asset('UI/js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('UI/js/isotope.js') }}"></script>
-<script src="{{ asset('UI/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('UI/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('UI/js/html2canvas.js') }}"></script>
-
-<script src="https://kit.fontawesome.com/39c3d46f9d.js" crossorigin="anonymous"></script>
-<script src="{{ asset('UI/js/nouislider.js') }}"></script>
-<script src="{{ asset('UI/js/wow.min.js') }}"></script>
-<script src="{{ asset('UI/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('UI/js/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('UI/js/waypoints.min.js') }}"></script>
-
-<script src="{{ asset('UI/js/theme.js') }}"></script>
-<script src="{{ asset('UI/js/Navbar.js') }}"></script>
-<script src="{{ asset('UI/js/popper.min.js') }}"></script> -->
-<!--End-->
-<!-- Swipper -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-<!-- End Swipper -->
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script src="{{ asset('UI/js/TweenMax.min.js') }}"></script>
-<script src="{{ asset('UI/js/paymob.js') }}"></script>
-<script src="{{ asset('UI/js/backend.js') }}"></script>
-<script src="{{ asset('UI/js/user.js') }}"></script> -->
-<!-- <script>
-    function toggleLanguage() {
-        var currentLocale = $('html').attr('lang');
-        var newLocale = currentLocale === 'en' ? 'ar' : 'en';
-
-        $.get('/language/' + newLocale, function() {
-            location.reload();
-        });
-    }
-</script> -->
 
