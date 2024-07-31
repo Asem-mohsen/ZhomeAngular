@@ -1,0 +1,169 @@
+#shop-background{
+  position: relative;
+  height: 100% !important;;
+}
+.site-banner h1.page-title {
+  font-size: 2.2em;
+  font-weight: 500;
+  line-height: 1em;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  color: black;
+  cursor: default;
+}
+.breadcrumbs {
+  color: #8d8d8d;
+}
+.breadcrumbs .item {
+  text-transform: capitalize;
+}
+.padding-large {
+  padding-top: 7em;
+  padding-bottom: 7em;
+}
+.jarallax {
+  position: relative;
+  z-index: 0;
+  min-height: 320px;
+}
+.block-title {
+  margin-bottom: 20px;
+}
+.block-title__tag-line {
+  margin: 0;
+  color: #a5a5a5;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1em;
+  border-top: 2px solid #154352;
+  padding-top: 20px;
+  display: inline-block;
+}
+.block-title__title {
+  margin: 0;
+  color: #302e2f;
+  font-size: 44px;
+  margin-top: 20px;
+}
+.block-title__sub-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 44px;
+  color: #302e2f;
+  margin-top: 30px;
+}
+.funfact-one {
+    background-color: #3c3c3c;
+    padding-top: 16.5px;
+    padding-bottom: 11.5px;
+    margin-bottom: 100px;
+}
+
+.funfact-one__single {
+  margin-bottom: 30px;
+}
+@media (max-width: 575px) {
+  .funfact-one__single {
+    text-align: center;
+  }
+}
+
+.funfact-one__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (max-width: 575px) {
+  .funfact-one__content {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.funfact-one__icon {
+  font-size: 64px;
+  color: #d99578;
+  margin-bottom: 40px;
+}
+
+.funfact-one__count {
+  font-size: 50px;
+  color: #fff;
+  font-family: "Prata";
+  margin: 0;
+  line-height: 1em;
+  margin-right: 20px;
+}
+@media (max-width: 1199px) {
+  .funfact-one__count {
+    font-size: 35px;
+  }
+}
+
+.funfact-one__text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+@media (max-width: 575px) {
+  .funfact-one__text {
+    text-align: left;
+  }
+}
+.funfact-one__text span {
+  display: block;
+  line-height: 1em;
+}
+@media (max-width: 1199px) {
+  .funfact-one__text {
+    font-size: 14px;
+  }
+}
+
+.Cards-contact {
+  display: grid;
+  gap: 43px;
+}
+.card-contact-left {
+  display: flex;
+  gap: 65px;
+}
+.card-contact-left img {
+  width: 500px;
+  height: 344px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.card-contact-left h3 {
+  font-size: 43px;
+  text-align: left;
+  cursor: default;
+}
+.cta.ShopNowButton:hover svg#HomeIcon {
+    transform: translateX(180px);
+}
+a#BuildHomeCta{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+.card-contact-left .button-Tool{
+  display: block;
+  width: 159px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.contact-map-one {
+  padding-top: 60px;
+}
+.contact-map-one .google-map__home {
+  width: 100%;
+  border: none;
+  height: 500px;
+  display: block;
+}
