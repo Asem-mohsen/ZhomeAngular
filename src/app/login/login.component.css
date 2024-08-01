@@ -9,17 +9,17 @@ section.auth .box .content {
     margin-bottom: 10px;
 }
 
-.login-form__field i {
+.login-form__field svg {
     -webkit-transform: translateY(-137%);
 }
 html, body {
     height: 100%;
 }
-#Zhomecontent {
-    height: 100%;
-}
+
 section.auth{
-    display: block;
+  display: block;
+  position: relative;
+  height: 100vh !important;
 }
 @media (max-width: 767px){
     .auth .row.noHegiht{
@@ -41,22 +41,18 @@ section.auth{
     justify-content: center;
     height: 100%;
 }
-.auth .details {
-    color: #fff;
-    text-align: center;
+.auth .details  img{
+    object-fit: cover;
+    object-position: top;
 }
 .auth .wrapper {
     display: flex;
     height: 100%;
     align-items: center;
     width: 100%;
+    padding: 0;
 }
-section.auth {
-display: block;
-}
-.auth {
-    position: relative;
-}
+
 a.ZhomeName {
     color: white !important;
     background-color: var(--mainColor);
@@ -117,7 +113,7 @@ section.auth .box .content {
     left: 347px;
     color: red;
 }
-.login-form__field i {
+.login-form__field svg {
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-137%);
@@ -164,10 +160,10 @@ section.auth .box .content {
     text-align: center;
     display: flex;
 }
-.small-sidenav-ul i{
+.small-sidenav-ul svg{
     color: #302e2f;
 }
-.small-sidenav-ul i:hover{
+.small-sidenav-ul svg:hover{
     -webkit-transition: all .4s ease;
     transition: all .4s ease;
     color: var(--mainColor);

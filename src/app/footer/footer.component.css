@@ -16,7 +16,7 @@ section.MainFooter {
     text-align: center;
     color: white;
     font-size: 21px;
-    background-color: var(--MainColor);
+    background-color: var(--mainColor);
     width: 105px;
     height: 105px;
     display: grid;
@@ -43,7 +43,7 @@ section.MainFooter {
     padding: 10px 20px;
     width: 150px;
   }
-  .left-footer button i {
+  .left-footer button svg {
     padding-right: 8px;
     font-size: 20px;
   }
@@ -88,7 +88,7 @@ section.MainFooter {
     color: #777777;
   }
   .Footer .right-footer .list a:hover {
-    color: var(--MainColor);
+    color: var(--mainColor);
   }
   .copyright {
     display: flex;
@@ -117,13 +117,44 @@ section.MainFooter {
   .copyright .copy {
     margin-top: 30px;
   }
-  
+
   .copyright .Icons {
     margin-top: 30px;
   }
-  .copyright .Icons i {
+  .copyright .Icons svg {
     color: #6e6e6e;
     font-size: 21px;
     padding-left: 8px;
   }
-  
+
+  .scroll-to-top {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: #f0f0f0;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 990;
+    text-align: center;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    display: none;
+    border: 1px solid #f0f0f0;
+}
+.scroll-to-top svg {
+    font-size: 14px;
+    line-height: 50px;
+    color: #000;
+    position: relative;
+    z-index: 10;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+}
+.scroll-to-top:hover {
+    background: #154352;
+    border-color: #154352;
+}
+.scroll-to-top:hover i {
+    color: #fff;
+}

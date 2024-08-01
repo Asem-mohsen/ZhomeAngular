@@ -19,7 +19,7 @@
     }
     .nav li a.active {
         border: none;
-        border-bottom: 2px solid var(--MainColor);
+        border-bottom: 2px solid var(--mainColor);
         background-color: transparent;
     }
     .card {
@@ -103,21 +103,21 @@
 #index-background  .parent-buttons .ShopButton {
         color: white;
         padding: 14px 30px;
-        background-color: var(--MainColor);
+        background-color: var(--mainColor);
         border-radius: 5px;
         font-size: 15px;
-        border: 2px solid var(--MainColor);
+        border: 2px solid var(--mainColor);
         font-weight: bold;
     }
 #index-background  .parent-buttons .DesignButton:hover {
-        background-color: var(--MainColor);
-        border: 2px solid var(--MainColor);
+        background-color: var(--mainColor);
+        border: 2px solid var(--mainColor);
         color: white;
         transition: all 0.4s;
     }
 #index-background .parent-buttons .ShopButton:hover {
         background-color: transparent;
-        color: var(--MainColor);
+        color: var(--mainColor);
         transition: all 0.4s;
         border-color: white;
     }
@@ -222,8 +222,8 @@
 }
 .slider-one .owl-theme .owl-dots .owl-dot:hover span,
 .slider-one .owl-theme .owl-dots .owl-dot.active span {
-  border-color: var(--MainColor);
-  background-color: var(--MainColor);
+  border-color: var(--mainColor);
+  background-color: var(--mainColor);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
@@ -234,7 +234,7 @@
   align-items: center;
 }
 .thm-btn:hover {
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: #fff;
 }
 .slider-one__btn {
@@ -353,7 +353,7 @@ div.Text-under-images {
 }
 .overlay-button button:hover,
 .overlay-button-two button:hover {
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: white;
 }
 a.HomeImageInButton i{
@@ -594,11 +594,11 @@ a.HomeImageInButton i{
   padding: 10px;
 }
 .Button-shop-home {
-  border: 1px solid var(--MainColor);
+  border: 1px solid var(--mainColor);
   border-radius: 14px;
   padding: 10px 32px;
   position: relative;
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: white;
   margin: auto;
   display: block;
