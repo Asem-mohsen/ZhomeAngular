@@ -1,31 +1,31 @@
-#shop-background{
+.contact-background {
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  height: 100% !important;;
+  top: 0;
+  width: 100%;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+
+  .page-title {
+    font-size: 2.2em;
+    font-weight: 500;
+    line-height: 1em;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: black;
+    cursor: default;
+  }
+  .breadcrumbs {
+    color: #8d8d8d;
+  }
+  .breadcrumbs .item {
+    text-transform: capitalize;
+  }
 }
-.site-banner h1.page-title {
-  font-size: 2.2em;
-  font-weight: 500;
-  line-height: 1em;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  color: black;
-  cursor: default;
-}
-.breadcrumbs {
-  color: #8d8d8d;
-}
-.breadcrumbs .item {
-  text-transform: capitalize;
-}
-.padding-large {
-  padding-top: 7em;
-  padding-bottom: 7em;
-}
-.jarallax {
-  position: relative;
-  z-index: 0;
-  min-height: 320px;
-}
+
 .block-title {
   margin-bottom: 20px;
 }
@@ -113,8 +113,8 @@
 }
 .contact-one__text a {
   color: inherit;
-  -webkit-transition: all .4s ease;
-  transition: all .4s ease;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 .contact-one__text a:hover {
   color: #154352;
@@ -145,8 +145,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   line-height: 1em;
 }
 .contact-one__list li + li {
@@ -169,7 +169,7 @@
   top: 50%;
   right: 0;
   -webkit-transform: translateY(-55%);
-          transform: translateY(-55%);
+  transform: translateY(-55%);
   display: block;
 }
 .contact-one__content {

@@ -1,214 +1,216 @@
 /* Index page */
 #StartYourSystem-Shop {
-    margin-top: 66px;
-    margin-bottom: 83px;
-    padding: 40px;
-    background-color: #dddddd3d;
+  margin-top: 66px;
+  margin-bottom: 83px;
+  padding: 40px;
+  background-color: #dddddd3d;
 
-    .heading {
-        text-align: left;
-        color: #343333;
-        font-size: 40px;
-    }
-    .nav {
-        justify-content: left;
-        margin-top: 40px;
-    }
-    .container {
-        max-width: 1129px;
-    }
-    .nav li a.active {
-        border: none;
-        border-bottom: 2px solid var(--mainColor);
-        background-color: transparent;
-    }
-    .card {
-        background-color: transparent;
-        border:none;
-    }
-    .card .Box-Sizes {
-        display: flex;
-        gap: 28px;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    .small-size {
-         width: calc((100% - (4 * 28px)) / 5);
-        height: auto;
-    }
-    .small-size img{
-        background-size: cover;
-        border-radius: 13px;
-        height: 220px;
-    }
-    .small-size a{
-        font-size: 17px;
-        padding: 10px;
-        display: block;
-    }
-    .owl-nav{
-        display:none;
-    }
-}
-#index-background{
+  .heading {
+    text-align: left;
+    color: #343333;
+    font-size: 40px;
+  }
+  .nav {
+    justify-content: left;
+    margin-top: 40px;
+  }
+  .container {
+    max-width: 1129px;
+  }
+  .nav li a.active {
+    border: none;
+    border-bottom: 2px solid var(--mainColor);
+    background-color: transparent;
+  }
+  .card {
+    background-color: transparent;
+    border: none;
+  }
+  .card .Box-Sizes {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
     width: 100%;
-    height: 100vh;
-    background-position: center;
+  }
+  .small-size {
+    width: calc((100% - (4 * 28px)) / 5);
+    height: auto;
+  }
+  .small-size img {
     background-size: cover;
-    margin-bottom: 45px;
+    border-radius: 13px;
+    height: 220px;
+  }
+  .small-size a {
+    font-size: 17px;
+    padding: 10px;
+    display: block;
+  }
+  .owl-nav {
+    display: none;
+  }
+}
+
+#index-background {
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 45px;
 }
 #index-background .slider-one {
- top: 0 !important;
+  top: 0 !important;
 }
-#index-background .parent-home{
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        height: 100%;
-        flex-direction: column;
-        cursor: default;
-        gap: 10px;
-    }
-#index-background h1{
-        font-size: 55px;
-        color: white;
-        text-transform: uppercase;
-    }
-#index-background p#Welcome{
-        font-size: 18px;
-        color: white;
-        margin-bottom: 0;
-    }
-#index-background p#welcome-text{
-        color: white;
-        width: 35%;
-        display: block;
-        align-self: center;
-        font-size: 25px;
-    }
-#index-background .parent-buttons{
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
+#index-background .parent-home {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  flex-direction: column;
+  cursor: default;
+  gap: 10px;
+}
+#index-background h1 {
+  font-size: 55px;
+  color: white;
+  text-transform: uppercase;
+}
+#index-background p#Welcome {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 0;
+}
+#index-background p#welcome-text {
+  color: white;
+  width: 35%;
+  display: block;
+  align-self: center;
+  font-size: 25px;
+}
+#index-background .parent-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 #index-background .parent-buttons .DesignButton {
-        color: white;
-        padding: 14px 30px;
-        background-color: transparent;
-        border-radius: 5px;
-        font-size: 15px;
-        font-weight: bold;
-        border: 2px solid white;
-    }
-#index-background  .parent-buttons .ShopButton {
-        color: white;
-        padding: 14px 30px;
-        background-color: var(--mainColor);
-        border-radius: 5px;
-        font-size: 15px;
-        border: 2px solid var(--mainColor);
-        font-weight: bold;
-    }
-#index-background  .parent-buttons .DesignButton:hover {
-        background-color: var(--mainColor);
-        border: 2px solid var(--mainColor);
-        color: white;
-        transition: all 0.4s;
-    }
+  color: white;
+  padding: 14px 30px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 2px solid white;
+}
+#index-background .parent-buttons .ShopButton {
+  color: white;
+  padding: 14px 30px;
+  background-color: var(--mainColor);
+  border-radius: 5px;
+  font-size: 15px;
+  border: 2px solid var(--mainColor);
+  font-weight: bold;
+}
+#index-background .parent-buttons .DesignButton:hover {
+  background-color: var(--mainColor);
+  border: 2px solid var(--mainColor);
+  color: white;
+  transition: all 0.4s;
+}
 #index-background .parent-buttons .ShopButton:hover {
-        background-color: transparent;
-        color: var(--mainColor);
-        transition: all 0.4s;
-        border-color: white;
-    }
-    #StartYourSystem {
-    margin-top: 83px;
-    margin-bottom: 83px;
+  background-color: transparent;
+  color: var(--mainColor);
+  transition: all 0.4s;
+  border-color: white;
+}
+#StartYourSystem {
+  margin-top: 83px;
+  margin-bottom: 83px;
 
-    .heading{
-        text-align: center;
-        color: #343333;
-        font-size: 51px;
-    }
-    .nav {
-        justify-content: center;
-        margin-top: 40px;
-    }
-    .nav li {
-        padding: 0 14px;
-    }
-    .nav li a {
-        color: black;
-    }
-    .nav li a.active {
-        border: none;
-        border-bottom: 2px solid black;
-    }
-    .card {
-        border: none;
-    }
-    .card-body .Box-Sizes{
-        display:grid;
-        grid-template-areas:
-        "Start1 Start2 Start3"
-        "Start1 Start4 Start5";
-        width: 100%;
-        grid-template-rows: 50%;
-        grid-template-columns: 42% 26% 26%;
-        gap: 20px;
-    }
-    .box-1{
-        grid-area: Start1;
-    }
-    .box-2{
-        grid-area: Start2;
-    }
-    .box-3{
-        grid-area: Start3;
-    }
-    .box-4{
-        grid-area: Start4;
-    }
-    .box-5{
-        grid-area: Start5;
-    }
-    .small-size {
-        background-size: cover;
-        background-position: center center;
-        border-radius: 10px;
-        box-shadow: 6px 6px 9px 2px #d8d8d8cc;
-    }
-    .small-size a {
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        font-size: 25px;
-        color: white !important;
-    }
-    .card .Big-size {
-        background-size: cover;
-        border-radius: 10px;
-        background-position: center;
-    }
-    .card .Big-size a {
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        font-size: 25px;
-        color: white;
-    }
-    .card .Big-size a:hover , .small-size a:hover{
-        color: #777777;
-        transition: all 0.3s;
-    }
-    .tab-content .card-body {
-      display: flex;
-    }
-    .swiper-container{
-        display:none !important;
-    }
+  .heading {
+    text-align: center;
+    color: #343333;
+    font-size: 51px;
+  }
+  .nav {
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .nav li {
+    padding: 0 14px;
+  }
+  .nav li a {
+    color: black;
+  }
+  .nav li a.active {
+    border: none;
+    border-bottom: 2px solid black;
+  }
+  .card {
+    border: none;
+  }
+  .card-body .Box-Sizes {
+    display: grid;
+    grid-template-areas:
+      "Start1 Start2 Start3"
+      "Start1 Start4 Start5";
+    width: 100%;
+    grid-template-rows: 50%;
+    grid-template-columns: 42% 26% 26%;
+    gap: 20px;
+  }
+  .box-1 {
+    grid-area: Start1;
+  }
+  .box-2 {
+    grid-area: Start2;
+  }
+  .box-3 {
+    grid-area: Start3;
+  }
+  .box-4 {
+    grid-area: Start4;
+  }
+  .box-5 {
+    grid-area: Start5;
+  }
+  .small-size {
+    background-size: cover;
+    background-position: center center;
+    border-radius: 10px;
+    box-shadow: 6px 6px 9px 2px #d8d8d8cc;
+  }
+  .small-size a {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: white !important;
+  }
+  .card .Big-size {
+    background-size: cover;
+    border-radius: 10px;
+    background-position: center;
+  }
+  .card .Big-size a {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: white;
+  }
+  .card .Big-size a:hover,
+  .small-size a:hover {
+    color: #777777;
+    transition: all 0.3s;
+  }
+  .tab-content .card-body {
+    display: flex;
+  }
+  .swiper-container {
+    display: none !important;
+  }
 }
 
 .slider-one {
@@ -250,7 +252,7 @@
   background-color: #fff;
   color: #302e2f;
   margin-top: 12px;
-  text-align:center;
+  text-align: center;
 }
 .slider-one__title {
   margin: 0;
@@ -259,7 +261,7 @@
   line-height: 68px;
 }
 h2.Home-Text {
-width: 610px;
+  width: 610px;
   font-size: 50px;
   color: #343333;
   cursor: default;
@@ -335,11 +337,11 @@ div.Text-under-images {
   opacity: 1;
   transition-duration: 0.3s;
 }
- .Image-One:hover img {
+.Image-One:hover img {
   filter: brightness(50%);
   transition-duration: 0.3s;
 }
- .Image-Two:hover img {
+.Image-Two:hover img {
   filter: brightness(50%);
   transition-duration: 0.3s;
 }
@@ -356,18 +358,16 @@ div.Text-under-images {
   background-color: var(--mainColor);
   color: white;
 }
-a.HomeImageInButton i{
-    cursor: pointer;
-    font-size: 60px;
-    color:white;
+a.HomeImageInButton svg {
+  cursor: pointer;
+  font-size: 60px;
+  color: white;
 }
-@media (min-width: 1200px){
-    .container.ControlHomeCont {
-        max-width: 1140px;
-    }
+@media (min-width: 1200px) {
+  .container.ControlHomeCont {
+    max-width: 1140px;
+  }
 }
-
-
 
 #StartYourSystem {
   margin-top: 83px;
@@ -473,20 +473,20 @@ a.HomeImageInButton i{
 }
 
 #StartYourSystem.card .Big-size {
-    width: -webkit-fill-available;
-    margin: 0;
-    height: auto;
-    background-size: cover;
-    border-radius: 10px;
+  width: -webkit-fill-available;
+  margin: 0;
+  height: auto;
+  background-size: cover;
+  border-radius: 10px;
 }
 #StartYourSystem.card .Big-size a {
-    display: flex;
-    font-size: 38px;
-    text-align: center;
-    color: white;
-    justify-content: center;
-    height: -webkit-fill-available;
-    align-items: center;
+  display: flex;
+  font-size: 38px;
+  text-align: center;
+  color: white;
+  justify-content: center;
+  height: -webkit-fill-available;
+  align-items: center;
 }
 #StartYourSystem .card .Big-size a:hover {
   color: #777777;
@@ -503,18 +503,17 @@ a.HomeImageInButton i{
   grid-template-areas:
     "Shop1 Shop2"
     "Shop3 Shop2"
-    "Shop4 Shop5"
-  ;
+    "Shop4 Shop5";
   grid-template-columns: 50%;
   gap: 10px;
 }
-#Boxes .box{
-    min-height: 250px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    position: relative;
+#Boxes .box {
+  min-height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  position: relative;
 }
 #Boxes .box-1 {
   grid-area: Shop1;
@@ -535,30 +534,30 @@ a.HomeImageInButton i{
 #Boxes .box-5 {
   grid-area: Shop5;
 }
-#Boxes .box p{
-    display: flex;
-    font-size: 37px;
-    padding: 15px;
-    font-weight: bold;
+#Boxes .box p {
+  display: flex;
+  font-size: 37px;
+  padding: 15px;
+  font-weight: bold;
 }
-#Boxes .box a{
-    padding: 15px;
-    border: 1px solid #154352;
-    border-radius: 10px;
-    color: #154352;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    margin: auto;
+#Boxes .box a {
+  padding: 15px;
+  border: 1px solid #154352;
+  border-radius: 10px;
+  color: #154352;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
 }
-#Boxes .box a:hover{
-    transition: all 0.4s;
-    background-color: #154352;
-    color: white;
+#Boxes .box a:hover {
+  transition: all 0.4s;
+  background-color: #154352;
+  color: white;
 }
-#Boxes .box .hoverhere:hover .overlay-button{
-    opacity:1;
+#Boxes .box .hoverhere:hover .overlay-button {
+  opacity: 1;
 }
 .card-body .big-box {
   left: 34px;
@@ -1176,9 +1175,9 @@ section.WhyZhomeSection {
 .Build .Products-home h3 {
   text-align: center;
   color: white;
-    font-size: 37px;
-    margin-top: 50px;
-    padding: 25px;
+  font-size: 37px;
+  margin-top: 50px;
+  padding: 25px;
 }
 
 .Platfroms {
@@ -1210,7 +1209,7 @@ section.WhyZhomeSection {
 .Platfroms .Platform-home a {
   margin-bottom: 0;
   color: black;
-  font-size:13px;
+  font-size: 13px;
 }
 .Platfroms .Platform-home a:hover {
   transition-duration: 0.3s;

@@ -1,4 +1,4 @@
-.shop-background{
+.about-background {
   min-height: 350px;
   display: flex;
   align-items: center;
@@ -7,6 +7,7 @@
   top: 0;
   width: 100%;
   background-repeat: no-repeat;
+  background-size: cover;
 
   .page-title {
     font-size: 2.2em;
@@ -23,7 +24,6 @@
   .breadcrumbs .item {
     text-transform: capitalize;
   }
-
 }
 
 .block-title {
@@ -53,10 +53,10 @@
   margin-top: 30px;
 }
 .funfact-one {
-    background-color: #3c3c3c;
-    padding-top: 16.5px;
-    padding-bottom: 11.5px;
-    margin-bottom: 100px;
+  background-color: #3c3c3c;
+  padding-top: 16.5px;
+  padding-bottom: 11.5px;
+  margin-bottom: 100px;
 }
 
 .funfact-one__single {
@@ -73,14 +73,14 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 @media (max-width: 575px) {
   .funfact-one__content {
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
 }
 
@@ -138,14 +138,14 @@
   cursor: default;
 }
 .cta.ShopNowButton:hover svg#HomeIcon {
-    transform: translateX(180px);
+  transform: translateX(180px);
 }
-a#BuildHomeCta{
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
+a#BuildHomeCta {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
-.card-contact-left .button-Tool{
+.card-contact-left .button-Tool {
   display: block;
   width: 159px;
   margin: auto;

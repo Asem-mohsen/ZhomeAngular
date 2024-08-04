@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-:root{
-    --mainColor : #154352 ;
+:root {
+  --mainColor: #154352;
+  --secondaryColor: #2bbfb0;
+  --text-color: #e4e4e4;
 }
 body,
 h1,
@@ -17,29 +19,32 @@ ul,
 div {
   font-family: "Open Sans", sans-serif;
 }
-html{
+html {
   scroll-behavior: smooth;
 }
 a {
   cursor: pointer;
   text-decoration: none;
 }
-ul{
-    list-style: none;
+ul {
+  list-style: none;
+}
+.justify-items-center {
+  justify-items: center !important;
 }
 
 /* Icon */
-a.ZhomeName{
-    color: white !important;
-    background-color: var(--MainColor);
-    font-size: 23px;
-    width: 120px;
-    text-align: center;
-    height: 91px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 20px;
+a.ZhomeName {
+  color: white !important;
+  background-color: var(--MainColor);
+  font-size: 23px;
+  width: 120px;
+  text-align: center;
+  height: 91px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
