@@ -1,4 +1,3 @@
-
 <!-- Search  -->
 <!-- <div class="search-popup">
     <div class="search-popup__overlay custom-cursor__overlay">
@@ -17,148 +16,126 @@
 
 <!-- Scroll to Top -->
 <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
-    <i class="fa fa-arrow-turn-up"></i>
+  <i class="fa fa-arrow-turn-up"></i>
 </a>
 
 <!-- Footer -->
 <section class="MainFooter">
-    <div class="Footer">
-        <div class="left-footer">
-            <!-- Logo -->
-            <h2>Zhome</h2>
-            <h3> Always In Control</h3>
-            <div class="text-footer">
-                <p>01122334434</p>
-                <p>Find us in Egypt - Emarites</p>
-            </div>
+  <div class="Footer">
+    <div class="left-footer">
+      <!-- Logo -->
+      <h2>Zhome</h2>
+      <h3>Always In Control</h3>
+      <div class="text-footer">
+        <p>01122334434</p>
+        <p>Find us in Egypt - Emarites</p>
+      </div>
 
-            <p class="Download">Download App</p>
-            <button>
-                <i class="fa-brands fa-android"></i>
-                Android
-            </button>
-            <button>
-                <i class="fa-brands fa-apple"></i>
-                IOS
-            </button>
-        </div>
-
-        <div class="right-footer mr-0">
-            <h3>Never miss an updates</h3>
-            <p>Be the first to hear about new offers and updates from Zhome</p>
-            <div class="subscriptions">
-                <input type="text" class="form-control" id="inputEmail" name="Email" placeholder="Email Address" required  oninput="handleInput()">
-            </div>
-            <script>
-                // const subscriptionRoute = "{{ route('new.subscriber') }}";
-                // const token = "{{ csrf_token() }}";
-            </script>
-
-            <div class="list">
-                <ul>
-                    <li class="First">Zhome</li>
-                    <li>
-                        <a routerLink="shop">Shop</a>
-                    </li>
-                    <li>
-                        <a routerLink="categories">Categories</a>
-                    </li>
-                    <li>
-                        <a routerLink="platforms">Platforms</a>
-                    </li>
-                    <li>
-                        <a routerLink="brands">Brands</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="First">About</li>
-                    <li>
-                        <a routerLink="about">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="services">
-                            Services
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="contact">
-                            Contact Us
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="about">
-                            Why Zhome
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="First">
-                        @if (true){
-                            User
-                        }
-                        @else if (false){
-                            Admin
-                        }
-                        @else{
-                            User
-                        }
-                    </li>
-                    <li>
-                        @if (true){
-                            <a routerLink="login">
-                                Join Us
-                            </a>
-                        }
-                        @else if (false){
-                            <a routerLink="profile">
-                                Profile
-                            </a>
-                        }
-                        @else{
-                            <a routerLink="profile">
-                                Profile
-                            </a>
-                        }
-                    </li>
-                    <li>
-                        <a routerLink="cart">
-                            Cart
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="tools">
-                            Tools
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="shop">
-                            Products
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      <p class="Download">Download App</p>
+      <button>
+        <i class="fa-brands fa-android"></i>
+        Android
+      </button>
+      <button>
+        <i class="fa-brands fa-apple"></i>
+        IOS
+      </button>
     </div>
-    <div class="copyright">
-        <div class="Lang">
-            <a id="langSwitchBtn" class="lang-switch-btn">
-                <img class="lang-flag" src="" alt="English">
-                <span class="lang-name">English</span>
-            </a>
-        </div>
-        <div class="copy">
-            <p >
-                Copyright 2024 Zhome.
-            </p>
-        </div>
-        <div class="Icons">
-            <a href=""><i class="fa-brands fa-twitter"></i></a>
-            <a href=""><i class="fa-brands fa-facebook"></i></a>
-            <a href=""><i class="fa-brands fa-linkedin"></i></a>
-        </div>
+
+    <div class="right-footer mr-0">
+      <h3>Never miss an updates</h3>
+      <p>Be the first to hear about new offers and updates from Zhome</p>
+      <div class="subscriptions">
+        <input
+          type="text"
+          class="form-control"
+          id="inputEmail"
+          name="Email"
+          placeholder="Email Address"
+          required
+          oninput="handleInput()"
+        />
+      </div>
+      <script>
+        // const subscriptionRoute = "{{ route('new.subscriber') }}";
+        // const token = "{{ csrf_token() }}";
+      </script>
+
+      <div class="list">
+        <ul>
+          <li class="First">Zhome</li>
+          <li>
+            <a routerLink="shop">Shop</a>
+          </li>
+          <li>
+            <a routerLink="categories">Categories</a>
+          </li>
+          <li>
+            <a routerLink="platforms">Platforms</a>
+          </li>
+          <li>
+            <a routerLink="brands">Brands</a>
+          </li>
+        </ul>
+        <ul>
+          <li class="First">About</li>
+          <li>
+            <a routerLink="about"> About Us </a>
+          </li>
+          <li>
+            <a routerLink="services"> Services </a>
+          </li>
+          <li>
+            <a routerLink="contact"> Contact Us </a>
+          </li>
+          <li>
+            <a routerLink="about"> Why Zhome </a>
+          </li>
+        </ul>
+        <ul>
+          <li class="First">
+            @if (true){ User } @else if (false){ Admin } @else{ User }
+          </li>
+          <li>
+            @if (true){
+            <a routerLink="login"> Join Us </a>
+            } @else if (false){
+            <a routerLink="profile"> Profile </a>
+            } @else{
+            <a routerLink="profile"> Profile </a>
+            }
+          </li>
+          <li>
+            <a routerLink="cart"> Cart </a>
+          </li>
+          <li>
+            <a routerLink="tools"> Tools </a>
+          </li>
+          <li>
+            <a routerLink="shop"> Products </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <div class="copyright">
+    <div class="Lang">
+      <a id="langSwitchBtn" class="lang-switch-btn">
+        <img
+          class="lang-flag"
+          src="../../assets/imgs/UI/website/Footer/united-kingdom.png"
+          alt="English"
+        />
+        <span class="lang-name">English</span>
+      </a>
+    </div>
+    <div class="copy">
+      <p>Copyright 2024 Zhome.</p>
+    </div>
+    <div class="Icons">
+      <a href=""><i class="fa-brands fa-twitter"></i></a>
+      <a href=""><i class="fa-brands fa-facebook"></i></a>
+      <a href=""><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+  </div>
 </section>
-
-
