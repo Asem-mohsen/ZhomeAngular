@@ -1,0 +1,49 @@
+<div class="item product-one__single" [id]="'Product-' + product.ID" style="height: 390px;">
+    <div class="product-one__image">
+      <img [src]="product.MainImage" [alt]="product.Name" height="270px">
+    </div>
+    <div class="product-one__content">
+      <div class="product-one__content-left">
+        <h3 class="product-one__title">
+          <a [routerLink]="['/product', product.ID]">{{ product.Name | titlecase }}</a>
+        </h3>
+        <div class="description-product">
+          Brand: {{ product.brand.Brand }} 
+          <div class="d-flex gap-1">
+            @for (platform of product.platforms; track $index) {
+                <ng-container>
+                    <a [routerLink]="['/shop/filter/platform', platform.ID]" [title]="platform.Platform + ' Platform'">
+                        <img [src]="platform.Logo" class="Platform-flex-img">
+                    </a>
+                </ng-container>
+            }
+          </div>
+        </div>
+        <div class="product-one__content-right d-flex align-items-center justify-content-between">
+          <ng-container *ngIf="product.sale.PriceAfter; else regularPrice">
+            <div class="d-grid gap-1">
+              <p class="product-one__text">{{ product.sale.PriceAfter | currency:'EGP' }}</p>
+              <p class="product-one__text" style="text-decoration: line-through; font-size:14px">
+                {{ product.Price | currency:'EGP' }}
+              </p>
+            </div>
+          </ng-container>
+          <ng-template #regularPrice>
+            <p class="product-one__text">{{ product.Price | currency:'EGP' }}</p>
+          </ng-template>
+          <ng-container *ngIf="product.Quantity <= 0; else addToCartButton">
+            <p class="OutStock">Out of Stock</p>
+          </ng-container>
+          <ng-template #addToCartButton>
+            <button
+              type="button"
+              class="product-one__cart-btn add-to-cart-btn"
+              (click)="addToCart()"
+              title="Add to Cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -11,5 +11,5 @@ export interface Platform {
   ArchivedOn: string | null;
   DeletedOn:  string | null;
   products: any[];
-
+  faqs: any[];
 }

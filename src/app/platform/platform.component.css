@@ -1,0 +1,156 @@
+.block-title {
+  margin-bottom: 20px;
+}
+.block-title__tag-line {
+  margin: 0;
+  color: #a5a5a5;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1em;
+  border-top: 2px solid #154352;
+  padding-top: 20px;
+  display: inline-block;
+}
+.block-title__title {
+  margin: 0;
+  color: #302e2f;
+  font-size: 44px;
+  margin-top: 20px;
+}
+.block-title__sub-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 44px;
+  color: #302e2f;
+  margin-top: 30px;
+}
+
+.platform {
+  width: 271px;
+  padding: 8px;
+  gap: 10px;
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid #e3e3e3;
+}
+.platform img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px 0 0 10px;
+  filter: brightness(1.1);
+  padding: 6px;
+  object-fit: contain;
+}
+.platform p {
+  margin: auto;
+  padding-right: 13px;
+}
+@media (max-width: 767px) {
+  .PlatformSection .PlatformTop {
+    display: block !important;
+  }
+  .owl-carousel .owl-item {
+    width: 225px !important;
+  }
+  iframe.PlatformVideo {
+    width: auto;
+  }
+  .PlatformSection .PlatformInfo {
+    grid-template-columns: auto;
+  }
+  .Category-Product {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+  }
+}
+section.SectionNumber:nth-child(even) {
+  background-color: aliceblue;
+}
+
+button[data-toggle="collapse"] .fa:before {
+  content: "";
+}
+
+button[data-toggle="collapse"].collapsed .fa:before {
+  content: "";
+}
+
+.notSilder {
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 21px;
+  flex-wrap: wrap;
+}
+.PlatformSection {
+  display: grid;
+}
+.PlatformSection:not(:last-child) {
+  border-bottom: 1px solid gainsboro;
+}
+.PlatformSection .PlatformTop {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+}
+.PlatformSection .PlatformTop h1 {
+  font-size: 41px;
+  margin-top: 75px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+.PlatformSection .PlatformTop img {
+  object-fit: cover;
+  margin-top: 30px;
+  width: 300px;
+}
+.PlatformSection .PlafromQuestion {
+  text-align: left;
+}
+.PlatformSection .PlafromQuestion h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.PlatformSection .PlafromQuestion p {
+  width: 91%;
+  font-size: 15px;
+}
+.PlatformSection .PlatformInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+  margin-top: 46px;
+}
+iframe.PlatformVideo {
+  margin: auto;
+  display: block;
+  margin-top: 40px;
+  width: 678px;
+  margin-bottom: 20px;
+}
+.PlatformDesc {
+  width: 85%;
+  margin: auto;
+  text-align: center;
+  margin-top: 40px;
+}
+
+button.btn-link {
+  text-decoration: none !important;
+  color: black;
+  font-size: 22px;
+}
+.FAQTop {
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 13px;
+  margin-bottom: 36px;
+}
+.LongDiv-text {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  letter-spacing: 3px;
+}

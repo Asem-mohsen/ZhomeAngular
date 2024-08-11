@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { BrandService } from '../Services/brand.service';
+import { BrandService } from '../Services/brands/brand.service';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Brand } from '../Interfaces/brand';
-import { PlatformService } from '../Services/platform.service';
+import { PlatformService } from '../Services/platforms/platform.service';
 import { Platform } from '../Interfaces/platform';
 
 
@@ -19,12 +19,13 @@ export class HomeComponent implements OnInit{
   brands:    Brand[] = [];
   platforms: Platform[] = [];
 
-   slideConfig = {
+  slideConfig = {
     "slidesToShow": 6,
     "slidesToScroll": 4,
     "dots": false,
     "infinite": true,
     "autoplay": true,
+    "arrows":false,
     "autoplaySpeed": 3000
   };
 
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit{
     "dots": false,
     "infinite": false,
     "autoplay": false,
+    "arrows":false,
   };
 
   constructor(private _BrandService: BrandService , private _PlatformService : PlatformService)

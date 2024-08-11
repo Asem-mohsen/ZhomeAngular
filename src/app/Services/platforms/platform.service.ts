@@ -13,4 +13,9 @@ export class PlatformService {
   {
     return this._http.get('http://127.0.0.1:8000/api/platforms')
   }
+
+  getPlatfromsUserShow() : Observable<any>
+  {
+    return this._http.get('http://127.0.0.1:8000/api/platforms/userShow')
+  }
 }
