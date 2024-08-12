@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ShopComponent } from './shop/shop.component';
-import { CartComponent } from './cart/cart.component';
-import { AboutComponent } from './about/about.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ProductComponent } from './product/product.component';
-import { ServiceComponent } from './service/service.component';
-import { ContactComponent } from './contact/contact.component';
-import { CategoryComponent } from './category/category.component';
-import { PlatformComponent } from './platform/platform.component';
-import { BrandComponent } from './brand/brand.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ToolComponent } from './tool/tool.component';
+import { HomeComponent } from './web/layout/home/home.component';
+import { ShopComponent } from './web/layout/shop/shop.component';
+import { CartComponent } from './web/layout/cart/cart.component';
+import { AboutComponent } from './web/layout/about/about.component';
+import { LoginComponent } from './web/auth/login/login.component';
+import { RegisterComponent } from './web/auth/register/register.component';
+import { ProductComponent } from './web/layout/product/product.component';
+import { ServiceComponent } from './web/layout/service/service.component';
+import { ContactComponent } from './web/layout/contact/contact.component';
+import { CategoryComponent } from './web/layout/category/category.component';
+import { PlatformComponent } from './web/layout/platform/platform.component';
+import { BrandComponent } from './web/layout/brand/brand.component';
+import { ProfileComponent } from './web/layout/profile/profile.component';
+import { ToolComponent } from './web/layout/tool/tool.component';
 
 export const routes: Routes = [
     {path:'home' , component:HomeComponent},
