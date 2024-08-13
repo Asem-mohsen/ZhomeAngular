@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Register } from '../../Interfaces/auth/register';
 import { environment } from '../../Base/enviroment';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class BrandService {
+export class AuthService {
+
+  
 
   constructor(private _http : HttpClient) { }
 
-  getBrands() :Observable<any>
+  sendRegister(data : Register)
   {
-    return this._http.get(`${environment.baseURL}/api/brands`);
+    this._http.post(`${environment.baseURL}/api/register` , data)
   }
 }

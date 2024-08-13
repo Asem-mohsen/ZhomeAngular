@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../Base/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class PlatformService {
 
   getPlatfroms() : Observable<any>
   {
-    return this._http.get('http://127.0.0.1:8000/api/platforms')
+    return this._http.get(`${environment.baseURL}/api/platforms`)
   }
 
   getPlatfromsUserShow() : Observable<any>
   {
-    return this._http.get('http://127.0.0.1:8000/api/platforms/userShow')
+    return this._http.get(`${environment.baseURL}/api/platforms/userShow`)
   }
 }

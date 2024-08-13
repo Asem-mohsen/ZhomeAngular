@@ -16,24 +16,63 @@
                             </p>
                         </div>
 
-                        <form method='POST'>
+                        <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
                             <div class="inputs login-form__form">
                                 <div class="login-form__field position-relative" style="height:82px">
-                                    <input type="text" name="name" id="name" placeholder="Name" required/>
+                                    <input type="text" formControlName="name" id="name" placeholder="Name" required/>
+                                    @if (registerForm.get('name')?.errors && registerForm.get('name')?.touched) {
+                                        <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            @if(registerForm.get('name')?.errors?.['required'])
+                                            {
+                                                <p>Name field is required</p>
+                                            }
+                                            @else if (registerForm.get('name')?.errors?.['minlength']) {
+                                                <p>The name should be more than 3 letters</p>
+                                            }
+                                            @else {
+                                                <p>The name should be less than 50 letters</p>
+                                            }
+                                        </div>
+                                    }
                                     <i class="fa fa-user"></i>
                                 </div>
                                 <div class="login-form__field position-relative" style="height:82px">
-                                    <input type="email" id="email" name="email" placeholder="Email Address" required />
+                                    <input type="email" formControlName="email"  id="email" placeholder="Email Address" required />
+                                    @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+                                        <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            @if(registerForm.get('email')?.errors?.['required'])
+                                            {
+                                                <p>Email field is required</p>
+                                            }
+                                            @else if (registerForm.get('email')?.errors?.['email']) {
+                                                <p>Kindly enter a valid email</p>
+                                            }
+                                        </div>
+                                    }
                                     <i class="fa-solid fa-envelope"></i>
                                 </div>
 
                                 <div class="login-form__field position-relative password-input" style="height:82px">
-                                    <input type="password" class="password" id="password" name="password" placeholder="Enter Password" required/>
+                                    <input type="password" formControlName="password" class="password" id="password" placeholder="Enter Password" required/>
+                                    @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+                                        <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            @if(registerForm.get('password')?.errors?.['required'])
+                                            {
+                                                <p>Password field is required</p>
+                                            }
+                                            @else if (registerForm.get('password')?.errors?.['minLength']) {
+                                                <p>Password should be more than 9 numbers or letters</p>
+                                            }
+                                        </div>
+                                    }
                                     <i class="fa fa-eye toggler" id="eye"></i>
                                 </div>
 
                                 <div class="flex items-center justify-end mt-4">
-                                    <button type="submit" class="thm-btn contact-one__btn">
+                                    <button [disabled]="registerForm.invalid" type="submit" class="thm-btn contact-one__btn">
                                         Join Now
                                     </button>
                                 </div>
