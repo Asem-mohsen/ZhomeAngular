@@ -15,7 +15,11 @@
                                 <a routerLink="/login" class="fw-bold">Login now</a>
                             </p>
                         </div>
-
+                        @if (errorMsg) {
+                            <div class="alert alert-danger">
+                                {{errorMsg}}
+                            </div>
+                        }
                         <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
                             <div class="inputs login-form__form">
                                 <div class="login-form__field position-relative" style="height:82px">

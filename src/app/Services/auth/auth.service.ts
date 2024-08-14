@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Register } from '../../Interfaces/auth/register';
 import { environment } from '../../Base/enviroment';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -13,8 +14,8 @@ export class AuthService {
 
   constructor(private _http : HttpClient) { }
 
-  sendRegister(data : Register)
+  sendRegister(data : Register): Observable<any>
   {
-    this._http.post(`${environment.baseURL}/api/register` , data)
+    return this._http.post(`${environment.baseURL}/api/register` , data)
   }
 }
