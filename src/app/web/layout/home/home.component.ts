@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, afterNextRender } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BrandService } from '../../../Services/brands/brand.service';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -45,6 +45,9 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void
   {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/home')
+    }
     this._BrandService.getBrands().subscribe((result) => {
       this.brands = Object.values(result.data);
     })

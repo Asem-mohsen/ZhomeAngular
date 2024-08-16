@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink , RouterLinkActive],
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css' , '../../../../styles/Style-Admin.css' , '../../../../styles/adminlte.min.css']
+  styleUrls: ['./sidebar.component.css' ]
 })
 export class SidebarComponent {
 

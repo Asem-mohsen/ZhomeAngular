@@ -32,7 +32,9 @@ ul {
 .justify-items-center {
   justify-items: center !important;
 }
-
+.cursor-pointer {
+  cursor: pointer;
+}
 /* Icon */
 a.ZhomeName {
   color: white !important;

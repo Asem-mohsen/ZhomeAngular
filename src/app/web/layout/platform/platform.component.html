@@ -1,99 +1,127 @@
+<section>
+  <div class="container mt-5 pt-5 mb-4">
+    <div class="block-title text-center">
+      <p class="block-title__tag-line text-center">Zhome</p>
+      <h1 class="text-center">Platforms</h1>
+    </div>
+  </div>
+</section>
 
-    <section>
-        <div class="container mt-5 pt-5 mb-4">
-            <div class="block-title text-center">
-                <p class="block-title__tag-line text-center">Zhome</p>
-                <h1 class="text-center">Platforms</h1>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slider for Platforms -->
-    <section class="mt-5">
-        <div class="notSilder">
-            @for (platform of platforms; track $index){
-                <a [routerLink]="" fragment="{{platform.Platform}}">
-                    <div class="slide platform">
-                        <img [src]="platform.Logo" [alt]="platform.Platform">
-                        <p>{{platform.Platform}}</p>
-                    </div>
-                </a>
-            }
-        </div>
-    </section>
-
-
+<!-- Slider for Platforms -->
+<section class="mt-5">
+  <div class="notSilder">
     @for (platform of platforms; track $index){
-        <section class="SectionNumber" [id]="platform.Platform">
-            <div class="PlatformSection">
-                <div class="PlatformTop">
-                    <h2>{{platform.Platform}}</h2>
-                    <img [src]="platform.Logo" [alt]="platform.Platform">
-                </div>
-                <div class="container">
-                    <div class="PlatformDesc">
-                        <p>
-                            {{platform.MainDescription}}
-                        </p>
-                    </div>
-                    <div id="accordion">
-                        @if (platform.faqs && platform.faqs.length > 0){
-                            <div class="FAQonly">
-                                <div class="FAQTop">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#FAQ' + platform.ID"  aria-expanded="true" aria-controls="FAQ">
-                                            FAQ
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div class="PlatformInfo">
-                                    @for (faq of platform.faqs; track $index){
-                                    
-                                        <div class="collapse" [id]="'FAQ' + platform.ID" [attr.aria-labelledby]="platform.Platform"  data-parent="#accordion">
-                                            <div class="PlafromQuestion">
-                                                <h3>{{faq.Question}}</h3>
-                                                <p>{{faq.Answer}}</p>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    
-                        @if (platform.VideoURL != null){
-                            <div class="Videos">
-                                <div id="youtube-player">
-                                    <div class="FAQTop">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse"  [attr.data-target]="platform.ID" aria-expanded="true" aria-controls="Video">
-                                                Video
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div class="collapse" [id]="'Video' +platform.ID" [attr.aria-labelledby]="platform.Platform" data-parent="#accordion">
-                                        <iframe class="PlatformVideo" [src]="platform.VideoURL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-
-                    <!-- Products Related -->
-                    <div class="category-Name mt-5 pt-4">
-                        <h3>RelatedProducts</h3>
-                        <a routerLink="/shop">DiscoverMore<i class="fa fa-arrow-right"></i></a>
-                    </div>
-                    <ngx-slick-carousel #slickModal="slick-carousel" class="carousel" [config]="slideConfig">
-                        @for (product of platform.products; track $index){                              
-                            <div ngxSlickItem class="item slide">
-                                <a routerLink="/shop"> 
-                                    <app-product-card [product]="product"></app-product-card>
-                                </a>
-                            </div>
-                        }
-                    </ngx-slick-carousel>
-                </div>
-            </div>
-        </section>
+    <a [routerLink]="" fragment="{{ platform.Platform }}">
+      <div class="slide platform">
+        <img [src]="platform.Logo" [alt]="platform.Platform" />
+        <p>{{ platform.Platform }}</p>
+      </div>
+    </a>
     }
+  </div>
+</section>
 
+@for (platform of platforms; track $index){
+<section class="SectionNumber" [id]="platform.Platform">
+  <div class="PlatformSection">
+    <div class="PlatformTop">
+      <h2>{{ platform.Platform }}</h2>
+      <img [src]="platform.Logo" [alt]="platform.Platform" />
+    </div>
+    <div class="container">
+      <div class="PlatformDesc">
+        <p>
+          {{ platform.MainDescription }}
+        </p>
+      </div>
+      <div id="accordion">
+        @if (platform.faqs && platform.faqs.length > 0){
+        <div class="FAQonly">
+          <div class="FAQTop">
+            <h5 class="mb-0">
+              <button
+                class="btn btn-link"
+                data-toggle="collapse"
+                [attr.data-target]="'#FAQ' + platform.ID"
+                aria-expanded="true"
+                aria-controls="FAQ"
+              >
+                FAQ
+              </button>
+            </h5>
+          </div>
+          <div class="PlatformInfo">
+            @for (faq of platform.faqs; track $index){
+
+            <div
+              class="collapse"
+              [id]="'FAQ' + platform.ID"
+              [attr.aria-labelledby]="platform.Platform"
+              data-parent="#accordion"
+            >
+              <div class="PlafromQuestion">
+                <h3>{{ faq.Question }}</h3>
+                <p>{{ faq.Answer }}</p>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+        } @if (platform.VideoURL != null){
+        <div class="Videos">
+          <div id="youtube-player">
+            <div class="FAQTop">
+              <h5 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  data-toggle="collapse"
+                  [attr.data-target]="platform.ID"
+                  aria-expanded="true"
+                  aria-controls="Video"
+                >
+                  Video
+                </button>
+              </h5>
+            </div>
+            <div
+              class="collapse"
+              [id]="'Video' + platform.ID"
+              [attr.aria-labelledby]="platform.Platform"
+              data-parent="#accordion"
+            >
+              <iframe
+                class="PlatformVideo"
+                [src]="platform.VideoURL"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Products Related -->
+      <div class="category-Name mt-5 pt-4">
+        <h3>RelatedProducts</h3>
+        <a routerLink="/shop">DiscoverMore<i class="fa fa-arrow-right"></i></a>
+      </div>
+      <ngx-slick-carousel
+        #slickModal="slick-carousel"
+        class="carousel"
+        [config]="slideConfig"
+      >
+        @for (product of platform.products; track $index){
+        <div ngxSlickItem class="item slide">
+          <a routerLink="/shop">
+            <app-product-card [product]="product"></app-product-card>
+          </a>
+        </div>
+        }
+      </ngx-slick-carousel>
+    </div>
+  </div>
+</section>
+}

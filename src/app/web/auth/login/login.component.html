@@ -1,86 +1,161 @@
 <section class="auth">
-    <div class="h-100 w-100">
-        <div class="row h-100">
-            <div class="wrapper h-100">
-                <div class="col-md-6 box details">
-                  <img src="assets/imgs/UI/SignIn/RobotHand.jpg" class="w-100 h-100" alt="">
-                </div>
-                <div class="col-md-5 box">
-                    <div class="form">
-                        <div class="content">
-                            <a routerLink="/home" class="ZhomeName">Zhome</a>
-                            <h3 class="login-form__title">Login To Your Account</h3>
-                            <p>
-                                New Member
-                                <a routerLink="/register" class="fw-bold">Create Your Account Now</a>
-                            </p>
-                        </div>
-
-                        <form method='POST'>
-                            <div class="inputs login-form__form">
-                                <div class="login-form__field position-relative" style="height:82px">
-                                    <input type="email" id="email" name="email" placeholder="Email Address" required />
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-
-                                <div class="login-form__field position-relative password-input" style="height:82px">
-                                    <input type="password" class="password" id="password" name="password" placeholder="Enter Password" required/>
-                                    <i class="fa fa-eye toggler" id="eye"></i>
-                                </div>
-
-                                <div class="flex items-center justify-end mt-4">
-                                    <a class="ForgetPassword underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" routerLink="/forgetPassword">
-                                        Forget your password
-                                    </a>
-                                    <button type="submit" class="thm-btn contact-one__btn">
-                                        Login Now
-                                    </button>
-                                </div>
-
-
-                                <p class="text-center mt-2 mb-3" style="color: #acacac;">Login using social media accounts</p>
-
-                                <a>
-                                    login with google
-                                </a>
-                                <div id="g_id_onload"
-                                    data-client_id="673202749345-8voabpo6qcntjihfmlq4acudh7pl8o88.apps.googleusercontent.com"
-                                    data-context="signin"
-                                    data-ux_mode="popup"
-                                    data-auto_prompt="false"
-                                    >
-                                </div>
-
-                                <div class="d-flex gap-3 align-items-center justify-content-center flex-wrap" style="gap:20px;">
-                                    <div class="g_id_signin"
-                                        data-type="icon"
-                                        data-shape="square"
-                                        data-theme="filled_blue"
-                                        data-text="signin_with"
-                                        data-size="large"
-                                        data-locale="en-GB"
-                                        >
-
-                                    </div>
-
-                                    <a href="../SignWithFacebook.php" class="facebook-login-btn">
-                                        <i class="fa-brands fa-facebook-f"></i>
-                                        <span>Login With Facebook</span>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-1 small-sidenav">
-                    <ul class="small-sidenav-ul">
-                        <li><a routerLink="/home" title="Home"><i class="fa-solid fa-house"></i></a></li>
-                        <li><a routerLink="/shop" title="Shop"><i class="fa-solid fa-store"></i></a></li>
-                        <li><a routerLink="/about" title="About"><i class="fa-solid fa-circle-info"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+  <div class="h-100 w-100">
+    <div class="row h-100">
+      <div class="wrapper h-100">
+        <div class="col-md-6 box details">
+          <img
+            src="assets/imgs/UI/SignIn/RobotHand.jpg"
+            class="w-100 h-100"
+            alt=""
+          />
         </div>
+        <div class="col-md-5 box">
+          <div class="form">
+            <div class="content">
+              <a routerLink="/home" class="ZhomeName">Zhome</a>
+              <h3 class="login-form__title">Login To Your Account</h3>
+              <p>
+                New Member
+                <a routerLink="/register" class="fw-bold"
+                  >Create Your Account Now</a
+                >
+              </p>
+            </div>
+
+            @if (errorMsg) {
+            <div class="alert alert-danger">
+              {{ errorMsg }}
+            </div>
+            }
+
+            <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+              <div class="inputs login-form__form">
+                <div
+                  class="login-form__field position-relative"
+                  style="height: 82px"
+                >
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    placeholder="Email Address"
+                    required
+                  />
+                  @if (loginForm.get('email')?.errors &&
+                  loginForm.get('email')?.touched) {
+                  <div
+                    class="alert danger d-flex align-items-baseline text-danger position-absolute"
+                  >
+                    <i class="fa-solid fa-xmark"></i>
+                    @if(loginForm.get('email')?.errors?.['required']) {
+                    <p>Email field is required</p>
+                    } @else if (loginForm.get('email')?.errors?.['email']) {
+                    <p>Write a valid email</p>
+                    }
+                  </div>
+                  }
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div
+                  class="login-form__field position-relative password-input"
+                  style="height: 82px"
+                >
+                  <input
+                    type="password"
+                    class="password"
+                    id="password"
+                    formControlName="password"
+                    placeholder="Enter Password"
+                    required
+                  />
+                  @if (loginForm.get('password')?.errors &&
+                  loginForm.get('password')?.touched) {
+                  <div
+                    class="alert danger d-flex align-items-baseline text-danger position-absolute"
+                  >
+                    <i class="fa-solid fa-xmark"></i>
+                    @if(loginForm.get('password')?.errors?.['required']) {
+                    <p>Password field is required</p>
+                    } @else if
+                    (loginForm.get('password')?.errors?.['minLength']) {
+                    <p>Password should be more than 9 numbers or letters</p>
+                    }
+                  </div>
+                  }
+                  <i class="fa fa-eye toggler" id="eye"></i>
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                  <a
+                    class="ForgetPassword underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    routerLink="/forgetPassword"
+                  >
+                    Forget your password
+                  </a>
+                  <button type="submit" class="thm-btn contact-one__btn">
+                    @if(isLoading == true){
+                    <i class="fa-solid fa-spinner"></i>
+                    } @else { Login Now }
+                  </button>
+                </div>
+
+                <p class="text-center mt-2 mb-3" style="color: #acacac">
+                  Login using social media accounts
+                </p>
+
+                <a> login with google </a>
+                <div
+                  id="g_id_onload"
+                  data-client_id="673202749345-8voabpo6qcntjihfmlq4acudh7pl8o88.apps.googleusercontent.com"
+                  data-context="signin"
+                  data-ux_mode="popup"
+                  data-auto_prompt="false"
+                ></div>
+
+                <div
+                  class="d-flex gap-3 align-items-center justify-content-center flex-wrap"
+                  style="gap: 20px"
+                >
+                  <div
+                    class="g_id_signin"
+                    data-type="icon"
+                    data-shape="square"
+                    data-theme="filled_blue"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-locale="en-GB"
+                  ></div>
+
+                  <a href="../SignWithFacebook.php" class="facebook-login-btn">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <span>Login With Facebook</span>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-1 small-sidenav">
+          <ul class="small-sidenav-ul">
+            <li>
+              <a routerLink="/home" title="Home"
+                ><i class="fa-solid fa-house"></i
+              ></a>
+            </li>
+            <li>
+              <a routerLink="/shop" title="Shop"
+                ><i class="fa-solid fa-store"></i
+              ></a>
+            </li>
+            <li>
+              <a routerLink="/about" title="About"
+                ><i class="fa-solid fa-circle-info"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

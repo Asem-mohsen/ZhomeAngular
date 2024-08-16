@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../Base/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,11 @@ export class ProductsService {
 
   getProduct() : Observable<any>
   {
-    return this._http.get('http://127.0.0.1:8000/api/products/products');
+    return this._http.get(`${environment.baseURL}/api/products/products`);
+  }
+
+  getOneProduct(id : number): Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/products/${id}/product`);
   }
 }

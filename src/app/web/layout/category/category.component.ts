@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class CategoryComponent {
 
+
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/checkout')
+    }
+  }
+
 }

@@ -1,18 +1,18 @@
 <!-- Search  -->
-<!-- <div class="search-popup">
-    <div class="search-popup__overlay custom-cursor__overlay">
-        <div class="cursor"></div>
-        <div class="cursor-follower"></div>
-    </div>
-    <div class="search-popup__inner">
-        <form action="#" class="search-popup__form">
-        <input type="text" name="search" placeholder="" autocomplete="off" />
-        <button type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-        </form>
-    </div>
-</div> -->
+<div class="search-popup">
+  <div class="search-popup__overlay custom-cursor__overlay">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+  </div>
+  <div class="search-popup__inner">
+    <form action="#" class="search-popup__form">
+      <input type="text" name="search" placeholder="" autocomplete="off" />
+      <button type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+  </div>
+</div>
 
 <!-- Scroll to Top -->
 <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
@@ -53,13 +53,8 @@
           name="Email"
           placeholder="Email Address"
           required
-          oninput="handleInput()"
         />
       </div>
-      <script>
-        // const subscriptionRoute = "{{ route('new.subscriber') }}";
-        // const token = "{{ csrf_token() }}";
-      </script>
 
       <div class="list">
         <ul>
@@ -97,9 +92,9 @@
             @if (true){ User } @else if (false){ Admin } @else{ User }
           </li>
           <li>
-            @if (true){
+            @if(!isLoggedIn) {
             <a routerLink="login"> Join Us </a>
-            } @else if (false){
+            } @else if (isLoggedIn){
             <a routerLink="profile"> Profile </a>
             } @else{
             <a routerLink="profile"> Profile </a>

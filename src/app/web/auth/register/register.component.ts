@@ -14,25 +14,29 @@ import UAParser from 'ua-parser-js';
 export class RegisterComponent implements OnInit{
 
   errorMsg: string = '';
-  isLoading : boolean = false ;
-  registerForm: FormGroup;
+  isLoading: boolean = false;
 
-  constructor(private _AuthService: AuthService , private _router : Router) {
-    const parser = new UAParser();
-    const result = parser.getResult();
+  constructor(private _AuthService: AuthService, private _router: Router) { }
 
-    this.registerForm = new FormGroup({
+    registerForm: FormGroup = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      device_name: new FormControl(this.getDeviceName(result), [Validators.required]),
-      operating_system: new FormControl(this.getOS(result), [Validators.required]),
+      device_name: new FormControl(null, [Validators.required]),
+      operating_system: new FormControl(null, [Validators.required]),
+    });
+
+  ngOnInit(): void {
+    const parser = new UAParser();
+    const result = parser.getResult();
+
+    // Patch the form values
+    this.registerForm.patchValue({
+      device_name: this.getDeviceName(result),
+      operating_system: this.getOS(result),
     });
   }
 
-
-  ngOnInit(): void {}
-  
 
   getDeviceName(result: UAParser.IResult): string {
     return result.device.vendor ? `${result.device.vendor} ${result.device.model}` : 'Unknown Device';
@@ -45,21 +49,25 @@ export class RegisterComponent implements OnInit{
 
   registerSubmit()
   {
+    this.isLoading = true
     if (this.registerForm.valid) {
       this._AuthService.sendRegister(this.registerForm.value).subscribe({
-        next: (res) => {          
-          //LOGIN
-          this._router.navigate(['login'])
+        next: (res) => {
+          //Register
+          const token = res.data.token;
+          localStorage.setItem('userToken', token);
+          this.isLoading = false
+          this._router.navigate(['home']);
         },
         error: (err) => {
-          console.log(err);
+          this.isLoading = false
           this.errorMsg = err.error.message || 'An error occurred during registration';
         }
       });
     } else {
       this.errorMsg = 'Please fill all required fields correctly';
     }
-    
+
   }
 
 

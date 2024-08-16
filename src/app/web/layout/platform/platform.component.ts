@@ -17,7 +17,7 @@ import { Product } from '../../../Interfaces/product';
 export class PlatformComponent implements OnInit{
 
   platforms: Platform[] = [];
-  products : Product[]  = []; 
+  products : Product[]  = [];
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 4,
@@ -35,6 +35,10 @@ export class PlatformComponent implements OnInit{
 
   ngOnInit(): void
   {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/platforms')
+    }
+
     this._PlatformService.getPlatfromsUserShow().subscribe((allPlatforms) => {
       this.platforms = Object.values(allPlatforms.data);
     })

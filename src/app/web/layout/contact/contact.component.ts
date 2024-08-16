@@ -10,4 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class ContactComponent {
 
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/contact')
+    }
+  }
 }

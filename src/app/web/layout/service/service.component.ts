@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ServiceComponent {
 
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/service')
+    }
+  }
 }

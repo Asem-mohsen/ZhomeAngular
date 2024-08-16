@@ -10,4 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ShopComponent {
 
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/shop')
+    }
+  }
+
 }

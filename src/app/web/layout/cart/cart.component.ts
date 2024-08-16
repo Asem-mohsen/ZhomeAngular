@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class CartComponent {
 
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/cart')
+    }
+  }
+
 }
