@@ -15,7 +15,7 @@ import { PaymentsComponent } from '../layout/payments/payments.component';
 import { ProductsComponent } from '../layout/products/products.component';
 import { RolesComponent } from '../layout/roles/roles.component';
 import { SubscribersComponent } from '../layout/subscribers/subscribers.component';
-import { FeaturesComponent } from '../layouts/features/features.component';
+import { FeaturesComponent } from '../layout/features/features.component';
 import { SalesComponent } from '../layout/sales/sales.component';
 import { PlatformsComponent } from '../layout/platforms/platforms.component';
 import { SidebarComponent } from "../additions/sidebar/sidebar.component";
