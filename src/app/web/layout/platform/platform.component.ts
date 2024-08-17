@@ -35,9 +35,9 @@ export class PlatformComponent implements OnInit{
 
   ngOnInit(): void
   {
-    if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', '/platforms')
-    }
+    // if (typeof localStorage != 'undefined') {
+    //   localStorage.setItem('currentPage', '/platforms')
+    // }
 
     this._PlatformService.getPlatfromsUserShow().subscribe((allPlatforms) => {
       this.platforms = Object.values(allPlatforms.data);

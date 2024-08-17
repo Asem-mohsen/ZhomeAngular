@@ -19,7 +19,7 @@ export class AdminComponent {
   ngOnInit(): void
   {
     if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', '/admin')
+      localStorage.setItem('currentPage', '/admins')
     }
     this._AdminService.getAdmins().subscribe((res) => {
       this.admins = Object.values(res.data.admins);

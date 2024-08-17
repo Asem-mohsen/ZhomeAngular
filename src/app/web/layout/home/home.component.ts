@@ -45,9 +45,9 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void
   {
-    if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', '/home')
-    }
+    // if (typeof localStorage != 'undefined') {
+    //   localStorage.setItem('currentPage', '/home')
+    // }
     this._BrandService.getBrands().subscribe((result) => {
       this.brands = Object.values(result.data);
     })

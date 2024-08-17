@@ -1,6 +1,6 @@
 import { NavbarComponent } from './../additions/navbar/navbar.component';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../additions/footer/footer.component';
 import { AdminComponent } from '../layout/admin/admin.component';
 import { BrandsComponent } from '../layout/brands/brands.component';
@@ -12,7 +12,7 @@ import { DashboardComponent } from '../layout/dashboard/dashboard.component';
 import { InventoryComponent } from '../layout/inventory/inventory.component';
 import { OrdersComponent } from '../layout/orders/orders.component';
 import { PaymentsComponent } from '../layout/payments/payments.component';
-import { PrroductsComponent } from '../layout/prroducts/prroducts.component';
+import { ProductsComponent } from '../layout/products/products.component';
 import { RolesComponent } from '../layout/roles/roles.component';
 import { SubscribersComponent } from '../layout/subscribers/subscribers.component';
 import { FeaturesComponent } from '../layouts/features/features.component';
@@ -21,20 +21,35 @@ import { PlatformsComponent } from '../layout/platforms/platforms.component';
 import { SidebarComponent } from "../additions/sidebar/sidebar.component";
 import { ScriptLoaderService } from '../services/scriptLoader/ScriptLoaderService.service';
 import { StylesheetLoaderService } from '../services/scriptLoader/StylesheetLoader.service';
+import { PageService } from '../../Services/Settings/Pages/page.service';
 
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, AdminComponent, BrandsComponent, UserComponent, ContactComponent, CategoriesComponent, CollectionsComponent, DashboardComponent, InventoryComponent, OrdersComponent, PaymentsComponent, PlatformsComponent, PrroductsComponent, RolesComponent, SalesComponent, SubscribersComponent, FeaturesComponent, SidebarComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, AdminComponent, BrandsComponent, UserComponent, ContactComponent, CategoriesComponent, CollectionsComponent, DashboardComponent, InventoryComponent, OrdersComponent, PaymentsComponent, PlatformsComponent, ProductsComponent, RolesComponent, SalesComponent, SubscribersComponent, FeaturesComponent, SidebarComponent],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.css'
 })
 export class AdminLayoutComponent {
 
-  constructor(private scriptLoader: ScriptLoaderService , private stylesheetLoader: StylesheetLoaderService) { }
+  constructor(private scriptLoader: ScriptLoaderService , private stylesheetLoader: StylesheetLoaderService , private router : Router , private _pageService : PageService) { }
 
   ngOnInit() {
     this.loadAdminResources();
+
+    const savedPage = this._pageService.getCurrentPage();
+    if (savedPage) {
+      this.router.navigate([savedPage]);
+    } else {
+      this._pageService.setCurrentPage('/admin/dashboard');
+    }
+
+    // Listen to route changes and save the current page
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
+      }
+    });
   }
 
   private async loadAdminResources() {

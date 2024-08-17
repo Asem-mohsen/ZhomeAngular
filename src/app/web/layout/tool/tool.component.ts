@@ -15,11 +15,11 @@ export class ToolComponent {
   currentStep: number = 1;
   isPopupOpen: boolean = false;
 
-  ngOnInit(): void {
-    if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', '/tool')
-    }
-  }
+  // ngOnInit(): void {
+  //   if (typeof localStorage != 'undefined') {
+  //     localStorage.setItem('currentPage', '/tool')
+  //   }
+  // }
 
   openPopup() {
     this.isPopupOpen = true;

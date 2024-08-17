@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ProductComponent {
 
-  ngOnInit(): void {
-    if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', '/product')
-    }
-  }
+  // ngOnInit(): void {
+  //   if (typeof localStorage != 'undefined') {
+  //     localStorage.setItem('currentPage', '/product')
+  //   }
+  // }
 }

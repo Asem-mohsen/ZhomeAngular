@@ -29,13 +29,14 @@ import { InventoryComponent } from './admin/layout/inventory/inventory.component
 import { OrdersComponent } from './admin/layout/orders/orders.component';
 import { PaymentsComponent } from './admin/layout/payments/payments.component';
 import { PlatformsComponent } from './admin/layout/platforms/platforms.component';
-import { PrroductsComponent } from './admin/layout/prroducts/prroducts.component';
 import { RolesComponent } from './admin/layout/roles/roles.component';
 import { SalesComponent } from './admin/layout/sales/sales.component';
 import { SubscribersComponent } from './admin/layout/subscribers/subscribers.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 import { UserLayoutComponent } from './web/user-layout/user-layout.component';
 import { FeaturesComponent } from './admin/layouts/features/features.component';
+import { ProductsComponent } from './admin/layout/products/products.component';
+import { PromocodesComponent } from './admin/layout/promocodes/promocodes.component';
 
 
 export const routes: Routes = [
@@ -63,9 +64,9 @@ export const routes: Routes = [
   {
     path: 'admin', component: AdminLayoutComponent, data: { adminOnly: true }, canActivate: [authGuard]  ,children: [
     { path: 'dashboard', component: DashboardComponent },
-    { path: '', component: AdminComponent },
-    { path: 'admin', component: AdminComponent },
+    { path: 'admins', component: AdminComponent },
     { path: 'users', component: UserComponent },
+    { path: 'brands', component: BrandsComponent },
     { path: 'categories', component: CategoriesComponent },
     { path: 'collections', component: CollectionsComponent },
     { path: 'contact', component: ContactComponent },
@@ -73,8 +74,10 @@ export const routes: Routes = [
     { path: 'inventory', component: InventoryComponent },
     { path: 'orders', component: OrdersComponent },
     { path: 'payments', component: PaymentsComponent },
+    { path: 'promocodes', component: PromocodesComponent },
+    { path: 'payments', component: PaymentsComponent },
     { path: 'platforms', component: PlatformsComponent },
-    { path: 'products', component: PrroductsComponent },
+    { path: 'products', component: ProductsComponent},
     { path: 'roles', component: RolesComponent },
     { path: 'sales', component: SalesComponent },
     { path: 'subscribers', component: SubscribersComponent },

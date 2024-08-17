@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index" class="brand-link">
+  <a routerLink="/admin/dashboard" class="brand-link">
     <img
       src="../../../../assets/imgs/Admin/img/web/Logo/Icon.png"
       alt="Zhome Logo"
@@ -22,7 +22,7 @@
       </div>
       <div class="info">
         <a href="#" class="d-block">
-          <p></p>
+          <p>{{ adminName }}</p>
         </a>
       </div>
     </div>
@@ -54,36 +54,44 @@
       >
         <!--Dashboard -->
         <li class="nav-item">
-          <a href="Dashboard.index" class="nav-link">
+          <a routerLink="/admin/dashboard" routerLinkActive="" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p>
           </a>
         </li>
         <!--Website -->
         <li class="nav-item">
-          <a href="index" class="nav-link">
+          <a routerLink="/home" routerLinkActive="" class="nav-link">
             <i class="nav-icon fa-solid fa-desktop"></i>
             <p>Website</p>
           </a>
         </li>
         <!--Admins -->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a class="nav-link" (click)="toggleSubMenu('admins')">
             <i class="nav-icon fa-solid fa-user-tie"></i>
             <p>
               Admins
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul [class.show]="isSubMenuOpen('admins')" class="nav nav-treeview">
             <li class="nav-item">
-              <a href="Admins.index" class="nav-link Admins">
+              <a
+                routerLink="/admin/admins"
+                routerLinkActive=""
+                class="nav-link Admins"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Admins</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="Roles.index" class="nav-link Roles">
+              <a
+                routerLink="/admin/roles"
+                routerLinkActive=""
+                class="nav-link Roles"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Roles</p>
               </a>
@@ -92,41 +100,61 @@
         </li>
         <!--Users -->
         <li class="nav-item">
-          <a href="Users.index" class="nav-link Users">
+          <a
+            routerLink="/admin/users"
+            routerLinkActive=""
+            class="nav-link Users"
+          >
             <i class="nav-icon fa-solid fa-users"></i>
             <p>Users</p>
           </a>
         </li>
         <!--Products -->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a (click)="toggleSubMenu('products')" class="nav-link">
             <i class="nav-icon fa-solid fa-box-open"></i>
             <p>
               Products
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul [class.show]="isSubMenuOpen('products')" class="nav nav-treeview">
             <li class="nav-item">
-              <a href="Products.index" class="nav-link Products">
+              <a
+                routerLink="/admin/products"
+                routerLinkActive=""
+                class="nav-link Products"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Products</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="Category.index" class="nav-link Category">
+              <a
+                routerLink="/admin/categories"
+                routerLinkActive=""
+                class="nav-link Category"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Categories</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="Brands.index" class="nav-link Brands">
+              <a
+                routerLink="/admin/brands"
+                routerLinkActive=""
+                class="nav-link Brands"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Brands</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="Platform.index" class="nav-link Platform">
+              <a
+                routerLink="/admin/platforms"
+                routerLinkActive=""
+                class="nav-link Platform"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Platforms</p>
               </a>
@@ -135,45 +163,50 @@
         </li>
         <!--Features -->
         <li class="nav-item">
-          <a href="Features.index" class="nav-link">
+          <a routerLink="/admin/features" routerLinkActive="" class="nav-link">
             <i class="nav-icon fa-solid fa-star"></i>
             <p>Features</p>
           </a>
         </li>
         <!--Collections -->
         <li class="nav-item">
-          <a href="Collections.index" class="nav-link">
+          <a
+            routerLink="/admin/collections"
+            routerLinkActive=""
+            class="nav-link"
+          >
             <i class="nav-icon fa-solid fa-object-group"></i>
             <p>Collections</p>
           </a>
         </li>
         <!--Payments -->
         <li class="nav-item">
-          <a href="Payment.Admin.index" class="nav-link">
+          <a routerLink="/admin/payments" routerLinkActive="" class="nav-link">
             <i class="nav-icon fa-solid fa-money-bill-1-wave"></i>
             <p>Payments</p>
           </a>
         </li>
         <!--Inventory -->
         <li class="nav-item">
-          <a href="Inventory.index" class="nav-link">
+          <a routerLink="/admin/inventory" routerLinkActive="" class="nav-link">
             <i class="nav-icon fa-solid fa-boxes-stacked"></i>
             <p>Stock</p>
           </a>
         </li>
         <!--Orders -->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a (click)="toggleSubMenu('orders')" class="nav-link">
             <i class="nav-icon fa-solid fa-cart-shopping"></i>
             <p>
               Orders
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul [class.show]="isSubMenuOpen('orders')" class="nav nav-treeview">
             <li class="nav-item">
               <a
-                href="Orders.ShopOrders.index"
+                routerLink="/admin/orders/shop"
+                routerLinkActive=""
                 class="nav-link Orders.ShopOrders"
               >
                 <i class="nav-icon fa-solid fa-shop"></i>
@@ -182,7 +215,8 @@
             </li>
             <li class="nav-item">
               <a
-                href="Orders.ToolsOrders.index"
+                routerLink="/admin/orders/tools"
+                routerLinkActive=""
                 class="nav-link Orders.ToolsOrder"
               >
                 <i class="nav-icon fa-solid fa-store"></i>
@@ -193,22 +227,30 @@
         </li>
         <!--Sales -->
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a (click)="toggleSubMenu('sales')" class="nav-link">
             <i class="nav-icon fa-solid fa-sack-dollar"></i>
             <p>
               Sales
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-          <ul class="nav nav-treeview">
+          <ul [class.show]="isSubMenuOpen('sales')" class="nav nav-treeview">
             <li class="nav-item">
-              <a href="Sales.index" class="nav-link Sales">
+              <a
+                routerLink="/admin/sales"
+                routerLinkActive=""
+                class="nav-link Sales"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sales</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="Sales.Promocode.index" class="nav-link Sales.Promocode">
+              <a
+                routerLink="/admin/promocodes"
+                routerLinkActive=""
+                class="nav-link Sales.Promocode"
+              >
                 <i class="far fa-circle nav-icon"></i>
                 <p>Promocodes</p>
               </a>
@@ -218,14 +260,22 @@
         <li class="nav-header">Others</li>
         <!--Subscribers -->
         <li class="nav-item">
-          <a href="Subscribers.index" class="nav-link">
+          <a
+            routerLink="/admin/subscribers"
+            routerLinkActive=""
+            class="nav-link"
+          >
             <i class="nav-icon fa-solid fa-user-plus"></i>
             <p>Subscribers</p>
           </a>
         </li>
         <!--Contact  -->
         <li class="nav-item">
-          <a href="Contact.index" class="nav-link Contact">
+          <a
+            routerLink="/admin/contact"
+            routerLinkActive=""
+            class="nav-link Contact"
+          >
             <i class="nav-icon fa-solid fa-address-card"></i>
             <p>Contact</p>
           </a>

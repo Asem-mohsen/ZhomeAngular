@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../additions/navbar/navbar.component';
 import { FooterComponent } from '../additions/footer/footer.component';
@@ -19,22 +19,39 @@ import { ServiceComponent } from '../layout/service/service.component';
 import { ToolComponent } from '../layout/tool/tool.component';
 import { ShopComponent } from '../layout/shop/shop.component';
 import { NgIf } from '@angular/common';
+import { PageService } from '../../Services/Settings/Pages/page.service';
 
 @Component({
   selector: 'app-user-layout',
   standalone: true,
-  // imports: [RouterOutlet , NavbarComponent , FooterComponent],
   imports: [NgIf , RouterOutlet, NavbarComponent, FooterComponent , HomeComponent , ContactComponent , ShopComponent , AboutComponent , BrandComponent , CartComponent , CategoryComponent , LoginComponent , RegisterComponent , CheckoutComponent , PlatformComponent , ProfileComponent , ProductComponent , ServiceComponent, ToolComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css'
 })
-export class UserLayoutComponent {
+export class UserLayoutComponent implements OnInit {
   title = 'Zhome';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _pageService: PageService) {}
+
+   ngOnInit(): void {
+    const savedPage = this._pageService.getCurrentPage();
+    if (savedPage) {
+      this.router.navigate([savedPage]);
+    } else {
+      this._pageService.setCurrentPage('/home');
+    }
+
+    // Listen to route changes and save the current page
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
+      }
+    });
+     
+  }
 
   isAuthPage(): boolean {
-    const authRoutes = ['/login', '/register']; // Define the routes where navbar/footer should not appear
+    const authRoutes = ['/login', '/register']; // navbar/footer should not appear
     return authRoutes.includes(this.router.url);
   }
 }

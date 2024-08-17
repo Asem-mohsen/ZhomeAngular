@@ -8,10 +8,10 @@
       ></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a routerLink="" class="nav-link">Dashboard</a>
+      <a routerLink="/admin/dashboard" class="nav-link">Dashboard</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a routerLink="" class="nav-link">Contact</a>
+      <a routerLink="/admin/contact" class="nav-link">Contact</a>
     </li>
   </ul>
 
@@ -19,7 +19,7 @@
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
     <li class="nav-item">
-      <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+      <a class="nav-link" data-widget="navbar-search" role="button">
         <i class="fas fa-search"></i>
       </a>
       <div class="navbar-search-block">
@@ -136,21 +136,13 @@
         >
       </div>
     </li>
-    <!-- @auth(admin) -->
+    @if(isLoggedIn){
     <li class="nav-item">
-      <a
-        class="nav-link"
-        href="#"
-        onclick="event.preventDefault(); document.getElementById(logout-form).submit();"
-      >
+      <a class="nav-link" (click)="logout()">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
       </a>
-      <form id="logout-form" action="" method="POST" style="display: none">
-        <!-- @method(GET)
-                    @csrf -->
-      </form>
     </li>
-    <!-- @endauth -->
+    }
     <li class="nav-item">
       <a class="nav-link" data-widget="fullscreen" href="#" role="button">
         <i class="fas fa-expand-arrows-alt"></i>
