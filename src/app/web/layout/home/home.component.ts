@@ -1,42 +1,73 @@
 import { Component, OnInit, inject, afterNextRender } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BrandService } from '../../../Services/brands/brand.service';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Brand } from '../../../Interfaces/brand';
 import { PlatformService } from '../../../Services/platforms/platform.service';
 import { Platform } from '../../../Interfaces/platform';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SlickCarouselModule , RouterLink , RouterLinkActive],
+  imports: [RouterLink , RouterLinkActive , CarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
 
+
   brands:    Brand[] = [];
   platforms: Platform[] = [];
 
-  slideConfig = {
-    "slidesToShow": 6,
-    "slidesToScroll": 4,
-    "dots": false,
-    "infinite": true,
-    "autoplay": true,
-    "arrows":false,
-    "autoplaySpeed": 3000
-  };
-
-  slidePlatform = {
-    "slidesToShow": 4,
-    "slidesToScroll": 0,
-    "dots": false,
-    "infinite": false,
-    "autoplay": false,
-    "arrows":false,
-  };
+  PlatformSlider: OwlOptions = {
+    loop: false,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: false
+  }
+  BrandsSlider: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 2
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 5
+      },
+      940: {
+        items: 6
+      }
+    },
+    nav: false
+  }
 
   constructor(private _BrandService: BrandService , private _PlatformService : PlatformService)
   {
@@ -45,9 +76,6 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void
   {
-    // if (typeof localStorage != 'undefined') {
-    //   localStorage.setItem('currentPage', '/home')
-    // }
     this._BrandService.getBrands().subscribe((result) => {
       this.brands = Object.values(result.data);
     })

@@ -77,7 +77,7 @@ export const routes: Routes = [
       {path:'cart' , component:CartComponent},
       {path:'login' , component:LoginComponent},
       {path:'register' , component:RegisterComponent},
-      {path:'product' , component:ProductComponent},
+      {path:'product/:productId' , component:ProductComponent},
       {path:'brands' , component:BrandComponent},
       {path:'platforms' , component:PlatformComponent},
       {path:'categories' , component:CategoryComponent},

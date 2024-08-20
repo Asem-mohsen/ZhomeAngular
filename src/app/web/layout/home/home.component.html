@@ -86,22 +86,13 @@
 <section class="mt-5 pt-3">
   <div class="customer-logos slider">
     <div class="slide Brand">
-      <ngx-slick-carousel
-        #slickModal="slick-carousel"
-        class="carousel"
-        [config]="slideConfig"
-      >
+      <owl-carousel-o [options]="BrandsSlider">
         @for (brand of brands; track $index){
-        <div ngxSlickItem class="slide">
-          <img
-            loading="lazy"
-            [src]="brand.Logo"
-            [alt]="brand.Brand"
-            [title]="brand.Brand"
-          />
-        </div>
-        }
-      </ngx-slick-carousel>
+          <ng-template carouselSlide>
+            <img loading="lazy" [src]="brand.Logo" [alt]="brand.Brand" [title]="brand.Brand" />
+          </ng-template>
+        }    
+      </owl-carousel-o>
     </div>
   </div>
 </section>
@@ -1025,41 +1016,22 @@
     <!-- Platforms -->
     <div class="Platfroms">
       <h3>Zhome Compability</h3>
-      <ngx-slick-carousel
-        #slickModal="slick-carousel"
-        class="carousel"
-        [config]="slidePlatform"
-      >
+      <owl-carousel-o [options]="PlatformSlider">
         @for (platform of platforms; track $index){
-        <div ngxSlickItem class="slide">
-          <div class="Platform-home">
-            <img
-              loading="lazy"
-              [src]="platform.Logo"
-              [alt]="platform.Platform"
-              [title]="platform.Platform"
-            />
-            <a routerLink="/platforms">{{ platform.Platform }}</a>
-          </div>
-        </div>
-        }
-      </ngx-slick-carousel>
+          <ng-template carouselSlide>
+            <div class="Platform-home">
+              <img
+                loading="lazy"
+                [src]="platform.Logo"
+                [alt]="platform.Platform"
+                [title]="platform.Platform"
+              />
+              <a routerLink="/platforms">{{ platform.Platform }}</a>
+            </div>
+          </ng-template>
+        }    
+      </owl-carousel-o>
     </div>
   </div>
 </section>
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-  var swiper = new Swiper(".swiper-container", {
-    slidesPerView: "auto",
-    spaceBetween: 10,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-  });
-</script>

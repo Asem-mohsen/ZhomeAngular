@@ -28,7 +28,7 @@
     <div
       class="product-one__content-right d-flex align-items-center justify-content-between"
     >
-      @if (product.sale.PriceAfter) {
+      @if (product.sale) {
       <div class="d-grid gap-1">
         <p class="product-one__text">
           {{ product.sale.PriceAfter | currency : "EGP" }}

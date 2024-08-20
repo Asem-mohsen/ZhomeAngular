@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable , afterNextRender } from '@angular/core';
+import { Inject, Injectable , PLATFORM_ID, afterNextRender } from '@angular/core';
 import { Login, Register } from '../../Interfaces/auth/register';
 import { environment } from '../../Base/enviroment';
 import { BehaviorSubject, Observable , tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 import { Admin, User, AuthResponse } from '../../Interfaces/user';
-
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
 
   currentUserDate: BehaviorSubject<Admin | User | null> = new BehaviorSubject<Admin | User | null>(null);
 
-  constructor(private _http: HttpClient, private _router: Router) {
+  constructor(private _http: HttpClient, private _router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
     this.loadCurrentUser();
 
@@ -75,12 +75,14 @@ export class AuthService {
   }
 
   private loadCurrentUser() {
-    const storedUserData = localStorage.getItem('currentUserData');
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      this.currentUserDate.next(userData);
-    } else {
-      this.currentUserDate.next(null);
+    if (isPlatformBrowser(this.platformId)) {
+      const storedUserData = localStorage.getItem('currentUserData');
+      if (storedUserData) {
+        const userData = JSON.parse(storedUserData);
+        this.currentUserDate.next(userData);
+      } else {
+        this.currentUserDate.next(null);
+      }
     }
   }
 

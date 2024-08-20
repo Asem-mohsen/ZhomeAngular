@@ -20,6 +20,7 @@ import { ToolComponent } from '../layout/tool/tool.component';
 import { ShopComponent } from '../layout/shop/shop.component';
 import { NgIf } from '@angular/common';
 import { PageService } from '../../Services/Settings/Pages/page.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-layout',
@@ -34,20 +35,33 @@ export class UserLayoutComponent implements OnInit {
   constructor(private router: Router, private _pageService: PageService) {}
 
    ngOnInit(): void {
-    const savedPage = this._pageService.getCurrentPage();
-    if (savedPage) {
-      this.router.navigate([savedPage]);
-    } else {
-      this._pageService.setCurrentPage('/home');
-    }
+    // const savedPage = this._pageService.getCurrentPage();
+    // if (savedPage) {
+    //   this.router.navigate([savedPage]);
+    // } else {
+    //   this._pageService.setCurrentPage('/home');
+    // }
 
-    // Listen to route changes and save the current page
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
-      }
-    });
-     
+    // // Listen to route changes and save the current page
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
+    //   }
+    // });
+    // const savedPage = this._pageService.getCurrentPage(false);
+    // if (savedPage && !savedPage.startsWith('/admin')) {
+    //   this.router.navigate([savedPage]);
+    // } else {
+    //   this.router.navigate(['/home']);
+    // }
+
+    // this.router.events.pipe(
+    //   filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    // ).subscribe((event: NavigationEnd) => {
+    //   if (!event.urlAfterRedirects.startsWith('/admin')) {
+    //     this._pageService.setCurrentPage(event.urlAfterRedirects, false);
+    //   }
+    // });
   }
 
   isAuthPage(): boolean {

@@ -15,8 +15,8 @@ export class ProductsService {
     return this._http.get(`${environment.baseURL}/api/products/products`);
   }
 
-  getOneProduct(id : number): Observable<any>
+  getOneProduct(id : string | null): Observable<any>
   {
-    return this._http.get(`${environment.baseURL}/api/products/${id}/product`);
+    return this._http.get(`${environment.baseURL}/api/products/${id}/userView`);
   }
 }

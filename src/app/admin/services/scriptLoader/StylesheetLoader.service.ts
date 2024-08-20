@@ -22,4 +22,11 @@ export class StylesheetLoaderService {
       document.head.appendChild(linkElement);
     });
   }
+
+  unloadStylesheet(name: string): void {
+    const linkElement = document.querySelector(`link[data-name="${name}"]`);
+    if (linkElement) {
+      document.head.removeChild(linkElement);
+    }
+  }
 }

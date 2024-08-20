@@ -1,5 +1,5 @@
 import { NavbarComponent } from './../additions/navbar/navbar.component';
-import { Component } from '@angular/core';
+import { Component , OnDestroy , OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../additions/footer/footer.component';
 import { AdminComponent } from '../layout/admin/admin.component';
@@ -22,6 +22,7 @@ import { SidebarComponent } from "../additions/sidebar/sidebar.component";
 import { ScriptLoaderService } from '../services/scriptLoader/ScriptLoaderService.service';
 import { StylesheetLoaderService } from '../services/scriptLoader/StylesheetLoader.service';
 import { PageService } from '../../Services/Settings/Pages/page.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-layout',
@@ -30,26 +31,48 @@ import { PageService } from '../../Services/Settings/Pages/page.service';
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.css'
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   constructor(private scriptLoader: ScriptLoaderService , private stylesheetLoader: StylesheetLoaderService , private router : Router , private _pageService : PageService) { }
 
+
   ngOnInit() {
+
     this.loadAdminResources();
+    // const savedPage = this._pageService.getCurrentPage();
+    // if (savedPage) {
+    //   console.log(savedPage)
+    //   this.router.navigate([savedPage]);
+    // } else {
+    //   this._pageService.setCurrentPage('/admin/dashboard');
+    // }
 
-    const savedPage = this._pageService.getCurrentPage();
-    if (savedPage) {
-      this.router.navigate([savedPage]);
-    } else {
-      this._pageService.setCurrentPage('/admin/dashboard');
-    }
+    // // Listen to route changes and save the current page
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     console.log(event.urlAfterRedirects)
+    //     this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
+    //   }
+    // });
+    // const savedPage = this._pageService.getCurrentPage(true);
+    // if (savedPage && savedPage.startsWith('/admin')) {
+    //   this.router.navigate([savedPage]);
+    // } else {
+    //   this.router.navigate(['/admin/dashboard']);
+    // }
 
-    // Listen to route changes and save the current page
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this._pageService.setCurrentPage(event.urlAfterRedirects); // Save the new route
-      }
-    });
+    // this.router.events.pipe(
+    //   filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    // ).subscribe((event: NavigationEnd) => {
+    //   if (event.urlAfterRedirects.startsWith('/admin')) {
+    //     this._pageService.setCurrentPage(event.urlAfterRedirects, true);
+    //   }
+    // });
+
+  }
+
+  ngOnDestroy() {
+    this.unloadAdminResources();
   }
 
   private async loadAdminResources() {
@@ -114,4 +137,50 @@ export class AdminLayoutComponent {
     }
   }
 
+
+  private unloadAdminResources() {
+    this.stylesheetLoader.unloadStylesheet('google-fonts');
+    this.stylesheetLoader.unloadStylesheet('dataTablesBootstrap');
+    this.stylesheetLoader.unloadStylesheet('dataTablesResponsive');
+    this.stylesheetLoader.unloadStylesheet('dataTablesButtons');
+    this.stylesheetLoader.unloadStylesheet('ionicons');
+    this.stylesheetLoader.unloadStylesheet('tempusdominusBootstrap');
+    this.stylesheetLoader.unloadStylesheet('icheckBootstrap');
+    this.stylesheetLoader.unloadStylesheet('jqvmap');
+    this.stylesheetLoader.unloadStylesheet('adminlte');
+    this.stylesheetLoader.unloadStylesheet('overlayScrollbars');
+    this.stylesheetLoader.unloadStylesheet('daterangepicker');
+    this.stylesheetLoader.unloadStylesheet('summernote');
+    this.stylesheetLoader.unloadStylesheet('styleAdmin');
+
+    this.scriptLoader.unloadScript('jquery');
+    this.scriptLoader.unloadScript('jqueryUI');
+    this.scriptLoader.unloadScript('bootstrap');
+    this.scriptLoader.unloadScript('chart');
+    this.scriptLoader.unloadScript('sparkline');
+    this.scriptLoader.unloadScript('jqvmap');
+    this.scriptLoader.unloadScript('jqueryKnob');
+    this.scriptLoader.unloadScript('moment');
+    this.scriptLoader.unloadScript('daterangepicker');
+    this.scriptLoader.unloadScript('tempusdominusBootstrap');
+    this.scriptLoader.unloadScript('summernote');
+    this.scriptLoader.unloadScript('overlayScrollbars');
+    this.scriptLoader.unloadScript('dataTables');
+    this.scriptLoader.unloadScript('dataTablesBootstrap');
+    this.scriptLoader.unloadScript('dataTablesResponsive');
+    this.scriptLoader.unloadScript('dataTablesResponsiveBS');
+    this.scriptLoader.unloadScript('dataTablesButtons');
+    this.scriptLoader.unloadScript('dataTablesButtonsBS');
+    this.scriptLoader.unloadScript('jszip');
+    this.scriptLoader.unloadScript('pdfmake');
+    this.scriptLoader.unloadScript('pdfmakeFonts');
+    this.scriptLoader.unloadScript('dataTablesButtonsHTML5');
+    this.scriptLoader.unloadScript('dataTablesButtonsPrint');
+    this.scriptLoader.unloadScript('dataTablesButtonsColVis');
+    this.scriptLoader.unloadScript('bsCustomFileInput');
+    this.scriptLoader.unloadScript('adminlte');
+    this.scriptLoader.unloadScript('demo');
+    this.scriptLoader.unloadScript('dashboard');
+    this.scriptLoader.unloadScript('main');
+  }
 }

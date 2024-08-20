@@ -1,34 +1,37 @@
     <section>
         <div class="container-shop" id="shop-background">
-            <div class="background-image" style="background-image: url(UI/Imgs/website/Shop/AlexaImage2.jpg)"></div>
+            <div class="background-image" style="background-image: url('../../../../assets/imgs/UI/website/Shop/AlexaImage2.jpg')"></div>
             <div class="content parent-home">
-                <h1>ContentShop</h1>
+                <h1>Experience Seamless Living with Our Range of Smart Home Technologies</h1>
             </div>
         </div>
     </section>
 
     <!-- All Categories -->
-    <section>
-        <div class="container CatgeorySliderShop">
-            <h1 id="ShopByCategory">Category</h1>
-            <div class="categories-shop customer-logos slider">
-                <!-- @foreach($categories as $category)
-                    <div class="category-shop slide">
-                        <a href="{{route('Shop.Filter.category' , $category->ID)}}">
-                            <img src="{{asset("Admin/dist/img/web/Categories/$category->MainImage")}}" alt="{{$category->Category}}">
-                        </a>
-                        <a href="">
-                            @if(App::getLocale() == 'ar')
-                                {{$category->ArabicName}}
-                            @else
-                                {{$category->Category}}
-                            @endif
-                        </a>
-                    </div>
-                @endforeach -->
+     @if(shopData?.['All Categories']){
+        <section>
+            <div class="container">
+                <h1 id="ShopByCategory">Category</h1>
+                <div class="categories-shop">
+                    <owl-carousel-o [options]="CategorySlider">
+                        @for (category of shopData['All Categories']; track $index) {
+                            <ng-template carouselSlide>
+                                <div class="category-shop">
+                                    <a routerLink="">
+                                        <img [src]="category.MainImage" [alt]="category.Category">
+                                    </a>
+                                    <a href="">
+                                        {{category.Category}}
+                                    </a>
+                                </div>
+                            </ng-template>
+                        }    
+                    </owl-carousel-o>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+     }
+    
 
     <section id="StartYourSystem-Shop">
         <div class="container">
@@ -57,74 +60,88 @@
             </ul>
             <div class="tab-content py-3">
                 <!-- Recommended -->
-                <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
+                 @if(shopData['Category 1 to show']){
+                    <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
                         <div class="wrapper">
                             <div class="card">
                                 <div class="card-body pl-0">
-                                    <div class="related-product__carousel owl-carousel owl-theme">
-                                        <!-- @foreach($categoriesProduct2 as $product)
-                                            <div class="item">
-                                                <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                                            </div>
-                                        @endforeach -->
+                                    <div class="related-product__carousel">
+                                        <owl-carousel-o [options]="ProductsSlider">
+                                            @for (product of shopData['Category 1 to show'].Products; track $index) {
+                                                <ng-template carouselSlide>
+                                                    <app-product-card [product]="product"></app-product-card>
+                                                </ng-template>
+                                            }    
+                                        </owl-carousel-o>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                 }
+                
 
                 <!-- All -->
-                <div class="tab-pane fade" id="All" role="tabpanel">
-                    <div class="wrapper">
-                        <div class="card">
-                            <div class="card-body pl-0">
-                                <div class="related-product__carousel owl-carousel owl-theme">
-                                    <!-- @foreach($categoriesProduct2 as $product)
-                                        <div class="item">
-                                            <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                                        </div>
-                                    @endforeach -->
+                @if(shopData['Category 2 to show']){
+                    <div class="tab-pane fade" id="All" role="tabpanel">
+                        <div class="wrapper">
+                            <div class="card">
+                                <div class="card-body pl-0">
+                                    <div class="related-product__carousel">
+                                        <owl-carousel-o [options]="ProductsSlider">
+                                            @for (product of shopData['Category 2 to show'].Products; track $index) {
+                                                <ng-template carouselSlide>
+                                                    <app-product-card [product]="product"></app-product-card>
+                                                </ng-template>
+                                            }    
+                                        </owl-carousel-o>
+                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                }
                 <!-- MostPopular -->
-                <div class="tab-pane fade" id="MostPopular" role="tabpanel">
-                    <div class="wrapper">
-                        <div class="card" >
-                            <div class="card-body pl-0">
-                                <div class="related-product__carousel owl-carousel owl-theme">
-                                    <!-- @foreach($categoriesProduct as $product)
-                                        <div class="item">
-                                            <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                                        </div>
-                                    @endforeach -->
+                @if(shopData['Brand to show']){
+                    <div class="tab-pane fade" id="MostPopular" role="tabpanel">
+                        <div class="wrapper">
+                            <div class="card" >
+                                <div class="card-body pl-0">
+                                    <div class="related-product__carousel">
+                                        <owl-carousel-o [options]="ProductsSlider">
+                                            @for (product of shopData['Brand to show'].Products; track $index) {
+                                                <ng-template carouselSlide>
+                                                    <app-product-card [product]="product"></app-product-card>
+                                                </ng-template>
+                                            }    
+                                        </owl-carousel-o>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                }
                 <!-- On Sale -->
-                <div class="tab-pane fade" id="OnSale" role="tabpanel">
-                    <div class="wrapper">
-                        <div class="card" >
-                            <div class="card-body pl-0">
-                                <div class="related-product__carousel owl-carousel owl-theme">
-                                    <!-- @if($productsOnSale->isNotEmpty())
-                                        @foreach($productsOnSale as $product)
-                                            <div class="item">
-                                                <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                                            </div>
-                                        @endforeach
-                                    @endif -->
+                @if(shopData['All Products On Sale']){
+                    <div class="tab-pane fade" id="OnSale" role="tabpanel">
+                        <div class="wrapper">
+                            <div class="card" >
+                                <div class="card-body pl-0">
+                                    <div class="related-product__carousel">
+                                        <owl-carousel-o [options]="ProductsSlider">
+                                            @for (product of shopData['All Products On Sale']; track $index) {
+                                                <ng-template carouselSlide>
+                                                    <app-product-card [product]="product"></app-product-card>
+                                                </ng-template>
+                                            }    
+                                        </owl-carousel-o>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
 
             </div>
         </div>
@@ -132,45 +149,45 @@
 
     <section id="Boxes">
         <!-- Select Bundles-->
-        <!-- <div class="container">
+        <div class="container">
             <div class="More-boxes">
-                <div class="box box-1" style="background-image:url('UI/Imgs/website/Shop/Escritorio.jpg)">
-                    <p>ExploreCollection</p>
-                    <a class="Button" routerLink="/categories">DiscoverMore</a>
+                <div class="box box-1" style="background-image:url(assets/imgs/UI/website/Shop/Escritorio.jpg)">
+                    <p>Explore Our Collection of Smart Home Gadgets</p>
+                    <a class="Button" routerLink="/categories">Discover More</a>
                 </div>
-                <div class="box hoverhere box-2" style="background-image:url('UI/Imgs/website/Shop/AlexaImage2.jpg)">
+                <div class="box hoverhere box-2" style="background-image:url(assets/imgs/UI/website/Shop/AlexaImage2.jpg)">
                     <div class="overlay-button" style="width: 85%;">
                         <div class="Info-bundle">
-                            <h3>{{ucfirst(strtolower($bundle->Name))}}</h3>
-                            <p>{{ucfirst(strtolower($bundle->brand->Brand))}}</p>
+                            <h3>{{bundle.Name}}</h3>
+                            <p>{{bundle.brand.Brand}}</p>
                         </div>
                         <a >Read More</a>
                     </div>
                 </div>
-                <div class="box hoverhere box-3"  style="background-image:url(UI/Imgs/website/Shop/Escritorio.jpg)">
+                <div class="box hoverhere box-3"  style="background-image:url(assets/imgs/UI/website/Shop/Escritorio.jpg)">
                     <div class="overlay-button" style="width: 85%;">
                         <div class="Info-bundle">
-                            <h3>{{ucfirst(strtolower($bundle->Name))}}</h3>
-                            <p>{{ucfirst(strtolower($bundle->brand->Brand))}}</p>
+                            <h3>{{bundle.Name}}</h3>
+                            <p>{{bundle.brand.Brand}}</p>
                         </div>
                         <a >Read More</a>
                     </div>
                 </div>
-                <div class="box box-4"  style="background-image:url(UI/Imgs/website/Shop/LightZhome.jpg);flex: 0.6;">
-                    <p>FindYourPerfect</p>
-                    <a class="Button" routerLink="/tools">GetYourDesignButton</a>
+                <div class="box box-4"  style="background-image:url(assets/imgs/UI/website/Shop/LightZhome.jpg);flex: 0.6;">
+                    <p>Find Your Perfect Smart Home Setup Here</p>
+                    <a class="Button" routerLink="/tools">Get Your Design</a>
                 </div>
-                <div class="box hoverhere box-5" style="background-image:url(UI/Imgs/website/Shop/james-mcdonald-74nIYjsOY88-unsplash.jpg)">
+                <div class="box hoverhere box-5" style="background-image:url(assets/imgs/UI/website/Shop/james-mcdonald-74nIYjsOY88-unsplash.jpg)">
                     <div class="overlay-button" style="width: 85%;">
                         <div class="Info-bundle">
-                            <h3>{{ucfirst(strtolower($bundle->Name))}}</h3>
-                            <p>{{ucfirst(strtolower($bundle->brand->Brand))}}</p>
+                            <h3>{{bundle.Name}}</h3>
+                            <p>{{bundle.brand.Brand}}</p>
                         </div>
                         <a >Read More</a>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </section>
 
     <!-- Promocode -->
@@ -261,75 +278,76 @@
 
     <!-- Products With Sale -->
 
-    <!-- @if($productsOnSale->isNotEmpty())
+    @if(shopData['All Products On Sale']){
         <section>
             <div class="container">
                 <div class="category-Name mt-5">
-                    <h3>FreshSaleText</h3>
-                    <a href="{{route('Shop.index">DiscoverMore<i class="fa fa-arrow-right ml-2"></i></a>
+                    <h3>Fresh Sale</h3>
+                    <a>Discover More<i class="fa fa-arrow-right ml-2"></i></a>
                 </div>
                 <div class="related-product__carousel owl-carousel owl-theme mt-3 mb-5">
-                    @foreach($productsOnSale as $product)
-                        <div class="item">
-                            <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                        </div>
-                    @endforeach
+                    <owl-carousel-o [options]="ProductsSlider">
+                        @for (product of shopData['All Products On Sale']; track $index) {
+                            <ng-template carouselSlide>
+                                <app-product-card [product]="product"></app-product-card>
+                            </ng-template>
+                        }    
+                    </owl-carousel-o>
                 </div>
             </div>
         </section>
+    }
     @else
+    {
         <div class='m-4'>
         </div>
-    @endif -->
+    }
 
     <!-- Sub Categories of one category and thier product -->
     <section>
         <div class="container Category-selected-shop">
 
             <!-- Category and Sub of that Category -->
+             
             <section>
                 <div class="boxes-shop SubCategory-OnlineShop">
                     <div class="category-Name">
                         <h3>
-                            <!-- @if(App::getLocale() == 'ar')
-                                {{$category2->ArabicName}}
-                            @else
-                                {{$category2->Category}}
-                            @endif -->
+                            {{category1.Category}}
                             <br>
                             <span>Category</span>
                         </h3>
-                        <!-- <a href="{{route('Shop.Filter.category' , $category2->ID)}}">DiscoverMore<i class="fa fa-arrow-right ml-2"></i></a> -->
+                        <a routerLink="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
                     </div>
 
-                    <!-- @if($category2->subcategories->isNotEmpty())
+                    @if(shopData['Category 1 to show'].Category.subcategories){
                         <div class="Subs mt-3">
-                            @foreach($category2->subcategories as $subcategory)
-                                <a class="ToTheSubPage" href="{{route('Shop.Filter.subcategory' , $subcategory->ID)}}">
-                                    <div class="box-shop SubCategory-OnlineShop-Circled" style="background-image: url({{asset("Admin/dist/img/web/Categories/SubCategory/$subcategory->image")}})">
+                            @for (subcategory of shopData['Category 1 to show'].Category.subcategories ; track $index) {
+                                <a class="ToTheSubPage">
+                                    <div class="box-shop SubCategory-OnlineShop-Circled" [style]="'background-image: url('+subcategory.image+')'">
                                     </div>
                                     <p>
-                                        @if(App::getLocale() == 'ar')
-                                            {{$subcategory->SubArabicName}}
-                                        @else
-                                            {{$subcategory->SubName}}
-                                        @endif
+                                        {{subcategory.SubName}}
                                     </p>
                                 </a>
-                            @endforeach
+                            }
                         </div>
-                    @endif -->
+                    }
                 </div>
             </section>
 
             <!-- Product From The Selected Category -->
             <section>
-                <div class="related-product__carousel owl-carousel owl-theme mt-5 mb-5 pb-3">
-                    <!-- @foreach($categoriesProduct as $product)
-                        <div class="item">
-                            <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                        </div>
-                    @endforeach -->
+                <div class="related-product__carousel mt-5 mb-5 pb-3">
+                    <owl-carousel-o [options]="ProductsSlider">
+                        @for (product of shopData['Category 1 to show'].Products; track $index) {
+                            <ng-template carouselSlide>
+                                <div class="item">
+                                    <app-product-card [product]="product"></app-product-card>
+                                </div>
+                            </ng-template>
+                        }    
+                    </owl-carousel-o>
                 </div>
             </section>
             
@@ -341,27 +359,25 @@
         <div class="container">
             <!-- Select Bundles -->
             <h2 class="Home-Text">
-                BundlesMadeforYou
+                Bundles Made for You
             </h2>
             <div class="Bundles Images-Home">
-                <!-- @foreach ($bundles as $bundle )
+                @for (bundle of shopData['All Bundles']; track $index) {
+               
                     <div class="Bundle-Shop Image-One">
-                        <img src="{{asset("Admin/dist/img/web/Products/MainImage/$bundle->MainImage")}}" class="BigWidth" alt="{{$bundle->Name}}">
+                        <img [src]="bundle.MainImage" class="BigWidth" [alt]="bundle.Name">
                         <div class="overlay-button" style="width: 250px;">
                             <div class="Info-bundle">
                                 <h3>
-                                    @if(App::getLocale() == 'ar')
-                                        {{$bundle->ArabicName}}
-                                    @else
-                                        {{$bundle->Name}}
-                                    @endif
+                                    {{bundle.Name}}
                                 </h3>
-                                <p>{{$bundle->brand->Brand}}</p>
+                                <p>{{bundle.brand.Brand}}</p>
                             </div>
-                            <a href="{{route('Product.show' , $bundle->ID)}}" class="btn btn-info">Read More</a>
+                            <a [routerLink]="['/product' , bundle.ID ]"   class="btn btn-info">Read More</a>
                         </div>
                     </div>
-                @endforeach -->
+                
+                }
             </div>
         </div>
     </section>
@@ -374,47 +390,41 @@
                 <div class="boxes-shop SubCategory-OnlineShop">
                     <div class="category-Name">
                         <h3>
-                            <!-- @if(App::getLocale() == 'ar')
-                                {{$category->ArabicName}}
-                            @else
-                                {{$category->Category}}
-                            @endif -->
+                            {{category2.Category}}
                             <br>
                             <span>Category</span>
                         </h3>
-                        <!-- <a href="{{route('Shop.Filter.category' , $category->ID)}}">DiscoverMore<i class="fa fa-arrow-right ml-2"></i></a> -->
+                        <a routerLink="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
                     </div>
-                    <!-- @if($category->subcategories->isNotEmpty())
+                    @if(shopData['Category 2 to show'].Category.subcategories){
                         <div class="Subs mt-3">
-                            @foreach($category->subcategories as $subcategory)
+                            @for (subcategory of shopData['Category 2 to show'].Category.subcategories ; track $index) {
 
-                                <a class="ToTheSubPage" href="{{route('Shop.Filter.subcategory' , $subcategory->ID)}}">
-                                    <div class="box-shop SubCategory-OnlineShop-Circled" style="background-image: url({{asset("Admin/dist/img/web/Categories/SubCategory/$subcategory->Image")}})">
+                                <a class="ToTheSubPage">
+                                    <div class="box-shop SubCategory-OnlineShop-Circled" [style]="'background-image: url('+subcategory.image+')'">
                                     </div>
                                     <p>
-                                        @if(App::getLocale() == 'ar')
-                                            {{$subcategory->SubArabicName}}
-                                        @else
-                                            {{$subcategory->SubName}}
-                                        @endif
+                                        {{subcategory.SubName}}
                                     </p>
                                 </a>
-                            @endforeach
+                            }
                         </div>
-                    @endif -->
+                    }
                 </div>
             </section>
 
             <!-- Product From The Selected Category -->
             <section>
-                <div class="related-product__carousel owl-carousel owl-theme mt-5 mb-5 pb-3">
-                    <!-- @foreach($categoriesProduct as $product)
-                        <div class="item">
-                            <a href="{{ route('Product.show', $product->ID) }}">
-                                <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                            </a>
-                        </div>
-                    @endforeach -->
+                <div class="related-product__carousel mt-5 mb-5 pb-3">
+                    <owl-carousel-o [options]="ProductsSlider">
+                        @for (product of shopData['Category 2 to show'].Products; track $index) {
+                            <ng-template carouselSlide>
+                                <div class="item">
+                                    <app-product-card [product]="product"></app-product-card>
+                                </div>
+                            </ng-template>
+                        }    
+                    </owl-carousel-o>
                 </div>
             </section>
         </div>
@@ -422,13 +432,13 @@
 
     <!-- Fixed attach for bundles -->
     <section>
-        <div class="Fixed-bundle item slider-one__slider-1" style="background-image: url(UI/Imgs/website/Shop/bence-boros-anapPhJFRhM-unsplash.jpg)">
+        <div class="Fixed-bundle item slider-one__slider-1" style="background-image: url(assets/imgs/UI/website/Shop/bence-boros-anapPhJFRhM-unsplash.jpg)">
             <div class="bottom-slider">
-                <a href="" class="thm-btn slider-one__btn">ExploreBundles</a>
+                <a href="" class="thm-btn slider-one__btn">Explore Bundles</a>
                 <h2 class="slider-one__title">
-                    PackagesAndBundles
+                    Packages And Bundles
                     <br/>
-                    Matches
+                    matches your smart home
                 </h2>
             </div>
         </div>
@@ -440,17 +450,19 @@
             <!-- Product From The Selected Brand -->
             <section>
                 <div class="Category-Product mt-4 justify-content-between">
-                    <!-- <h3>{{$brand->Brand . " Products"}} </h3>
-                    <a href="{{route('Shop.Filter.brand' , $brand->ID)}}">DiscoverMore<i class="fa fa-arrow-right ml-2"></i></a> -->
+                    <h3>{{brand.Brand + " Products"}} </h3>
+                    <a href="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
                 </div>
-                <div class="related-product__carousel owl-carousel owl-theme mt-5 mb-5">
-                    <!-- @foreach($productsBrand as $product)
-                        <div class="item">
-                            <a href="{{ route('Product.show', $product->ID) }}">
-                                <x-user.product-card-user :variable="$product" :productID="$product->ID" />
-                            </a>
-                        </div>
-                    @endforeach -->
+                <div class="related-product__carousel mt-5 mb-5">
+                    <owl-carousel-o [options]="ProductsSlider">
+                        @for (product of shopData['Brand to show'].Products; track $index) {
+                            <ng-template carouselSlide>
+                                <div class="item">
+                                    <app-product-card [product]="product"></app-product-card>
+                                </div>
+                            </ng-template>
+                        }    
+                    </owl-carousel-o>
                 </div>
             </section>
         </div>
@@ -462,16 +474,16 @@
             <div class="Cards-contact mt-5 pt-4">
                 <div class="card-contact-left align-items-center">
                     <a routerLink="/tools" >
-                        <img src="UI/Imgs/website/Shop/r-architecture-T6d96Qrb5MY-unsplash2.png" class="ProposalProduct" alt="Design Your Home">
+                        <img src="../../../../assets/imgs/UI/website/Shop/r-architecture-T6d96Qrb5MY-unsplash2.png" class="ProposalProduct" alt="Design Your Home">
                     </a>
                     <div class="ToolOnlineShop">
-                        <h3>ToolOnlineShop</h3>
+                        <h3>Build your home with our free customized proposal</h3>
                         <div>
                             <a routerLink="/tools" class="cta ShopNowButton" id="BuildHomeCta">
                                 <svg xmlns="http://www.w3.org/2000/svg" id="HomeIcon" height="15" width="17" viewBox="0 0 576 512">
                                     <!-- <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></path> -->
                                 </svg>
-                                <span class="hover-underline-animation">BuildYourHomeButton</span>
+                                <span class="hover-underline-animation">Build Your Home</span>
                             </a>
                         </div>
                     </div>
@@ -482,12 +494,14 @@
     </section>
 
     <section class="mt-5 pt-2">
-        <div class="customer-logos shop-slider-brands slider">
-            <!-- @foreach($brands as $brand)
-                <div class="slide Brand">
-                    <img src="{{asset("Admin/dist/img/web/Brands/$brand->Logo")}}" alt="{{$brand->Brand}}">
-                </div>
-            @endforeach -->
+        <div class="Brand shop-slider-brands">
+            <owl-carousel-o [options]="BrandsSlider">
+                @for (brand of shopData['All Brands']; track $index){
+                    <ng-template carouselSlide>
+                    <img loading="lazy" [src]="brand.Logo" [alt]="brand.Brand" [title]="brand.Brand" />
+                    </ng-template>
+                }    
+            </owl-carousel-o>
         </div>
     </section>
 
@@ -495,35 +509,5 @@
 
 
 
-    <script>
-        $(document).ready(function() {
-            $('.card-slider').slick({
-                dots: false,
-                arrows: true,
-                slidesToShow: 5,
-                infinite: true,
-                responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                    slidesToShow: 3
-                    }
-                },
-                {
-                    breakpoint: 800,
-                    settings: {
-                    slidesToShow: 2
-                    }
-                },
-                {
-                    breakpoint: 600,
-                settings: {
-                slidesToShow: 1
-                }
-            }
-            ]
-        });
-        });
-    </script>
 
 

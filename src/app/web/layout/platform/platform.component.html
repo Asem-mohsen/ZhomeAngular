@@ -108,19 +108,13 @@
         <h3>RelatedProducts</h3>
         <a routerLink="/shop">DiscoverMore<i class="fa fa-arrow-right"></i></a>
       </div>
-      <ngx-slick-carousel
-        #slickModal="slick-carousel"
-        class="carousel"
-        [config]="slideConfig"
-      >
+      <owl-carousel-o [options]="ProductsSlider">
         @for (product of platform.products; track $index){
-        <div ngxSlickItem class="item slide">
           <a routerLink="/shop">
             <app-product-card [product]="product"></app-product-card>
           </a>
-        </div>
-        }
-      </ngx-slick-carousel>
+        }    
+      </owl-carousel-o>
     </div>
   </div>
 </section>

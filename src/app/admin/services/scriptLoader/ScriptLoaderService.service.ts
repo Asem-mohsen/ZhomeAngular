@@ -29,4 +29,15 @@ export class ScriptLoaderService {
       this.document.body.appendChild(script);
     });
   }
+
+  unloadScript(name: string): void {
+    const scriptElement = document.querySelector(`script[data-name="${name}"]`);
+    if (scriptElement) {
+      // Remove the script element from the DOM
+      scriptElement.remove();
+      console.log(`Script ${name} unloaded successfully.`);
+    } else {
+      console.warn(`Script ${name} not found or already unloaded.`);
+    }
+  }
 }

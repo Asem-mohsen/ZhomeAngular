@@ -21,11 +21,11 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.product) {
-      this._ProductService.getProduct().subscribe((products) => {
-        this.product = products.data[0];
-      });
-    }
+    // if (!this.product) {
+    //   this._ProductService.getProduct().subscribe((products) => {
+    //     this.product = products.data[0];
+    //   });
+    // }
   }
 
   addToCart() {

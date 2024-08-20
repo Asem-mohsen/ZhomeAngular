@@ -1,3 +1,5 @@
+import { Subcategory } from "./subcategory";
+
 export interface Category {
     ID: number;
     Category: string;
@@ -12,4 +14,5 @@ export interface Category {
     updated_at: string;
     ArchivedOn: string | null;
     DeletedOn: string | null;
+    Subcategory: Subcategory[]
 }
