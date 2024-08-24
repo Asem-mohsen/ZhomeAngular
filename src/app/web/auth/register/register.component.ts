@@ -35,6 +35,11 @@ export class RegisterComponent implements OnInit{
       device_name: this.getDeviceName(result),
       operating_system: this.getOS(result),
     });
+
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/register')
+    }
+
   }
 
 

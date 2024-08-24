@@ -1,0 +1,35 @@
+<div class="col-4 col-md-4 col-lg-2 FilterTransform MainFilter">
+  <div class="shop_sidebar_area">
+    <!-- Categories -->
+    <app-category-filter></app-category-filter>
+
+    <!-- Brands -->
+    <app-brand-filter></app-brand-filter>
+
+    <!-- Platforms -->
+    <app-platform-filter></app-platform-filter>
+
+    <!-- Technologies -->
+    <app-tecnology-filter></app-tecnology-filter>
+
+    <!-- Price Range -->
+    <div class="widget price mb-50">
+      <h6 class="widget-title mb-30">{{ 'Filter by Price' }}</h6>
+      <div class="widget-desc">
+        <div class="slider-range">
+          <div data-min="" data-max="" class="slider-range-price">
+            <div class="ui-slider-range"></div>
+            <span class="ui-slider-handle"></span>
+            <span class="ui-slider-handle"></span>
+          </div>
+          <div class="range-price">{{ 'Price' }} <span id="price-range"> - </span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="FiltersButton">
+      <button id="applyFilterBtn">{{ 'Apply Filter' }}</button>
+      <button id="Reset" type="reset" title="{{ 'Reset Choices' }}"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+  </div>
+</div>

@@ -46,12 +46,18 @@
       <p class="OutStock">Out of Stock</p>
       } @else {
       <button
+        [ngClass]="{'added-successfully': isAdded}"
         type="button"
         class="product-one__cart-btn add-to-cart-btn"
-        (click)="addToCart()"
+        (click)="addToCart(product.ID)"
         title="Add to Cart"
       >
+      @if(!isAdded){
         <i class="fa-solid fa-cart-shopping"></i>
+      }
+      @else {
+        <i class="fa-solid fa-check"></i>
+      }
       </button>
       }
     </div>

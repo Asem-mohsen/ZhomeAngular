@@ -7,7 +7,6 @@ import { MovingDirection, WizardComponent } from 'angular-archwizard';
   imports: [],
   templateUrl: './tool.component.html',
   styleUrls: ['./tool.component.css']
-  //  '../../assets/css/bd-wizard.css'
 })
 export class ToolComponent {
 
@@ -15,11 +14,11 @@ export class ToolComponent {
   currentStep: number = 1;
   isPopupOpen: boolean = false;
 
-  // ngOnInit(): void {
-  //   if (typeof localStorage != 'undefined') {
-  //     localStorage.setItem('currentPage', '/tool')
-  //   }
-  // }
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/tool')
+    }
+  }
 
   openPopup() {
     this.isPopupOpen = true;

@@ -24,17 +24,18 @@
                         </div>
                         <div class="additional-images-container">
                             <div class="swiper additional-images-slider">
-                                <div class="swiper-wrapper">
-                                    @for (image of productImages ; track $index){
+                              <owl-carousel-o [options]="ImagesSlider">
+                                  @for (image of productImages ; track $index){
+                                      <ng-template carouselSlide>
                                         <div class="swiper-slide">
                                             <div class="additional-image m-2">
                                                 <img class="img-fluid h-100" [src]="image.Image" style="width:130px;object-fit: cover;" [alt]="product.Name" />
                                             </div>
                                         </div>
-                                    }
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
+                                      </ng-template>
+
+                                  }
+                              </owl-carousel-o>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                                     <input type="hidden" name="PriceAfterSale" [value]="product.sale.PriceAfter" >
                                     <p class="product-details__price">{{ product.sale.PriceAfter + " EGP"}}</p>
                                     <p class="product-details__price" style="text-decoration: line-through; font-size:19px">{{ product.Price + " EGP"}}</p>
-                                } 
+                                }
                                 @else{
                                     <p class="product-details__price">{{ product.Price + " EGP"}}</p>
                                 }
@@ -61,7 +62,7 @@
                                     <a routerLink="/category">
                                         {{ product.subcategory.category.Category }}
                                     </a>
-                                    <br />    
+                                    <br />
                                     <span class="text-uppercase"> Brand  </span>
                                     <a routerLink="/brand">
                                         {{ product.brand.Brand }}
@@ -74,13 +75,13 @@
                                         <!-- <button (click)="addToCart({{ $product.ID }}, {{ $product.sale  ? $product.sale?->PriceAfter : $product.Price }}, {{ $product.InstallationCost ?? 0 }})" class="thm-btn product-details__cart-btn ml-3">AddtoCart <span>+</span></button> -->
                                     }
                                     @else if(product.Quantity <= 0){
-                                        <p class='OutStock'> OutofStock </p>
+                                        <p class='OutStock'> Out of Stock </p>
                                     }
                                 </div>
                                 @if(product.Quantity > 0){
                                     <p class="product-details__availabelity">
                                         <span>Availability</span>
-                                        <i class='fa-solid fa-check'></i> AvailableInstock
+                                        <i class='fa-solid fa-check'></i> Available In stock
                                     </p>
                                 }
                                 @else{
@@ -197,22 +198,18 @@
                                                         </div>
                                                     </div>
                                                 </ng-template>
-                                                
+
                                             }
                                         </owl-carousel-o>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="navigation-buttons">
-                                <button class="prev-button"><i class="fa-solid fa-arrow-left"></i></button>
-                                <button class="next-button"><i class="fa-solid fa-arrow-right"></i></button>
                             </div>
                         </div>
                     </div>
                     <!-- Expert Review -->
                     <div class="mt-4" style="border-bottom:1px solid #eeee; ">
                         <div class="product-details__review-form">
-                            <h2 class="mb-4 text-center">ExpertReview</h2>
+                            <h2 class="mb-4 text-center">Expert Review</h2>
                             <!-- Reviews -->
                             <div class="product-details__review mb-4">
                                 <div class="ExpertReview m-auto mt-5">
@@ -268,10 +265,10 @@
                                             <p>{{feature.Feature}}</p>
                                         </li>
                                     }
-                                        
+
                                     <li>
                                         <span><i class="fa-solid fa-check"></i></span>
-                                        <p> FreeTransportation</p>
+                                        <p> Free Transportation</p>
                                     </li>
 
                                     @if(product.InstallationCost){
@@ -289,10 +286,22 @@
                                     }
 
                                     @if(product.Quantity > 0){
-                                        <!-- <button onclick="addToCart({{ $product.ID }}, {{ $product.sale?  ? $product.sale?.PriceAfter : $product.Price }}, {{ $product.InstallationCost ?? 0 }})" data-toggle="tooltip" data-placement="top" class="thm-btn product-details__cart-btn"> AddtoCart</button> -->
+                                      <button
+                                        type="button"
+                                        class="thm-btn product-details__cart-btn"
+                                        (click)="addToCart(product.ID)"
+                                        title="Add to Cart"
+                                      >
+                                      @if(!isAdded){
+                                        Add to Cart
+                                      }
+                                      @else {
+                                        <i class="fa-solid fa-check"></i>
+                                      }
+                                      </button>
                                     }
                                     @else if(product.Quantity <= 0){
-                                        <p class='OutStock text-center' style='font-size: 20px;'> OutofStock</p>
+                                        <p class='OutStock text-center' style='font-size: 20px;'> Out of Stock</p>
                                     }
                                 </div>
                         </div>
@@ -315,7 +324,7 @@
                             <div class="accrodion-grp" data-grp-name="product-details__accrodion">
                                 <div class="accrodion">
                                     <div class="accrodion-title">
-                                        <a data-toggle="collapse" href="#Description" role="button" aria-expanded="false"  aria-controls="Description">ProductDescription</a>
+                                        <a data-toggle="collapse" href="#Description" role="button" aria-expanded="false"  aria-controls="Description">Product Description</a>
                                     </div>
                                     <div class="collapse " id="Description">
                                         <div class="inner">
@@ -333,19 +342,19 @@
                                                         <div class="Details">
                                                             <h5>Noise</h5>
                                                             <div class="Details-info">
-                                                                <p>NoiseLevel(dBA)</p>
+                                                                <p>Noise Level(dBA)</p>
                                                                 <span>50 dBA</span>
                                                             </div>
                                                         </div>
                                                         <div class="Details">
-                                                            <h5> PhysicalSpecification</h5>
+                                                            <h5> Physical Specification</h5>
                                                             <div class="many-details">
                                                                 <div class="Details-info">
-                                                                    <p>NetDimension(WxHxD)</p>
+                                                                    <p>Net Dimension(WxHxD)</p>
                                                                     <span>{{ product.product_details.Width + 'x' + product.product_details.Height +  'x' + product.product_details.Length}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
-                                                                    <p>NetWeight(kg)</p>
+                                                                    <p>Net Weight(kg)</p>
                                                                     <span>{{ product.product_details.Weight + 'KG'}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
@@ -486,9 +495,9 @@
                             <ng-template carouselSlide>
                                 <div class="item">
                                     <app-product-card [product]="product"></app-product-card>
-                                </div> 
+                                </div>
                             </ng-template>
-                            
+
                         }
                     </owl-carousel-o>
                 </div>

@@ -1,0 +1,19 @@
+<div class="widget catagory ">
+    <div class="nav-side-menu">
+        <a class="nav-link" (click)="toggleCollapse()" role="button" id="BrandsExamplesButton">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-between">
+                <h6 class="mb-0 nav-link-text">Brands</h6>
+              <i class="fa-solid text-dark text-sm opacity-10"
+                  [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
+            </div>
+          </a>
+        <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}"  class="collapse collapsing menu-list checkbox-list" id="BrandsExamples">
+            @for (brand of brands; track $index) {
+                <label [for]="'Brand '+brand.ID" class="checkbox BrandsCheckBox">
+                    <input type="checkbox" class="BrandCheckInput" [id]="'Brand '+brand.ID"  (change)="onBrandChange(brand.ID)" >
+                    <img [src]="brand.Logo" [alt]="brand.Brand">
+                </label>
+              }
+        </div>
+    </div>
+</div>

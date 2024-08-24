@@ -1,3 +1,4 @@
+import { Product } from "./product";
 import { Subcategory } from "./subcategory";
 
 export interface Category {
@@ -14,5 +15,6 @@ export interface Category {
     updated_at: string;
     ArchivedOn: string | null;
     DeletedOn: string | null;
-    Subcategory: Subcategory[]
+    subcategories: Subcategory[];
+    products : Product[] | null;
 }

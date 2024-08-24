@@ -11,111 +11,114 @@
 <section class="mt-5">
   <div class="notSilder">
     @for (platform of platforms; track $index){
-    <a [routerLink]="" fragment="{{ platform.Platform }}">
-      <div class="slide platform">
-        <img [src]="platform.Logo" [alt]="platform.Platform" />
-        <p>{{ platform.Platform }}</p>
-      </div>
-    </a>
+      <a [routerLink]="" [fragment]="platform.Platform">
+        <div class="slide platform">
+          <img [src]="platform.Logo" [alt]="platform.Platform" />
+          <p>{{ platform.Platform }}</p>
+        </div>
+      </a>
     }
   </div>
 </section>
 
 @for (platform of platforms; track $index){
-<section class="SectionNumber" [id]="platform.Platform">
-  <div class="PlatformSection">
-    <div class="PlatformTop">
-      <h2>{{ platform.Platform }}</h2>
-      <img [src]="platform.Logo" [alt]="platform.Platform" />
-    </div>
-    <div class="container">
-      <div class="PlatformDesc">
-        <p>
-          {{ platform.MainDescription }}
-        </p>
+  <section class="SectionNumber" [id]="platform.Platform">
+    <div class="PlatformSection">
+      <div class="PlatformTop">
+        <h2>{{ platform.Platform }}</h2>
+        <img [src]="platform.Logo" [alt]="platform.Platform" />
       </div>
-      <div id="accordion">
-        @if (platform.faqs && platform.faqs.length > 0){
-        <div class="FAQonly">
-          <div class="FAQTop">
-            <h5 class="mb-0">
-              <button
-                class="btn btn-link"
-                data-toggle="collapse"
-                [attr.data-target]="'#FAQ' + platform.ID"
-                aria-expanded="true"
-                aria-controls="FAQ"
-              >
-                FAQ
-              </button>
-            </h5>
-          </div>
-          <div class="PlatformInfo">
-            @for (faq of platform.faqs; track $index){
-
-            <div
-              class="collapse"
-              [id]="'FAQ' + platform.ID"
-              [attr.aria-labelledby]="platform.Platform"
-              data-parent="#accordion"
-            >
-              <div class="PlafromQuestion">
-                <h3>{{ faq.Question }}</h3>
-                <p>{{ faq.Answer }}</p>
-              </div>
-            </div>
-            }
-          </div>
+      <div class="container">
+        <div class="PlatformDesc">
+          <p>
+            {{ platform.MainDescription }}
+          </p>
         </div>
-        } @if (platform.VideoURL != null){
-        <div class="Videos">
-          <div id="youtube-player">
+        <div id="accordion">
+          @if (platform.faqs && platform.faqs.length > 0){
+          <div class="FAQonly">
             <div class="FAQTop">
               <h5 class="mb-0">
                 <button
                   class="btn btn-link"
                   data-toggle="collapse"
-                  [attr.data-target]="platform.ID"
+                  [attr.data-target]="'#FAQ' + platform.ID"
                   aria-expanded="true"
-                  aria-controls="Video"
+                  aria-controls="FAQ"
                 >
-                  Video
+                  FAQ
                 </button>
               </h5>
             </div>
-            <div
-              class="collapse"
-              [id]="'Video' + platform.ID"
-              [attr.aria-labelledby]="platform.Platform"
-              data-parent="#accordion"
-            >
-              <iframe
-                class="PlatformVideo"
-                [src]="platform.VideoURL"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
+            <div class="PlatformInfo">
+              @for (faq of platform.faqs; track $index){
+
+              <div
+                class="collapse"
+                [id]="'FAQ' + platform.ID"
+                [attr.aria-labelledby]="platform.Platform"
+                data-parent="#accordion"
+              >
+                <div class="PlafromQuestion">
+                  <h3>{{ faq.Question }}</h3>
+                  <p>{{ faq.Answer }}</p>
+                </div>
+              </div>
+              }
             </div>
           </div>
+          }
+          @if (platform.VideoURL != null){
+            <div class="Videos">
+              <div id="youtube-player">
+                <div class="FAQTop">
+                  <h5 class="mb-0">
+                    <button
+                      class="btn btn-link"
+                      data-toggle="collapse"
+                      [attr.data-target]="platform.ID"
+                      aria-expanded="true"
+                      aria-controls="Video"
+                    >
+                      Video
+                    </button>
+                  </h5>
+                </div>
+                <div
+                  class="collapse"
+                  [id]="'Video' + platform.ID"
+                  [attr.aria-labelledby]="platform.Platform"
+                  data-parent="#accordion"
+                >
+                  <iframe
+                    class="PlatformVideo"
+                    [src]="platform.VideoURL"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          }
         </div>
-        }
-      </div>
 
-      <!-- Products Related -->
-      <div class="category-Name mt-5 pt-4">
-        <h3>RelatedProducts</h3>
-        <a routerLink="/shop">DiscoverMore<i class="fa fa-arrow-right"></i></a>
+        <!-- Products Related -->
+        <div class="category-Name mt-5 pt-4">
+          <h3>Related Products</h3>
+          <a routerLink="/shop">Discover More<i class="fa fa-arrow-right"></i></a>
+        </div>
+        <owl-carousel-o [options]="ProductsSlider">
+          @for (product of platform.products; track product.ID){
+            <ng-template carouselSlide>
+              <div class="item">
+                <app-product-card [product]="product"></app-product-card>
+              </div>
+            </ng-template>
+          }
+        </owl-carousel-o>
       </div>
-      <owl-carousel-o [options]="ProductsSlider">
-        @for (product of platform.products; track $index){
-          <a routerLink="/shop">
-            <app-product-card [product]="product"></app-product-card>
-          </a>
-        }    
-      </owl-carousel-o>
     </div>
-  </div>
-</section>
+  </section>
 }

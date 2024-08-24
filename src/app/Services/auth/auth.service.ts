@@ -13,19 +13,14 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AuthService {
 
-  currentUserDate: BehaviorSubject<Admin | User | null> = new BehaviorSubject<Admin | User | null>(null);
+  private tokenKey = 'authToken';
 
+  currentUserDate: BehaviorSubject<Admin | User | null> = new BehaviorSubject<Admin | User | null>(null);
   constructor(private _http: HttpClient, private _router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
-    this.loadCurrentUser();
-
-    afterNextRender(() => {
-      if (localStorage.getItem('userToken') != null) {
-
-        this.loadCurrentUser();
-        this._router.navigate([localStorage.getItem('currentPage')])
-      }
-    })
+    if (isPlatformBrowser(this.platformId) && this.getToken()) {
+      this._router.navigate([localStorage.getItem('currentPage') || '/']);
+    }
 
   }
 
@@ -50,38 +45,22 @@ export class AuthService {
   }
 
   signOutAllSessions() {
-    const token = localStorage.getItem('userToken');
-    if (token) {
-      // Make the logout API call with the Authorization header
-      this._http.post(`${environment.baseURL}/api/logout/all`, {}, {
-        headers: {
-           'Authorization': `Bearer ${token}`
-        }
-      }).subscribe({
-        next: () => {
-          // Clear the token and any other user data
-          this.clearUserData()
-
-          // Redirect to login page
-          this._router.navigate(['/login']);
-        },
-        error: (err) => {
-          console.error('Logout failed', err);
-        }
-      });
-    } else {
-      console.error('No token found, unable to logout');
-    }
-  }
-
-  private loadCurrentUser() {
     if (isPlatformBrowser(this.platformId)) {
-      const storedUserData = localStorage.getItem('currentUserData');
-      if (storedUserData) {
-        const userData = JSON.parse(storedUserData);
-        this.currentUserDate.next(userData);
+      const token = localStorage.getItem(this.tokenKey);
+      if (token) {
+        this._http.post(`${environment.baseURL}/api/logout/all`, {}, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }).subscribe({
+          next: () => {
+            this.clearUserData();
+            this._router.navigate(['/login']);
+          },
+          error: (err) => {
+            console.error('Logout failed', err);
+          }
+        });
       } else {
-        this.currentUserDate.next(null);
+        console.error('No token found, unable to logout');
       }
     }
   }
@@ -90,16 +69,25 @@ export class AuthService {
     return this.currentUserDate.getValue();
   }
 
-  // Method to set user data during login
-  setUserData(data: User | Admin) {
-    localStorage.setItem('currentUserData', JSON.stringify(data));
-    this.currentUserDate.next(data);
+  private clearUserData() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.tokenKey);
+      this.currentUserDate.next(null);
+    }
   }
 
-  private clearUserData() {
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('currentUserData');
-    this.currentUserDate.next(null);
+  getToken(): string | null {
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem(this.tokenKey) : null;
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  saveToken(token: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.tokenKey, token);
+    }
   }
 
 }

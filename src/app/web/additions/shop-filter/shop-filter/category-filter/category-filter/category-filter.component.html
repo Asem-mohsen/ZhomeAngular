@@ -1,0 +1,19 @@
+  <div class="widget catagory">
+    <div class="nav-side-menu">
+      <a class="nav-link" (click)="toggleCollapse()" role="button">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-between">
+          <h6 class="mb-0 nav-link-text">Categories</h6>
+          <i class="fa-solid text-dark text-sm opacity-10"
+                  [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
+        </div>
+      </a>
+      <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}" class="menu-list checkbox-list">
+        @for (category of categories; track $index) {
+          <label class="checkbox CategoryCheckBox">
+            <input type="checkbox" class="CategoryCheckInput" [value]="category.ID" (change)="onCategoryChange(category.ID)" />
+            {{ category.Category }}
+          </label>
+        }
+      </div>
+    </div>
+  </div>

@@ -13,7 +13,7 @@ export interface Product {
     Price: number;
     Quantity: number;
     MainImage: string;
-    InstallationCost: string;
+    InstallationCost: number;
     SubCategoryID: number;
     BrandID: number;
     IsBundle: number;

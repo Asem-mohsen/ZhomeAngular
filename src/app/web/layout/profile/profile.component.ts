@@ -9,10 +9,10 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
-  // ngOnInit(): void {
-  //   if (typeof localStorage != 'undefined') {
-  //     localStorage.setItem('currentPage', '/profile')
-  //   }
-  // }
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/profile')
+    }
+  }
 
 }

@@ -18,7 +18,7 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 export class PlatformComponent implements OnInit{
 
   platforms: Platform[] = [];
-  products : Product[]  = [];
+
   // Sliders
   ProductsSlider: OwlOptions = {
     loop: true,
@@ -26,6 +26,8 @@ export class PlatformComponent implements OnInit{
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoplay: true,
+    autoplaySpeed:5000,
     navSpeed: 700,
     navText: ['', ''],
     responsive: {
@@ -44,20 +46,17 @@ export class PlatformComponent implements OnInit{
     },
     nav: false
   }
-  constructor(private _PlatformService : PlatformService , private _ProductService : ProductsService)
-  {
 
-  }
+  constructor(private _PlatformService : PlatformService){}
 
   ngOnInit(): void
   {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/platforms')
+    }
 
-    this._PlatformService.getPlatfromsUserShow().subscribe((allPlatforms) => {
-      this.platforms = Object.values(allPlatforms.data);
-    })
-
-    this._ProductService.getProduct().subscribe((allProducts) =>{
-      this.products = Object.values(allProducts.data);
+    this._PlatformService.getPlatfromsUserShow().subscribe((res) => {
+      this.platforms = Object.values(res.data);
     })
   }
 }

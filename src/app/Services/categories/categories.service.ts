@@ -14,4 +14,5 @@ export class CategoriesService {
   {
     return this._http.get(`${environment.baseURL}/api/category/user/categories`);
   }
+
 }

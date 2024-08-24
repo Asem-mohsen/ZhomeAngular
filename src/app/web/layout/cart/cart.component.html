@@ -1,1 +1,272 @@
-<p>cart works!</p>
+<!-- Header -->
+<div class="container">
+    <ul class="list-unstyled thm-breadcrumb thm-breadcrumb__two">
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/shop">Shop</a></li>
+        <li class="active"><a routerLink="/cart">Cart</a></li>
+    </ul>
+</div>
+
+<section>
+    <div class="container">
+        <div class="CartHeader">
+            <p class="active">
+                Cart
+            </p>
+            >
+            <p>
+                Checkout
+            </p>
+            >
+            <p>
+                Payment
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Cart -->
+<section>
+    <div class="container">
+        <div class="CartContainer">
+            <div class="col-lg-12 CartProducts">
+                <div class="topping">
+                    <div class="CartandCount">
+                        <h3>Cart</h3>
+                        <span id="TotalItems">
+                          @if(cartData.count <= 1 ){
+                            {{cartData.count + " Product"}}
+                          }
+                          @else {
+                            {{cartData.count  + " Products"}}
+                          }
+                        </span>
+                    </div>
+
+                    @if(cartData.count > 0){
+                      <div class="ClearAll">
+                          <a class="remove-All-btn" (click)="clearCart()">
+                              <i class="fa fa-x"></i>
+                              Clear Cart
+                          </a>
+                      </div>
+                    }
+                </div>
+                <div class="cart-main">
+                    <div class="table-outer table-responsive">
+                        <table class="cart-table" id="myTable">
+                            <thead class="cart-header">
+                                <tr>
+                                    <th class="prod-column">Product</th>
+                                    <th>Quantity</th>
+                                    <th>installation</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @for(item of cartData.cartItems; track $index){
+                                      <tr>
+                                          <td class="prod-column price">
+                                              <div class="d-flex px-2 py-1">
+                                                  <div>
+                                                      <figure class="prod-thumb">
+                                                          <a [routerLink]="['/product' , item.product.ID]">
+                                                              <img [src]="item.product.MainImage" class="ProductCartImage" [alt]="item.product.Name">
+                                                          </a>
+                                                      </figure>
+                                                  </div>
+                                                  <div class="d-flex flex-column justify-content-center ml-1">
+                                                      <h3 class="prod-title padd-top-20">{{ item.product.Name }}</h3>
+                                                        @if(item.product.sale){
+                                                          <div class="d-flex" style="gap:20px;">
+                                                              <p class="text-xs text-secondary mb-0 fw-bold" style="font-size:17px">{{ item.product.sale.PriceAfter | currency : "EGP"}}</p>
+                                                              <p class="text-xs text-secondary mb-0 BeforeSale" style="text-decoration: line-through; font-size:14px">{{ item.product.Price | currency : "EGP"}}</p>
+                                                              <input type="hidden" name="SavedPrice" class="SavedPrice" [value]="item.product.sale.PriceAfter">
+                                                          </div>
+                                                        }
+                                                        @else{
+                                                          <p class="text-xs text-secondary mb-0 BeforeSale" >{{ item.product.Price | currency : "EGP" }}</p>
+                                                        }
+                                                          <input type="hidden" name="Price[]" class="ProductPrice" [value]="item.product.Price">
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td class="qty">
+                                              <input class="quantity-spinner Quantity" type="number" min="1" [max]="item.Quantity" [value]="item.Quantity">
+                                          </td>
+                                          <td for="installmentPriceCheckbox">
+                                              @if(item.product.InstallationCost && item.product.InstallationCost > 0 ){
+                                                  <div class="d-flex justify-content-center" style="gap: 20px;">
+                                                      <p class="text-secondary mb-0">{{item.product.InstallationCost +  " EGP"}}</p>
+                                                      <input type="hidden" class="installmentsPrice"  name="Installments" [value]="item.product.InstallationCost">
+                                                      <input type="checkbox" id="installmentPriceCheckbox" class="installments installmentPriceCheckbox" name="Installments" [value]="item.product.InstallationCost">
+                                                  </div>
+                                              }
+                                              @else{
+                                                  <p class="text-secondary mb-0">No Installation Cost</p>
+                                                  <input type="hidden" class="installments installmentPriceCheckbox" name="Installments" value="0">
+                                              }
+                                          </td>
+                                          <td class="sub-total SubTotal p-0">{{ item.product.Price | currency : "EGP" }}</td>
+                                          <td class="remove p-1">
+                                              <a class="remove-btn" (click)="removeProduct(item.product.ID)">
+                                                  <span class="fa fa-x"></span>
+                                              </a>
+                                          </td>
+                                      </tr>
+                                    }
+                                    @empty{
+                                      <tr>
+                                        <td class="text-center pt-4 border-none" colspan="4" style="border-top: 1px solid #eeee;border-radius: 0;">
+                                            <a routerLink="/shop" class="cta ShopNowButton">
+                                                <span class="hover-underline-animation">Shop Now</span>
+                                                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                                                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Total -->
+<section>
+    <div class="container">
+        <div class="row m-0 justify-content-evenly">
+            @if(cartData.count > 0){
+                <div class="col-lg-6 CartPrices">
+                    <h5 class="mb-4">Total</h5>
+                        <div class="PromocodeInput">
+                            <!-- Line -->
+                            <div class="Totals">
+                                <ul>
+                                    <li>
+                                        SubTotal
+                                        <span id='TotalPriceOne'></span>
+                                    </li>
+                                    <li class="Saved">
+                                        YouSaved
+                                        <span id="discountDiv2"></span>
+                                    </li>
+                                    <input type="hidden" name="totalSaved" id="totalSaved">
+                                    <li class="total">
+                                        Total
+                                        <span id='FinalTotal'></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="buttons-in-cart d-flex justify-content-center align-items-center mt-3">
+                                @if (!isLogged){
+                                    <a routerLink="/login" class="Signincart"><i class="fa-solid fa-user-plus"></i></a>
+                                }
+                                <button type="submit" id="Checkout" class="cta ShopNowButton">
+                                    <span class="hover-underline-animation">Continue to Checkout</span>
+                                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                                        <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                </div>
+            }
+            @else{
+                <div class="col-lg-6">
+                    <div class="Splitted Images-Home">
+                        <div class="SplittedProduct_1 Image-One ">
+                            <img src="assets/imgs/UI/website/Cart/r-architecture-rOk4VSMS3Ck-unsplash.jpg" class="BigWidth" alt="Bundles">
+                            <div class="overlay-button" style="width: 85%;">
+                                <div class="Info-bundle">
+                                    <h3>Bundle Name</h3>
+                                    <p>Apple</p>
+                                </div>
+                                <a routerLink="['/product' , 1]" class="btn btn-info">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="col-lg-5 CardCarouselCart">
+                <div class="card card-carousel overflow-hidden h-100 p-0" style="border-radius:10px">
+                    <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
+                        <div class="carousel-inner border-radius-lg h-100">
+                            <div class="carousel-item h-100 active" style="background-image: url(assets/imgs/UI/website/Cart/james-yarema-zdjZ4kCaJaY-unsplash.jpg);background-size: cover;">
+                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                                    <div class="icon icon-shape icon-sm bg-transparent text-center border-radius-md mb-3">
+                                        <i class="fa fa-camera text-white opacity-10 fa-5"></i>
+                                    </div>
+                                    <h5 class="text-white mb-1">BuildyourDreamHome</h5>
+                                    <p class="text-white">BuildyourDreamHomeText</p>
+                                    <a class="btn btn-xs bg-gradient-info" routerLink="/tools" target="_blank"><i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="carousel-item h-100" style="background-image: url(assets/imgs/UI/website/Cart/darryl-low-uqk9RAzm6lk-unsplash.jpg); background-size: cover;">
+                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                                    <div class="icon icon-shape icon-sm bg-transparent text-center border-radius-md mb-3">
+                                    <i class="fa fa-lightbulb text-white opacity-10 fa-5"></i>
+                                    </div>
+                                    <h5 class="text-white mb-1">DiscoverourProducts</h5>
+                                    <p class="text-white">DiscoverourProductsText</p>
+                                    <a class="btn btn-xs bg-gradient-info" routerLink="/shop" target="_blank"><i class="fa fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden d-none">Previous</span>
+                        </button>
+                        <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden d-none">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Selling Product -->
+<section>
+    <div class="container">
+        <div class="col-lg-12 p-0">
+            <div class="ShopNowInCart" id="ShopNowInCheckout" style="background-image: url(assets/imgs/UI/website/Cart/bence-boros-anapPhJFRhM-unsplash.jpg);">
+                <h4>
+                    Check The Newest
+                    <br>
+                    Apple Products
+                </h4>
+                <a routerLink="/shop" class="btn btn-secondary">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- You may also like -->
+<section>
+    <div class="container">
+        <h3 class="related-product__title">You May Also Like</h3>
+        <div class="related-product__carousel">
+          <owl-carousel-o [options]="ProductsSlider">
+            @for (product of cartData.products; track $index) {
+              <ng-template carouselSlide>
+                <div class="item">
+                  <app-product-card [product]="product"></app-product-card>
+                </div>
+              </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+    </div>
+</section>
+
+<script>
+  $(".quantity-spinner").inputSpinner()
+</script>

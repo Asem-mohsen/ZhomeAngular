@@ -60,31 +60,31 @@
         <ul>
           <li class="First">Zhome</li>
           <li>
-            <a routerLink="shop">Shop</a>
+            <a routerLink="/shop">Shop</a>
           </li>
           <li>
-            <a routerLink="categories">Categories</a>
+            <a routerLink="/categories">Categories</a>
           </li>
           <li>
-            <a routerLink="platforms">Platforms</a>
+            <a routerLink="/platforms">Platforms</a>
           </li>
           <li>
-            <a routerLink="brands">Brands</a>
+            <a routerLink="/brands">Brands</a>
           </li>
         </ul>
         <ul>
           <li class="First">About</li>
           <li>
-            <a routerLink="about"> About Us </a>
+            <a routerLink="/about"> About Us </a>
           </li>
           <li>
-            <a routerLink="services"> Services </a>
+            <a routerLink="/services"> Services </a>
           </li>
           <li>
-            <a routerLink="contact"> Contact Us </a>
+            <a routerLink="/contact"> Contact Us </a>
           </li>
           <li>
-            <a routerLink="about"> Why Zhome </a>
+            <a routerLink="/about"> Why Zhome </a>
           </li>
         </ul>
         <ul>
@@ -93,21 +93,21 @@
           </li>
           <li>
             @if(!isLoggedIn) {
-            <a routerLink="login"> Join Us </a>
+            <a routerLink="/login"> Join Us </a>
             } @else if (isLoggedIn){
-            <a routerLink="profile"> Profile </a>
+            <a routerLink="/profile"> Profile </a>
             } @else{
-            <a routerLink="profile"> Profile </a>
+            <a routerLink="/profile"> Profile </a>
             }
           </li>
           <li>
-            <a routerLink="cart"> Cart </a>
+            <a routerLink="/cart"> Cart </a>
           </li>
           <li>
-            <a routerLink="tools"> Tools </a>
+            <a routerLink="/tools"> Tools </a>
           </li>
           <li>
-            <a routerLink="shop"> Products </a>
+            <a routerLink="/shop/filters"> Products </a>
           </li>
         </ul>
       </div>

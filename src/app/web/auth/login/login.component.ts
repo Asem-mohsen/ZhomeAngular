@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
       operating_system: this.getOS(result),
     });
 
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/login')
+    }
+
   }
 
 
@@ -56,19 +60,18 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           this.isLoading = false
 
-          // set the token on local storage
-          const token = res.data.token;
-          localStorage.setItem('userToken', token);
+          if (res.token) {
+            this._AuthService.saveToken(res.token);
 
-          //Navigatation
-          if (res.data.admin) {
-            this._AuthService.currentUserDate.next(res.data.admin);
-            localStorage.setItem('currentUserData', JSON.stringify(res.data.admin));
-            this._router.navigate(['admin/dashboard']);
+            if (res.user) {
+              this._AuthService.currentUserDate.next(res.user);
+              this._router.navigate(['home']);
+            } else if (res.admin) {
+              this._AuthService.currentUserDate.next(res.admin);
+              this._router.navigate(['admin/dashboard']);
+            }
           } else {
-            this._AuthService.currentUserDate.next(res.data.user);
-            localStorage.setItem('currentUserData', JSON.stringify(res.data.user));
-            this._router.navigate(['home']);
+            this.errorMsg = 'No token received from server';
           }
 
         },
@@ -77,6 +80,7 @@ export class LoginComponent implements OnInit {
           this.errorMsg = err.error.message || 'An error occurred during registration';
         }
       });
+
     } else {
       this.errorMsg = 'Please fill all required fields correctly';
     }

@@ -10,9 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class AboutComponent {
 
-  // ngOnInit(): void {
-  //   if (typeof localStorage != 'undefined') {
-  //     localStorage.setItem('currentPage', '/about')
-  //   }
-  // }
+  ngOnInit(): void {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/about')
+    }
+  }
 }

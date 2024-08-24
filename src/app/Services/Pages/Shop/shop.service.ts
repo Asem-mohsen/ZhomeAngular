@@ -14,4 +14,29 @@ export class ShopService {
   {
     return this._http.get(`${environment.baseURL}/api/shop`)
   }
+
+  getShopFilterPage() : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/shop/shop`)
+  }
+
+  getCategoryFilterPage(id : number) : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/shop/shop/category/${id}`)
+  }
+
+  getSubcategoryFilterPage(id : number) : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/shop/shop/subcategory/${id}`)
+  }
+
+  getBrandFilterPage(id : number) : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/shop/shop/brand/${id}`)
+  }
+
+  getPlatformFilterPage(id : number) : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/shop/shop/platform/${id}`)
+  }
 }

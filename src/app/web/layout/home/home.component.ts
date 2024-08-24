@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit{
         items: 2
       },
       740: {
-        items: 3
+        items: 4
       },
       940: {
         items: 4
@@ -76,6 +76,10 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void
   {
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/home')
+    }
+
     this._BrandService.getBrands().subscribe((result) => {
       this.brands = Object.values(result.data);
     })

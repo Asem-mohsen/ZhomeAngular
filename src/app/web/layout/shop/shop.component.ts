@@ -18,11 +18,13 @@ import { ProductCardComponent } from '../../additions/product-card/product-card.
 export class ShopComponent {
 
   categories : Category[] = []
-  shopData: any; 
+  shopData !: any ;
+  productsOnSale: Product[] = [];
   bundle!: Product;
   category1 !:Category;
   category2 !: Category;
   brand !: Brand ;
+
   // Sliders
   ProductsSlider: OwlOptions = {
     loop: true,
@@ -30,6 +32,8 @@ export class ShopComponent {
     touchDrag: true,
     pullDrag: true,
     dots: false,
+    autoplay:true,
+    autoplayTimeout: 5000,
     navSpeed: 700,
     navText: ['', ''],
     responsive: {
@@ -59,6 +63,8 @@ export class ShopComponent {
     touchDrag: false,
     pullDrag: false,
     dots: false,
+    autoplay:true,
+    autoplayTimeout: 5000,
     navSpeed: 700,
     navText: ['', ''],
     responsive: {
@@ -77,12 +83,14 @@ export class ShopComponent {
     },
     nav: false
   }
-  
+
   BrandsSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
+    autoplay:true,
+    autoplayTimeout: 5000,
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
@@ -103,43 +111,25 @@ export class ShopComponent {
     nav: false
   }
 
-  CategoriesSlider: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: true,
-    navSpeed: 900,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 4
-      },
-      740: {
-        items: 5
-      },
-      940: {
-        items: 6
-      }
-    },
-    nav: true
-  }
 
   constructor(
     private _ShopService : ShopService
   ){}
 
   ngOnInit(): void {
+
+    if (typeof localStorage != 'undefined') {
+      localStorage.setItem('currentPage', '/shop')
+    }
+
     this._ShopService.getShopPage().subscribe((res) => {
-      this.shopData = res.data; 
-      this.bundle = this.shopData['Bundle to Show'] as Product;
-      this.category1 = this.shopData['Category 1 to show'].Category as Category;
-      this.category2 = this.shopData['Category 2 to show'].Category as Category;
-      this.brand = this.shopData['Brand to show'].Brand as Brand;
-  
+      this.shopData = res.data;
+      this.productsOnSale = res.data.All_Products_On_Sale;
+      this.bundle = this.shopData.Bundle_to_Show as Product;
+      this.category1 = this.shopData.Category1_to_show.Category as Category;
+      this.category2 = this.shopData.Category2_to_show.Category as Category;
+      this.brand = this.shopData.Brand_to_show.Brand as Brand;
+
     });
   }
 

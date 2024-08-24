@@ -55,7 +55,6 @@ import { CreateFeatureComponent } from './admin/layout/features/create/create-fe
 import { EditFeatureComponent } from './admin/layout/features/edit/edit-feature/edit-feature.component';
 import { CreatePromocodeComponent } from './admin/layout/promocodes/create/create-promocode/create-promocode.component';
 import { EditPromocodeComponent } from './admin/layout/promocodes/edit/edit-promocode/edit-promocode.component';
-import { createPlatform } from '@angular/core';
 import { CreatePlatfromComponent } from './admin/layout/platforms/create/create-platfrom/create-platfrom.component';
 import { EditPlatformComponent } from './admin/layout/platforms/edit/edit-platform/edit-platform.component';
 import { CreateProductComponent } from './admin/layout/products/create/create-product/create-product.component';
@@ -65,6 +64,7 @@ import { CreateRoleComponent } from './admin/layout/roles/create/create-role/cre
 import { EditRoleComponent } from './admin/layout/roles/edit/edit-role/edit-role.component';
 import { CreateSaleComponent } from './admin/layout/sales/create/create-sale/create-sale.component';
 import { EditSaleComponent } from './admin/layout/sales/edit/edit-sale/edit-sale.component';
+import { ShopFiltersComponent } from './web/layout/shop/shop-filters/shop-filters/shop-filters.component';
 
 
 export const routes: Routes = [
@@ -74,9 +74,10 @@ export const routes: Routes = [
       {path:'' , redirectTo:'home', pathMatch:'full'},
       {path:'about' , component:AboutComponent},
       {path:'shop' , component:ShopComponent},
+      {path:'shop/filters', component:ShopFiltersComponent},
       {path:'cart' , component:CartComponent},
-      {path:'login' , component:LoginComponent},
-      {path:'register' , component:RegisterComponent},
+      {path:'login' , component:LoginComponent , canActivate: [authGuard]},
+      {path:'register' , component:RegisterComponent , canActivate: [authGuard]},
       {path:'product/:productId' , component:ProductComponent},
       {path:'brands' , component:BrandComponent},
       {path:'platforms' , component:PlatformComponent},

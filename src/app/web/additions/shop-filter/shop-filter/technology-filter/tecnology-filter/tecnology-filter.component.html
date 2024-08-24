@@ -1,0 +1,19 @@
+<div class="widget catagory">
+  <div class="nav-side-menu">
+      <a class="nav-link"  (click)="toggleCollapse()" role="button" id="TechnologiesExamplesButton" >
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-between">
+              <h6 class="mb-0 nav-link-text">Technologies</h6>
+              <i class="fa-solid text-dark text-sm opacity-10"
+                [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
+          </div>
+      </a>
+      <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}" class="collapse collapsing checkbox-list" id="TechnologiesExamples">
+        @for (technology of technologies; track $index) {
+              <label [for]="technology" class="checkbox TechCheckBox">
+                  <input type="checkbox" [id]="technology" class="TechCheckInput" [value]="technology" >
+                  {{technology}}
+              </label>
+          }
+      </div>
+  </div>
+</div>

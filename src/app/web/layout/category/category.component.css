@@ -1,0 +1,129 @@
+/* Navbar for specific pages */
+.header{
+  border-bottom: 1px solid #eeee;
+}
+.menu .menu__inner .menu__item .menu__link , .nav-icon i{
+  color: black
+}
+#Icons .separator {
+  border-left: 1px solid black;
+}
+a.menu__link.JoinUsBtn {
+  border: 1px solid #154352;
+  color: black;
+}
+a.menu__link.JoinUsBtn:hover{
+  color: white;
+}
+/* End */
+
+.bottom-slider {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+.slider-one__btn {
+  padding: 13px 27px;
+  width: 176px;
+  border-radius: 35px;
+}
+@media (max-width: 767px) {
+  .Category-Product {
+      margin-top: 20px;
+      display: grid;
+      text-align: center;
+      justify-content: center;
+  }
+}
+
+
+.notSilder {
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 21px;
+  flex-wrap: wrap;
+  .Categories p {
+    margin: 0;
+    padding: 10px;
+  }
+  .Categories {
+    border: 1px solid #eeee;
+    border-radius: 7px;
+    width: 174px !important;
+  }
+}
+.notSilder .Categories:hover {
+  transition-duration: 0.5s;
+  background-color: var(--mainColor);
+}
+.slider-one {
+  position: relative;
+  top: 0px;
+  z-index: 0;
+}
+.slider-one__title {
+  margin: 0;
+  color: #fff;
+  font-size: 59px;
+  line-height: 68px;
+}
+.slider-one__btn {
+  padding: 13px 27px;
+  width: 176px;
+  border-radius: 35px;
+}
+.SubCategory-OnlineShop a.ToTheSubPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.SubCategory-OnlineShop {
+  justify-content: space-between !important;
+  gap: 40px !important;
+  align-items: center;
+}
+.SubCategory-OnlineShop a.ToTheSubPage:hover .SubCategory-onlineshop {
+  transition-duration: 0.4s;
+  filter: brightness(0.6);
+  box-shadow: none;
+}
+.boxes-shop {
+  display: flex;
+  justify-content: center;
+  gap: 69px;
+  margin-top: 43px;
+  flex-wrap: wrap;
+}
+.SubCategory-OnlineShop .ToTheSubPage .box-shop {
+  width: 110px;
+  background-size: contain;
+  height: 75px !important;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 6px 5px 10px 0px #e3e3e3;
+  overflow: hidden;
+}
+.SubCategory-OnlineShop p {
+  text-align: center;
+  font-size: 14px;
+  color: black;
+}
+.category-Name {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.backgroud-category{
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  margin-top: 15px;
+}

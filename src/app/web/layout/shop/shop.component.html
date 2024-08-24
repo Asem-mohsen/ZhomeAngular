@@ -1,197 +1,249 @@
-    <section>
-        <div class="container-shop" id="shop-background">
-            <div class="background-image" style="background-image: url('../../../../assets/imgs/UI/website/Shop/AlexaImage2.jpg')"></div>
-            <div class="content parent-home">
-                <h1>Experience Seamless Living with Our Range of Smart Home Technologies</h1>
+<section>
+  <div class="container-shop" id="shop-background">
+    <div
+      class="background-image"
+      style="background-image: url(assets/imgs/UI/website/Shop/AlexaImage2.jpg)"
+    ></div>
+    <div class="content parent-home">
+      <h1>
+        Experience Seamless Living with Our Range of Smart Home Technologies
+      </h1>
+    </div>
+  </div>
+</section>
+
+<!-- All Categories -->
+<section>
+  <div class="container">
+    <h1 id="ShopByCategory">Category</h1>
+    <div class="categories-shop">
+      <owl-carousel-o [options]="CategorySlider">
+        @for (category of shopData.All_Categories; track $index) {
+        <ng-template carouselSlide>
+          <div class="category-shop">
+            <a routerLink="">
+              <img [src]="category.MainImage" [alt]="category.Category" />
+            </a>
+            <a href="">
+              {{ category.Category }}
+            </a>
+          </div>
+        </ng-template>
+        }
+        @empty {
+          <i class="fa-solid fa-spinner"></i>
+        }
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+
+
+<section id="StartYourSystem-Shop">
+  <div class="container">
+    <h2 class="heading">Best Product</h2>
+    <ul class="nav nav-tabs nav-primary" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#All"
+          role="tab"
+          aria-selected="false"
+        >
+          All
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          data-bs-toggle="tab"
+          href="#Recommended"
+          role="tab"
+          aria-selected="true"
+        >
+          Recommendition
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#MostPopular"
+          role="tab"
+          aria-selected="false"
+        >
+          MostPopular
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          data-bs-toggle="tab"
+          href="#OnSale"
+          role="tab"
+          aria-selected="false"
+        >
+          OnSale
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content py-3">
+      <!-- Recommended -->
+      <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
+        <div class="wrapper">
+          <div class="card">
+            <div class="card-body pl-0">
+              <div class="related-product__carousel">
+                <owl-carousel-o [options]="ProductsSlider">
+                  @for (product of shopData.Category1_to_show.Products; track $index) {
+                    <ng-template carouselSlide>
+                      <app-product-card [product]="product"></app-product-card>
+                    </ng-template>
+                  }
+                  @empty {
+                    <i class="fa-solid fa-spinner"></i>
+                  }
+                </owl-carousel-o>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- All Categories -->
-     @if(shopData?.['All Categories']){
-        <section>
-            <div class="container">
-                <h1 id="ShopByCategory">Category</h1>
-                <div class="categories-shop">
-                    <owl-carousel-o [options]="CategorySlider">
-                        @for (category of shopData['All Categories']; track $index) {
-                            <ng-template carouselSlide>
-                                <div class="category-shop">
-                                    <a routerLink="">
-                                        <img [src]="category.MainImage" [alt]="category.Category">
-                                    </a>
-                                    <a href="">
-                                        {{category.Category}}
-                                    </a>
-                                </div>
-                            </ng-template>
-                        }    
-                    </owl-carousel-o>
-                </div>
+
+      <!-- All -->
+      <div class="tab-pane fade" id="All" role="tabpanel">
+        <div class="wrapper">
+          <div class="card">
+            <div class="card-body pl-0">
+              <div class="related-product__carousel">
+                <owl-carousel-o [options]="ProductsSlider">
+                  @for (product of shopData.Category2_to_show.Products;
+                  track $index) {
+                  <ng-template carouselSlide>
+                    <app-product-card [product]="product"></app-product-card>
+                  </ng-template>
+                  }
+                </owl-carousel-o>
+              </div>
             </div>
-        </section>
-     }
-    
-
-    <section id="StartYourSystem-Shop">
-        <div class="container">
-            <h2 class="heading">Best Product</h2>
-            <ul class="nav nav-tabs nav-primary" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#All" role="tab" aria-selected="false">
-                        All
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#Recommended" role="tab" aria-selected="true">
-                        Recommendition
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#MostPopular" role="tab" aria-selected="false">
-                        MostPopular
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#OnSale" role="tab" aria-selected="false">
-                        OnSale
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content py-3">
-                <!-- Recommended -->
-                 @if(shopData['Category 1 to show']){
-                    <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
-                        <div class="wrapper">
-                            <div class="card">
-                                <div class="card-body pl-0">
-                                    <div class="related-product__carousel">
-                                        <owl-carousel-o [options]="ProductsSlider">
-                                            @for (product of shopData['Category 1 to show'].Products; track $index) {
-                                                <ng-template carouselSlide>
-                                                    <app-product-card [product]="product"></app-product-card>
-                                                </ng-template>
-                                            }    
-                                        </owl-carousel-o>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 }
-                
-
-                <!-- All -->
-                @if(shopData['Category 2 to show']){
-                    <div class="tab-pane fade" id="All" role="tabpanel">
-                        <div class="wrapper">
-                            <div class="card">
-                                <div class="card-body pl-0">
-                                    <div class="related-product__carousel">
-                                        <owl-carousel-o [options]="ProductsSlider">
-                                            @for (product of shopData['Category 2 to show'].Products; track $index) {
-                                                <ng-template carouselSlide>
-                                                    <app-product-card [product]="product"></app-product-card>
-                                                </ng-template>
-                                            }    
-                                        </owl-carousel-o>
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <!-- MostPopular -->
-                @if(shopData['Brand to show']){
-                    <div class="tab-pane fade" id="MostPopular" role="tabpanel">
-                        <div class="wrapper">
-                            <div class="card" >
-                                <div class="card-body pl-0">
-                                    <div class="related-product__carousel">
-                                        <owl-carousel-o [options]="ProductsSlider">
-                                            @for (product of shopData['Brand to show'].Products; track $index) {
-                                                <ng-template carouselSlide>
-                                                    <app-product-card [product]="product"></app-product-card>
-                                                </ng-template>
-                                            }    
-                                        </owl-carousel-o>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <!-- On Sale -->
-                @if(shopData['All Products On Sale']){
-                    <div class="tab-pane fade" id="OnSale" role="tabpanel">
-                        <div class="wrapper">
-                            <div class="card" >
-                                <div class="card-body pl-0">
-                                    <div class="related-product__carousel">
-                                        <owl-carousel-o [options]="ProductsSlider">
-                                            @for (product of shopData['All Products On Sale']; track $index) {
-                                                <ng-template carouselSlide>
-                                                    <app-product-card [product]="product"></app-product-card>
-                                                </ng-template>
-                                            }    
-                                        </owl-carousel-o>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <section id="Boxes">
-        <!-- Select Bundles-->
-        <div class="container">
-            <div class="More-boxes">
-                <div class="box box-1" style="background-image:url(assets/imgs/UI/website/Shop/Escritorio.jpg)">
-                    <p>Explore Our Collection of Smart Home Gadgets</p>
-                    <a class="Button" routerLink="/categories">Discover More</a>
-                </div>
-                <div class="box hoverhere box-2" style="background-image:url(assets/imgs/UI/website/Shop/AlexaImage2.jpg)">
-                    <div class="overlay-button" style="width: 85%;">
-                        <div class="Info-bundle">
-                            <h3>{{bundle.Name}}</h3>
-                            <p>{{bundle.brand.Brand}}</p>
-                        </div>
-                        <a >Read More</a>
-                    </div>
-                </div>
-                <div class="box hoverhere box-3"  style="background-image:url(assets/imgs/UI/website/Shop/Escritorio.jpg)">
-                    <div class="overlay-button" style="width: 85%;">
-                        <div class="Info-bundle">
-                            <h3>{{bundle.Name}}</h3>
-                            <p>{{bundle.brand.Brand}}</p>
-                        </div>
-                        <a >Read More</a>
-                    </div>
-                </div>
-                <div class="box box-4"  style="background-image:url(assets/imgs/UI/website/Shop/LightZhome.jpg);flex: 0.6;">
-                    <p>Find Your Perfect Smart Home Setup Here</p>
-                    <a class="Button" routerLink="/tools">Get Your Design</a>
-                </div>
-                <div class="box hoverhere box-5" style="background-image:url(assets/imgs/UI/website/Shop/james-mcdonald-74nIYjsOY88-unsplash.jpg)">
-                    <div class="overlay-button" style="width: 85%;">
-                        <div class="Info-bundle">
-                            <h3>{{bundle.Name}}</h3>
-                            <p>{{bundle.brand.Brand}}</p>
-                        </div>
-                        <a >Read More</a>
-                    </div>
-                </div>
+      <!-- MostPopular -->
+      <div class="tab-pane fade" id="MostPopular" role="tabpanel">
+        <div class="wrapper">
+          <div class="card">
+            <div class="card-body pl-0">
+              <div class="related-product__carousel">
+                <owl-carousel-o [options]="ProductsSlider">
+                  @for (product of shopData.Brand_to_show.Products; track $index) {
+                  <ng-template carouselSlide>
+                    <app-product-card [product]="product"></app-product-card>
+                  </ng-template>
+                  }
+                </owl-carousel-o>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Promocode -->
-    <!-- <section>
+      <!-- On Sale -->
+      <div class="tab-pane fade" id="OnSale" role="tabpanel">
+        <div class="wrapper">
+          <div class="card">
+            <div class="card-body pl-0">
+              <div class="related-product__carousel">
+                <owl-carousel-o [options]="ProductsSlider">
+                  @for (product of shopData.All_Products_On_Sale; track $index) {
+                    <ng-template carouselSlide>
+                      <app-product-card [product]="product"></app-product-card>
+                    </ng-template>
+                  }
+                </owl-carousel-o>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="Boxes">
+  <!-- Select Bundles-->
+  <div class="container">
+    <div class="More-boxes">
+      <div
+        class="box box-1"
+        style="
+          background-image: url(assets/imgs/UI/website/Shop/Escritorio.jpg);
+        "
+      >
+        <p>Explore Our Collection of Smart Home Gadgets</p>
+        <a class="Button" routerLink="/categories">Discover More</a>
+      </div>
+      <div
+        class="box hoverhere box-2"
+        style="
+          background-image: url(assets/imgs/UI/website/Shop/AlexaImage2.jpg);
+        "
+      >
+        <div class="overlay-button" style="width: 85%">
+          <div class="Info-bundle">
+            <h3>{{ bundle.Name }}</h3>
+            <p>{{ bundle.brand.Brand }}</p>
+          </div>
+          <a>Read More</a>
+        </div>
+      </div>
+      <div
+        class="box hoverhere box-3"
+        style="
+          background-image: url(assets/imgs/UI/website/Shop/Escritorio.jpg);
+        "
+      >
+        <div class="overlay-button" style="width: 85%">
+          <div class="Info-bundle">
+            <h3>{{ bundle.Name }}</h3>
+            <p>{{ bundle.brand.Brand }}</p>
+          </div>
+          <a>Read More</a>
+        </div>
+      </div>
+      <div
+        class="box box-4"
+        style="
+          background-image: url(assets/imgs/UI/website/Shop/LightZhome.jpg);
+          flex: 0.6;
+        "
+      >
+        <p>Find Your Perfect Smart Home Setup Here</p>
+        <a class="Button" routerLink="/tools">Get Your Design</a>
+      </div>
+      <div
+        class="box hoverhere box-5"
+        style="
+          background-image: url(assets/imgs/UI/website/Shop/james-mcdonald-74nIYjsOY88-unsplash.jpg);
+        "
+      >
+        <div class="overlay-button" style="width: 85%">
+          <div class="Info-bundle">
+            <h3>{{ bundle.Name }}</h3>
+            <p>{{ bundle.brand.Brand }}</p>
+          </div>
+          <a>Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Promocode -->
+<!-- <section>
         <div class="container">
             @if($promocodes)
                 {{-- Timer --}}
@@ -276,238 +328,253 @@
         </div>
     </section> -->
 
-    <!-- Products With Sale -->
+<!-- Products With Sale -->
 
-    @if(shopData['All Products On Sale']){
-        <section>
-            <div class="container">
-                <div class="category-Name mt-5">
-                    <h3>Fresh Sale</h3>
-                    <a>Discover More<i class="fa fa-arrow-right ml-2"></i></a>
-                </div>
-                <div class="related-product__carousel owl-carousel owl-theme mt-3 mb-5">
-                    <owl-carousel-o [options]="ProductsSlider">
-                        @for (product of shopData['All Products On Sale']; track $index) {
-                            <ng-template carouselSlide>
-                                <app-product-card [product]="product"></app-product-card>
-                            </ng-template>
-                        }    
-                    </owl-carousel-o>
-                </div>
+@if(shopData['All Products On Sale']){
+<section>
+  <div class="container">
+    <div class="category-Name mt-5">
+      <h3>Fresh Sale</h3>
+      <a>Discover More<i class="fa fa-arrow-right ml-2"></i></a>
+    </div>
+    <div class="related-product__carousel owl-carousel owl-theme mt-3 mb-5">
+      <owl-carousel-o [options]="ProductsSlider">
+        @for (product of productsOnSale; track $index) {
+        <ng-template carouselSlide>
+          <app-product-card [product]="product"></app-product-card>
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+} @else {
+<div class="m-4"></div>
+}
+
+<!-- Sub Categories of one category and thier product -->
+<section>
+  <div class="container Category-selected-shop">
+    <!-- Category and Sub of that Category -->
+
+    <section>
+      <div class="boxes-shop SubCategory-OnlineShop">
+        <div class="category-Name">
+          <h3>
+            {{ category1.Category }}
+            <br />
+            <span>Category</span>
+          </h3>
+          <a routerLink=""
+            >Discover More<i class="fa fa-arrow-right ml-2"></i
+          ></a>
+        </div>
+
+        @if(shopData.Category1_to_show.Category.subcategories){
+        <div class="Subs mt-3">
+          @for (subcategory of shopData.Category1_to_show.Category.subcategories ; track $index) {
+          <a class="ToTheSubPage">
+            <div
+              class="box-shop SubCategory-OnlineShop-Circled"
+              [style]="'background-image: url(' + subcategory.image + ')'"
+            ></div>
+            <p>
+              {{ subcategory.SubName }}
+            </p>
+          </a>
+          }
+        </div>
+        }
+      </div>
+    </section>
+
+    <!-- Product From The Selected Category -->
+    <section>
+      <div class="related-product__carousel mt-5 mb-5 pb-3">
+        <owl-carousel-o [options]="ProductsSlider">
+          @for (product of shopData.Category1_to_show.Products; track $index) {
+          <ng-template carouselSlide>
+            <div class="item">
+              <app-product-card [product]="product"></app-product-card>
             </div>
-        </section>
-    }
-    @else
-    {
-        <div class='m-4'>
-        </div>
-    }
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+    </section>
+  </div>
+</section>
 
-    <!-- Sub Categories of one category and thier product -->
+<!-- Bundles -->
+<section>
+  <div class="container">
+    <!-- Select Bundles -->
+    <h2 class="Home-Text">Bundles Made for You</h2>
+    <div class="Bundles Images-Home">
+      @for (bundle of shopData.All_Bundles; track $index) {
+
+      <div class="Bundle-Shop Image-One">
+        <img [src]="bundle.MainImage" class="BigWidth" [alt]="bundle.Name" />
+        <div class="overlay-button" style="width: 250px">
+          <div class="Info-bundle">
+            <h3>
+              {{ bundle.Name }}
+            </h3>
+            <p>{{ bundle.brand.Brand }}</p>
+          </div>
+          <a [routerLink]="['/product', bundle.ID]" class="btn btn-info"
+            >Read More</a
+          >
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Sub Categories of one category and thier product -->
+<section>
+  <div class="container Category-selected-shop">
+    <!-- Category and Sub of that Category -->
     <section>
-        <div class="container Category-selected-shop">
-
-            <!-- Category and Sub of that Category -->
-             
-            <section>
-                <div class="boxes-shop SubCategory-OnlineShop">
-                    <div class="category-Name">
-                        <h3>
-                            {{category1.Category}}
-                            <br>
-                            <span>Category</span>
-                        </h3>
-                        <a routerLink="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
-                    </div>
-
-                    @if(shopData['Category 1 to show'].Category.subcategories){
-                        <div class="Subs mt-3">
-                            @for (subcategory of shopData['Category 1 to show'].Category.subcategories ; track $index) {
-                                <a class="ToTheSubPage">
-                                    <div class="box-shop SubCategory-OnlineShop-Circled" [style]="'background-image: url('+subcategory.image+')'">
-                                    </div>
-                                    <p>
-                                        {{subcategory.SubName}}
-                                    </p>
-                                </a>
-                            }
-                        </div>
-                    }
-                </div>
-            </section>
-
-            <!-- Product From The Selected Category -->
-            <section>
-                <div class="related-product__carousel mt-5 mb-5 pb-3">
-                    <owl-carousel-o [options]="ProductsSlider">
-                        @for (product of shopData['Category 1 to show'].Products; track $index) {
-                            <ng-template carouselSlide>
-                                <div class="item">
-                                    <app-product-card [product]="product"></app-product-card>
-                                </div>
-                            </ng-template>
-                        }    
-                    </owl-carousel-o>
-                </div>
-            </section>
-            
+      <div class="boxes-shop SubCategory-OnlineShop">
+        <div class="category-Name">
+          <h3>
+            {{ category2.Category }}
+            <br />
+            <span>Category</span>
+          </h3>
+          <a routerLink=""
+            >Discover More<i class="fa fa-arrow-right ml-2"></i
+          ></a>
         </div>
+        @if(shopData.Category2_to_show.Category.subcategories){
+        <div class="Subs mt-3">
+          @for (subcategory of shopData.Category2_to_show.Category.subcategories ; track $index) {
+
+          <a class="ToTheSubPage">
+            <div
+              class="box-shop SubCategory-OnlineShop-Circled"
+              [style]="'background-image: url(' + subcategory.image + ')'"
+            ></div>
+            <p>
+              {{ subcategory.SubName }}
+            </p>
+          </a>
+          }
+        </div>
+        }
+      </div>
     </section>
 
-    <!-- Bundles -->
+    <!-- Product From The Selected Category -->
     <section>
-        <div class="container">
-            <!-- Select Bundles -->
-            <h2 class="Home-Text">
-                Bundles Made for You
-            </h2>
-            <div class="Bundles Images-Home">
-                @for (bundle of shopData['All Bundles']; track $index) {
-               
-                    <div class="Bundle-Shop Image-One">
-                        <img [src]="bundle.MainImage" class="BigWidth" [alt]="bundle.Name">
-                        <div class="overlay-button" style="width: 250px;">
-                            <div class="Info-bundle">
-                                <h3>
-                                    {{bundle.Name}}
-                                </h3>
-                                <p>{{bundle.brand.Brand}}</p>
-                            </div>
-                            <a [routerLink]="['/product' , bundle.ID ]"   class="btn btn-info">Read More</a>
-                        </div>
-                    </div>
-                
-                }
+      <div class="related-product__carousel mt-5 mb-5 pb-3">
+        <owl-carousel-o [options]="ProductsSlider">
+          @for (product of shopData.Category2_to_show.Products; track $index) {
+          <ng-template carouselSlide>
+            <div class="item">
+              <app-product-card [product]="product"></app-product-card>
             </div>
-        </div>
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
     </section>
+  </div>
+</section>
 
-    <!-- Sub Categories of one category and thier product -->
+<!-- Fixed attach for bundles -->
+<section>
+  <div
+    class="Fixed-bundle item slider-one__slider-1"
+    style="
+      background-image: url(assets/imgs/UI/website/Shop/bence-boros-anapPhJFRhM-unsplash.jpg);
+    "
+  >
+    <div class="bottom-slider">
+      <a href="" class="thm-btn slider-one__btn">Explore Bundles</a>
+      <h2 class="slider-one__title">
+        Packages And Bundles
+        <br />
+        matches your smart home
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- one Brand and thier product-->
+<section>
+  <div class="container mt-5 pt-3">
+    <!-- Product From The Selected Brand -->
     <section>
-        <div class="container Category-selected-shop">
-            <!-- Category and Sub of that Category -->
-            <section>
-                <div class="boxes-shop SubCategory-OnlineShop">
-                    <div class="category-Name">
-                        <h3>
-                            {{category2.Category}}
-                            <br>
-                            <span>Category</span>
-                        </h3>
-                        <a routerLink="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
-                    </div>
-                    @if(shopData['Category 2 to show'].Category.subcategories){
-                        <div class="Subs mt-3">
-                            @for (subcategory of shopData['Category 2 to show'].Category.subcategories ; track $index) {
-
-                                <a class="ToTheSubPage">
-                                    <div class="box-shop SubCategory-OnlineShop-Circled" [style]="'background-image: url('+subcategory.image+')'">
-                                    </div>
-                                    <p>
-                                        {{subcategory.SubName}}
-                                    </p>
-                                </a>
-                            }
-                        </div>
-                    }
-                </div>
-            </section>
-
-            <!-- Product From The Selected Category -->
-            <section>
-                <div class="related-product__carousel mt-5 mb-5 pb-3">
-                    <owl-carousel-o [options]="ProductsSlider">
-                        @for (product of shopData['Category 2 to show'].Products; track $index) {
-                            <ng-template carouselSlide>
-                                <div class="item">
-                                    <app-product-card [product]="product"></app-product-card>
-                                </div>
-                            </ng-template>
-                        }    
-                    </owl-carousel-o>
-                </div>
-            </section>
-        </div>
-    </section>
-
-    <!-- Fixed attach for bundles -->
-    <section>
-        <div class="Fixed-bundle item slider-one__slider-1" style="background-image: url(assets/imgs/UI/website/Shop/bence-boros-anapPhJFRhM-unsplash.jpg)">
-            <div class="bottom-slider">
-                <a href="" class="thm-btn slider-one__btn">Explore Bundles</a>
-                <h2 class="slider-one__title">
-                    Packages And Bundles
-                    <br/>
-                    matches your smart home
-                </h2>
+      <div class="Category-Product mt-4 justify-content-between">
+        <h3>{{ brand.Brand + " Products" }}</h3>
+        <a href="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
+      </div>
+      <div class="related-product__carousel mt-5 mb-5">
+        <owl-carousel-o [options]="ProductsSlider">
+          @for (product of shopData.Brand_to_show.Products ; track $index) {
+          <ng-template carouselSlide>
+            <div class="item">
+              <app-product-card [product]="product"></app-product-card>
             </div>
-        </div>
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
     </section>
+  </div>
+</section>
 
-    <!-- one Brand and thier product-->
-    <section>
-        <div class="container mt-5 pt-3">
-            <!-- Product From The Selected Brand -->
-            <section>
-                <div class="Category-Product mt-4 justify-content-between">
-                    <h3>{{brand.Brand + " Products"}} </h3>
-                    <a href="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
-                </div>
-                <div class="related-product__carousel mt-5 mb-5">
-                    <owl-carousel-o [options]="ProductsSlider">
-                        @for (product of shopData['Brand to show'].Products; track $index) {
-                            <ng-template carouselSlide>
-                                <div class="item">
-                                    <app-product-card [product]="product"></app-product-card>
-                                </div>
-                            </ng-template>
-                        }    
-                    </owl-carousel-o>
-                </div>
-            </section>
+<!-- Tool -->
+<section>
+  <div class="container">
+    <div class="Cards-contact mt-5 pt-4">
+      <div class="card-contact-left align-items-center">
+        <a routerLink="/tools">
+          <img
+            src="../../../../assets/imgs/UI/website/Shop/r-architecture-T6d96Qrb5MY-unsplash2.png"
+            class="ProposalProduct"
+            alt="Design Your Home"
+          />
+        </a>
+        <div class="ToolOnlineShop">
+          <h3>Build your home with our free customized proposal</h3>
+          <div>
+            <a routerLink="/tools" class="cta ShopNowButton" id="BuildHomeCta">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="HomeIcon"
+                height="15"
+                width="17"
+                viewBox="0 0 576 512"
+              >
+                <!-- <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></path> -->
+              </svg>
+              <span class="hover-underline-animation">Build Your Home</span>
+            </a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Tool -->
-    <section>
-        <div class="container">
-            <div class="Cards-contact mt-5 pt-4">
-                <div class="card-contact-left align-items-center">
-                    <a routerLink="/tools" >
-                        <img src="../../../../assets/imgs/UI/website/Shop/r-architecture-T6d96Qrb5MY-unsplash2.png" class="ProposalProduct" alt="Design Your Home">
-                    </a>
-                    <div class="ToolOnlineShop">
-                        <h3>Build your home with our free customized proposal</h3>
-                        <div>
-                            <a routerLink="/tools" class="cta ShopNowButton" id="BuildHomeCta">
-                                <svg xmlns="http://www.w3.org/2000/svg" id="HomeIcon" height="15" width="17" viewBox="0 0 576 512">
-                                    <!-- <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></path> -->
-                                </svg>
-                                <span class="hover-underline-animation">Build Your Home</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<section class="mt-5 pt-2">
+  <div class="Brand shop-slider-brands">
+    <owl-carousel-o [options]="BrandsSlider">
+      @for (brand of shopData.All_Brands; track $index){
+      <ng-template carouselSlide>
+        <img
 
-            </div>
-        </div>
-    </section>
-
-    <section class="mt-5 pt-2">
-        <div class="Brand shop-slider-brands">
-            <owl-carousel-o [options]="BrandsSlider">
-                @for (brand of shopData['All Brands']; track $index){
-                    <ng-template carouselSlide>
-                    <img loading="lazy" [src]="brand.Logo" [alt]="brand.Brand" [title]="brand.Brand" />
-                    </ng-template>
-                }    
-            </owl-carousel-o>
-        </div>
-    </section>
-
-
-
-
-
-
-
+          [src]="brand.Logo"
+          [alt]="brand.Brand"
+          [title]="brand.Brand"
+        />
+      </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+</section>

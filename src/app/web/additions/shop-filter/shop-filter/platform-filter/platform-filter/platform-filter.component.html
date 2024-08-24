@@ -1,0 +1,20 @@
+<div class="widget catagory">
+  <div class="nav-side-menu">
+        <a class="nav-link" (click)="toggleCollapse()" role="button" id="PlatformsExamplesButton">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-between">
+              <h6 class="mb-0 nav-link-text">Platforms</h6>
+              <i class="fa-solid text-dark text-sm opacity-10"
+              [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
+          </div>
+        </a>
+      <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}" class="collapse collapsing checkbox-list" id="PlatformsExamples">
+          @for (platform of platforms; track $index) {
+              <label [for]="'Platform'+platform.ID" class="checkbox PlatformCheckBox">
+                  <input type="checkbox" [id]="'Platform'+platform.ID" class="PlatformCheckInput" [value]="'Platform'+platform.ID"  (change)="onPlatformChange(platform.ID)">
+                  <img [src]="platform.Logo" [alt]="platform.Platform">
+                  {{platform.Platform}}
+              </label>
+            }
+      </div>
+  </div>
+</div>

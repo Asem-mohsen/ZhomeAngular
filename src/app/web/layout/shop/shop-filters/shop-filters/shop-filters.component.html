@@ -1,0 +1,97 @@
+
+    <!-- Header -->
+    <section class="shop-background site-banner jarallax pb-0" style="min-height:150px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-title">Shop</h1>
+                    <div class="breadcrumbs">
+                    <span class="item">
+                        <a routerLink="/home" style="color: #d1d1d1;">Home /</a>
+                    </span>
+                        <span class="item text-black">Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter and Products -->
+    <section class="shop_grid_area">
+        <div class="container" style="max-width: 1220px;">
+            <div class="row Page-flex">
+
+            <!-- Filter -->
+            <div class="col-4 col-md-4 col-lg-2 FilterTransform MainFilter">
+              <div class="shop_sidebar_area">
+                  <!-- Categories -->
+                  <app-category-filter
+                      [categories]="filterData.Filter_Data.categories"
+                      (filterChange)="onFilterChange($event, 'category')">
+                  </app-category-filter>
+
+                  <!-- Brands -->
+                  <app-brand-filter
+                      [brands]="filterData.Filter_Data.brands"
+                      (filterChange)="onFilterChange($event, 'brand')">
+                  </app-brand-filter>
+
+                  <!-- Platforms -->
+                  <app-platform-filter
+                      [platforms]="filterData.Filter_Data.platforms"
+                      (filterChange)="onFilterChange($event, 'platform')">
+                  </app-platform-filter>
+
+                  <!-- Technologies -->
+                  <app-tecnology-filter
+                      [technologies]="filterData.Filter_Data.technologies"
+                      (filterChange)="onFilterChange($event, 'technology')">
+                  </app-tecnology-filter>
+
+                  <!-- Price Range -->
+                  <div class="widget price mb-50">
+                      <h6 class="widget-title mb-30">{{ 'Filter by Price' }}</h6>
+                      <div class="widget-desc">
+                          <div class="slider-range">
+                              <div
+                                    data-min=""
+                                    data-max=""
+                                    class="slider-range-price">
+                                  <div class="ui-slider-range"></div>
+                                  <span class="ui-slider-handle"></span>
+                                  <span class="ui-slider-handle"></span>
+                              </div>
+                              <div class="range-price">
+                                  {{ 'Price' }}
+                                  <span id="price-range">{{ filterData.Filter_Data.minPrice }} - {{ filterData.Filter_Data.maxPrice}}</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="FiltersButton">
+                    <button id="applyFilterBtn">{{ 'Apply Filter' }}</button>
+                    <button id="Reset" type="reset" title="{{ 'Reset Choices' }}"><i class="fa-solid fa-rotate-right"></i></button>
+                  </div>
+                </div>
+            </div>
+            <!-- Products -->
+            <div class="col-12 col-md-8 col-lg-10">
+                <div class="shop_grid_product_area">
+                    <div class="row d-flex justify-content-start pl-3" style="gap: 23px">
+
+                        <!-- Single gallery Item -->
+                        @for(product of filterData.products.data ; track $index){
+                          <div class="item">
+                            <app-product-card [product]="product"></app-product-card>
+                          </div>
+                        }
+                    </div>
+                </div>
+                <!-- {{ $products->links() }} -->
+            </div>
+
+        </div>
+    </div>
+</section>
+
