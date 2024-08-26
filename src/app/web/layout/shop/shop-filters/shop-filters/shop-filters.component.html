@@ -19,7 +19,16 @@
     <!-- Filter and Products -->
     <section class="shop_grid_area">
         <div class="container" style="max-width: 1220px;">
-            <div class="row Page-flex">
+            <div class="input-wrapper">
+              <button class="icon-search">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
+                  <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
+                  <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M22 22L20 20"></path>
+                </svg>
+              </button>
+              <input [(ngModel)]="searchWord" placeholder="search.." class="input-search" name="text" type="text">
+            </div>
+          <div class="row Page-flex">
 
             <!-- Filter -->
             <div class="col-4 col-md-4 col-lg-2 FilterTransform MainFilter">
@@ -81,7 +90,7 @@
                     <div class="row d-flex justify-content-start pl-3" style="gap: 23px">
 
                         <!-- Single gallery Item -->
-                        @for(product of filterData.products.data ; track $index){
+                        @for(product of products | search : searchWord  ; track $index){
                           <div class="item">
                             <app-product-card [product]="product"></app-product-card>
                           </div>

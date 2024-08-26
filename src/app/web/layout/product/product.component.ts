@@ -3,15 +3,16 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../Services/products/products.service';
 import { Product, ProductImages } from '../../../Interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { NgStyle } from '@angular/common';
+import { NgStyle, CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { ProductCardComponent } from "../../additions/product-card/product-card.component";
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent],
+  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -102,6 +103,7 @@ export class ProductComponent {
     },
     nav: true
   }
+
   constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService){}
   // ActivatedRoute => to extract any param form the url
 
@@ -155,4 +157,17 @@ export class ProductComponent {
   }
 
 
+  quantity: number = 1;
+
+  incrementQuantity() {
+    if (this.quantity < this.product.Quantity) {
+      this.quantity++;
+    }
+  }
+
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
 }

@@ -6,7 +6,7 @@
             <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/shop">Shop</a></li>
             <li>
-                {{product.Name}}
+                {{product.Name | titlecase }}
             </li>
         </ul>
     </div>
@@ -47,11 +47,11 @@
                                 </h1>
                                 @if(product.sale){
                                     <input type="hidden" name="PriceAfterSale" [value]="product.sale.PriceAfter" >
-                                    <p class="product-details__price">{{ product.sale.PriceAfter + " EGP"}}</p>
-                                    <p class="product-details__price" style="text-decoration: line-through; font-size:19px">{{ product.Price + " EGP"}}</p>
+                                    <p class="product-details__price">{{ product.sale.PriceAfter | currency:'EGP' }} </p>
+                                    <p class="product-details__price" style="text-decoration: line-through; font-size:19px">{{ product.Price | currency:'EGP' }}</p>
                                 }
                                 @else{
-                                    <p class="product-details__price">{{ product.Price + " EGP"}}</p>
+                                    <p class="product-details__price">{{ product.Price | currency:'EGP' }}</p>
                                 }
 
                                 <p class="product-details__text">
@@ -68,15 +68,22 @@
                                         {{ product.brand.Brand }}
                                     </a>
                                 </p>
+
                                 <div class="product-details__button-block d-grid gap-1">
-                                    <input type='hidden' name='Quantity' [value]="product.Quantity" />
-                                    @if(product.Quantity > 0){
-                                        <input class="quantity-spinner" type="text" min="1" value="1" name="quantity" [id]="'quantity-'+product.ID">
-                                        <!-- <button (click)="addToCart({{ $product.ID }}, {{ $product.sale  ? $product.sale?->PriceAfter : $product.Price }}, {{ $product.InstallationCost ?? 0 }})" class="thm-btn product-details__cart-btn ml-3">AddtoCart <span>+</span></button> -->
-                                    }
-                                    @else if(product.Quantity <= 0){
-                                        <p class='OutStock'> Out of Stock </p>
-                                    }
+                                  <input type='hidden' name='Quantity' [value]="product.Quantity" />
+                                  @if(product.Quantity > 0){
+                                    <div class="quantity-spinner">
+                                      <button (click)="decrementQuantity()" [disabled]="quantity <= 1">-</button>
+                                      <input type="number" [(ngModel)]="quantity" min="1" [max]="product.Quantity" [id]="'quantity-'+product.ID">
+                                      <button (click)="incrementQuantity()" [disabled]="quantity >= product.Quantity">+</button>
+                                    </div>
+                                    <!-- <button (click)="addToCart()" class="thm-btn product-details__cart-btn ml-3">
+                                      Add to Cart <span>+</span>
+                                    </button> -->
+                                  }
+                                  @else if(product.Quantity <= 0){
+                                    <p class='OutStock'> Out of Stock </p>
+                                  }
                                 </div>
                                 @if(product.Quantity > 0){
                                     <p class="product-details__availabelity">
@@ -159,7 +166,7 @@
                                         </div>
                                         <div class="bottom-text">
                                             <p>
-                                                Professional Installation {{ product.InstallationCost + ' EGP'}}.
+                                                Professional Installation {{ product.InstallationCost | currency:'EGP' }}.
                                             </p>
                                         </div>
                                     </div>
@@ -274,7 +281,7 @@
                                     @if(product.InstallationCost){
                                         <li>
                                             <span><i class="fa-solid fa-check"></i></span>
-                                            <p>Professional Installation {{ product.InstallationCost + 'EGP'}}</p>
+                                            <p>Professional Installation {{ product.InstallationCost | currency:'EGP' }}</p>
                                         </li>
                                     }
 
