@@ -33,7 +33,8 @@ section.MainFooter {
   font-size: 20px;
   color: black;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 .left-footer button {
   border-radius: 28px;
@@ -42,12 +43,15 @@ section.MainFooter {
   border: none;
   padding: 10px 20px;
   width: 150px;
+  margin: 0px 2px;
 }
-.left-footer button svg {
+.left-footer button i {
   padding-right: 8px;
   font-size: 20px;
 }
 .left-footer button:hover {
+  transition: all 0.4s;
+  background-color: var(--mainColor);
 }
 .Footer .right-footer {
   margin-top: 90px;
@@ -121,7 +125,7 @@ section.MainFooter {
 .copyright .Icons {
   margin-top: 30px;
 }
-.copyright .Icons svg {
+.copyright .Icons i {
   color: #6e6e6e;
   font-size: 21px;
   padding-left: 8px;
@@ -142,7 +146,7 @@ section.MainFooter {
   display: none;
   border: 1px solid #f0f0f0;
 }
-.scroll-to-top svg {
+.scroll-to-top i {
   font-size: 14px;
   line-height: 50px;
   color: #000;
@@ -153,7 +157,7 @@ section.MainFooter {
 }
 .scroll-to-top:hover {
   background: #154352;
-  border-color: #154352;
+  border-color: var(--mainColor);
 }
 .scroll-to-top:hover i {
   color: #fff;

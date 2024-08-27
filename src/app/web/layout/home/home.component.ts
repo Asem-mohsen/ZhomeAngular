@@ -20,30 +20,6 @@ export class HomeComponent implements OnInit{
   brands:    Brand[] = [];
   platforms: Platform[] = [];
 
-  PlatformSlider: OwlOptions = {
-    loop: false,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 4
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: false
-  }
   BrandsSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -81,11 +57,11 @@ export class HomeComponent implements OnInit{
     }
 
     this._BrandService.getBrands().subscribe((result) => {
-      this.brands = Object.values(result.data);
+      this.brands = result.data.Brands;
     })
 
     this._PlatformService.getPlatfroms().subscribe((allPlatforms) => {
-      this.platforms = Object.values(allPlatforms.data);
+      this.platforms = allPlatforms.data.Platforms;
     })
   }
 

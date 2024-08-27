@@ -1016,21 +1016,21 @@
     <!-- Platforms -->
     <div class="Platfroms">
       <h3>Zhome Compability</h3>
-      <owl-carousel-o [options]="PlatformSlider">
+      <div class="d-flex g-2">
         @for (platform of platforms; track $index){
-          <ng-template carouselSlide>
-            <div class="Platform-home">
-              <img
-                loading="lazy"
-                [src]="platform.Logo"
-                [alt]="platform.Platform"
-                [title]="platform.Platform"
-              />
-              <a routerLink="/platforms">{{ platform.Platform }}</a>
-            </div>
-          </ng-template>
-        }    
-      </owl-carousel-o>
+          
+          <div class="Platform-home">
+            <img
+              loading="lazy"
+              [src]="platform.Logo"
+              [alt]="platform.Platform"
+              [title]="platform.Platform"
+            />
+            <a routerLink="/platforms">{{ platform.Platform }}</a>
+          </div>
+        
+      }   
+      </div>
     </div>
   </div>
 </section>

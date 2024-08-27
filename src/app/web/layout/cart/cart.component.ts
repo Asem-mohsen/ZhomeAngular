@@ -68,9 +68,6 @@ export class CartComponent{
       next: (res: ApiResponse) => {
         this.cartData = res.data;
       },
-      error: (err) => {
-        console.error('Error fetching cart data:', err);
-      }
     });
   }
 

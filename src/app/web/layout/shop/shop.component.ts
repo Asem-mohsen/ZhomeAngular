@@ -117,20 +117,26 @@ export class ShopComponent {
   ){}
 
   ngOnInit(): void {
-
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/shop')
     }
 
-    this._ShopService.getShopPage().subscribe((res) => {
-      this.shopData = res.data;
-      this.productsOnSale = res.data.All_Products_On_Sale;
-      this.bundle = this.shopData.Bundle_to_Show as Product;
-      this.category1 = this.shopData.Category1_to_show.Category as Category;
-      this.category2 = this.shopData.Category2_to_show.Category as Category;
-      this.brand = this.shopData.Brand_to_show.Brand as Brand;
-
-    });
+    this._ShopService.getShopPage().subscribe({
+        next: (res) => {
+          if (res && res.data) {
+            this.shopData = res.data;
+            this.productsOnSale = res.data.All_Products_On_Sale || [];
+            this.bundle = res.data.Bundle_to_Show as Product || null;
+            this.category1 = res.data.Category1_to_show?.Category as Category || null;
+            this.category2 = res.data.Category2_to_show?.Category as Category || null;
+            this.brand = res.data.Brand_to_show?.Brand as Brand || null;
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching shop page data:', err);
+        }
+      });
   }
 
+  
 }

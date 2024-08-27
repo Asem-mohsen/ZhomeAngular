@@ -56,7 +56,7 @@ export class PlatformComponent implements OnInit{
     }
 
     this._PlatformService.getPlatfromsUserShow().subscribe((res) => {
-      this.platforms = Object.values(res.data);
+      this.platforms = res.data.platforms;
     })
   }
 }

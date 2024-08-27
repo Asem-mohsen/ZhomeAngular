@@ -80,7 +80,7 @@ export class BrandComponent {
     }
 
     this._BrandsService.getBrandsPage().subscribe((res) => {
-      this.brands = Object.values(res.data);
+      this.brands = res.data.brands;
     })
   }
 }

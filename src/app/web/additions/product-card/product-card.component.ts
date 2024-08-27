@@ -20,7 +20,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
   isAdded: boolean = false;
 
-  constructor(private _ProductService : ProductsService , private _cartService : CartService , private toastr: ToastrService){
+  constructor(private _cartService : CartService , private toastr: ToastrService){
 
   }
 
