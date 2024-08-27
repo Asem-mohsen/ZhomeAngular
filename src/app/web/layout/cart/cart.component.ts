@@ -6,21 +6,27 @@ import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { ProductCardComponent } from '../../additions/product-card/product-card.component';
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
-import { ApiResponse, CartData } from "../../../Interfaces/cart";
+import { ApiResponse, CartItem } from "../../../Interfaces/cart";
 import { SwiperModule } from 'ngx-swiper-wrapper';
+import { FormsModule } from '@angular/forms';
+import { Product } from '../../../Interfaces/product';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [RouterLink , CarouselModule , ProductCardComponent , CurrencyPipe],
+  imports: [RouterLink , CarouselModule , ProductCardComponent , CurrencyPipe, TitleCasePipe , FormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent{
 
   isLogged : boolean = false ;
-  cartData!: CartData;
+  // cartData!: CartData;
+  cartItems: CartItem[] = [];
+  products: Product[] = [];
 
+  total: number = 0;
+  count!: number
   constructor(private _cartService : CartService  , private _AuthService : AuthService , private toastr: ToastrService){}
 
   // Sliders
@@ -64,9 +70,19 @@ export class CartComponent{
       this.isLogged = true
     }
 
+    this.loadCartItems();
+  }
+
+  loadCartItems(): void {
     this._cartService.getCart().subscribe({
-      next: (res: ApiResponse) => {
-        this.cartData = res.data;
+      next: (response) => {
+        this.cartItems = response.data.cartItems;
+        this.total = response.data.total;
+        this.count = response.data.count;
+        this.products = response.data.products;
+      },
+      error: (err) => {
+        console.error('Error loading cart items:', err);
       },
     });
   }
@@ -76,6 +92,7 @@ export class CartComponent{
     this._cartService.removeItem(id).subscribe({
       next : (res) => {
         this.toastr.success(res.message);
+        this.loadCartItems();
       },
       error : (err) =>{
         this.toastr.error('an error occured');
@@ -88,11 +105,31 @@ export class CartComponent{
     this._cartService.removeAll().subscribe({
       next : (res) => {
         this.toastr.success(res.message);
+        this.loadCartItems();
       },
       error : (err) =>{
         this.toastr.error('an error occured');
       }
     })
+  }
+
+  // Spinner Quantity
+  incrementQuantity(item: CartItem) {
+    if (item.Quantity < item.product.Quantity) {
+      item.Quantity++;
+      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe((res)=>{
+        this.loadCartItems();
+      })
+    }
+  }
+
+  decrementQuantity(item: CartItem) {
+    if (item.Quantity > 1) {
+      item.Quantity--;
+      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe((res)=>{
+        this.loadCartItems();
+      })
+    }
   }
 
 }

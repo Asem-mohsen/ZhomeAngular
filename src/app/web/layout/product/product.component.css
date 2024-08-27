@@ -496,21 +496,42 @@ input[type="file"] {
   font-size: 12px;
   color: #302e2f;
 }
-.product-details .quantity-spinner {
-  padding: 5px 0px 5px 20px;
-  line-height: 24px;
-  height: 43px;
-  display: block;
-  width: 0px;
-  font-size: 20px;
-  position: relative;
-  padding: 0;
+
+.quantity-spinner {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-spinner button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quantity-spinner button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-spinner input {
+  width: 50px;
   text-align: center;
-  border: none;
-  outline: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: 1px solid #e4e4e4;
+  border: 1px solid #ddd;
+  padding: 5px;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.quantity-spinner input::-webkit-inner-spin-button,
+.quantity-spinner input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-spinner input[type="number"] {
+  -moz-appearance: textfield;
 }
 .product-details .bootstrap-touchspin {
   width: 120px;

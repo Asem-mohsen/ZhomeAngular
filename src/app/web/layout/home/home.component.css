@@ -1202,14 +1202,18 @@ section.WhyZhomeSection {
   border-top: 1px solid #cdcdcd;
   width: auto;
   margin: auto;
-  gap: 30px;
   margin-top: 46px;
 }
 .Platfroms h3 {
   margin-top: 20px;
-  margin-right: 78px;
   font-size: 21px;
   color: #343333;
+  width: 33%;
+}
+.Platfroms-slider {
+  width: 100%;
+  justify-content: center;
+  gap: 37px;
 }
 .Platfroms .Platform-home {
   display: flex;

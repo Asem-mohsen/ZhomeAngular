@@ -1,7 +1,7 @@
 import { Platform } from './../../../../../Interfaces/platform';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ShopService } from './../../../../../Services/Pages/Shop/shop.service';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Product } from '../../../../../Interfaces/product';
 import { RouterLink } from '@angular/router';
 import { ProductCardComponent } from '../../../../additions/product-card/product-card.component';
@@ -9,19 +9,24 @@ import { CategoryFilterComponent } from "../../../../additions/shop-filter/shop-
 import { BrandFilterComponent } from '../../../../additions/shop-filter/shop-filter/brand-filter/brand-filter/brand-filter.component';
 import { PlatformFilterComponent } from '../../../../additions/shop-filter/shop-filter/platform-filter/platform-filter/platform-filter.component';
 import { TecnologyFilterComponent } from '../../../../additions/shop-filter/shop-filter/technology-filter/tecnology-filter/tecnology-filter.component';
+import { SearchPipe } from '../../../../../Pipes/search/search.pipe';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop-filters',
   standalone: true,
-  imports: [RouterLink, ProductCardComponent, CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent],
+  imports: [RouterLink, ProductCardComponent, CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent , SearchPipe , FormsModule],
   templateUrl: './shop-filters.component.html',
   styleUrl: './shop-filters.component.css'
 })
 export class ShopFiltersComponent {
 
+  searchWord : string = '';
   constructor(private _ShopService : ShopService){}
 
-  filterData !: any
+  filterData !: any ;
+  products : Product [] = [];
     // Sliders
     ProductsSlider: OwlOptions = {
       loop: true,
@@ -60,7 +65,13 @@ export class ShopFiltersComponent {
         localStorage.setItem('currentPage', '/shop/filters')
       }
 
-      this.loadFilterData();
+      this._ShopService.getShopFilterPage().subscribe({
+        next: (res) => {
+          this.products = res.data.products.data;
+          this.filterData = res.data;
+
+        }
+      });
 
       this.loadProducts();
     }
@@ -118,11 +129,7 @@ export class ShopFiltersComponent {
     }
 
     loadFilterData() {
-      this._ShopService.getShopFilterPage().subscribe({
-        next: (res) => {
-          this.filterData = res.data;
-        }
-      });
+
     }
 
     loadProducts() {
