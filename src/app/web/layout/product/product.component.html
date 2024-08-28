@@ -77,9 +77,9 @@
                                       <input type="number" [(ngModel)]="quantity" min="1" [max]="product.Quantity" [id]="'quantity-'+product.ID">
                                       <button (click)="incrementQuantity()" [disabled]="quantity >= product.Quantity">+</button>
                                     </div>
-                                    <!-- <button (click)="addToCart()" class="thm-btn product-details__cart-btn ml-3">
+                                    <button (click)="addToCart(product.ID , quantity)" class="thm-btn product-details__cart-btn ml-3">
                                       Add to Cart <span>+</span>
-                                    </button> -->
+                                    </button>
                                   }
                                   @else if(product.Quantity <= 0){
                                     <p class='OutStock'> Out of Stock </p>

@@ -1,0 +1,29 @@
+@media (max-width: 767px) {
+  .ControlProfile a {
+    width: -webkit-fill-available;
+  }
+  .ControlProfile button {
+    width: -webkit-fill-available;
+  }
+  .NumbersCard {
+    height: -webkit-fill-available !important;
+  }
+  .related-product__carousel .owl-nav {
+    display: none;
+  }
+  #PastOrders {
+    height: auto;
+  }
+}
+.card#PastOrders {
+  height: auto;
+}
+.shop-background.site-banner.jarallax.min-height300.padding-large {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-body.text-center {
+  display: grid;
+  justify-items: center;
+}

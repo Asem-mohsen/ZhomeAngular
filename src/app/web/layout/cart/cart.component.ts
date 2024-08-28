@@ -77,6 +77,7 @@ export class CartComponent{
     this._cartService.getCart().subscribe({
       next: (response) => {
         this.cartItems = response.data.cartItems;
+        
         this.total = response.data.total;
         this.count = response.data.count;
         this.products = response.data.products;

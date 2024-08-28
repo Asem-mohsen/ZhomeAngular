@@ -38,11 +38,11 @@ export class CartService {
     return this._http.get<ApiResponse>(`${environment.baseURL}/api/cart`, {  headers: headers  });
   }
 
-  storeCart(productId : number , quantity: number = 1) :  Observable<any>
+  storeCart(productId : number , quantity?: number) :  Observable<any>
   {
     const headers = this.getHeaders();
     return this._http.post(`${environment.baseURL}/api/cart/add` ,
-    { product_id: productId, quantity: quantity },
+    { product_id: productId, quantity: quantity || 1 },
     { headers: headers });
   }
 

@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export interface User {
   id: number;
   google_id: string | null;
@@ -40,4 +42,24 @@ export interface AuthResponse {
     admin?: Admin;
   };
   error: any;
+}
+
+
+export interface OrderStatistics {
+  UserID: number;
+  MinOrderDate: string;
+  TotalNumberOfOrders: number;
+}
+
+export interface profileResponse {
+  success: boolean;
+  message: string;
+  data: {
+    user: User;
+    products: Product[];
+    userProducts:Product[] ;
+    orderStatistics: OrderStatistics;
+
+  }
+  error: {};
 }

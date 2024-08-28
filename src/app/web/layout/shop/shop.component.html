@@ -330,18 +330,20 @@
 
 <!-- Products With Sale -->
 
-@if(shopData['All Products On Sale']){
+@if(productsOnSale){
 <section>
   <div class="container">
     <div class="category-Name mt-5">
       <h3>Fresh Sale</h3>
       <a>Discover More<i class="fa fa-arrow-right ml-2"></i></a>
     </div>
-    <div class="related-product__carousel owl-carousel owl-theme mt-3 mb-5">
+    <div class="related-product__carousel mt-3 mb-5">
       <owl-carousel-o [options]="ProductsSlider">
         @for (product of productsOnSale; track $index) {
         <ng-template carouselSlide>
-          <app-product-card [product]="product"></app-product-card>
+          <div class="item">
+            <app-product-card [product]="product"></app-product-card>
+          </div>
         </ng-template>
         }
       </owl-carousel-o>

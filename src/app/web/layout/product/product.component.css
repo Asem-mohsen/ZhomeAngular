@@ -185,16 +185,14 @@ h2.ProductDetails-Text {
 .Text-under-images-ProductDetails {
   display: flex;
   flex-wrap: wrap;
-  width: 1000px;
+  width: 100%;
   margin-top: 40px;
   gap: 57px;
-  justify-content: start;
+  justify-content: center;
   cursor: default;
 }
 .Image-One-ProductDetails {
   position: relative;
-  width: 1003px;
-  left: -19px;
 }
 .Colorsdiv {
   display: flex;

@@ -24,7 +24,6 @@ export class ProductComponent {
   productImages: ProductImages[] = [];
   productPlatforms: any[] = [];
   isAdded : boolean = false;
-
   // Sliders
   ProductsSlider: OwlOptions = {
     loop: true,
@@ -133,8 +132,10 @@ export class ProductComponent {
 
   }
 
-  addToCart(id : number) : void {
-    this._cartService.storeCart(id).subscribe({
+  quantity: number = 1;
+  
+  addToCart(id: number, quantity?: number): void {
+    this._cartService.storeCart(id, quantity).subscribe({
       next : (res) => {
         this.isAdded = true;
         this.toastr.success('product Added Successfully');
@@ -156,8 +157,6 @@ export class ProductComponent {
       .join(' - ');
   }
 
-
-  quantity: number = 1;
 
   incrementQuantity() {
     if (this.quantity < this.product.Quantity) {

@@ -385,10 +385,19 @@ div.Splitted .SplittedProduct_1 img.BigWidth {
   display: grid;
   justify-content: center;
 }
+.related-product__title {
+  margin: 0;
+  color: #302e2f;
+  margin-bottom: 49px;
+  text-align: center;
+  font-size: 50px;
+}
 .PromocodeInput button#Checkout {
   place-self: center;
   width: fit-content;
   margin-left: 20px;
+  border: none;
+  background-color: white;
 }
 .cta.ShopNowButton {
   text-align: center;

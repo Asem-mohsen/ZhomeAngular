@@ -5,8 +5,9 @@ import { environment } from '../../Base/enviroment';
 import { BehaviorSubject, Observable , tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { Admin, User, AuthResponse } from '../../Interfaces/user';
+import { Admin, User, AuthResponse, profileResponse } from '../../Interfaces/user';
 import { isPlatformBrowser } from '@angular/common';
+import { ApiResponse } from '../../Interfaces/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,9 @@ export class AuthService {
     }
   }
 
+  userProfile(userId: number): Observable<profileResponse> {
+    return this._http.get<profileResponse>(`${environment.baseURL}/api/users/${userId}/profile/user`);
+  }
   getCurrentUser(): User | Admin | null {
     return this.currentUserDate.getValue();
   }

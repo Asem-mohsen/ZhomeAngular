@@ -372,18 +372,16 @@ h1#ShopByCategory {
   justify-content: space-between;
   width: 100%;
   align-items: center;
-
-  /* h3 {
-    position: relative;
-  }
-  span {
-    font-size: 19px;
-    position: absolute;
-    right: 0;
-    margin-top: 7px;
-  } */
 }
-
+.category-Name h3{
+  position:relative;
+}
+.category-Name span {
+  font-size: 19px;
+  position: absolute;
+  right: 0;
+  margin-top: 7px;
+}
 .promocode {
   padding: 20px;
   border-radius: 13px;
