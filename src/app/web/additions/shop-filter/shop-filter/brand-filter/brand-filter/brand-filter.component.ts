@@ -13,14 +13,21 @@ import { ShopService } from '../../../../../../Services/Pages/Shop/shop.service'
 export class BrandFilterComponent {
 
   @Input() brands: any[] = [];
-  @Output() filterChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() filterChange = new EventEmitter<string[]>();
 
   isCollapsed = true;
 
   constructor(private shopService: ShopService) {}
 
-  onBrandChange(brandId: number) {
-    this.filterChange.emit(brandId);
+  selectedBrands: string[] = [];
+
+  onBrandChange(event: any, brandId: string) {
+    if (event.target.checked) {
+      this.selectedBrands.push(brandId);
+    } else {
+      this.selectedBrands = this.selectedBrands.filter(id => id !== brandId);
+    }
+    this.filterChange.emit(this.selectedBrands);
   }
 
   toggleCollapse() {

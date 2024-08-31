@@ -21,37 +21,31 @@ import { ShopComponent } from '../layout/shop/shop.component';
 import { NgIf } from '@angular/common';
 import { PageService } from '../../Services/Settings/Pages/page.service';
 import { ViewportScroller } from '@angular/common';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from '../../Services/auth/auth.service';
 
 @Component({
   selector: 'app-user-layout',
   standalone: true,
-  imports: [NgIf , RouterOutlet, NavbarComponent, FooterComponent , HomeComponent , ContactComponent , ShopComponent , AboutComponent , BrandComponent , CartComponent , CategoryComponent , LoginComponent , RegisterComponent , CheckoutComponent , PlatformComponent , ProfileComponent , ProductComponent , ServiceComponent, ToolComponent],
+  imports: [NgIf , NgxSpinnerModule , RouterOutlet, NavbarComponent, FooterComponent , HomeComponent , ContactComponent , ShopComponent , AboutComponent , BrandComponent , CartComponent , CategoryComponent , LoginComponent , RegisterComponent , CheckoutComponent , PlatformComponent , ProfileComponent , ProductComponent , ServiceComponent, ToolComponent],
   templateUrl: './user-layout.component.html',
   styleUrl: './user-layout.component.css'
 })
 export class UserLayoutComponent implements OnInit {
   title = 'Zhome';
 
-  constructor(private router: Router, private _pageService: PageService , private _viewportScroller : ViewportScroller) {}
+  constructor(private router: Router , private _AuthService : AuthService) {}
 
-   ngOnInit(): void {
-    // const savedPage = this._pageService.getCurrentPage();
-    // if (savedPage) {
-    //   this.router.navigate([savedPage]);
-    // } else {
-    //   this._pageService.setCurrentPage('/home');
-    // }
+    ngOnInit(): void {
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this._viewportScroller.scrollToPosition([0, 0]);
-      }
-    });
+      this._AuthService.getSessionId();
 
-  }
+    }
 
-  isAuthPage(): boolean {
-    const authRoutes = ['/login', '/register']; // navbar/footer should not appear
-    return authRoutes.includes(this.router.url);
-  }
+    
+
+    isAuthPage(): boolean {
+      const authRoutes = ['/login', '/register']; // navbar/footer should not appear
+      return authRoutes.includes(this.router.url);
+    }
 }

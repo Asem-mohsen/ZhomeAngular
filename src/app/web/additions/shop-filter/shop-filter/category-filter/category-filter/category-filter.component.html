@@ -7,10 +7,10 @@
                   [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
         </div>
       </a>
-      <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}" class="menu-list checkbox-list">
+      <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"  class="menu-list checkbox-list">
         @for (category of categories; track $index) {
           <label class="checkbox CategoryCheckBox">
-            <input type="checkbox" class="CategoryCheckInput" [value]="category.ID" (change)="onCategoryChange(category.ID)" />
+            <input type="checkbox" class="CategoryCheckInput" [value]="category.ID" (change)="onCategoryChange($event ,category.ID)" />
             {{ category.Category }}
           </label>
         }

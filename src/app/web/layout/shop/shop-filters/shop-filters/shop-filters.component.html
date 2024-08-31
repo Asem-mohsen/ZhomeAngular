@@ -19,15 +19,18 @@
     <!-- Filter and Products -->
     <section class="shop_grid_area">
         <div class="container" style="max-width: 1220px;">
-            <div class="input-wrapper">
-              <button class="icon-search">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
-                  <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
-                  <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M22 22L20 20"></path>
-                </svg>
-              </button>
-              <input [(ngModel)]="searchWord" placeholder="search.." class="input-search" name="text" type="text">
-            </div>
+
+          <!-- Search -->
+          <div class="input-wrapper">
+            <button class="icon-search">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
+                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
+                <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff" d="M22 22L20 20"></path>
+              </svg>
+            </button>
+            <input [(ngModel)]="searchWord" placeholder="search.." class="input-search" name="text" type="text">
+          </div>
+
           <div class="row Page-flex">
 
             <!-- Filter -->
@@ -35,26 +38,26 @@
               <div class="shop_sidebar_area">
                   <!-- Categories -->
                   <app-category-filter
-                      [categories]="filterData.Filter_Data.categories"
-                      (filterChange)="onFilterChange($event, 'category')">
+                    [categories]="filterData.Filter_Data.categories"
+                    (filterChange)="onFilterChange($event, 'category')">
                   </app-category-filter>
 
                   <!-- Brands -->
                   <app-brand-filter
-                      [brands]="filterData.Filter_Data.brands"
-                      (filterChange)="onFilterChange($event, 'brand')">
+                    [brands]="filterData.Filter_Data.brands"
+                    (filterChange)="onFilterChange($event, 'brand')">
                   </app-brand-filter>
 
                   <!-- Platforms -->
                   <app-platform-filter
-                      [platforms]="filterData.Filter_Data.platforms"
-                      (filterChange)="onFilterChange($event, 'platform')">
+                    [platforms]="filterData.Filter_Data.platforms"
+                    (filterChange)="onFilterChange($event, 'platform')">
                   </app-platform-filter>
 
                   <!-- Technologies -->
                   <app-tecnology-filter
-                      [technologies]="filterData.Filter_Data.technologies"
-                      (filterChange)="onFilterChange($event, 'technology')">
+                    [technologies]="filterData.Filter_Data.technologies"
+                    (filterChange)="onFilterChange($event, 'technology')">
                   </app-tecnology-filter>
 
                   <!-- Price Range -->
@@ -72,25 +75,19 @@
                               </div>
                               <div class="range-price">
                                   {{ 'Price' }}
-                                  <span id="price-range">{{ filterData.Filter_Data.minPrice }} - {{ filterData.Filter_Data.maxPrice}}</span>
+                                  <span id="price-range">{{ filterData.minPrice }} - {{ filterData.maxPrice}}</span>
                               </div>
                           </div>
                       </div>
                   </div>
 
-                  <div class="FiltersButton">
-                    <button id="applyFilterBtn">{{ 'Apply Filter' }}</button>
-                    <button id="Reset" type="reset" title="{{ 'Reset Choices' }}"><i class="fa-solid fa-rotate-right"></i></button>
-                  </div>
                 </div>
             </div>
             <!-- Products -->
             <div class="col-12 col-md-8 col-lg-10">
                 <div class="shop_grid_product_area">
                     <div class="row d-flex justify-content-start pl-3" style="gap: 23px">
-
-                        <!-- Single gallery Item -->
-                        @for(product of products | search : searchWord  ; track $index){
+                        @for(product of filteredProducts | search: searchWord  ; track $index){
                           <div class="item">
                             <app-product-card [product]="product"></app-product-card>
                           </div>

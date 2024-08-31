@@ -34,16 +34,16 @@
                     <div class="CartandCount">
                         <h3>Cart</h3>
                         <span id="TotalItems">
-                          @if(count <= 1 ){
-                            {{count + " Product"}}
+                          @if(count() <= 1 ){
+                            {{count() + " Product"}}
                           }
                           @else {
-                            {{count  + " Products"}}
+                            {{count()  + " Products"}}
                           }
                         </span>
                     </div>
 
-                    @if(count > 0){
+                    @if(count() > 0){
                       <div class="ClearAll">
                           <a class="remove-All-btn" (click)="clearCart()">
                               <i class="fa fa-x"></i>
@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    @for(item of cartItems; track $index){
+                                    @for(item of cartItems(); track $index){
                                       <tr>
                                           <td class="prod-column price">
                                               <div class="d-flex px-2 py-1">
@@ -102,8 +102,11 @@
                                               @if(item.product.InstallationCost && item.product.InstallationCost > 0 ){
                                                   <div class="d-flex justify-content-center" style="gap: 20px;">
                                                       <p class="text-secondary mb-0">{{item.product.InstallationCost | currency : "EGP"}}</p>
-                                                      <input type="hidden" class="installmentsPrice"  name="Installments" [value]="item.product.InstallationCost">
-                                                      <input type="checkbox" id="installmentPriceCheckbox" class="installments installmentPriceCheckbox" name="Installments" [value]="item.product.InstallationCost">
+                                                      <input type="checkbox"
+                                                        [id]="'installmentPriceCheckbox-' + item.product.ID"
+                                                        class="installments installmentPriceCheckbox"
+                                                        [value]="item.product.InstallationCost"
+                                                        (change)="toggleInstallation(item, $event)">
                                                   </div>
                                               }
                                               @else{
@@ -111,7 +114,7 @@
                                                   <input type="hidden" class="installments installmentPriceCheckbox" name="Installments" value="0">
                                               }
                                           </td>
-                                          <td class="sub-total SubTotal p-0">{{ item.Quantity * item.Price | currency : " EGP "}}</td>
+                                          <td class="sub-total SubTotal p-0">{{ (item.Quantity * item.Price) + (installationPrices()[item.product.ID] || 0) | currency : " EGP "}}</td>
                                           <td class="remove p-1">
                                               <a class="remove-btn" (click)="removeProduct(item.product.ID)">
                                                   <span class="fa fa-x"></span>
@@ -144,7 +147,7 @@
 <section>
     <div class="container">
         <div class="row m-0 justify-content-evenly">
-            @if(count > 0){
+            @if(count() > 0){
                 <div class="col-lg-6 CartPrices">
                     <h5 class="mb-4">Total</h5>
                         <div class="PromocodeInput">
@@ -153,16 +156,16 @@
                                 <ul>
                                     <li>
                                         SubTotal
-                                        <span id='TotalPriceOne'>{{total | currency : " EGP"}}</span>
+                                        <span id='TotalPriceOne'>{{total() | currency : " EGP"}}</span>
                                     </li>
                                     <li class="Saved">
                                         You Saved
-                                        <span id="discountDiv2">{{total | currency : " EGP"}}</span>
+                                        <span id="discountDiv2">{{total() | currency : " EGP"}}</span>
                                     </li>
                                     <input type="hidden" name="totalSaved" id="totalSaved">
                                     <li class="total">
                                         Total
-                                        <span id='FinalTotal'>{{total | currency : " EGP"}}</span>
+                                        <span id='FinalTotal'>{{total() | currency : " EGP"}}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -170,7 +173,7 @@
                                 @if (!isLogged){
                                     <a routerLink="/login" class="Signincart"><i class="fa-solid fa-user-plus"></i></a>
                                 }
-                                <button type="submit" id="Checkout" class="cta ShopNowButton">
+                                <button type="submit" (click)="checkout()" id="Checkout" class="cta ShopNowButton">
                                     <span class="hover-underline-animation">Continue to Checkout</span>
                                     <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
                                         <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
@@ -259,7 +262,7 @@
         <h3 class="related-product__title">You May Also Like</h3>
         <div class="related-product__carousel">
           <owl-carousel-o [options]="ProductsSlider">
-            @for (product of products; track $index) {
+            @for (product of products(); track $index) {
               <ng-template carouselSlide>
                 <div class="item">
                   <app-product-card [product]="product"></app-product-card>

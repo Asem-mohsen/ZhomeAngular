@@ -11,35 +11,46 @@
   color: white;
   background-color: var(--mainColor);
 }
-.icons{
 
-  .JoinUs{
-    color: white;
-    border: 1px solid white;
-    padding: 7px 15px;
-    border-radius: 4px;
-    transition: all .6s ease-out;
-    background: linear-gradient(to right, #154352 50%, transparent 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-  }
-  .JoinUs:hover {
-    background-position: left bottom;
-  }
-  .nav-link{
-    font-size: 16px;
-  }
-  .horizontal-line{
-    border: 1px solid white;
-    height: 30px;
-  }
-  .nav-link svg{
-    color: white;
-    padding: 5px;
-  }
-  .nav-link:hover svg{
-    transition: all 0.4s;
-    color: var(--mainColor);
-    
-  }
+.JoinUs{
+  color: white;
+  border: 1px solid white;
+  padding: 7px 15px;
+  border-radius: 4px;
+  transition: all .6s ease-out;
+  background: linear-gradient(to right, #154352 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+}
+.JoinUs:hover {
+  background-position: left bottom;
+}
+.nav-link{
+  font-size: 16px;
+}
+.horizontal-line{
+  border: 1px solid white;
+  height: 30px;
+}
+.nav-link i{
+  color: white;
+  padding: 5px;
+}
+.nav-link:hover i{
+  transition: all 0.4s;
+  color: var(--mainColor);
+  
+}
+
+.count{
+  color: white;
+  position: absolute;
+  background-color: #154352;
+  font-size: 14px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  top: -8px;
+  left: 11px;
 }

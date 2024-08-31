@@ -16,16 +16,24 @@ export class PlatformFilterComponent {
   constructor(private shopService: ShopService) {}
 
   @Input() platforms: any[] = [];
-  @Output() filterChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() filterChange = new EventEmitter<string[]>();
 
   isCollapsed = true ;
 
-  onPlatformChange(platformId: number) {
-    this.filterChange.emit(platformId);
+  selectedPlatforms: string[] = [];
+
+  onPlatformChange(event: any, platformId: string) {
+    if (event.target.checked) {
+      this.selectedPlatforms.push(platformId);
+    } else {
+      this.selectedPlatforms = this.selectedPlatforms.filter(id => id !== platformId);
+    }
+    this.filterChange.emit(this.selectedPlatforms);
   }
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
   }
+
 
 }

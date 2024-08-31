@@ -1,0 +1,484 @@
+.CartHeader {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  padding-top: 28px;
+  cursor: default;
+  flex-wrap: wrap;
+}
+.CartHeader p.active {
+  color: black;
+}
+
+.CartHeader p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a9a9a9;
+}
+.CartHeader p.active::before {
+  content: "";
+  border: 1px solid black;
+}
+
+.CartHeader p::before {
+  content: "";
+  border-radius: 50%;
+  border: 1px solid #b2b2b2;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.CartHeader p.Passed::before {
+  content: "";
+  background-color: var(--mainColor);
+  border-color: var(--mainColor);
+}
+.select2-selection__rendered {
+        display: none;
+}
+.slider-OnlineShop .owl-carousel .owl-stage-outer {
+border-radius: 0;
+}
+.Userform .row {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+div.Checkout .Userform .form-group {
+    display: grid;
+    align-items: center;
+    gap: 4px;
+    padding:0;
+    margin: 10px 0;
+}
+ @media (max-width: 767px) {
+    .related-product__carousel .owl-item {
+        width: 225px !important;
+    }
+    .col-lg-12 .ShopNowInCart#ShopNowInCheckout {
+        height: auto;
+       margin-top: 22px !important;
+    }
+    .CardCarouselCart{
+       height: 400px;
+        padding: 0;
+        margin: 25px 0;
+     }
+     .Splitted div.Image-One {
+        padding: 20px 0 !important;
+    }
+    .topping{
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+    div.Checkout .Summery ul:nth-child(odd) {
+        width: 100%;
+    }
+    div.Checkout .Summery ul {
+        width: 100%;
+    }
+        #wizard .content.clearfix .row .col-md-4 , #wizard .content.clearfix .row .col-md-12,  .row .col-md-6 {
+            padding:0 !important;
+        }
+        .wizard .actions > ul {
+            gap: 20px;
+        }
+         .wizard .actions li a  {
+            width: 150px  !important;
+            text-align: center;
+            font-style: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+       .wizard .actions li:not(.disabled) + li, .wizard .actions li:not(:first-child):last-child {
+             margin-left: 0px !important;
+        }
+        .PromocodeInput .form-group{
+            display:grid !important;
+        }
+        .PayWithCardButton .card-line {
+            width: 65px !important;
+            height: 13px !important;
+        }
+        .PayWithCardButton .left-side {
+            background-color: #5de2a3;
+            width: 100px !important;
+        }
+        .PayWithCardButton .new {
+            font-size: 17px;
+            color: #67748e;
+            padding: 9px;
+            margin:0 !important;
+        }
+        .PayWithCardButton {
+            display: flex;
+            width: auto !important;
+            height: 47px !important;
+
+        }
+
+}
+.product-checkout-page{
+    width: 250px;
+}
+
+.smallSummary{
+  display: flex;
+  /*grid-template-columns: repeat(3,1fr);*/
+  justify-content: center;
+flex-wrap: wrap;
+}
+div.Checkout .Summery ul {
+    margin-top: 27px;
+    margin-left: 0px;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 19px;
+    width: 50%;
+}
+
+div.Checkout .Summery ul:nth-child(odd){
+    border-right: 1px solid #efefef;
+}
+#successPopup{
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #5151516e;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 826px;
+  animation: fadeIn 0.3s ease-in-out, fadeOut 2s 0.5s ease-in-out;
+  text-align: center;
+}
+#successPopup img{
+  width: 400px;
+}
+#successPopup p{
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.Totals ul{
+    display: grid;
+    gap: 9px;
+    margin-left: 20px;
+}
+.Totals ul li.total {
+    border-top: 1px solid #d3d3d3;
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 291px;
+}
+.ShopNowInCart{
+    display: grid;
+    background-size: cover;
+    height: 235px;
+    background-position: center;
+    margin-bottom: 38px;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 37px;
+    margin-top: 30px;
+}
+.ShopNowInCart h4{
+    color: white;
+    font-size: 38px;
+    font-weight: 500;
+    text-align: center;
+}
+.ShopNowInCart a{
+    width: 151px;
+    height: 45px;
+    display: block;
+    margin: auto;
+    border-radius: 12px;
+    background-color: transparent;
+    border-color: white;
+}
+.ShopNowInCart a:hover{
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+input.installments{
+  cursor: pointer;
+  display: block;
+  /*top: -19px;*/
+  /*position: relative;*/
+  /*left: 144px;*/
+}
+div.Checkout{
+  /*display: grid;*/
+  display: block;
+  /*grid-template-columns: repeat(2,1fr);*/
+  justify-content: center;
+  margin-top: 50px;
+  border: 1px solid gainsboro;
+  border-radius: 17px;
+  padding: 24px;
+}
+div.Checkout .Userform .form-group {
+  display: grid;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+div.Checkout .Userform{
+  /* width: 50%; */
+  /*border-right: 1px solid #dadadaee;*/
+}
+div.Checkout .Userform h4{
+  text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+div.Checkout .Userform .form-group label{
+  margin: 0;
+  text-align: left;
+  color: #646464;
+  font-size: 15px;
+}
+span.asterisk{
+  color: red;
+}
+/*div.Checkout .Summery{*/
+/*  border-right: 1px solid #dadadaee;*/
+/*}*/
+
+div.Checkout .Summery .Receipt{
+
+}
+div.Checkout .Summery h4{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+div.Checkout .Summery li{
+
+}
+div.Checkout .Summery li:not(:first-of-type){
+  margin-left: 20px;
+}
+
+div.ZhomeLogoCheckout{
+    /* background-image: url("./assets/imgs/UI/website/Home/Background.jpg"); */
+        width: -webkit-fill-available;
+    height: 124px;
+    background-size: cover;
+    background-position: center center;
+}
+
+
+div.ZhomeLogoCheckout p{
+        height: -webkit-fill-available;
+    color: white;
+    font-size: 39px;
+    letter-spacing: 10px;
+    left: 842px;
+    text-align: center;
+        display: grid;
+    justify-content: center;
+    align-content: center;
+}
+div.PayNow {
+  display: flex;
+    gap: 30px;
+  justify-content: center;
+      flex-wrap: wrap;
+}
+div.PayNow a{
+  width: 230px;
+}
+div.PayNow button.PayButton{
+  background-color: var(--MainColor);
+  width: 230px;
+}
+.wizard .content .form-control {
+    max-width: none !important;
+}
+.wizard .steps {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.wizard .steps > ul {
+  list-style: none;
+  padding-left: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7b7f89), to(#7b7f89));
+  background-image: linear-gradient(#7b7f89, #7b7f89);
+  background-size: calc(100% - 50px) 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.wizard .steps > ul li a {
+  display: inline-block;
+}
+.wizard .audible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.wizard .steps > ul li.current span.number, .wizard .steps > ul li.done span.number {
+  background-color: var(--mainColor);
+}
+
+.DarkShadow{
+  position: relative;
+}
+  .overlaySignIn {
+          display: flex;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgb(89 89 89 / 23%);
+          justify-content: center;
+          align-items: center;
+          z-index: 99;
+
+      }
+
+      .cardOverlay {
+          background: #fff;
+          width: 505px;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          position: relative;
+
+      }
+      @media (max-width: 767px) {
+          .cardOverlay {
+              width: 90%; /* Adjust width as needed for smaller screens */
+          }
+      }
+
+
+      /*.close-btn {*/
+      /*    position: absolute;*/
+      /*    top: 10px;*/
+      /*    right: 10px;*/
+      /*    cursor: pointer;*/
+      /*    font-size: 20px;*/
+      /*    color: #555;*/
+      /*}*/
+  .Div-Overlay-Sign{
+      display:flex;
+      gap:35px;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  a.ButtonSignInOverlay,a.ButtonSignUpOverlay{
+      border: 1px solid #e4e4e4;
+      padding: 10px;
+      background-color: #e4e4e4;
+      border-radius: 10px;
+      min-height: 100px;
+      min-width: 150px;
+  }
+  .InnerDiv-Overlay img{
+          width: 73px;
+          margin: auto;
+  }
+
+  p.Continue-Shopping{
+          cursor: pointer;
+          border: 1px solid #319c55;
+          background-color: #319c55;
+          padding: 10px;
+          color: white;
+          border-radius: 10px;
+          width: 180px;
+          margin: auto;
+  }
+  .InnerDiv-Overlay{
+          display: grid;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+  }
+  .InnerDiv-Overlay p.small-txt{
+      font-size: 14px;
+      margin-top: 8px;
+  }
+  .wizard .content .form-control {
+    padding: 5px;
+    min-height: 50px;
+    max-width: none;
+    border-radius: 4px;
+    border: solid 1px #ececec;
+}
+.wizard .steps > ul li span.number {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: #7b7f89;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+}
+.next-button{
+    text-align: center;
+    display: block;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    background-color: var(--mainColor);
+    color: white;
+    min-width: 100px;
+}
+.next-button:hover{
+  transition: all 0.4s;
+  background-color: rgb(13, 21, 27);
+}
+.save-button{
+  min-width: 100px;
+  background-color: #1d761d;
+  color: white;
+}
+.save-button:hover{
+  transition: all 0.4s;
+  background-color: rgb(29, 59, 34);
+}
+.back-button{
+  min-width: 100px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+.back-button:hover{
+  transition: all 0.4s;
+  color: white;
+  background-color: black;
+}

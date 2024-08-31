@@ -1,1 +1,381 @@
-<p>checkout works!</p>
+<!-- Cart -> Checkout -> Payment -->
+<section>
+    <div class="container">
+        <div class="CartHeader">
+            <p>
+                Cart
+            </p>
+            >
+            <p class="active">
+                Checkout
+            </p>
+            >
+            <p>
+                Payment
+            </p>
+        </div>
+    </div>
+</section>
+
+    <!-- Checkout form -->
+    <section>
+        <div class="container">
+            <div class="Checkout d-block">
+                <!--Total Summary -->
+                <div class="Summery">
+                    <div class="Receipt">
+                        <h4>Receipt Summary</h4>
+                        <!-- Product One -->
+                        <div class="smallSummary">
+                            @for (order of orderData.Orders; track $index) {
+                                <ul>
+                                    <div class="product-checkout-page">
+                                        <img [src]="order.product.MainImage" class="w-100" [alt]="order.product.Name">
+                                        <div>
+                                            <li>{{order.product.Name}}</li>
+                                            <li>x{{order.Quantity}}    </li>
+                                            <li>Price {{order.Price | currency: "EGP"}}</li>
+                                            @if(order.WithInstallation != 0){
+                                                <li>Installation Price {{order.product.InstallationCost | currency: "EGP"}}</li>
+                                            }
+                                            @if(order.product.sale){
+                                                <li>Saved: {{(order.product.Price - order.product.sale.PriceAfter) | currency: "EGP" }}</li>
+                                            }
+                                        </div>
+                                    </div>
+                                </ul>
+                              }
+                        </div>
+                    </div>
+
+                    <p id="deliveryFees"></p>
+                    @if (checkPromocodeForm.value.promocode) {
+                      <h6 id="promocode-div">Promocode <span id="promocode">{{ checkPromocodeForm.value.promocode }}</span></h6>
+                    }
+                    @if(savedAmount() > 0){
+                      <h6 id="saved-amount">Saved: {{ savedAmount() | currency: 'EGP' }}</h6>
+                    }
+                    <h6 id="FinalCheckoutHide">
+                      Total <span id="FinalCheckout">{{ total() | currency: 'EGP' }}</span>
+                    </h6>
+                </div>
+
+                <div class="mb-4 wizard clearfix">
+                  <div class="steps clearfix">
+                    <ul role="tablist">
+                      <li role="tab" aria-disabled="false" aria-selected="true" [ngClass]="{'current': step === 1, 'disabled': step !== 1}">
+                        <a id="wizard-t-0" aria-controls="wizard-p-0">
+                          <span class="current-info audible">current step: </span>
+                          <span class="number">1</span>
+                        </a>
+                      </li>
+                      <li role="tab" aria-disabled="true" [ngClass]="{'current': step === 2, 'disabled': step !== 2}" >
+                        <a id="wizard-t-1" aria-controls="wizard-p-1">
+                          <span class="number">2</span>
+                        </a>
+                      </li>
+                      <li role="tab" class="disabled" aria-disabled="true" [ngClass]="{'current': step === 3, 'disabled': step !== 3}" >
+                        <a id="wizard-t-2" aria-controls="wizard-p-2">
+                          <span class="number">3</span>
+                        </a>
+                      </li>
+                      <li role="tab" class="disabled last" aria-disabled="true" [ngClass]="{'current': step === 4, 'disabled': step !== 4}" >
+                        <a id="wizard-t-3" aria-controls="wizard-p-3">
+                          <span class="number">4</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <form [formGroup]="userInfo" (ngSubmit)="submitUserInfo()">
+                    <!--User Info-->
+                    @if(step == 1){
+                      <section>
+                          <div class="Userform">
+
+                              <h4>Contact Information</h4>
+                              @if(isLogged){
+
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserName" class="form-control-label">Name</label>
+                                                  <input class="form-control" id="UserName" type="text" formControlName="Name" [value]="orderData.User.Name" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
+                                              <!-- <input class="form-control" type="hidden"  formControlName="FirstName" [value]="orderData.firstName">
+                                                  <input class="form-control" type="hidden"  formControlName="LastName"  [value]="orderData.lastName" > -->
+                                                    <input class="form-control" type="hidden" formControlName="CartID">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserEmail" class="form-control-label">Email</label>
+                                              <input class="form-control" id="UserEmail" type="email" formControlName="email" [value]="orderData.User.email" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserMainAddress" class="form-control-label">Address</label>
+                                              <textarea class="form-control" id="UserMainAddress" formControlName="Address">{{ orderData.User.Address}}</textarea>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserPhone" class="form-control-label">Phone</label>
+                                              <input class="form-control" id="UserPhone" type="number" formControlName="Phone" [value]="orderData.User.Phone">
+                                          </div>
+                                      </div>
+                                  </div>
+                              }
+                              @else{
+
+                                  <div class="DarkShadow">
+                                      <div id="signInOverlay" class="overlaySignIn">
+                                          <div class="cardOverlay" id="signInCard">
+                                              <h2>Zhome Community</h2>
+                                              <p style="font-size: 13px;">Join us now to finalize your payment and enjoy additional benefits.</p>
+                                              <div class="Div-Overlay-Sign">
+                                                  <div class="InnerDiv-Overlay">
+                                                      <a routerLink="/login" class="ButtonSignInOverlay"><img src="assets/imgs/UI/website/Cart/refer.png" alt="Sign In"></a>
+                                                      <p class="small-txt">Already have an Account?</p>
+                                                  </div>
+                                                  <div class="InnerDiv-Overlay">
+                                                      <a routerLink="/register" class="ButtonSignUpOverlay"><img src="assets/imgs/UI/website/Cart/add-user.png" alt="Sign Up"></a>
+                                                      <p class="small-txt">New user..! create your account now </p>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row mt-2">
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="FirstName" class="form-control-label">First Name</label>
+                                                  <input class="form-control" id="FirstName" type="text" autocomplete="off" [disabled]="true">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="LastName" class="form-control-label">Last Name</label>
+                                                  <input class="form-control" id="LastName" type="text" autocomplete="off" [disabled]="true" >
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="UserEmail" class="form-control-label">Email</label>
+                                                  <input class="form-control" id="UserEmail" type="email" autocomplete="off" disabled >
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="UserPhone" class="form-control-label">Phone</label>
+                                                  <input class="form-control" id="UserPhone" type="number" autocomplete="off"[disabled]="true" >
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="UserCity" class="form-control-label">City</label>
+                                                  <input class="form-control" id="UserCity" type="text"[disabled]="true" >
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label for="UserCountry" class="form-control-label">Country</label>
+                                                  <input class="form-control" id="UserCountry" type="text"[disabled]="true" >
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                      <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label for="UserAddress" class="form-control-label">Address</label>
+                                                  <textarea class="form-control" id="UserAddress"[disabled]="true" ></textarea>
+                                              </div>
+                                          </div>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <div class="form-group">
+                                                  <label for="UserBuilding" class="form-control-label">Building</label>
+                                                  <input class="form-control" id="UserBuilding" type="text" disabled >
+                                              </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <div class="form-group">
+                                                  <label for="UserFloor" class="form-control-label">Floor</label>
+                                                  <input class="form-control" id="UserFloor" type="number" [disabled]="true">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <div class="form-group">
+                                                  <label for="UserApartment" class="form-control-label">Apartment</label>
+                                                  <input class="form-control" id="UserApartment" type="number" [disabled]="true">
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                  </div>
+
+                              }
+
+                              <a class="btn border-none next-button" (click)="next()">Next</a>
+                          </div>
+                      </section>
+                    }
+
+                    <!--Address-->
+                    @if(step == 2){
+                      <section>
+                          <div class="Userform">
+                              <h4>Shipping Information</h4>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="form-group">
+                                              <label for="UserShippingAddress" class="form-control-label">Address</label>
+                                              <textarea class="form-control" id="UserShippingAddress" formControlName="UserShippingAddress"></textarea>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserCountry">Country</label>
+                                              <select id="UserCountry" formControlName="Country" class="form-control">
+                                                  <option disabled selected hidden>Select Country</option>
+                                                  <!-- <option [value]="orderData.Orders.Country" selected>{{orderData.Orders.Country}}</option> -->
+                                                  <option value="United Arab Emarits">United Arab Emarits</option>
+                                                  <option value="Egypt">Egypt</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="UserCity">City</label>
+                                              <select id="UserCity" formControlName="City" class="form-control">
+                                                  <option disabled selected hidden>Select City</option>
+                                                  <option avalue="cairo"  selected>cairo</option>
+                                                  <!-- <option [value]="orderData.Orders.City"  selected>{{orderData.Orders.City}}</option> -->
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label for="UserBuilding" class="form-control-label">Building</label>
+                                                  <input class="form-control" id="UserBuilding" type="text" formControlName="Building" [value]="" >
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label for="UserFloor" class="form-control-label">Floor</label>
+                                              <input class="form-control" id="UserFloor" type="text" formControlName="Floor" [value]="">
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="form-group">
+                                              <label for="UserApartment" class="form-control-label">Apartment</label>
+                                              <input class="form-control" id="UserApartment" type="text" formControlName="Apartment" [value]="">
+                                          </div>
+                                      </div>
+                                  </div>
+
+                          </div>
+                          <div class="d-flex gap-2 justify-content-center mt-3">
+                            <a class="btn border-none back-button" (click)="back()">Back</a>
+                            <button type="submit" class="btn border-none save-button">Save</button>
+                          </div>
+
+                      </section>
+                    }
+                </form>
+                    <!--Promocode-->
+                    @if(step == 3){
+                      <section>
+                        <form [formGroup]="checkPromocodeForm" (ngSubmit)="checkPromocode()">
+                          <h4 class="text-center mb-5" style="font-size: 30px;">Promocode</h4>
+                          <div class="PromocodeInput">
+                              <div class="form-group d-flex align-items-center">
+                                  <input class="form-control" type="text" id="promoCodeInput" formControlName="promocode" placeholder="Promocode" autocomplete="off">
+                                  <button class="btn btn-primary p-2" type="submit" id="checkPromoCodeButton">Check</button>
+                              </div>
+                          </div>
+                          <div class="d-flex gap-2 justify-content-center mt-3">
+                            <a class="btn border-none next-button" (click)="next()">Next</a>
+                            <a class="btn border-none back-button" (click)="back()">Back</a>
+                          </div>
+                        </form>
+                      </section>
+                    }
+
+                    <!--Payment-->
+                    @if(step == 4){
+                      <h3>Step 4 Title</h3>
+                      <section>
+                          <h4 class="text-center mb-5" style="font-size: 30px;">Payment Options</h4>
+                            @if(isLogged){
+                              <div class="PayNow">
+                                  <div class="PayWithCardButton" (click)="cardPay()" id="checkoutButton">
+                                      <div class="left-side">
+                                          <div class="card">
+                                              <div class="card-line"></div>
+                                              <div class="buttons"></div>
+                                          </div>
+                                          <div class="post">
+                                              <div class="post-line"></div>
+                                              <div class="screen">
+                                                  <div class="dollar">$</div>
+                                              </div>
+                                              <div class="numbers"></div>
+                                              <div class="numbers-line2"></div>
+                                          </div>
+                                      </div>
+                                      <div class="right-side">
+                                          <div class="new">Pay with Card</div>
+                                      </div>
+                                  </div>
+                                  <button class="button-COD" style="--clr: #00ad54;" (click)="cashPay()"  id="CODButton">
+                                      <span class="button-decor"></span>
+                                      <div class="button-content">
+                                          <div class="button__icon">
+                                              <img src="assets/imgs/UI/website/Cart/cash-on-delivery.png" alt="Cash on Delivery">
+                                          </div>
+                                          <span class="button__text">Cash On Delivery</span>
+                                      </div>
+                                  </button>
+                              </div>
+                            }
+                      </section>
+                    }
+
+                <div class="ZhomeLogoCheckout">
+                    <p>Zhome</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Selling Product -->
+    <section>
+        <div class="container">
+            <div class="col-lg-12 p-0">
+                <div class="ShopNowInCart" style="background-image: url('assets/imgs/UI/website/Cart/bence-boros-anapPhJFRhM-unsplash.jpg');">
+                    <h4>
+                        Check The Newest<br>
+                        Apple Products
+                    </h4>
+                    <a routerLink="/shop" class="btn btn-secondary">ShopNowButton</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+

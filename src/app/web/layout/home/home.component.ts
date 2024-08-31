@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit{
         items: 6
       }
     },
-    nav: false
+    nav: false,
+    rtl: true,
   }
 
   constructor(private _BrandService: BrandService , private _PlatformService : PlatformService)

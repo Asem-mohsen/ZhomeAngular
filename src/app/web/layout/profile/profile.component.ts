@@ -5,6 +5,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { profileResponse, User } from '../../../Interfaces/user';
+import { Product } from '../../../Interfaces/product';
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +17,9 @@ import { profileResponse, User } from '../../../Interfaces/user';
 export class ProfileComponent {
 
   user!: User;
-  errorMessage: string = '';
   orderStatistics !: {};
-  private loggedInUserId: number | null = null;
+  products !: Product[]
+
 
   constructor(private _AuthService : AuthService , private toastr: ToastrService){}
 
@@ -26,29 +27,15 @@ export class ProfileComponent {
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/profile')
     }
-    this.getLoggedInUserId();
     this.loadProfile();
   }
 
-
-  getLoggedInUserId() {
-
-  }
-
   loadProfile() {
-    if (this.loggedInUserId === null) {
-      this.errorMessage = 'No user is currently logged in.';
-      return;
-    }
-
-    this._AuthService.userProfile(this.loggedInUserId).subscribe({
+    this._AuthService.getUserProfile().subscribe({
       next: (res) => {
+        this.orderStatistics = res.data;
         this.user = res.data.user;
-        this.orderStatistics = res.data.orderStatistics;
-      },
-      error: (error) => {
-        console.error('Error fetching profile:', error);
-        this.errorMessage = 'An error occurred while fetching the profile.';
+        this.products = res.data.products;
       }
     });
   }

@@ -1,5 +1,3 @@
-import { Platform } from './../../../../../Interfaces/platform';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ShopService } from './../../../../../Services/Pages/Shop/shop.service';
 import { Component, NgModule } from '@angular/core';
 import { Product } from '../../../../../Interfaces/product';
@@ -12,52 +10,32 @@ import { TecnologyFilterComponent } from '../../../../additions/shop-filter/shop
 import { SearchPipe } from '../../../../../Pipes/search/search.pipe';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterPipe } from '../../../../../Pipes/filter/filter.pipe';
 
 @Component({
   selector: 'app-shop-filters',
   standalone: true,
-  imports: [RouterLink, ProductCardComponent, CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent , SearchPipe , FormsModule],
+  imports: [RouterLink,ProductCardComponent, CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent , SearchPipe , FormsModule , CommonModule , FilterPipe],
   templateUrl: './shop-filters.component.html',
   styleUrl: './shop-filters.component.css'
 })
 export class ShopFiltersComponent {
 
   searchWord : string = '';
+
   constructor(private _ShopService : ShopService){}
 
-  filterData !: any ;
+  filterData: any = {};
   products : Product [] = [];
-    // Sliders
-    ProductsSlider: OwlOptions = {
-      loop: true,
-      mouseDrag: true,
-      touchDrag: true,
-      pullDrag: true,
-      dots: false,
-      autoplay:true,
-      autoplayTimeout: 5000,
-      navSpeed: 700,
-      navText: ['', ''],
-      responsive: {
-        0: {
-          items: 1,
-          loop: false
-        },
-        400: {
-          items: 2,
-          loop: true
-        },
-        740: {
-          items: 2,
-          loop: true
-        },
-        940: {
-          items: 4,
-          loop: true
-        }
-      },
-      nav: true
-    };
+
+  filteredProducts: Product[] = [];
+  selectedFilters: any = {
+    category: [],
+    brand: [],
+    platform: [],
+    technology: [],
+  };
+
 
     ngOnInit(): void {
 
@@ -69,6 +47,7 @@ export class ShopFiltersComponent {
         next: (res) => {
           this.products = res.data.products.data;
           this.filterData = res.data;
+          this.applyFilters();
 
         }
       });
@@ -76,15 +55,26 @@ export class ShopFiltersComponent {
       this.loadProducts();
     }
 
-    getShopFilter()
-    {
-      this._ShopService.getShopFilterPage().subscribe({
-        next: (res) => {
-          this.filterData = res.data;
-        },
-      });
+    onFilterChange(selectedItems: string[], filterType: string) {
+      this.selectedFilters[filterType] = selectedItems;
+      this.applyFilters();
     }
 
+    applyFilters() {
+      this.filteredProducts = new FilterPipe().transform(this.products, this.selectedFilters);
+    }
+
+    resetFilters(): void {
+      this.selectedFilters = {
+        category: null,
+        brand: null,
+        platform: null,
+        technology: null,
+        minPrice: null,
+        maxPrice: null,
+      };
+      this.filteredProducts = this.products;
+    }
 
     getCategoryFilter(categroyId : number)
     {
@@ -120,12 +110,6 @@ export class ShopFiltersComponent {
           this.filterData = res.data;
         },
       });
-    }
-
-    onFilterChange(filterId: number, type: string) {
-      console.log(`Filter changed: ${type} - ${filterId}`);
-      // Apply filter logic here
-      this.loadProducts();
     }
 
     loadFilterData() {

@@ -7,7 +7,7 @@
                 [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
           </div>
       </a>
-      <div [ngClass]="{'collapse': !isCollapsed, 'collapsing': isCollapsed}" class="collapse collapsing checkbox-list" id="TechnologiesExamples">
+      <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"  id="TechnologiesExamples">
         @for (technology of technologies; track $index) {
               <label [for]="technology" class="checkbox TechCheckBox">
                   <input type="checkbox" [id]="technology" class="TechCheckInput" [value]="technology" >

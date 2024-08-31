@@ -9,7 +9,7 @@ section.auth .box .content {
   margin-bottom: 10px;
 }
 
-.login-form__field svg {
+.login-form__field i {
   -webkit-transform: translateY(-137%);
 }
 html,
@@ -114,7 +114,7 @@ section.auth .box .content {
   left: 347px;
   color: red;
 }
-.login-form__field svg {
+.login-form__field i {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-137%);
@@ -127,7 +127,7 @@ section.auth .box .content {
   right: 0;
 }
 
-.login-form__field .alert svg {
+.login-form__field .alert i {
   position: relative !important;
   -webkit-transform: translateY(0) !important;
   right: 10px !important;
@@ -171,7 +171,7 @@ section.auth .box .content {
   text-align: center;
   display: flex;
 }
-.small-sidenav-ul svg {
+.small-sidenav-ul i {
   color: #302e2f;
 }
 .small-sidenav-ul svg:hover {

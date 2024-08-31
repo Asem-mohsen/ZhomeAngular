@@ -1,3 +1,11 @@
+.main-img img{
+  height: 450px;
+  object-fit: cover;
+}
+.side-imgs img{
+  height: 225px;
+  object-fit: cover;
+}
 section.shop-background {
   background-size: auto !important;
   width: -webkit-fill-available;
@@ -343,7 +351,7 @@ h4[aria-expanded="false"]::before {
   border-top: none;
 }
 h1#ShopByCategory {
-  margin-top: 100px;
+  margin-top: 30px;
   margin-bottom: 40px;
   cursor: default;
 }
@@ -510,7 +518,8 @@ div.SubCategory-onlineshop {
   padding: 10px;
 }
 
-.Bundles {
+.Bundle-Shop{
+  position: relative;
 }
 .Images-Home div.Image-One img.BigWidth {
   width: 400px !important;

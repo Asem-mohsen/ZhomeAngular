@@ -13,15 +13,23 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoryFilterComponent {
   @Input() categories: any[] = [];
-  @Output() filterChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() filterChange = new EventEmitter<string[]>();
 
   isCollapsed = true;
 
   constructor(private shopService: ShopService) {}
 
-  onCategoryChange(categoryId: number) {
-    this.filterChange.emit(categoryId);
+  selectedCategories: string[] = [];
+
+  onCategoryChange(event: any, categoryId: string) {
+    if (event.target.checked) {
+      this.selectedCategories.push(categoryId);
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
+    }
+    this.filterChange.emit(this.selectedCategories);
   }
+
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;

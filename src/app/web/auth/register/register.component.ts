@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
@@ -7,7 +8,7 @@ import UAParser from 'ua-parser-js';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule , CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './../login/login.component.css'
 })
@@ -15,6 +16,8 @@ export class RegisterComponent implements OnInit{
 
   errorMsg: string = '';
   isLoading: boolean = false;
+  show: boolean = false;
+
 
   constructor(private _AuthService: AuthService, private _router: Router) { }
 
@@ -75,5 +78,10 @@ export class RegisterComponent implements OnInit{
 
   }
 
+
+  togglePasswordVisibility(passwordInput: HTMLInputElement): void {
+    this.show = !this.show;
+    passwordInput.type = this.show ? 'text' : 'password';
+  }
 
 }

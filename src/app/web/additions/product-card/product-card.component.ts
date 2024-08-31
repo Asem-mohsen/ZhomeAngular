@@ -38,6 +38,8 @@ export class ProductCardComponent implements OnInit {
       },
       error: (err)=>{
         this.isAdded = false;
+        this.toastr.error('Error Adding a product');
+        console.log(err)
       }
     })
   }

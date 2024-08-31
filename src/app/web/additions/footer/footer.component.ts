@@ -1,31 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '../../../Services/translation/translation.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink , TranslateModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
 export class FooterComponent implements OnInit{
 
   isLoggedIn: boolean = false;
-  constructor(private _AuthService : AuthService){}
+  currentLang: string = 'en'
+
+  constructor(private _AuthService : AuthService , private translationService : TranslationService){}
 
   ngOnInit(): void {
 
-    this._AuthService.currentUserDate.subscribe(() => {
+    this.isLoggedIn = this._AuthService.isAuthenticated();
 
-      if (this._AuthService.currentUserDate.getValue() == null)
-      {
-        this.isLoggedIn = false
-      } else {
-        this.isLoggedIn = true
-      }
+  }
 
-    })
-
+  switchLang(lang: string): void {
+    this.translationService.changeLang(lang);
+    this.translationService.changeDirection(lang);
+    this.currentLang = lang;
   }
 }

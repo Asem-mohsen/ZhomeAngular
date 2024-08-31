@@ -1,6 +1,6 @@
 import { AuthService } from './../../../Services/auth/auth.service';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component , signal, computed } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { ProductCardComponent } from '../../additions/product-card/product-card.component';
@@ -21,13 +21,28 @@ import { Product } from '../../../Interfaces/product';
 export class CartComponent{
 
   isLogged : boolean = false ;
-  // cartData!: CartData;
-  cartItems: CartItem[] = [];
-  products: Product[] = [];
 
-  total: number = 0;
-  count!: number
-  constructor(private _cartService : CartService  , private _AuthService : AuthService , private toastr: ToastrService){}
+  cartItems = signal<CartItem[]>([]);
+  products = signal<Product[]>([]);
+
+  total = signal(0);
+  installationPrices = signal<{ [key: number]: number }>({});
+
+  count = computed(() => {
+    return this.cartItems().reduce((acc, item) => acc + Number(item.Quantity), 0);
+  });
+
+  countOfProducts = computed(() => this.cartItems().length);
+
+  subtotal = computed(() => {
+    return this.cartItems().reduce((acc, item) => {
+      const itemTotal = Number(item.Quantity) * Number(item.Price);
+      const installationPrice = Number(this.installationPrices()[item.product.ID] || 0);
+      return acc + itemTotal + installationPrice;
+    }, 0);
+  });
+
+  constructor(private _cartService : CartService  , private _AuthService : AuthService , private toastr: ToastrService , private _router : Router){}
 
   // Sliders
   ProductsSlider: OwlOptions = {
@@ -73,18 +88,15 @@ export class CartComponent{
     this.loadCartItems();
   }
 
+
   loadCartItems(): void {
     this._cartService.getCart().subscribe({
-      next: (response) => {
-        this.cartItems = response.data.cartItems;
-        
-        this.total = response.data.total;
-        this.count = response.data.count;
-        this.products = response.data.products;
-      },
-      error: (err) => {
-        console.error('Error loading cart items:', err);
-      },
+      next: (response: ApiResponse) => {
+        this.cartItems.set(response.data.cartItems); // This will automatically update `count` because it's computed
+        this.total.set(response.data.total);
+        this.products.set(response.data.products);
+        this.updateTotal(); // This will update the subtotal correctly
+      }
     });
   }
 
@@ -112,6 +124,37 @@ export class CartComponent{
         this.toastr.error('an error occured');
       }
     })
+  }
+
+  checkout()
+  {
+    this._cartService.checkout().subscribe({
+      next : (res) => {
+        this._router.navigate(['/checkout']);
+      },
+      error : (err) =>{
+        this.toastr.error('an error occured');
+      }
+    })
+  }
+
+  toggleInstallation(item: CartItem, event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    const isChecked = checkbox.checked;
+
+    const currentPrices = this.installationPrices();
+    if (isChecked) {
+      currentPrices[item.product.ID] = Number(item.product.InstallationCost) || 0;
+    } else {
+      delete currentPrices[item.product.ID];
+    }
+    this.installationPrices.set(currentPrices);
+    this.updateTotal();
+  }
+
+  updateTotal(): void {
+    const newTotal = this.subtotal();
+    this.total.set(newTotal);
   }
 
   // Spinner Quantity

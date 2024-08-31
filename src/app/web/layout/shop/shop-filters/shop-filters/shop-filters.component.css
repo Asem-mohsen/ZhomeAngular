@@ -42,6 +42,12 @@
 .item {
   width: 220px;
 }
+h6.nav-link-text{
+  font-weight: 600;
+  color: #3c3c3c;
+  letter-spacing: 1px;
+}
+
 /*Shop Container*/
 @media (max-width: 767px) {
   .header-navigation.ShopNav {
@@ -66,9 +72,6 @@
   }
   .FilterTransform {
     transform: translateY(0px) !important;
-  }
-  .widget:last-child {
-    display: none;
   }
   .nav-side-menu {
     width: 100%;
@@ -392,9 +395,12 @@ div.SubCategory-onlineshop {
 }
 .widget {
   border-bottom: 0.5px solid #ebebeb;
-  padding: 20px 0;
+  padding: 15px 0;
+  margin: 25px 0;
 }
-
+input[type="checkbox"]:checked {
+  border: 2px solid var(--mainColor);
+}
 .Logo {
   display: flex;
   align-items: center;
@@ -741,6 +747,8 @@ div.BundlesButton a:hover {
 .collapsing.show {
   display: block;
   max-height: 1000px;
+  height: auto;
+
 }
 
 /* Add a smooth transition effect when opening and closing */
@@ -748,11 +756,6 @@ div.BundlesButton a:hover {
   transition: max-height 0.35s ease;
   max-height: 0;
   overflow: hidden;
-}
-
-/* For the expanded state */
-.collapsing.show {
-  max-height: 500px;
 }
 
 .fa-chevron-down,
@@ -781,7 +784,7 @@ div.BundlesButton a:hover {
   background-color: var(--mainColor);
   box-shadow: 0px 0px 3px #f3f3f3;
   padding-right: 40px;
-  color: #fff;
+  color: black;
 }
 
 .input-search::placeholder,

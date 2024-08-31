@@ -6,15 +6,17 @@ import { HttpInterceptorFn } from "@angular/common/http";
 import { AuthService } from '../Services/auth/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
+
   const _AuthService: AuthService = inject(AuthService);
-  const token = _AuthService.getToken();
-  if (token) {
-    request = request.clone({
-      setHeaders: {
-        'Authorization': `Bearer ${token}`,
-        ...request.headers
-      },
-    });
-  }
+  const token     = _AuthService.getToken();
+  const sessionId = _AuthService.getSessionId();
+
+  request = request.clone({
+    setHeaders: {
+      'Authorization': `Bearer ${token}`,
+      'X-Session-ID': sessionId
+    },
+  });
+  
   return next(request);
 }

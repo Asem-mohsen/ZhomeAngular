@@ -11,12 +11,13 @@ export interface User {
   Phone: number;
   Address: string;
   verification_code: string | null;
-  email_verified_at: string;
+  email_verified_at: string | null;
   created_at: string;
   updated_at: string;
   remember_token: string | null;
   ArchivedOn: string | null;
   DeletedOn: string | null;
+  products: Product[] | null;
 }
 
 export interface Admin {

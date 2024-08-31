@@ -89,8 +89,8 @@ div.Checkout .Userform .form-group label {
 }
 .CartHeader p.Passed::before {
   content: "";
-  background-color: var(--MainColor);
-  border-color: var(--MainColor);
+  background-color: var(--mainColor);
+  border-color: var(--mainColor);
 }
 .topping {
   display: flex;

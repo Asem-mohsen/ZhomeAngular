@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="container-shop" id="shop-background">
     <div
       class="background-image"
@@ -10,21 +10,39 @@
       </h1>
     </div>
   </div>
+</section> -->
+<section>
+  <div class="row p-0 m-0">
+      <div class="col-md-9 main-img p-0 m-0">
+        <owl-carousel-o [options]="ShopSlider">
+          @for (bundle of shopData.All_Bundles; track $index) {
+          <ng-template carouselSlide>
+            <img [src]="bundle.MainImage" class="w-100" [alt]="bundle.Name">
+          </ng-template>
+          }
+        </owl-carousel-o>
+          
+      </div>
+      <div class="col-md-3 side-imgs p-0 m-0">
+        <img src="assets/imgs/UI/website/Shop/Escritorio.jpg" class="w-100" alt="">
+        <img src="assets/imgs/UI/website/Shop/r-architecture-T6d96Qrb5MY-unsplash2.png" class="w-100" alt="">
+      </div>
+  </div>
 </section>
 
 <!-- All Categories -->
 <section>
   <div class="container">
-    <h1 id="ShopByCategory">Category</h1>
+    <h1 id="ShopByCategory"> {{'Categories' | translate}}</h1>
     <div class="categories-shop">
       <owl-carousel-o [options]="CategorySlider">
         @for (category of shopData.All_Categories; track $index) {
         <ng-template carouselSlide>
           <div class="category-shop">
-            <a routerLink="">
+            <a [routerLink]="['/shop/filters']">
               <img [src]="category.MainImage" [alt]="category.Category" />
             </a>
-            <a href="">
+            <a [routerLink]="['/shop/filters']">
               {{ category.Category }}
             </a>
           </div>
@@ -41,68 +59,74 @@
 
 <section id="StartYourSystem-Shop">
   <div class="container">
-    <h2 class="heading">Best Product</h2>
+    <h2 class="heading"> {{'BestProduct' | translate}}</h2>
     <ul class="nav nav-tabs nav-primary" role="tablist">
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
           data-bs-toggle="tab"
-          href="#All"
+          [ngClass]="{ active: activeTab === 'All' }"
+          (click)="selectTab('All')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'All'"
         >
-          All
-        </a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a
-          class="nav-link active"
-          data-bs-toggle="tab"
-          href="#Recommended"
-          role="tab"
-          aria-selected="true"
-        >
-          Recommendition
+        {{'All' | translate}}
         </a>
       </li>
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
-          data-bs-toggle="tab"
-          href="#MostPopular"
+          [ngClass]="{ active: activeTab === 'Recommended' }"
+          (click)="selectTab('Recommended')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'Recommended'"
         >
-          MostPopular
+          {{ 'Recommendition' | translate }}
         </a>
       </li>
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
-          data-bs-toggle="tab"
-          href="#OnSale"
+          [ngClass]="{ active: activeTab === 'MostPopular' }"
+          (click)="selectTab('MostPopular')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'MostPopular'"
         >
-          OnSale
+          {{ 'MostPopular' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          [ngClass]="{ active: activeTab === 'OnSale' }"
+          (click)="selectTab('OnSale')"
+          role="tab"
+          [attr.aria-selected]="activeTab === 'OnSale'"
+        >
+          {{ 'OnSale' | translate }}
         </a>
       </li>
     </ul>
     <div class="tab-content py-3">
       <!-- Recommended -->
-      <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
+      <div
+        class="tab-pane fade"
+        [ngClass]="{ 'show active': activeTab === 'Recommended' }"
+        [hidden]="activeTab !== 'Recommended'"
+        role="tabpanel"
+      >
         <div class="wrapper">
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
                   @for (product of shopData.Category1_to_show.Products; track $index) {
-                    <ng-template carouselSlide>
-                      <app-product-card [product]="product"></app-product-card>
-                    </ng-template>
+                  <ng-template carouselSlide>
+                    <app-product-card [product]="product"></app-product-card>
+                  </ng-template>
                   }
                   @empty {
-                    <i class="fa-solid fa-spinner"></i>
+                  <i class="fa-solid fa-spinner"></i>
                   }
                 </owl-carousel-o>
               </div>
@@ -110,17 +134,20 @@
           </div>
         </div>
       </div>
-
-
+    
       <!-- All -->
-      <div class="tab-pane fade" id="All" role="tabpanel">
+      <div
+        class="tab-pane fade"
+        [ngClass]="{ 'show active': activeTab === 'All' }"
+        [hidden]="activeTab !== 'All'"
+        role="tabpanel"
+      >
         <div class="wrapper">
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
-                  @for (product of shopData.Category2_to_show.Products;
-                  track $index) {
+                  @for (product of shopData.Category2_to_show.Products; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
@@ -131,9 +158,14 @@
           </div>
         </div>
       </div>
-
+    
       <!-- MostPopular -->
-      <div class="tab-pane fade" id="MostPopular" role="tabpanel">
+      <div
+        class="tab-pane fade"
+        [ngClass]="{ 'show active': activeTab === 'MostPopular' }"
+        [hidden]="activeTab !== 'MostPopular'"
+        role="tabpanel"
+      >
         <div class="wrapper">
           <div class="card">
             <div class="card-body pl-0">
@@ -150,18 +182,23 @@
           </div>
         </div>
       </div>
-
+    
       <!-- On Sale -->
-      <div class="tab-pane fade" id="OnSale" role="tabpanel">
+      <div
+        class="tab-pane fade"
+        [ngClass]="{ 'show active': activeTab === 'OnSale' }"
+        [hidden]="activeTab !== 'OnSale'"
+        role="tabpanel"
+      >
         <div class="wrapper">
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
                   @for (product of shopData.All_Products_On_Sale; track $index) {
-                    <ng-template carouselSlide>
-                      <app-product-card [product]="product"></app-product-card>
-                    </ng-template>
+                  <ng-template carouselSlide>
+                    <app-product-card [product]="product"></app-product-card>
+                  </ng-template>
                   }
                 </owl-carousel-o>
               </div>
@@ -183,8 +220,8 @@
           background-image: url(assets/imgs/UI/website/Shop/Escritorio.jpg);
         "
       >
-        <p>Explore Our Collection of Smart Home Gadgets</p>
-        <a class="Button" routerLink="/categories">Discover More</a>
+        <p>{{ 'ExploreCollection' | translate }}</p>
+        <a class="Button" routerLink="/categories"> {{ 'DiscoverMore' | translate }}</a>
       </div>
       <div
         class="box hoverhere box-2"
@@ -334,8 +371,8 @@
 <section>
   <div class="container">
     <div class="category-Name mt-5">
-      <h3>Fresh Sale</h3>
-      <a>Discover More<i class="fa fa-arrow-right ml-2"></i></a>
+      <h3>{{ 'FreshSaleText' | translate }}</h3>
+      <a>{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
     </div>
     <div class="related-product__carousel mt-3 mb-5">
       <owl-carousel-o [options]="ProductsSlider">
@@ -365,10 +402,10 @@
           <h3>
             {{ category1.Category }}
             <br />
-            <span>Category</span>
+            <span>{{ 'Category' | translate }}</span>
           </h3>
           <a routerLink=""
-            >Discover More<i class="fa fa-arrow-right ml-2"></i
+            >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
 
@@ -411,7 +448,7 @@
 <section>
   <div class="container">
     <!-- Select Bundles -->
-    <h2 class="Home-Text">Bundles Made for You</h2>
+    <h2 class="Home-Text">{{ 'BundlesMadeforYou' | translate }}</h2>
     <div class="Bundles Images-Home">
       @for (bundle of shopData.All_Bundles; track $index) {
 
@@ -445,10 +482,10 @@
           <h3>
             {{ category2.Category }}
             <br />
-            <span>Category</span>
+            <span>{{ 'Category' | translate }}</span>
           </h3>
           <a routerLink=""
-            >Discover More<i class="fa fa-arrow-right ml-2"></i
+            >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
         @if(shopData.Category2_to_show.Category.subcategories){
@@ -496,11 +533,11 @@
     "
   >
     <div class="bottom-slider">
-      <a href="" class="thm-btn slider-one__btn">Explore Bundles</a>
+      <a href="" class="thm-btn slider-one__btn">{{ 'ExploreBundles' | translate }}</a>
       <h2 class="slider-one__title">
-        Packages And Bundles
+        {{'PackagesAndBundles' | translate }}
         <br />
-        matches your smart home
+        {{ 'Matches' | translate }}
       </h2>
     </div>
   </div>
@@ -513,7 +550,7 @@
     <section>
       <div class="Category-Product mt-4 justify-content-between">
         <h3>{{ brand.Brand + " Products" }}</h3>
-        <a href="">Discover More<i class="fa fa-arrow-right ml-2"></i></a>
+        <a >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
       </div>
       <div class="related-product__carousel mt-5 mb-5">
         <owl-carousel-o [options]="ProductsSlider">
@@ -543,7 +580,7 @@
           />
         </a>
         <div class="ToolOnlineShop">
-          <h3>Build your home with our free customized proposal</h3>
+          <h3>{{ 'ToolOnlineShop' | translate }}</h3>
           <div>
             <a routerLink="/tools" class="cta ShopNowButton" id="BuildHomeCta">
               <svg
@@ -555,7 +592,7 @@
               >
                 <!-- <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></path> -->
               </svg>
-              <span class="hover-underline-animation">Build Your Home</span>
+              <span class="hover-underline-animation">{{ 'BuildYourHomeButton' | translate }}</span>
             </a>
           </div>
         </div>

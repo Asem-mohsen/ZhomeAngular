@@ -17,6 +17,7 @@ export class AuthService {
   private tokenKey = 'authToken';
 
   currentUserDate: BehaviorSubject<Admin | User | null> = new BehaviorSubject<Admin | User | null>(null);
+
   constructor(private _http: HttpClient, private _router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
     if (isPlatformBrowser(this.platformId) && this.getToken()) {
@@ -49,15 +50,10 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem(this.tokenKey);
       if (token) {
-        this._http.post(`${environment.baseURL}/api/logout/all`, {}, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        }).subscribe({
+        this._http.get(`${environment.baseURL}/api/logout/all`).subscribe({
           next: () => {
             this.clearUserData();
             this._router.navigate(['/login']);
-          },
-          error: (err) => {
-            console.error('Logout failed', err);
           }
         });
       } else {
@@ -66,9 +62,11 @@ export class AuthService {
     }
   }
 
-  userProfile(userId: number): Observable<profileResponse> {
-    return this._http.get<profileResponse>(`${environment.baseURL}/api/users/${userId}/profile/user`);
+  getUserProfile() : Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/users/profile`);
   }
+
   getCurrentUser(): User | Admin | null {
     return this.currentUserDate.getValue();
   }
@@ -76,6 +74,7 @@ export class AuthService {
   private clearUserData() {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.tokenKey);
+      localStorage.removeItem('sessionId');
       this.currentUserDate.next(null);
     }
   }
@@ -92,6 +91,20 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.tokenKey, token);
     }
+  }
+
+  // Sessions
+  getSessionId(): string {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = this.generateSessionId();
+      localStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+  }
+
+  generateSessionId(): string {
+    return 'guest-' + Math.random().toString(36).substring(2, 15);
   }
 
 }

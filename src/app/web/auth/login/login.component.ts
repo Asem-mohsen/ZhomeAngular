@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -7,7 +8,7 @@ import UAParser from 'ua-parser-js';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink , ReactiveFormsModule],
+  imports: [RouterLink , ReactiveFormsModule , CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   errorMsg: string = '';
   isLoading : boolean = false ;
-
+  show: boolean = false;
   constructor(private _AuthService: AuthService, private _router: Router) { }
 
   loginForm: FormGroup = new FormGroup({
@@ -87,5 +88,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+
+  togglePasswordVisibility(passwordInput: HTMLInputElement): void {
+    this.show = !this.show;
+    passwordInput.type = this.show ? 'text' : 'password';
+  }
 
 }

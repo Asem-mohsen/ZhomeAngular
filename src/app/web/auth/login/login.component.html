@@ -68,6 +68,8 @@
                     formControlName="password"
                     placeholder="Enter Password"
                     required
+
+                    #pass
                   />
                   @if (loginForm.get('password')?.errors &&
                   loginForm.get('password')?.touched) {
@@ -83,7 +85,11 @@
                     }
                   </div>
                   }
-                  <i class="fa fa-eye toggler" id="eye"></i>
+                  <i
+                    class="fa"
+                    [ngClass]="show ? 'fa-eye-slash' : 'fa-eye'"
+                    (click)="togglePasswordVisibility(pass)"
+                  ></i>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

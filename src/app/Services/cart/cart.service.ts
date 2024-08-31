@@ -1,82 +1,51 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable , signal, computed } from '@angular/core';
 import { environment } from '../../Base/enviroment';
-import { ApiResponse } from '../../Interfaces/cart';
+import { ApiResponse, CartItem } from '../../Interfaces/cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  cartItems = signal<CartItem[]>([]);
+  cartCount = computed(() => {
+    return this.cartItems().reduce((acc, item) => acc + Number(item.Quantity), 0);
+  });
+
   constructor(private _http : HttpClient) { }
 
-  private getHeaders(): HttpHeaders {
-    /*
-       * we store the session ID on the local storage as it's unique
-       * idintifier to handle all the cart related operations adding, removing and displaying
-    */
-    let headers = new HttpHeaders();
-
-    if (typeof localStorage != 'undefined') {
-      const token = localStorage.getItem('authToken');
-      const sessionId = this.getSessionId();
-
-      if (token) {
-        headers = headers.set('Authorization', `Bearer ${token}`);
-      }
-
-      if (sessionId) {
-        headers = headers.set('X-Session-ID', sessionId);
-      }
-    }
-    return headers;
-  }
-
   getCart(): Observable<any> {
-    const headers = this.getHeaders();
-    return this._http.get<ApiResponse>(`${environment.baseURL}/api/cart`, {  headers: headers  });
+    return this._http.get(`${environment.baseURL}/api/cart`);
   }
 
   storeCart(productId : number , quantity?: number) :  Observable<any>
   {
-    const headers = this.getHeaders();
     return this._http.post(`${environment.baseURL}/api/cart/add` ,
-    { product_id: productId, quantity: quantity || 1 },
-    { headers: headers });
-  }
-
-  updateQuantity(productId : number , quantity : number) :  Observable<any>
-  {
-    const headers = this.getHeaders();
-    return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
-    { product_id: productId, quantity },
-    { headers: headers });
-  }
-
-  removeItem(productId: number): Observable<any> {
-    const headers = this.getHeaders();
-    return this._http.delete(`${environment.baseURL}/api/cart/remove/${productId}`,
-      {  headers: headers  }
+    { product_id: productId, quantity: quantity || 1 }
     );
   }
 
+
+  updateQuantity(productId : number , quantity : number) :  Observable<any>
+  {
+    return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
+    { product_id: productId, quantity });
+  }
+
+  removeItem(productId: number): Observable<any> {
+    return this._http.delete(`${environment.baseURL}/api/cart/remove/${productId}`);
+  }
+
   removeAll(): Observable<any> {
-    const headers = this.getHeaders();
-    return this._http.delete(`${environment.baseURL}/api/cart/clearCart`, {  headers: headers  });
+    return this._http.delete(`${environment.baseURL}/api/cart/clearCart`);
   }
 
-  // Sessions
-  private getSessionId(): string {
-    let sessionId = localStorage.getItem('sessionId');
-    if (!sessionId) {
-      sessionId = this.generateSessionId();
-      localStorage.setItem('sessionId', sessionId);
-    }
-    return sessionId;
+
+  checkout(): Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/checkout/`);
   }
 
-  private generateSessionId(): string {
-    return 'guest-' + Math.random().toString(36).substring(2, 15);
-  }
 }
