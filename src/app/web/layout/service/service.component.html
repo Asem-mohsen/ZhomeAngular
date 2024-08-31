@@ -1,1 +1,53 @@
-<p>service works!</p>
+    <div class="container mt-5 pt-4 mb-5">
+        <div class="block-title text-center">
+            <p class="block-title__tag-line text-center">Zhome</p>
+            <h1 class="text-center">{{ 'Services' | translate }}</h1>
+        </div>
+    </div>
+
+    <!-- Services -->
+    @for(service of services ; track service.ID){
+        <section class="SectionNumber">
+            <div class="container">
+                <div class="Cards-contact mt-5 pt-3">
+                    <div class="card-contact-left text-center">
+                        <img [src]="service.Image" class="ProposalProduct" style="width: 497px;height: 367px;border-radius: 3px;" [alt]="service.Name">
+                        <div>
+                            <h2 style="font-size: 35px;">
+                                @if(currentLang === 'ar'){
+                                    {{ service.ArabicName}}
+                                }
+                                @else{
+                                    {{ service.Name}}
+                                }
+                            </h2>
+                            <p>
+                              @if(currentLang === 'ar'){
+                                    {{ service.ArabicDescription}}
+                                }
+                                @else{
+                                    {{ service.Description}}
+                                }
+                            </p>
+                            @if(service.Duration){
+                                <span>{{ 'Duration' | translate }} {{ service.Duration + " Minutes" }}</span>
+                            }
+                            <br>
+                            @if(service.Price){
+                                <span>{{ 'Price' | translate }} {{'DepenedsOntheProduct' | translate }} </span>
+                            }
+                            @else{
+                                <span>{{ 'Price' | translate }} {{ service.Price | currency : " EGP "}}</span>
+                            }
+                            <div>
+                                <a class="btn btn-info button-Tool text-white"  >{{ service.ButtonText}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr class="vertical">
+        </section>
+
+      }

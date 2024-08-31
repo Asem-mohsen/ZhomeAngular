@@ -1,0 +1,8 @@
+section.SectionNumber:nth-child(odd) {
+  direction: rtl;
+}
+@media (max-width: 767px) {
+.SectionNumber hr.vertical {
+  width: auto;
+}
+}

@@ -43,4 +43,8 @@ export class TranslationService {
     }
   }
 
+  getLanguage(): string {
+    return localStorage.getItem('lang') || this.defaultLang;
+  }
+
 }
