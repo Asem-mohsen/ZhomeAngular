@@ -167,11 +167,8 @@ export class CartComponent{
   incrementQuantity(item: CartItem) {
     if (item.Quantity < item.product.Quantity) {
       item.Quantity++;
-      const installationCost = this.installationPrices()[item.product.ID] || 0; 
-      this._cartService.updateQuantity(item.product.ID, item.Quantity, installationCost).subscribe({
+      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe({
         next: (res) => {
-          // Make sure the total is updated from the backend
-          this.total.set(res.data.total);
           this.loadCartItems();
         }
       });
@@ -181,11 +178,8 @@ export class CartComponent{
   decrementQuantity(item: CartItem) {
     if (item.Quantity > 1) {
       item.Quantity--;
-      const installationCost = this.installationPrices()[item.product.ID] || 0;
-      this._cartService.updateQuantity(item.product.ID, item.Quantity, installationCost).subscribe({
+      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe({
         next: (res) => {
-          // Make sure the total is updated from the backend
-          this.total.set(res.data.total);
           this.loadCartItems();
         }
       });

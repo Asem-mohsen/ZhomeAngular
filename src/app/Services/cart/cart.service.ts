@@ -28,10 +28,16 @@ export class CartService {
   }
 
 
-  updateQuantity(productId : number , quantity : number , installationCost?: number) :  Observable<any>
+  updateQuantity(productId : number , quantity : number) :  Observable<any>
   {
     return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
-    { product_id: productId, quantity  , installation_cost : installationCost || 0 });
+    { product_id: productId, quantity });
+  }
+
+  toggleInstalltion(productId : number , installationCost : number) :  Observable<any>
+  {
+    return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
+    { product_id: productId, installation_cost: installationCost });
   }
 
   removeItem(productId: number): Observable<any> {
