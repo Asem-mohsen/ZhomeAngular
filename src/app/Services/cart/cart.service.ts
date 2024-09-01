@@ -34,9 +34,9 @@ export class CartService {
     { product_id: productId, quantity });
   }
 
-  toggleInstalltion(productId : number , installationCost : number) :  Observable<any>
+  updateInstalltion(productId : number , installationCost : number) :  Observable<any>
   {
-    return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
+    return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/update-Installtion` ,
     { product_id: productId, installation_cost: installationCost });
   }
 

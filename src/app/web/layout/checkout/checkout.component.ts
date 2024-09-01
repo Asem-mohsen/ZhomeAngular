@@ -45,7 +45,7 @@ export class CheckoutComponent {
   });
 
   checkPromocodeForm: FormGroup = new FormGroup({
-    promocode: new FormControl(null),
+    promoCode: new FormControl('', [Validators.required])
   });
 
   ngOnInit(): void {
@@ -56,6 +56,7 @@ export class CheckoutComponent {
     this._ordersService.checkoutOrders().subscribe({
       next : (res) =>{
         this.orderData = res.data;
+        this.total.set(res.data.total);
         this.userInfo.patchValue({ CartID: this.orderData.CartID });
       },
     })
@@ -84,10 +85,12 @@ export class CheckoutComponent {
   }
 
   checkPromocode() {
-    this._ordersService.checkPromocode(this.checkPromocodeForm.value, this.total()).subscribe({
+    const promoCodeValue = this.checkPromocodeForm.get('promoCode')?.value;
+
+    this._ordersService.checkPromocode(promoCodeValue, this.total()).subscribe({
       next: (res) => {
-        this.total.set(res.data.total); // Update total signal
-        this.savedAmount.set(res.data.savedAmount || 0); // Set the saved amount signal
+        this.total.set(res.data.total);
+        this.savedAmount.set(res.data.savedAmount || 0);
         this.step = 4;
       },
     });

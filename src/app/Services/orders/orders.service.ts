@@ -21,10 +21,10 @@ export class OrdersService {
     return this._http.post(`${environment.baseURL}/api/checkout/save-user-data`, data);
   }
 
-  checkPromocode(promocode : string , total : number) : Observable<any>
+  checkPromocode(promoCode : string , total : number) : Observable<any>
   {
-    return this._http.post(`${environment.baseURL}/api/checkout/check-promocode`, 
-    { promocode: promocode, total: total}
+    return this._http.post(`${environment.baseURL}/api/checkout/check-promocode`,
+    { promoCode: promoCode, totalPrice: total}
     );
   }
 }

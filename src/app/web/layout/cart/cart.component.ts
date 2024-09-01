@@ -7,7 +7,6 @@ import { ProductCardComponent } from '../../additions/product-card/product-card.
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiResponse, CartItem } from "../../../Interfaces/cart";
-import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../Interfaces/product';
 
@@ -99,7 +98,6 @@ export class CartComponent{
         this.total.set(response.data.total);
         this.products.set(response.data.products);
         this.totalSaved.set(response.data.totalSaved);
-        // this.updateTotal();
       }
     });
   }
@@ -137,7 +135,7 @@ export class CartComponent{
     const checkbox = event.target as HTMLInputElement;
     const isChecked = checkbox.checked;
 
-    const currentPrices = this.installationPrices();
+    const currentPrices = { ...this.installationPrices() };
     if (isChecked) {
       currentPrices[item.product.ID] = Number(item.product.InstallationCost) || 0;
     } else {
@@ -147,17 +145,11 @@ export class CartComponent{
     this.updateTotal();
   }
 
-  // updateTotal(): void {
-  //   const newTotal = this.subtotal();
-  //   this.total.set(newTotal);
-  // }
   updateTotal(): void {
-    const subtotalWithInstallation = this.subtotal();
-  
-    // Assuming that 'total' should be directly set from API or computed here
-    const newTotal = subtotalWithInstallation;
+    const newTotal = this.subtotal();
     this.total.set(newTotal);
   }
+
   calculateFullTotal(): number {
     const cartTotal = this.subtotal();
     return cartTotal;
@@ -174,7 +166,7 @@ export class CartComponent{
       });
     }
   }
-  
+
   decrementQuantity(item: CartItem) {
     if (item.Quantity > 1) {
       item.Quantity--;
