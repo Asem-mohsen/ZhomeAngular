@@ -28,10 +28,10 @@ export class CartService {
   }
 
 
-  updateQuantity(productId : number , quantity : number) :  Observable<any>
+  updateQuantity(productId : number , quantity : number , installationCost?: number) :  Observable<any>
   {
     return this._http.post<ApiResponse>(`${environment.baseURL}/api/cart/updateQuantity` ,
-    { product_id: productId, quantity });
+    { product_id: productId, quantity  , installation_cost : installationCost || 0 });
   }
 
   removeItem(productId: number): Observable<any> {

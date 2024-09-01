@@ -14,17 +14,12 @@ export interface CartItem {
   product: Product;
 }
 
-// export interface CartData {
-//   count: number;
-//   cartItems: CartItem[];
-//   products?: Product[];
-// }
-
 export interface ApiResponse {
   message: string;
   data: {
     count: number;
     total: number;
+    totalSaved: number
     cartItems: CartItem[];
     products: Product[];
   };

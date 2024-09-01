@@ -26,7 +26,10 @@ export class CartComponent{
   products = signal<Product[]>([]);
 
   total = signal(0);
+
   installationPrices = signal<{ [key: number]: number }>({});
+
+  totalSaved = signal(0);
 
   count = computed(() => {
     return this.cartItems().reduce((acc, item) => acc + Number(item.Quantity), 0);
@@ -92,10 +95,11 @@ export class CartComponent{
   loadCartItems(): void {
     this._cartService.getCart().subscribe({
       next: (response: ApiResponse) => {
-        this.cartItems.set(response.data.cartItems); // This will automatically update `count` because it's computed
+        this.cartItems.set(response.data.cartItems);
         this.total.set(response.data.total);
         this.products.set(response.data.products);
-        this.updateTotal(); // This will update the subtotal correctly
+        this.totalSaved.set(response.data.totalSaved);
+        // this.updateTotal();
       }
     });
   }
@@ -106,9 +110,6 @@ export class CartComponent{
       next : (res) => {
         this.toastr.success(res.message);
         this.loadCartItems();
-      },
-      error : (err) =>{
-        this.toastr.error('an error occured');
       }
     })
   }
@@ -119,9 +120,6 @@ export class CartComponent{
       next : (res) => {
         this.toastr.success(res.message);
         this.loadCartItems();
-      },
-      error : (err) =>{
-        this.toastr.error('an error occured');
       }
     })
   }
@@ -131,9 +129,6 @@ export class CartComponent{
     this._cartService.checkout().subscribe({
       next : (res) => {
         this._router.navigate(['/checkout']);
-      },
-      error : (err) =>{
-        this.toastr.error('an error occured');
       }
     })
   }
@@ -152,27 +147,48 @@ export class CartComponent{
     this.updateTotal();
   }
 
+  // updateTotal(): void {
+  //   const newTotal = this.subtotal();
+  //   this.total.set(newTotal);
+  // }
   updateTotal(): void {
-    const newTotal = this.subtotal();
+    const subtotalWithInstallation = this.subtotal();
+  
+    // Assuming that 'total' should be directly set from API or computed here
+    const newTotal = subtotalWithInstallation;
     this.total.set(newTotal);
+  }
+  calculateFullTotal(): number {
+    const cartTotal = this.subtotal();
+    return cartTotal;
   }
 
   // Spinner Quantity
   incrementQuantity(item: CartItem) {
     if (item.Quantity < item.product.Quantity) {
       item.Quantity++;
-      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe((res)=>{
-        this.loadCartItems();
-      })
+      const installationCost = this.installationPrices()[item.product.ID] || 0; 
+      this._cartService.updateQuantity(item.product.ID, item.Quantity, installationCost).subscribe({
+        next: (res) => {
+          // Make sure the total is updated from the backend
+          this.total.set(res.data.total);
+          this.loadCartItems();
+        }
+      });
     }
   }
-
+  
   decrementQuantity(item: CartItem) {
     if (item.Quantity > 1) {
       item.Quantity--;
-      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe((res)=>{
-        this.loadCartItems();
-      })
+      const installationCost = this.installationPrices()[item.product.ID] || 0;
+      this._cartService.updateQuantity(item.product.ID, item.Quantity, installationCost).subscribe({
+        next: (res) => {
+          // Make sure the total is updated from the backend
+          this.total.set(res.data.total);
+          this.loadCartItems();
+        }
+      });
     }
   }
 

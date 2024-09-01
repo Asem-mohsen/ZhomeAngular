@@ -64,76 +64,76 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    @for(item of cartItems(); track $index){
-                                      <tr>
-                                          <td class="prod-column price">
-                                              <div class="d-flex px-2 py-1">
-                                                  <div>
-                                                      <figure class="prod-thumb">
-                                                          <a [routerLink]="['/product' , item.product.ID]">
-                                                              <img [src]="item.product.MainImage" class="ProductCartImage" [alt]="item.product.Name">
-                                                          </a>
-                                                      </figure>
-                                                  </div>
-                                                  <div class="d-flex flex-column justify-content-center ml-1">
-                                                      <h3 class="prod-title padd-top-20">{{ item.product.Name | titlecase }}</h3>
-                                                        @if(item.product.sale){
-                                                          <div class="d-flex" style="gap:20px;">
-                                                              <p class="text-xs text-secondary mb-0 fw-bold" style="font-size:17px">{{ item.product.sale.PriceAfter | currency : "EGP"}}</p>
-                                                              <p class="text-xs text-secondary mb-0 BeforeSale" style="text-decoration: line-through; font-size:14px">{{ item.product.Price | currency : "EGP"}}</p>
-                                                              <input type="hidden" name="SavedPrice" class="SavedPrice" [value]="item.product.sale.PriceAfter">
-                                                          </div>
-                                                        }
-                                                        @else{
-                                                          <p class="text-xs text-secondary mb-0 BeforeSale" >{{ item.product.Price | currency : "EGP" }}</p>
-                                                        }
-                                                          <input type="hidden" name="Price[]" class="ProductPrice" [value]="item.product.Price">
-                                                  </div>
-                                              </div>
-                                          </td>
-                                          <td class="qty">
-                                            <div class="quantity-spinner">
-                                              <button (click)="decrementQuantity(item)" [disabled]="item.Quantity <= 1">-</button>
-                                              <input type="number" [(ngModel)]="item.Quantity" min="1" [max]="item.product.Quantity" [id]="'quantity-'+item.product.ID">
-                                              <button (click)="incrementQuantity(item)" [disabled]="item.Quantity >= item.product.Quantity">+</button>
+                                @for(item of cartItems(); track $index){
+                                    <tr>
+                                        <td class="prod-column price">
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <figure class="prod-thumb">
+                                                        <a [routerLink]="['/product' , item.product.ID]">
+                                                            <img [src]="item.product.MainImage" class="ProductCartImage" [alt]="item.product.Name">
+                                                        </a>
+                                                    </figure>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center ml-1">
+                                                    <h3 class="prod-title padd-top-20">{{ item.product.Name | titlecase }}</h3>
+                                                    @if(item.product.sale){
+                                                        <div class="d-flex" style="gap:20px;">
+                                                            <p class="text-xs text-secondary mb-0 fw-bold" style="font-size:17px">{{ item.product.sale.PriceAfter | currency : "EGP"}}</p>
+                                                            <p class="text-xs text-secondary mb-0 BeforeSale" style="text-decoration: line-through; font-size:14px">{{ item.product.Price | currency : "EGP"}}</p>
+                                                            <input type="hidden" name="SavedPrice" class="SavedPrice" [value]="item.product.sale.PriceAfter">
+                                                        </div>
+                                                    }
+                                                    @else{
+                                                        <p class="text-xs text-secondary mb-0 BeforeSale" >{{ item.product.Price | currency : "EGP" }}</p>
+                                                    }
+                                                        <input type="hidden" name="Price[]" class="ProductPrice" [value]="item.product.Price">
+                                                </div>
                                             </div>
-                                          </td>
-                                          <td for="installmentPriceCheckbox">
-                                              @if(item.product.InstallationCost && item.product.InstallationCost > 0 ){
-                                                  <div class="d-flex justify-content-center" style="gap: 20px;">
-                                                      <p class="text-secondary mb-0">{{item.product.InstallationCost | currency : "EGP"}}</p>
-                                                      <input type="checkbox"
-                                                        [id]="'installmentPriceCheckbox-' + item.product.ID"
-                                                        class="installments installmentPriceCheckbox"
-                                                        [value]="item.product.InstallationCost"
-                                                        (change)="toggleInstallation(item, $event)">
-                                                  </div>
-                                              }
-                                              @else{
-                                                  <p class="text-secondary mb-0">No Installation Cost</p>
-                                                  <input type="hidden" class="installments installmentPriceCheckbox" name="Installments" value="0">
-                                              }
-                                          </td>
-                                          <td class="sub-total SubTotal p-0">{{ (item.Quantity * item.Price) + (installationPrices()[item.product.ID] || 0) | currency : " EGP "}}</td>
-                                          <td class="remove p-1">
-                                              <a class="remove-btn" (click)="removeProduct(item.product.ID)">
-                                                  <span class="fa fa-x"></span>
-                                              </a>
-                                          </td>
-                                      </tr>
-                                    }
-                                    @empty{
-                                      <tr>
-                                        <td class="text-center pt-4 border-none" colspan="4" style="border-top: 1px solid #eeee;border-radius: 0;">
-                                            <a routerLink="/shop" class="cta ShopNowButton">
-                                                <span class="hover-underline-animation">Shop Now</span>
-                                                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
-                                                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
-                                                </svg>
+                                        </td>
+                                        <td class="qty">
+                                        <div class="quantity-spinner">
+                                            <button (click)="decrementQuantity(item)" [disabled]="item.Quantity <= 1">-</button>
+                                            <input type="number" [(ngModel)]="item.Quantity" min="1" [max]="item.product.Quantity" [id]="'quantity-'+item.product.ID">
+                                            <button (click)="incrementQuantity(item)" [disabled]="item.Quantity >= item.product.Quantity">+</button>
+                                        </div>
+                                        </td>
+                                        <td for="installmentPriceCheckbox">
+                                            @if(item.product.InstallationCost && item.product.InstallationCost > 0 ){
+                                                <div class="d-flex justify-content-center" style="gap: 20px;">
+                                                    <p class="text-secondary mb-0">{{item.product.InstallationCost | currency : "EGP"}}</p>
+                                                    <input type="checkbox"
+                                                    [id]="'installmentPriceCheckbox-' + item.product.ID"
+                                                    class="installments installmentPriceCheckbox"
+                                                    [value]="item.product.InstallationCost"
+                                                    (change)="toggleInstallation(item, $event)">
+                                                </div>
+                                            }
+                                            @else{
+                                                <p class="text-secondary mb-0">No Installation Cost</p>
+                                                <input type="hidden" class="installments installmentPriceCheckbox" name="Installments" value="0">
+                                            }
+                                        </td>
+                                        <td class="sub-total SubTotal p-0">{{ (item.Quantity * item.Price) + (installationPrices()[item.product.ID] || 0) | currency : " EGP "}}</td>
+                                        <td class="remove p-1">
+                                            <a class="remove-btn" (click)="removeProduct(item.product.ID)">
+                                                <span class="fa fa-x"></span>
                                             </a>
                                         </td>
                                     </tr>
-                                    }
+                                }
+                                @empty{
+                                    <tr>
+                                    <td class="text-center pt-4 border-none" colspan="4" style="border-top: 1px solid #eeee;border-radius: 0;">
+                                        <a routerLink="/shop" class="cta ShopNowButton">
+                                            <span class="hover-underline-animation">Shop Now</span>
+                                            <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                                                <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -156,16 +156,16 @@
                                 <ul>
                                     <li>
                                         SubTotal
-                                        <span id='TotalPriceOne'>{{total() | currency : " EGP"}}</span>
+                                        <span id='TotalPriceOne'>{{calculateFullTotal() | currency : " EGP"}}</span>
                                     </li>
                                     <li class="Saved">
                                         You Saved
-                                        <span id="discountDiv2">{{total() | currency : " EGP"}}</span>
+                                        <span id="discountDiv2">{{ totalSaved() | currency  : " EGP"}}</span>
                                     </li>
                                     <input type="hidden" name="totalSaved" id="totalSaved">
                                     <li class="total">
                                         Total
-                                        <span id='FinalTotal'>{{total() | currency : " EGP"}}</span>
+                                        <span id='FinalTotal'>{{calculateFullTotal() | currency : " EGP"}}</span>
                                     </li>
                                 </ul>
                             </div>
