@@ -7,6 +7,7 @@ import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { CheckoutData } from '../../../Interfaces/checkout';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentsService } from '../../../Services/payments/payments.service';
 
 @Component({
   selector: 'app-checkout',
@@ -25,7 +26,7 @@ export class CheckoutComponent {
   total = signal<number>(0);
   savedAmount = signal<number>(0);
 
-  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService){}
+  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService){}
 
   // steps
   step : number = 1;
@@ -99,11 +100,26 @@ export class CheckoutComponent {
 
   cashPay()
   {
-
+    this.paymentService.createCashPayment(this.total(), this.userInfo.value.CartID).subscribe({
+      next : (res) => {
+        if (res.success) {
+          window.location.href = res.url;
+        }
+      }
+    });
   }
 
   cardPay()
   {
-
+    this.paymentService.createPayment(this.total(), this.userInfo.value.CartID).subscribe({
+      next : (response) => {
+        if (response.success) {
+          window.location.href = response.url;
+        } else {
+          console.error('Failed to create checkout session:', response.error);
+        }
+      }
+    });
   }
+
 }
