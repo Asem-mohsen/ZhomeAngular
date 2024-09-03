@@ -2,7 +2,7 @@ import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angula
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { OrdersService } from './../../../Services/orders/orders.service';
 import { Component , Signal, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { CheckoutData } from '../../../Interfaces/checkout';
 import { AuthService } from '../../../Services/auth/auth.service';
@@ -26,7 +26,7 @@ export class CheckoutComponent {
   total = signal<number>(0);
   savedAmount = signal<number>(0);
 
-  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService){}
+  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService , private _router : Router){}
 
   // steps
   step : number = 1;
@@ -36,7 +36,7 @@ export class CheckoutComponent {
     email: new FormControl(null, [Validators.required, Validators.email]),
     Address: new FormControl(null, [Validators.required]),
     Phone: new FormControl(null, [Validators.required]),
-    Name: new FormControl(null, [Validators.required]),
+    Name: new FormControl(null, [Validators.required , Validators.minLength(3)]),
     UserShippingAddress: new FormControl(null, [Validators.required]),
     Country: new FormControl(null, [Validators.required]),
     City: new FormControl(null, [Validators.required]),
@@ -58,12 +58,32 @@ export class CheckoutComponent {
       next : (res) =>{
         this.orderData = res.data;
         this.total.set(res.data.total);
-        this.userInfo.patchValue({ CartID: this.orderData.CartID });
       },
     })
 
     this.isLogged = this._authService.isAuthenticated();
+    if (this.isLogged) {
+      this.loadUserDetails();
+    }
+    
   }
+
+
+  // fetch  user details
+  loadUserDetails() {
+    this._ordersService.checkoutOrders().subscribe({
+      next: (res) => {
+        this.userInfo.patchValue({
+          CartID: this.orderData.CartID,
+          email: res.data.User.email,
+          Address: res.data.User.Address,
+          Phone: res.data.User.Phone,
+          Name: res.data.User.Name,
+        });
+      }
+    });
+  }
+
 
   submitUserInfo()
   {
@@ -100,10 +120,11 @@ export class CheckoutComponent {
 
   cashPay()
   {
-    this.paymentService.createCashPayment(this.total(), this.userInfo.value.CartID).subscribe({
+    this.paymentService.createCashPayment(this.userInfo.value.CartID , this.total()).subscribe({
       next : (res) => {
-        if (res.success) {
-          window.location.href = res.url;
+        if (res.success == true) {
+          this._router.navigate(['/cart']);
+          this._toaster.success('Track your order');
         }
       }
     });
