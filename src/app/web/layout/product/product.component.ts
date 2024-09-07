@@ -3,16 +3,17 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../Services/products/products.service';
 import { Product, ProductImages } from '../../../Interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { NgStyle, CurrencyPipe, TitleCasePipe } from '@angular/common';
+import { NgStyle, CurrencyPipe, TitleCasePipe, CommonModule } from '@angular/common';
 import { ProductCardComponent } from "../../additions/product-card/product-card.component";
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser'; 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule],
+  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule , CommonModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -24,6 +25,14 @@ export class ProductComponent {
   productImages: ProductImages[] = [];
   productPlatforms: any[] = [];
   isAdded : boolean = false;
+  activeTab : string = '';
+
+  collapseStates: { [key: string]: boolean } = {
+    'description': true,
+    'faq': true,
+    'video':true
+  };
+
   // Sliders
   ProductsSlider: OwlOptions = {
     loop: true,
@@ -103,14 +112,10 @@ export class ProductComponent {
     nav: true
   }
 
-  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService){}
+  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService , private _titleService: Title){}
   // ActivatedRoute => to extract any param form the url
 
   ngOnInit(): void {
-
-    if (typeof localStorage != 'undefined') {
-      localStorage.setItem('currentPage', `/product/${this.productID}`)
-    }
 
     this._ActivatedRoute.paramMap.subscribe((res) => {
       this.productID = res.get('productId');
@@ -121,14 +126,22 @@ export class ProductComponent {
           this.product = res.data.Product;
           this.productImages = res.data.Product.images;
           this.productPlatforms = res.data.Product.platforms;
-        },
-        error:(err) =>{
-          console.error('Error retrieving product:', err);
+
+          if (this.product?.Name) {
+            this._titleService.setTitle(this.product.Name);
+          }
+
         }
       });
 
+      if (typeof localStorage != 'undefined') {
+        localStorage.setItem('currentPage', `/product/${this.productID}`)
+      }
 
     });
+
+    
+
 
   }
 
@@ -157,7 +170,6 @@ export class ProductComponent {
       .join(' - ');
   }
 
-
   incrementQuantity() {
     if (this.quantity < this.product.Quantity) {
       this.quantity++;
@@ -168,5 +180,13 @@ export class ProductComponent {
     if (this.quantity > 1) {
       this.quantity--;
     }
+  }
+
+  selectTab(tab: string) {
+    this.activeTab = tab;
+  }
+
+  toggleCollapse(section: string) {
+    this.collapseStates[section] = !this.collapseStates[section]; // Toggle the collapse state for the specified section
   }
 }

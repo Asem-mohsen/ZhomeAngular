@@ -779,7 +779,7 @@ input[type="file"] {
   }
 }
 .product-details__review-form {
-  margin-top: 60px;
+  margin-top: 30px;
 }
 .product-details__review-form__title {
   margin: 0;
@@ -835,11 +835,7 @@ input[type="file"] {
   text-align: center;
   font-size: 50px;
 }
-.feature-container {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 1em 0;
-}
+
 .Feature-details img {
   width: 300px;
   margin: auto;
@@ -852,7 +848,7 @@ input[type="file"] {
   flex-direction: column;
   justify-content: space-around;
   flex: 0 0 360px;
-  width: 360px;
+  width: 350px;
   min-height: 280px;
   padding: 20px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
@@ -861,4 +857,47 @@ input[type="file"] {
   .bottom-text {
     margin-top: 20px;
   }
+}
+
+.Product-spacification{
+  background-color: #e2f1ff;
+  margin-bottom: 52px;
+  display: grid;
+  padding: 90px;
+}
+.Product-spacification .Details{
+  display: flex;
+  border-top: 1px solid #d8d8d8;
+  padding-top: 26px;
+}
+.Product-spacification .Details:not(:last-child){
+  margin-bottom: 50px;
+
+}
+.Product-spacification .Details h5{
+  width: 400px;
+  font-weight: 500;
+}
+
+.Details .many-details{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+  grid-column-gap: 24px;
+}
+.Details-info p{
+  font-weight: bold;
+}
+
+
+.FAQ{
+  display: grid;
+  gap: 22px;
+}
+.FAQ .Question{
+  font-size: 24px;
+  color: black;
+}
+.FAQ .Answer{
+  margin-top: 10px;
 }

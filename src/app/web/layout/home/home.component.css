@@ -375,7 +375,7 @@ div.Text-under-images {
   background-color: var(--mainColor);
   color: white;
 }
-a.HomeImageInButton svg {
+a.HomeImageInButton i {
   cursor: pointer;
   font-size: 60px;
   color: white;
@@ -1235,4 +1235,27 @@ section.WhyZhomeSection {
 .Platfroms .Platform-home a:hover {
   transition-duration: 0.3s;
   color: #1982b7;
+}
+.cta.ShopNowButton {
+  text-align: center;
+  display: block;
+  text-transform: uppercase;
+}
+.cta.ShopNowButton span {
+  padding-bottom: 7px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+.cta.ShopNowButton svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+.hover-underline-animation {
+  position: relative;
+  color: black;
+}
+.cta.ShopNowButton:hover svg {
+  transform: translateX(0);
 }

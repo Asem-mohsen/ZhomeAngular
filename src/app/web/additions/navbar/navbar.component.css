@@ -39,9 +39,11 @@
 .nav-link:hover i{
   transition: all 0.4s;
   color: var(--mainColor);
-  
-}
 
+}
+.navbar-brand:focus, .navbar-brand:hover {
+  color: white !important;
+}
 .count{
   color: white;
   position: absolute;

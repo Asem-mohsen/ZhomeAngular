@@ -1,0 +1,106 @@
+<section class="shop-background site-banner padding-large" style="background: url('asstes/imgs/UI/website/Profile/Background.jpg');">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <h1 class="page-title text-white">{{'Profile' | translate }}</h1>
+              <div class="breadcrumbs">
+              <span class="item">
+                  <a routerLink="/home" class="text-white">{{'Home' | translate }} /</a>
+              </span>
+              <span class="item text-white">{{'EditProfile' | translate }}</span>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section>
+  <div class="container py-5">
+      <div class="row">
+          <div class="col-lg-4">
+              <!-- Side Card -->
+              <div class="card mb-4" style="border-radius: 14px;">
+                  <div class="card-body text-center">
+                      <img src="assets/dist/img/avatar.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                      <h5 class="my-3">{{user.Name}}</h5>
+                      <p class="text-muted mb-1">{{user.Phone ? "0" + user.Phone : 'Edit to Add Phone Number'}}</p>
+                      <p class="text-muted mb-4">{{user.Address ? user.Address : 'Edit to Add Address' }}</p>
+                  </div>
+              </div>
+              <!-- Side Nav -->
+              <div class="card mb-4 mb-lg-0"  style="border-radius: 14px;">
+                  <div class="card-body p-0">
+                      <ul class="list-group list-group-flush rounded-3" role="tablist">
+                          <li class="list-group-item d-flex justify-content-center align-items-center nav-item p-3" role="presentation" style="border-radius: 12px;">
+                              <a class="nav-link profile-link mb-0 active" data-bs-toggle="tab"  role="tab" aria-selected="true">
+                                  {{'Settings' | translate }}
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-8 tab-content">
+              <!-- Info Card -->
+              <div class="card mb-4 tab-pane fade show active" id="Settings" style="border-radius: 14px;">
+                  <form [formGroup]="userInfo" (ngSubmit)="updateUserInfo()">
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <p class="mb-0">{{'FullName' | translate }}</p>
+                              </div>
+                              <div class="form-group col-sm-9">
+                                  <input type="text" class="form-control" formControlName="Name">
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <p class="mb-0">{{'Email' | translate }}</p>
+                              </div>
+                              <div class="form-group col-sm-9">
+                                  <input type="email" class="form-control" formControlName="email">
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <p class="mb-0">{{'Phone' | translate }}</p>
+                              </div>
+                              <div class="form-group col-sm-9">
+                                  <input type="phone" class="form-control" formControlName="Phone">
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <p class="mb-0">{{'Address' | translate }}</p>
+                              </div>
+                              <div class="form-group col-sm-9">
+                                  <textarea class="form-control" formControlName="Address"></textarea>
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  <p class="mb-0">{{'Password' | translate }}</p>
+                              </div>
+                              <div class="form-group col-sm-9">
+                                  <input type="password" class="form-control" formControlName="Password">
+                              </div>
+                          </div>
+                          <hr>
+                          <p class="mb-0 text-center">{{'ControlyourAccount' | translate }}</p>
+                          <div class="row">
+                              <div class="col-sm-12 mt-15 d-flex justify-content-center mt-2" style="gap: 15px">
+                                  <a routerLink="/profile" class="btn btn-primary"> {{'Cancel' | translate }}</a>
+                                  <button class="btn btn-success">{{'UpdateAccount' | translate }}</button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

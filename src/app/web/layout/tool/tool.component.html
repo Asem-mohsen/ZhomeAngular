@@ -6,12 +6,12 @@
 
     <form [formGroup]="toolData" (ngSubmit)="sumbitToolData()" enctype="multipart/form-data">
       <div id="wizard" class="wizard clearfix vertical">
-        
+
         <!-- Steps -->
         <div class="steps clearfix">
           <ul role="tablist">
             @for(num of steps; track $index){
-              <li [ngClass]="{'done': num < step, 'current': num  === step, 'disabled': num  > step}" (click)="num  <= step ? goToStep(num) : null" role="tab" 
+              <li [ngClass]="{'done': num < step, 'current': num  === step, 'disabled': num  > step}" (click)="num  <= step ? goToStep(num) : null" role="tab"
                 [attr.aria-disabled]="num > step"
                 [attr.aria-selected]="num === step">
                 <a [id]="'wizard-t-' + num" [attr.aria-controls]="'wizard-p-' + num">
@@ -21,7 +21,7 @@
             }
           </ul>
         </div>
-       
+
         <!-- Content -->
         <div class="content clearfix">
             <!--Installed-->
@@ -149,7 +149,7 @@
                 </div>
               </section>
             }
-            
+
             <!--Rooms-->
             @if(step === 3){
               <section>
@@ -197,7 +197,7 @@
                       formControlName="Rooms"
                       id="Other"
                       class="purpose-radio-input RoomsInput"
-                      onclick="openPopup()"
+                      (click)="openPopup()"
                       value="Other"
                     />
                     <label for="Other" class="purpose-radio-label">
@@ -210,34 +210,21 @@
                 </div>
 
                 <!--PopUp-->
-                <div id="Roomspopup" class="Roomspopup">
-                  <div class="popup-content">
-                    <span class="close" (click)="closePopup()">&times;</span>
-                    <label for="otherInput mb-3">{{'OtherNumbers' | translate}}</label>
-                    <input
-                      type="text"
-                      class="form-control purpose-radio-input RoomsInput"
-                      id="otherInput"
-                      formControlName="RoomsInput"
-                    />
-                    <ul role="menu" aria-label="Pagination">
-                      <li
-                        aria-hidden="false"
-                        aria-disabled="false"
-                        class=""
-                        style="display: list-item"
-                      >
-                        <a
-                          href="#next"
-                          role="menuitem"
-                          style="margin-top: 18px"
-
-                          >{{'Next' | translate}}</a
-                        >
-                      </li>
-                    </ul>
+                @if(isPopupOpen == true){
+                  <div id="Roomspopup" class="Roomspopup">
+                    <div class="popup-content">
+                      <span class="close" (click)="closePopup()">&times;</span>
+                      <label for="otherInput mb-3">{{'OtherNumbers' | translate}}</label>
+                      <input
+                        type="text"
+                        class="form-control purpose-radio-input RoomsInput"
+                        id="otherInput"
+                        formControlName="RoomsInput"
+                      />
+                      <a class="buttons" (click)="next()">{{'Next' | translate}}</a>
+                    </div>
                   </div>
-                </div>
+                }
                 <div class="d-flex gap-2 mt-3">
                   <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
@@ -257,127 +244,27 @@
                   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
                   ad minim veniam, quis nostrud.
                 </p>
-                <div class="purpose-radios-wrapper">
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="Lighting"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="Lighting"
-                    />
-                    <label for="Lighting" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-lightbulb Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Lighting' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="Heating"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="Heating"
-                    />
-                    <label for="Heating" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-fire Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Heating' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="Security"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="Security"
-                    />
-                    <label for="Security" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-shield-halved Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Security' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="Entertainment"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="Entertainment"
-                    />
-                    <label for="Entertainment" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-volume-high Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Entertainment' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="Shutters"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="Shutters"
-                    />
-                    <label for="Shutters" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-house-chimney-window Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Shutters' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="GarageGates"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="GarageGates"
-                    />
-                    <label for="GarageGates" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-warehouse Icon"></i>
-                      </span>
-                      <span class="label-text">{{'Garage-Gates' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="AccessControl"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="AccessControl"
-                    />
-                    <label for="AccessControl" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-house-signal Icon"></i>
-                      </span>
-                      <span class="label-text">{{'AccessControl' | translate}}</span>
-                    </label>
-                  </div>
-                  <div class="purpose-radio">
-                    <input
-                      type="checkbox"
-                      formControlName="Categories[]"
-                      id="AcControl"
-                      class="purpose-radio-input CategoriesInputs"
-                      value="AcControl"
-                    />
-                    <label for="AcControl" class="purpose-radio-label">
-                      <span class="label-icon">
-                        <i class="fa-solid fa-snowflake Icon"></i>
-                      </span>
-                      <span class="label-text">{{'AC-Control' | translate}}</span>
-                    </label>
-                  </div>
+                <div class="purpose-radios-wrapper" formArrayName="Categories">
+                  @for (category of categories; track $index) {
+                    <div class="purpose-radio mb-3">
+                      <input
+                        type="checkbox"
+                        [id]="category.id"
+                        class="purpose-radio-input CategoriesInputs"
+                        [formControlName]="$index"
+                        [value]="category.value"
+
+                      />
+                                              <!-- formControlName="Categories"  [(ngModel)]="category.selected"-->
+
+                      <label [for]="category.id" class="purpose-radio-label">
+                        <span class="label-icon">
+                          <i [class]="category.icon" class="Icon"></i>
+                        </span>
+                        <span class="label-text">{{ category.label | translate }}</span>
+                      </label>
+                    </div>
+                  }
                 </div>
                 <div class="d-flex gap-2 mt-3">
                   <a class="buttons" (click)="next()">Next</a>
@@ -447,15 +334,15 @@
                 </p>
                 <div class="purpose-radios-wrapper Proposal-Platforms">
                   @for (platform of platforms; track $index) {
-                      <div class="purpose-radio">
-                          <input type="radio" formControlName="Platform" [id]="platform.Platform" class="purpose-radio-input PlatformsInputs" [value]="platform.Platform">
-                          <label [for]="platform.Platform" class="purpose-radio-label">
-                          <span class="label-icon">
-                              <img [src]="platform.Logo" class="label-icon-default" [alt]="platform.Platform">
-                          </span>
-                          <span class="label-text">{{platform.Platform}}</span>
-                          </label>
-                      </div>
+                    <div class="purpose-radio mb-3">
+                        <input type="radio" formControlName="Platform" [id]="platform.Platform" class="purpose-radio-input PlatformsInputs" [value]="platform.Platform">
+                        <label [for]="platform.Platform" class="purpose-radio-label">
+                        <span class="label-icon">
+                            <img [src]="platform.Logo" class="label-icon-default" [alt]="platform.Platform">
+                        </span>
+                        <span class="label-text">{{platform.Platform}}</span>
+                        </label>
+                    </div>
                   }
                   <div class="purpose-radio">
                     <input
@@ -544,10 +431,10 @@
                 </div>
               </section>
             }
-            
+
             <!--Contant -->
             @if(step === 8){
-              
+
               <section>
                 <h5 class="bd-wizard-step-title">{{'Step ' | translate}} 8</h5>
                 <h2 class="section-heading">{{'Step8Question' | translate}}</h2>
@@ -560,19 +447,17 @@
                       id="Name"
                       formControlName="Name"
                       class="form-control"
-                      value=""
-                      placeholder="FirstName"
+                      placeholder="{{'FirstName' | translate}}"
                     />
                   </div>
                   <div class="col-md-5">
                     <label for="Email" class="sr-only">{{'EmailAddress' | translate}}</label>
                     <input
                       type="email"
-                      formControlName="email"
+                      formControlName="Email"
                       id="Email"
                       class="form-control"
-                      value=""
-                      placeholder="EmailAddress"
+                      placeholder="{{'EmailAddress' | translate}}"
                     />
                   </div>
                 </div>
@@ -585,7 +470,7 @@
                       id="Phone"
                       class="form-control"
                       value=""
-                      placeholder="PhoneNumber"
+                      placeholder="{{'PhoneNumber' | translate}}"
                     />
                   </div>
                   <div class="col-md-5">
@@ -596,7 +481,7 @@
                       id="Address"
                       class="form-control"
                       value=""
-                      placeholder="Address"
+                      placeholder="{{'Address' | translate}}"
                     />
                   </div>
                 </div>
@@ -607,37 +492,40 @@
                       formControlName="Country"
                       id="Country"
                       class="form-control countrypicker"
+                      (change)="onCountryChange($event)"
                       data-flag="true"
                       style="padding: 0px 25px; color: #959aa6"
                     >
                       <option disabled selected hidden>{{'SelectCountry' | translate}}</option>
+                      <option *ngFor="let country of countries" [value]="country.code">
+                        <img [src]="country.flag" alt="{{ country.name }}" style="width: 20px; margin-right: 5px;">
+                        {{ country.name }}
+                      </option>
                     </select>
                   </div>
                   <div class="col-md-5">
                     <label for="City" class="sr-only">{{'City' | translate}}</label>
-                    <select
-                      formControlName="City"
-                      id="City"
-                      class="form-control"
-                      style="padding: 0px 25px; color: #959aa6"
-                    >
+                    <select id="city" class="form-control" formControlName="City" [disabled]="isCitySelectDisabled" [(ngModel)]="selectedCity" style="padding: 0px 25px; color: #959aa6">
                       <option disabled selected hidden>{{'SelectCity' | translate}}</option>
+                      <option *ngFor="let city of cities" [value]="city.name">
+                        {{ city.name }}
+                      </option>
                     </select>
                   </div>
                 </div>
 
-                <div class="form-group" style="width: -webkit-fill-available">
-                  <label for="formFile" class=""
+                <div class="form-group mt-3" style="width: -webkit-fill-available">
+                  <label for="formFile"
                     ><i class="fa-solid fa-house"></i>{{'UploadTheDesign' | translate}}
                   </label>
-                  <div class="row">
+                  <div class="d-flex gap-4 mt-2">
                     <input
                       class="FileType form-control"
                       type="file"
                       formControlName="file"
                       id="formFile"
                       accept=".pdf, .png, .jpg, .jpeg"
-                      style="padding: 10px 21px; width: 33%"
+                      style="padding: 10px 21px; width: 33%;height: fit-content;"
                     />
                     <img
                       src="assets/imgs/UI/website/Tools/AutocadHoe.jpg"
@@ -656,57 +544,57 @@
             <!--Invoice -->
             @if(step === 9){
               <section>
-                <h5 class="bd-wizard-step-title">{{'Step ' | translate}} 9</h5>
+                <h5 class="bd-wizard-step-title">{{'Step' | translate}} 9</h5>
                 <h2 class="section-heading mb-5">{{'Step9Question' | translate}}</h2>
 
                 <!-- Installed -->
-                <h6 class="font-weight-bold" id="Installed" style="font-size: 22px"  ngIf="toolData.value.Installed" >{{ toolData.value.Installed }}</h6>
+                <h6 class="font-weight-bold" id="Installed" style="font-size: 22px"  *ngIf="toolData.value.Installed" >{{ toolData.value.Installed }}</h6>
 
                 <!-- Building Type -->
-                <p>{{'Status' | translate}} : 
-                  <span id="BuildingType" ngIf="toolData.value.BuildingProject">{{ toolData.value.BuildingProject }}</span>
+                <p>{{'Status' | translate}} :
+                  <span id="BuildingType" *ngIf="toolData.value.BuildingProject">{{ toolData.value.BuildingProject }}</span>
                 </p>
-                
+
                 <!-- Rooms -->
                 <p>
-                  <span id="Rooms" ngIf="toolData.value.Rooms">{{ toolData.value.Rooms }}</span>
+                  <span id="Rooms" *ngIf="toolData.value.Rooms">{{ toolData.value.Rooms }}</span>
                   {{'Rooms' | translate}}
                 </p>
-                
+
                 <!-- System Type -->
                 <p>
-                  <span id="System" ngIf="toolData.value.System">{{ toolData.value.System }}</span>
+                  <span id="System" *ngIf="toolData.value.System">{{ toolData.value.System }}</span>
                   {{'System' | translate}}
                 </p>
-                
+
                 <!-- Package -->
                 <p>
-                  <span id="Package" ngIf="toolData.value.Package">{{ toolData.value.Package }}</span> 
+                  <span id="Package" *ngIf="toolData.value.Package">{{ toolData.value.Package }}</span>
                   {{'Package' | translate}}
                 </p>
-                
+
                 <!-- Platforms -->
-                <p>{{'Platforms' | translate}} : 
-                  <span id="Platforms" ngIf="toolData.value.Platforms">{{ toolData.value.Platforms }}</span>
+                <p>{{'Platforms' | translate}} :
+                  <span id="Platforms" *ngIf="toolData.value.Platforms">{{ toolData.value.Platforms }}</span>
                 </p>
 
                 <!-- Categories -->
-                <p>{{ 'Categories' | translate }}: 
-                  <span ngIf="toolData.value.Categories">{{ toolData.value.Categories }}</span>
+                <p>{{ 'Categories' | translate }}:
+                  <span *ngIf="toolData.value.Categories.value">{{ toolData.value.Categories.value }}</span>
                 </p>
 
-                
+
 
                 <h6 class="font-weight-bold">{{'AccountDetails' | translate}}</h6>
                 <p class="mb-4 text-black" style="font-size: 18px; font-weight: 600">
-                  <span id="enteredName" ngIf="toolData.value.Name">{{ toolData.value.Name }}</span>
+                  <span id="enteredName" *ngIf="toolData.value.Name">{{ toolData.value.Name }}</span>
                 </p>
                 <div class="d-grid">
-                  <p class="mb-2">{{'Email' | translate}} : <span id="enteredEmail" ngIf="toolData.value.email">{{ toolData.value.email }}</span></p>
-                  <p class="mb-2">{{'Phone' | translate}} : <span id="enteredPhone" ngIf="toolData.value.Phone">{{ toolData.value.Phone }}</span></p>
-                  <p class="mb-2">{{'Address' | translate}} : <span id="enteredAddress" ngIf="toolData.value.Address">{{ toolData.value.Address }}</span></p>
-                  <p class="mb-2">{{'City' | translate}} : <span id="enteredCity" ngIf="toolData.value.City">{{ toolData.value.City }}</span></p>
-                  <p class="mb-2">{{'Country' | translate}} : <span id="enteredCountry" ngIf="toolData.value.Country">{{ toolData.value.Country }}</span></p>
+                  <p class="mb-2">{{'Email' | translate}} : <span id="enteredEmail" *ngIf="toolData.value.Email">{{ toolData.value.Email }}</span></p>
+                  <p class="mb-2">{{'Phone' | translate}} : <span id="enteredPhone" *ngIf="toolData.value.Phone">{{ toolData.value.Phone }}</span></p>
+                  <p class="mb-2">{{'Address' | translate}} : <span id="enteredAddress" *ngIf="toolData.value.Address">{{ toolData.value.Address }}</span></p>
+                  <p class="mb-2">{{'City' | translate}} : <span id="enteredCity" *ngIf="toolData.value.City">{{ toolData.value.City }}</span></p>
+                  <p class="mb-2">{{'Country' | translate}} : <span id="enteredCountry" *ngIf="toolData.value.Country">{{ toolData.value.Country }}</span></p>
                 </div>
                 <div class="d-flex gap-2 mt-3">
                   <button type="submit" class="buttons">Save</button>

@@ -610,6 +610,43 @@ a#BuildHomeCta {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  text-align: center;
+}
+.cta.ShopNowButton svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+.cta.ShopNowButton span {
+  padding-bottom: 7px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+.cta.ShopNowButton:hover svg#HomeIcon {
+  transform: translateX(180px);
+}
+.cta.ShopNowButton:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.hover-underline-animation {
+  position: relative;
+  color: black;
+  padding-bottom: 20px;
 }
 .card-contact-left .button-Tool {
   display: block;

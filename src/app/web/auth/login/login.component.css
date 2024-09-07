@@ -179,3 +179,10 @@ section.auth .box .content {
   transition: all 0.4s ease;
   color: var(--mainColor);
 }
+.ForgetPassword{
+  font-size: 14px;
+  color: #757575;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  display: block;
+}

@@ -6,6 +6,7 @@ import { ProductsService } from '../../../Services/products/products.service';
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-product-card',
   standalone: true,

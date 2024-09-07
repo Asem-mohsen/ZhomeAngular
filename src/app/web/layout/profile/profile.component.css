@@ -1,3 +1,32 @@
+.profile-background {
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .page-title {
+    font-size: 2.2em;
+    font-weight: 500;
+    line-height: 1em;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: black;
+    cursor: default;
+    text-align: center;
+  }
+  .breadcrumbs {
+    color: #8d8d8d;
+    text-align: center;
+  }
+  .breadcrumbs .item {
+    text-transform: capitalize;
+  }
+}
 @media (max-width: 767px) {
   .ControlProfile a {
     width: -webkit-fill-available;

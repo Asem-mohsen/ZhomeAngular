@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { Component } from '@angular/core';
+import { Component , OnDestroy , Input, OnInit} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoriesService } from '../../../Services/categories/categories.service';
 import { Category } from '../../../Interfaces/category';
@@ -17,7 +17,7 @@ import { ProductCardComponent } from '../../additions/product-card/product-card.
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit, OnDestroy{
 
   categories : Category[] = []
   shopData !: any ;
@@ -26,7 +26,16 @@ export class ShopComponent {
   category1 !:Category;
   category2 !: Category;
   brand !: Brand ;
+
   activeTab: string = 'Recommended';
+
+  countdownInterval: any;
+  timeLeft: { days: number; hours: number; minutes: number; seconds: number } = {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  };
 
   // Sliders
   ProductsSlider: OwlOptions = {
@@ -58,7 +67,6 @@ export class ShopComponent {
       }
     },
     nav: false,
-    rtl: true
   };
 
   CategorySlider: OwlOptions = {
@@ -86,7 +94,6 @@ export class ShopComponent {
       }
     },
     nav: false,
-    rtl: true
   }
 
   BrandsSlider: OwlOptions = {
@@ -114,7 +121,6 @@ export class ShopComponent {
       }
     },
     nav: false,
-    rtl: true
   }
 
   ShopSlider: OwlOptions = {
@@ -146,12 +152,9 @@ export class ShopComponent {
       }
     },
     nav: true,
-    rtl: true
   }
 
-  constructor(
-    private _ShopService : ShopService
-  ){}
+  constructor(private _ShopService : ShopService){}
 
   ngOnInit(): void {
     if (typeof localStorage != 'undefined') {
@@ -159,23 +162,56 @@ export class ShopComponent {
     }
 
     this._ShopService.getShopPage().subscribe({
-        next: (res) => {
-          if (res && res.data) {
-            this.shopData = res.data;
-            this.productsOnSale = res.data.All_Products_On_Sale || [];
-            this.bundle = res.data.Bundle_to_Show as Product || null;
-            this.category1 = res.data.Category1_to_show?.Category as Category || null;
-            this.category2 = res.data.Category2_to_show?.Category as Category || null;
-            this.brand = res.data.Brand_to_show?.Brand as Brand || null;
+      next: (res) => {
+        if (res && res.data) {
+          this.shopData = res.data;
+          this.productsOnSale = res.data.All_Products_On_Sale || [];
+          this.bundle = res.data.Bundle_to_Show as Product || null;
+          this.category1 = res.data.Category1_to_show?.Category as Category || null;
+          this.category2 = res.data.Category2_to_show?.Category as Category || null;
+          this.brand = res.data.Brand_to_show?.Brand as Brand || null;
+          if (this.shopData?.Promocode?.EndsIn) {
+            this.startCountdown(this.shopData.Promocode.EndsIn);
           }
-        },
-      });
+        }
+      },
+    });
   }
 
-  
-  
   selectTab(tab: string) {
     this.activeTab = tab;
   }
 
+
+  startCountdown(endDate: string): void {
+    const endDateTime = new Date(endDate).getTime();
+
+    this.countdownInterval = setInterval(() => {
+      const now = new Date().getTime();
+      const timeDiff = endDateTime - now;
+
+      if (timeDiff < 0) {
+        clearInterval(this.countdownInterval);
+        this.timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      } else {
+        this.timeLeft = this.calculateTimeLeft(timeDiff);
+      }
+    }, 1000);
+  }
+
+  calculateTimeLeft(timeDiff: number) : { days: number; hours: number; minutes: number; seconds: number }
+  {
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    return { days, hours, minutes, seconds };
+  }
+
+  ngOnDestroy(): void {
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+    }
+  }
 }

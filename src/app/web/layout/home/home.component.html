@@ -91,7 +91,7 @@
           <ng-template carouselSlide>
             <img loading="lazy" [src]="brand.Logo" [alt]="brand.Brand" [title]="brand.Brand" />
           </ng-template>
-        }    
+        }
       </owl-carousel-o>
     </div>
   </div>
@@ -105,52 +105,56 @@
     <ul class="nav nav-tabs nav-primary" role="tablist">
       <li class="nav-item" role="presentation">
         <a
-          class="nav-link active"
+          class="nav-link"
           data-bs-toggle="tab"
-          href="#Recommended"
+          [ngClass]="{ active: activeTab === 'Recommended' }"
+          (click)="selectTab('Recommended')"
           role="tab"
-          aria-selected="true"
+          [attr.aria-selected]="activeTab === 'Recommended'"
         >
-          Recommendition
+        {{'Recommendition' | translate}}
         </a>
       </li>
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
           data-bs-toggle="tab"
-          href="#BestSelling"
+          [ngClass]="{ active: activeTab === 'BestSelling' }"
+          (click)="selectTab('BestSelling')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'BestSelling'"
         >
-          Best Selling
+        {{'BestSelling' | translate}}
         </a>
       </li>
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
           data-bs-toggle="tab"
-          href="#OnSale"
+          [ngClass]="{ active: activeTab === 'OnSale' }"
+          (click)="selectTab('OnSale')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'OnSale'"
         >
-          On Sale
+        {{'OnSale' | translate}}
         </a>
       </li>
       <li class="nav-item" role="presentation">
         <a
           class="nav-link"
           data-bs-toggle="tab"
-          href="#Bundles"
+          [ngClass]="{ active: activeTab === 'Bundles' }"
+          (click)="selectTab('Bundles')"
           role="tab"
-          aria-selected="false"
+          [attr.aria-selected]="activeTab === 'Bundles'"
         >
-          Bundles
+        {{'Bundles' | translate}}
         </a>
       </li>
     </ul>
     <div class="tab-content py-3">
       <!-- Recommended -->
-      <div class="tab-pane fade show active" id="Recommended" role="tabpanel">
+      <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'Recommended' }" [hidden]="activeTab !== 'Recommended'" role="tabpanel">
         <div class="wrapper">
           <div class="card" style="height: 469px">
             <div class="card-body ps-0">
@@ -158,7 +162,7 @@
                 <div
                   class="small-size box-1"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -166,7 +170,7 @@
                 <div
                   class="small-size box-2"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -174,7 +178,7 @@
                 <div
                   class="small-size box-3"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/james-mcdonald-74nIYjsOY88-unsplash.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -182,7 +186,7 @@
                 <div
                   class="small-size box-4"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/james-mcdonald-74nIYjsOY88-unsplash.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -190,49 +194,11 @@
                 <div
                   class="small-size box-5"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/james-mcdonald-74nIYjsOY88-unsplash.jpg');
                   "
                 >
                   <a>Daley low</a>
                 </div>
-              </div>
-              <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
               </div>
             </div>
           </div>
@@ -240,7 +206,7 @@
       </div>
 
       <!-- Best Selling -->
-      <div class="tab-pane fade" id="BestSelling" role="tabpanel">
+      <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'BestSelling' }" [hidden]="activeTab !== 'BestSelling'" role="tabpanel">
         <div class="wrapper">
           <div class="card" style="height: 469px">
             <div class="card-body ps-0">
@@ -248,7 +214,7 @@
                 <div
                   class="Big-size box-1"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                    background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -256,7 +222,7 @@
                 <div
                   class="small-size box-2"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -264,7 +230,7 @@
                 <div
                   class="small-size box-3"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -272,7 +238,7 @@
                 <div
                   class="small-size box-4"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -280,49 +246,11 @@
                 <div
                   class="small-size box-5"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
                 </div>
-              </div>
-              <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
               </div>
             </div>
           </div>
@@ -330,33 +258,19 @@
       </div>
 
       <!-- On Sale -->
-      <div class="tab-pane fade" id="OnSale" role="tabpanel">
+      <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'OnSale' }" [hidden]="activeTab !== 'OnSale'" role="tabpanel">
         <div class="wrapper">
           <div class="card" style="height: 469px">
             <div class="card-body ps-0">
               <div class="Box-Sizes">
                 <!-- @if($products->isNotEmpty())
-                                        @php $number = 1 @endphp
-                                        @foreach($products as $saleProduct)
-                                            <div class="Big-size box-{{ $number++ }}" style="background-image: url({{asset("Admin/dist/img/web/Products/MainImage/$saleProduct->MainImage")}});">
-                                                <a>{{ $saleProduct->Name }}</a>
-                                            </div>
-                                        @endforeach
-                                    @endif -->
-              </div>
-              <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  <!-- @if($products->isNotEmpty())
-                                        @php $number = 1 @endphp
-                                        @foreach($products as $saleProduct)
-                                            <div class="Big-size box-{{ $number++ }}" style="background-image: url({{asset("Admin/dist/img/web/Products/MainImage/$saleProduct->MainImage")}});">
-                                                <a>{{ $saleProduct->Name }}</a>
-                                            </div>
-                                        @endforeach
-                                    @endif -->
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
+                      @php $number = 1 @endphp
+                      @foreach($products as $saleProduct)
+                          <div class="Big-size box-{{ $number++ }}" style="background-image: url({{asset("Admin/dist/img/web/Products/MainImage/$saleProduct->MainImage")}});">
+                              <a>{{ $saleProduct->Name }}</a>
+                          </div>
+                      @endforeach
+                  @endif -->
               </div>
             </div>
           </div>
@@ -364,7 +278,7 @@
       </div>
 
       <!-- Bundles -->
-      <div class="tab-pane fade" id="Bundles" role="tabpanel">
+      <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'Bundles' }" [hidden]="activeTab !== 'Bundles'" role="tabpanel">
         <div class="wrapper">
           <div class="card" style="height: 469px">
             <div class="card-body ps-0">
@@ -372,7 +286,7 @@
                 <div
                   class="Big-size box-1"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -380,7 +294,7 @@
                 <div
                   class="small-size box-2"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -388,7 +302,7 @@
                 <div
                   class="small-size box-3"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -396,7 +310,7 @@
                 <div
                   class="small-size box-4"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
@@ -404,49 +318,11 @@
                 <div
                   class="small-size box-5"
                   style="
-                    background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
+                  background-image: url('./assets/imgs/UI/website/Home/Sliders/AlexaBlueGround.jpg');
                   "
                 >
                   <a>Daley low</a>
                 </div>
-              </div>
-              <div class="swiper-container">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/sebastian-scholz-nuki-Fh3Dtg6QX4Q-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartOutlet.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/SmartSwitch.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                  <div
-                    class="swiper-slide small-size"
-                    style="
-                      background-image: url(https://zhome.com.eg/Admin/Images/darryl-low-uqk9RAzm6lk-unsplash.jpg);
-                    "
-                  >
-                    <a>Daley low</a>
-                  </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
               </div>
             </div>
           </div>
@@ -478,251 +354,52 @@
 <section class="testmonials">
   <h2>Testmonials</h2>
   <div class="tests">
-    <div class="testmo active" data-id="content1">
-      <img
-        loading="lazy"
-        src="./assets/imgs/UI/website/Home/testmonials/algeria.jpeg"
-        alt="Alegria testmonials"
-      />
+    <div
+      *ngFor="let tab of tabs; let i = index"
+      class="testmo"
+      [ngClass]="{ active: activeTestmonialsTab === i }"
+      (click)="selectTestmonialTab(i)"
+    >
+      <img [src]="tab.image" [alt]="tab.alt" loading="lazy" />
       <div>
-        <h3>Alaa Abdelghafar</h3>
-        <p>Allegria Sodic compound</p>
+        <h3>{{ tab.name }}</h3>
+        <p>{{ tab.company }}</p>
       </div>
       <div class="gradient"></div>
-    </div>
-    <div class="testmo" data-id="content2">
-      <img
-        loading="lazy"
-        src="./assets/imgs/UI/website/Home/testmonials/Mivida-logo.png"
-        alt="Mivida testmonials"
-      />
-      <div>
-        <h3>Sherif Youssef</h3>
-        <p>Mivida</p>
-      </div>
-      <div class="gradient"></div>
-    </div>
-    <div class="testmo" data-id="content3">
-      <img
-        loading="lazy"
-        src="./assets/imgs/UI/website/Home/testmonials/mountain.png"
-        alt="mountain view testmonials"
-      />
-      <div>
-        <h3>Osama Elsayed</h3>
-        <p>Mountain View Hyde Park</p>
-      </div>
-      <div class="gradient"></div>
-    </div>
+  </div>
+
   </div>
   <div class="content">
-    <div class="contentBox active" id="content1">
+    <div
+      *ngFor="let content of contents; let i = index"
+      class="contentBox"
+      [ngClass]="{ active: activeTestmonialsTab === i }"
+      [id]="content.id"
+    >
       <div class="text">
-        <h2>Alaa Abdelghafar</h2>
+        <h2>{{ content.name }}</h2>
         <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <!-- Star SVGs -->
+          <ng-container *ngFor="let star of stars">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </ng-container>
         </span>
-        <p>
-          ZHome was very helpful in upgrading my old security system and
-          integrating it with my easy to use smart home system.
-        </p>
-        <p></p>
-      </div>
-    </div>
-    <div class="contentBox" id="content2">
-      <div class="text">
-        <h2>Sherif Youssef</h2>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </span>
-
-        <p>
-          I was really surprised to find such a transparent and professional
-          online platform like ZHome. They are very experienced and always there
-          for me
-        </p>
-      </div>
-    </div>
-    <div class="contentBox" id="content3">
-      <div class="text">
-        <h2>Osama Elsayed</h2>
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </span>
-        <p>
-          I like to design my own system and scenarios, this is what ZHome is
-          all about, they gave me the perfect platform to customise, design and
-          get my best suited system installed without trouble.
-        </p>
-        <p></p>
+        <p>{{ content.review }}</p>
       </div>
     </div>
   </div>
+
 </section>
 
 <script>
@@ -1018,7 +695,7 @@
       <h3>Zhome Compability</h3>
       <div class="d-flex g-2 Platfroms-slider">
         @for (platform of platforms; track $index){
-          
+
           <div class="Platform-home">
             <img
               loading="lazy"
@@ -1028,8 +705,8 @@
             />
             <a routerLink="/platforms">{{ platform.Platform }}</a>
           </div>
-        
-      }   
+
+      }
       </div>
     </div>
   </div>

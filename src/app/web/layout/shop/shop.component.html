@@ -21,7 +21,7 @@
           </ng-template>
           }
         </owl-carousel-o>
-          
+
       </div>
       <div class="col-md-3 side-imgs p-0 m-0">
         <img src="assets/imgs/UI/website/Shop/Escritorio.jpg" class="w-100" alt="">
@@ -134,7 +134,7 @@
           </div>
         </div>
       </div>
-    
+
       <!-- All -->
       <div
         class="tab-pane fade"
@@ -158,7 +158,7 @@
           </div>
         </div>
       </div>
-    
+
       <!-- MostPopular -->
       <div
         class="tab-pane fade"
@@ -182,7 +182,7 @@
           </div>
         </div>
       </div>
-    
+
       <!-- On Sale -->
       <div
         class="tab-pane fade"
@@ -280,91 +280,38 @@
 </section>
 
 <!-- Promocode -->
-<!-- <section>
-        <div class="container">
-            @if($promocodes)
-                {{-- Timer --}}
-                <script>
-
-                    // Function to update the countdown
-                    var days =  {{$remainingDays}}
-                    var hours = {{$remainingHours}}
-                    var minutes = {{$remainingMinutes}}
-                    var seconds =  {{$remainingSeconds}}
-                    function updateCountdown() {
-
-                        seconds--;
-                            if (seconds < 0){
-                                minutes--;
-                                seconds = 59
-                            }
-                            if (minutes < 0){
-                                hours--;
-                                minutes = 59
-                            }
-                            if (hours < 0){
-                                days--;
-                                hours = 23
-                            }
-
-                            function pad(n) {
-                                if ( n < 10 && n >= 0 ) {
-                                    return "0" + n;
-                                } else {
-                                    return n;
-                                }
-                            }
-                        // Update the countdown display
-                        document.getElementById("Days").innerHTML =  pad(days) ;
-                        document.getElementById("Hours").innerHTML = pad(hours) ;
-                        document.getElementById("Minutes").innerHTML = pad(minutes) ;
-                        document.getElementById("Seconds").innerHTML = pad(seconds) ;
-                        // Update the countdown every second
-                        setTimeout("updateCountdown()", 1000);
-                    }
-
-                </script>
-                @php
-                    // Calculate remaining time
-                    $endDate = $promocodes->EndsIn;
-                    $currentTime = time();
-                    $remainingTime = strtotime($endDate) - $currentTime;
-
-                    $remainingDays = floor($remainingTime / (60 * 60 * 24));
-                    $remainingHours = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60));
-                    $remainingMinutes = floor(($remainingTime % (60 * 60)) / 60);
-                    $remainingSeconds = $remainingTime % 60;
-                @endphp
-                <div class="promocode" style="background-image: url(UI/Imgs/website/Shop/pexels-eric-anada-1495580.jpg">
-                    <div class="promoInfo">
-                        <h2>FreshSale</h2>
-                        <p>SaveUpTo {{$promocodes->Save . "%"}} </p>
-                        <h3>WithPromo</h3><br>
-                        <span>{{$promocodes->Promocode}}</span>
-                    </div>
-                    <div class="countdown" id="countdown">
-                        <div class="num">
-                            <span id="Days"></span>
-                            <p>DaysSale</p>
-                        </div>
-                        <div class="num">
-                            <span id="Hours"></span>
-                            <p>HoursSale</p>
-                        </div>
-                        <div class="num" >
-                            <span id="Minutes"></span>
-                            <p>MinutesSale</p>
-                        </div>
-                        <div class="num">
-                            <span id="Seconds"></span>
-                            <p>SecondsSale</p>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-    </section> -->
-
+@if(shopData.Promocode){
+  <section>
+    <div class="container">
+      <div class="promocode" style="background-image: url('./assets/imgs/UI/website/Shop/pexels-eric-anada-1495580.jpg')">
+          <div class="promoInfo">
+              <h2>{{'FreshSale' | translate}}</h2>
+              <p>{{'SaveUpTo' | translate}} {{shopData.Promocode.Save + "%"}} </p>
+              <h3>{{'WithPromo' | translate}}</h3><br>
+              <span>{{shopData.Promocode.Promocode}}</span>
+          </div>
+          <div class="countdown" id="countdown">
+              <div class="num">
+                  <span id="Days">{{ timeLeft.days }}</span>
+                  <p>{{'DaysSale' | translate}}</p>
+              </div>
+              <div class="num">
+                  <span id="Hours">{{ timeLeft.hours }}</span>
+                  <p>{{'HoursSale' | translate}}</p>
+              </div>
+              <div class="num" >
+                  <span id="Minutes">{{ timeLeft.minutes }}</span>
+                  <p>{{'MinutesSale' | translate}}</p>
+              </div>
+              <div class="num">
+                  <span id="Seconds">{{ timeLeft.seconds }}</span>
+                  <p>{{'SecondsSale' | translate}}</p>
+              </div>
+          </div>
+      </div>
+    </div>
+  </section>
+}
 <!-- Products With Sale -->
 
 @if(productsOnSale){
@@ -387,8 +334,9 @@
     </div>
   </div>
 </section>
-} @else {
-<div class="m-4"></div>
+} 
+@else {
+  <div class="m-4"></div>
 }
 
 <!-- Sub Categories of one category and thier product -->

@@ -14,7 +14,7 @@ export class PaymentsService {
     return this.http.post(`${environment.baseURL}/api/payment/create-payment`, { amount, cartID });
   }
 
-  createCashPayment(cartID: string , amount: number): Observable<any> {
-    return this.http.post(`${environment.baseURL}/api/payment/cash-payment`, { cartID , amount  });
+  createCashPayment(CartID: string , amount: number): Observable<any> {
+    return this.http.post(`${environment.baseURL}/api/payment/cash-payment`, { CartID , amount  });
   }
 }

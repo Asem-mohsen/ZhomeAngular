@@ -50,7 +50,7 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem(this.tokenKey);
       if (token) {
-        this._http.get(`${environment.baseURL}/api/logout/all`).subscribe({
+        this._http.post(`${environment.baseURL}/api/logout/all` , {}).subscribe({
           next: () => {
             this.clearUserData();
             this._router.navigate(['/login']);
@@ -64,7 +64,22 @@ export class AuthService {
 
   getUserProfile() : Observable<any>
   {
-    return this._http.get(`${environment.baseURL}/api/users/profile`);
+    return this._http.get(`${environment.baseURL}/api/users/profile/user`);
+  }
+
+  updateUserProfile(data : User) : Observable<any>
+  {
+    return this._http.put(`${environment.baseURL}/api/users/update` , data);
+  }
+
+  deleteUserProfile() : Observable<any>
+  {
+    return this._http.post(`${environment.baseURL}/api/users/delete` , []);
+  }
+
+  deactivateUserProfile() : Observable<any>
+  {
+    return this._http.post(`${environment.baseURL}/api/users/deactivate` , []);
   }
 
   getCurrentUser(): User | Admin | null {
@@ -95,12 +110,17 @@ export class AuthService {
 
   // Sessions
   getSessionId(): string {
-    let sessionId = localStorage.getItem('sessionId');
-    if (!sessionId) {
-      sessionId = this.generateSessionId();
-      localStorage.setItem('sessionId', sessionId);
+    // Check if 'window' and 'localStorage' are available
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      let sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        sessionId = this.generateSessionId();
+        localStorage.setItem('sessionId', sessionId);
+      }
+      return sessionId;
+    } else {
+      return '';
     }
-    return sessionId;
   }
 
   generateSessionId(): string {

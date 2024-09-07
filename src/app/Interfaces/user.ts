@@ -57,10 +57,11 @@ export interface profileResponse {
   message: string;
   data: {
     user: User;
-    products: Product[];
     userProducts:Product[] ;
+    orderCount: number;
+    totalPayments: number;
+    products: Product[];
     orderStatistics: OrderStatistics;
-
-  }
+  };
   error: {};
 }

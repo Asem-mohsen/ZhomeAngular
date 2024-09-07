@@ -13,6 +13,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { spinnerLoadingInterceptor } from './Interceptors/spinner-loading/spinner-loading.interceptor';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -28,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr(),
     importProvidersFrom(HttpClientModule ,
       RouterModule ,
-      BrowserAnimationsModule , CarouselModule , ToastrModule , SwiperModule , NgxSpinnerModule ,
+      BrowserAnimationsModule , CarouselModule , ToastrModule , SwiperModule , NgxSpinnerModule , NgxSliderModule,
       TranslateModule.forRoot({
       defaultLanguage : 'en',
       loader: {
@@ -37,6 +39,6 @@ export const appConfig: ApplicationConfig = {
         deps: [HttpClient]
       }
     })),
-    provideHttpClient(withFetch() ,withInterceptors([authInterceptor , errorInterceptor , spinnerLoadingInterceptor]))
+    provideHttpClient(withFetch() ,withInterceptors([authInterceptor , errorInterceptor , spinnerLoadingInterceptor])), provideAnimationsAsync()
   ]
 };

@@ -19,6 +19,6 @@ export class ProposalService {
   storeData(data : Tool) : Observable <any>
   {
     return this.http.post(`${environment.baseURL}/api/tools/store` , data)
-    
+
   }
 }

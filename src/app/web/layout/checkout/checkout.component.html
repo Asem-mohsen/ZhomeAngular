@@ -101,7 +101,7 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserName" class="form-control-label">Name</label>
-                                                  <input class="form-control" id="UserName" type="text" formControlName="Name" [value]="orderData.User.Name" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
+                                                  <input class="form-control" id="UserName" type="text" formControlName="Name" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
                                               <!-- <input class="form-control" type="hidden"  formControlName="FirstName" [value]="orderData.firstName">
                                                   <input class="form-control" type="hidden"  formControlName="LastName"  [value]="orderData.lastName" > -->
                                                     <input class="form-control" type="hidden" formControlName="CartID">
@@ -144,7 +144,7 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserMainAddress" class="form-control-label">Address</label>
-                                              <textarea class="form-control" id="UserMainAddress" formControlName="Address">{{ orderData.User.Address}}</textarea>
+                                              <textarea class="form-control" id="UserMainAddress" formControlName="Address"></textarea>
                                                 @if (userInfo.get('Address')?.errors &&
                                                     userInfo.get('Address')?.touched) {
                                                     <div
@@ -161,7 +161,7 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserPhone" class="form-control-label">Phone</label>
-                                              <input class="form-control" id="UserPhone" type="number" formControlName="Phone" [value]="orderData.User.Phone">
+                                              <input class="form-control" id="UserPhone" type="number" formControlName="Phone">
                                                 @if (userInfo.get('Phone')?.errors &&
                                                     userInfo.get('Phone')?.touched) {
                                                     <div
@@ -350,7 +350,7 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserBuilding" class="form-control-label">Building</label>
-                                                <input class="form-control" id="UserBuilding" type="text" formControlName="Building" [value]="" >
+                                                <input class="form-control" id="UserBuilding" type="text" formControlName="Building">
                                                 @if (userInfo.get('Building')?.errors &&
                                                     userInfo.get('Building')?.touched) {
                                                     <div
@@ -367,7 +367,7 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserFloor" class="form-control-label">Floor</label>
-                                              <input class="form-control" id="UserFloor" type="text" formControlName="Floor" [value]="">
+                                              <input class="form-control" id="UserFloor" type="text" formControlName="Floor">
                                                 @if (userInfo.get('Floor')?.errors &&
                                                     userInfo.get('Floor')?.touched) {
                                                     <div
@@ -384,7 +384,7 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserApartment" class="form-control-label">Apartment</label>
-                                              <input class="form-control" id="UserApartment" type="text" formControlName="Apartment" [value]="">
+                                              <input class="form-control" id="UserApartment" type="text" formControlName="Apartment">
                                                 @if (userInfo.get('Apartment')?.errors &&
                                                     userInfo.get('Apartment')?.touched) {
                                                     <div

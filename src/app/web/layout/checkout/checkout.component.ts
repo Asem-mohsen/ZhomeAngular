@@ -18,7 +18,6 @@ import { PaymentsService } from '../../../Services/payments/payments.service';
 })
 export class CheckoutComponent {
 
-  stripe: Stripe | null = null;
   orderData !: CheckoutData ;
   isLogged : boolean = false
 
@@ -54,31 +53,24 @@ export class CheckoutComponent {
       localStorage.setItem('currentPage', '/checkout')
     }
 
-    this._ordersService.checkoutOrders().subscribe({
-      next : (res) =>{
-        this.orderData = res.data;
-        this.total.set(res.data.total);
-      },
-    })
+    this.loadCheckoutAndUserDetails();
 
     this.isLogged = this._authService.isAuthenticated();
-    if (this.isLogged) {
-      this.loadUserDetails();
-    }
-    
+
   }
 
-
-  // fetch  user details
-  loadUserDetails() {
+  loadCheckoutAndUserDetails() {
     this._ordersService.checkoutOrders().subscribe({
       next: (res) => {
-        this.userInfo.patchValue({
-          CartID: this.orderData.CartID,
-          email: res.data.User.email,
-          Address: res.data.User.Address,
-          Phone: res.data.User.Phone,
-          Name: res.data.User.Name,
+        this.orderData = res.data;
+        this.total.set(res.data.total);
+
+        this.userInfo.patchValue({ // patch value is used to set the data on the form
+          CartID: res.data.CartID,
+          email: res.data.User?.email,
+          Address: res.data.User?.Address,
+          Phone: res.data.User?.Phone,
+          Name: res.data.User?.Name,
         });
       }
     });
@@ -94,7 +86,6 @@ export class CheckoutComponent {
       }
     })
   }
-
 
   next() {
     this.step += 1;
@@ -120,6 +111,8 @@ export class CheckoutComponent {
 
   cashPay()
   {
+    console.log(this.userInfo.value);
+    console.log(this.userInfo.value.CartID);
     this.paymentService.createCashPayment(this.userInfo.value.CartID , this.total()).subscribe({
       next : (res) => {
         if (res.success == true) {

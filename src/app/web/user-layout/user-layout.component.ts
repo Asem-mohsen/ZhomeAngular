@@ -42,10 +42,10 @@ export class UserLayoutComponent implements OnInit {
 
     }
 
-    
+
 
     isAuthPage(): boolean {
-      const authRoutes = ['/login', '/register']; // navbar/footer should not appear
+      const authRoutes = ['/login', '/register' , '/forgetPassword']; // navbar/footer should not appear
       return authRoutes.includes(this.router.url);
     }
 }

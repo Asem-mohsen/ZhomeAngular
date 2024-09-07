@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(products : Product[] ,selectedFilters: any): Product[] {
 
-    const { category, brand, platform, technology } = selectedFilters;
+    const { category, brand, platform, technology , minPrice , maxPrice } = selectedFilters;
 
     return products.filter(product => {
 
@@ -25,8 +25,11 @@ export class FilterPipe implements PipeTransform {
       // Filter based on selected technologies
       const matchesTechnology = !technology.length || product.technologies.some(t => technology.includes(t.Technology));
 
+      // Filter based on price
+      const matchesPrice = product.Price >= minPrice && product.Price <= maxPrice;
+
       // Return products that match all selected filters
-      return matchesCategory && matchesBrand && matchesPlatform && matchesTechnology;
+      return matchesCategory && matchesBrand && matchesPlatform && matchesTechnology && matchesPrice;
     });
 
   }

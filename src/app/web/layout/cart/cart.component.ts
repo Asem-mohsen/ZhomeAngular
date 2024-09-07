@@ -1,5 +1,5 @@
 import { AuthService } from './../../../Services/auth/auth.service';
-import { Component , signal, computed } from '@angular/core';
+import { Component , signal, computed , ChangeDetectorRef} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiResponse, CartItem } from "../../../Interfaces/cart";
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../Interfaces/product';
+import { NavbarComponent } from '../../additions/navbar/navbar.component';
 
 @Component({
   selector: 'app-cart',
@@ -83,7 +84,7 @@ export class CartComponent{
       localStorage.setItem('currentPage', '/cart')
     }
 
-    if(this._AuthService.getCurrentUser() != null) {
+    if(this._AuthService.isAuthenticated() != null) {
       this.isLogged = true
     }
 

@@ -1,14 +1,16 @@
 
-    <section class="shop-background site-banner jarallax min-height300 padding-large" style="background: url('assets/imgs/UI/website/Profile/Background.jpg');">
+  <router-outlet></router-outlet>
+
+    <section class="profile-background site-banner padding-large" style="background: url('assets/imgs/UI/website/Profile/Background.jpg');">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="page-title text-white">Profile</h1>
+                    <h1 class="page-title text-white">{{'Profile' | translate}}</h1>
                     <div class="breadcrumbs">
                     <span class="item">
-                        <a routerLink="/home" class="text-white">Home /</a>
+                        <a routerLink="/home" class="text-white">{{'Home' | translate}} /</a>
                     </span>
-                    <span class="item text-white">Profile</span>
+                    <span class="item text-white">{{'Profile' | translate}}</span>
                     </div>
                 </div>
             </div>
@@ -18,9 +20,9 @@
     <!--UnVerified Email-->
     @if(user.email_verified_at){
         <section>
-            <div class="container">
+            <div class="container mt-3">
                 <div class="alert alert-warning text-center">
-                    ActivationText
+                    {{'ActivationText' | translate}}
                 </div>
             </div>
         </section>
@@ -44,13 +46,25 @@
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3" role="tablist">
                                 <li class="list-group-item d-flex justify-content-center align-items-center nav-item p-3" role="presentation">
-                                    <a class="nav-link profile-link mb-0 active" data-bs-toggle="tab" role="tab" aria-selected="true">
-                                        Settings
+                                    <a
+                                      class="nav-link profile-link mb-0"
+                                      [class.active]="activeTab === 'settings'"
+                                      (click)="selectTab('settings')"
+                                      role="tab"
+                                      aria-selected="activeTab === 'settings'"
+                                    >
+                                        {{'Settings' | translate}}
                                     </a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-center align-items-center nav-item p-3" role="presentation">
-                                    <a class="nav-link profile-link mb-0" data-bs-toggle="tab"  role="tab" aria-selected="false">
-                                        Orders
+                                    <a
+                                      class="nav-link profile-link mb-0"
+                                      [class.active]="activeTab === 'orders'"
+                                      (click)="selectTab('orders')"
+                                      role="tab"
+                                      aria-selected="activeTab === 'orders'"
+                                    >
+                                      {{'Orders' | translate}}
                                     </a>
                                 </li>
 
@@ -60,84 +74,83 @@
                 </div>
                 <div class="col-lg-8 tab-content">
                     <!-- Info Card -->
-                    <div class="card mb-4 tab-pane fade show active" id="Settings" style="border-radius: 14px;">
-                        <form action="" method="post">
-                            <div class="card-body">
-                                <div class="row RowReverseInArabic">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Full Name</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{user.Name}}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row RowReverseInArabic">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Email</p>
-                                    </div>
-                                    <div class="col-sm-9 RowReverseInArabic d-felx align-items-center flex-wrap" style="gap: 29px">
-                                        <p class="text-muted mb-0">{{user.email}}</p>
-                                        @if(user.email_verified_at){
-                                            <span class="badge badge-warning">unverified</span>
-                                        }
-                                        @else{
-                                            <span class="badge badge-success">verified</span>
-                                        }
+                    @if(activeTab === 'settings'){
+                      <div class="card mb-4 tab-pane fade show active" id="Settings" style="border-radius: 14px;">
+                              <div class="card-body">
+                                  <div class="row RowReverseInArabic">
+                                      <div class="col-sm-3">
+                                          <p class="mb-0">{{'FullName' | translate}}</p>
+                                      </div>
+                                      <div class="col-sm-9">
+                                          <p class="text-muted mb-0">{{user.Name}}</p>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <div class="row RowReverseInArabic">
+                                      <div class="col-sm-3">
+                                          <p class="mb-0">{{'Email' | translate}}</p>
+                                      </div>
+                                      <div class="col-sm-9 RowReverseInArabic d-flex align-items-center flex-wrap gap-4">
+                                          <p class="text-muted mb-0">{{user.email}}</p>
+                                          @if(user.email_verified_at){
+                                              <span class="badge badge-warning" style="background-color: #b0860e;">{{'unverified' | translate}}</span>
+                                          }
+                                          @else{
+                                              <span class="badge badge-success">{{'verified' | translate}}</span>
+                                          }
 
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row RowReverseInArabic">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Phone</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{user.Phone ? "0" + user.Phone : " Edit Phone Number " }}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row RowReverseInArabic">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Address</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">{{user.Address ? user.Address : "Edit to add Address"}}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <p class="mb-0 text-center">Control your Account</p>
-                                <div class="row RowReverseInArabic">
-                                    <div class="col-sm-12 mt-15 d-flex ControlProfile justify-content-center flex-wrap mt-2 " style="gap: 15px">
-                                        <a routerLink="/edit/profile" class="btn btn-success">Update your Information</a>
-                                        <button name="Deactivate" class="btn btn-danger">Deactivate Account</button>
-                                        <button name="Delete"  class="btn btn-danger">Delete Account</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <div class="row RowReverseInArabic">
+                                      <div class="col-sm-3">
+                                          <p class="mb-0">{{'Phone' | translate}}</p>
+                                      </div>
+                                      <div class="col-sm-9">
+                                          <p class="text-muted mb-0">{{user.Phone ? "0" + user.Phone : " Edit Phone Number " }}</p>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <div class="row RowReverseInArabic">
+                                      <div class="col-sm-3">
+                                          <p class="mb-0">{{'Address' | translate}}</p>
+                                      </div>
+                                      <div class="col-sm-9">
+                                          <p class="text-muted mb-0">{{user.Address ? user.Address : "Edit to add Address"}}</p>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                  <p class="mb-0 text-center">{{'ControlyourAccount' | translate}}</p>
+                                  <div class="row RowReverseInArabic">
+                                      <div class="col-sm-12 mt-15 d-flex ControlProfile justify-content-center flex-wrap mt-2 gap-3">
+                                          <a routerLink="edit" class="btn btn-success">{{'UpdateyourInformation' | translate}}</a>
+                                          <button (click)="deactivate()" class="btn btn-danger">{{'DeactivateAccount' | translate}}</button>
+                                          <button (click)="delete()"  class="btn btn-danger">{{'DeleteAccount' | translate}}</button>
+                                      </div>
+                                  </div>
+                              </div>
+                      </div>
+                    }
 
                     <!--  Orders Card-->
-                    <div class="card mb-4 tab-pane fade" id="PastOrders" style="border-radius: 14px;height: 107rem;">
+                  @if(activeTab === 'orders'){
+                    <div class="card mb-4 " id="PastOrders" style="border-radius: 14px;">
                         <div class="card-body">
 
                             <!-- Statistics for all -->
                             <div class="row">
                                 <div class="col-xl-12 col-sm-12 mb-xl-0 mb-4">
-                                    <div class="card NumbersCard" style="height: 118px;">
+                                    <div class="card NumbersCard mb-4">
                                         <div class="card-body p-3">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="numbers">
-                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.Name + " Orders"}} </p>
+                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.Name}} Orders </p>
                                                         <h5 class="font-weight-bolder text-center" >
-                                                            <!-- {{orderStatistics.orderCount}} -->
+                                                            {{profileData.data.orderCount}}
                                                         </h5>
                                                         <p class="mb-0 text-center" style="font-size: 16px;font-weight: 700;">
-                                                            <!-- @if(orderStatistics){
-                                                                since {{ formatOrderDate(orderStatistics.MinOrderDate) }}
-                                                            } -->
+                                                            {{profileData.data.orderStatistics.MinOrderDate}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -195,62 +208,39 @@
                             <hr>
 
                             <!-- Purchased -->
+                          @if(profileData.data.userProducts){
                             <h1 class="sub-header">Your Past Orders</h1>
                             <div class="row">
                                 <div class="related-product__carousel">
-
-                                        @for(product of user.products ; track product.ID){
-                                                <div class="item">
-                                                    <app-product-card [product]="product"></app-product-card>
-                                                </div>
-                                            }
-                                            @empty {
-                                                <div class="col-lg-12 col-md-6 wow fadeInUp text-center" data-wow-duration="1500ms">
-                                                    <a routerLink="/shop" class="btn btn-info">Shop Now</a>
-                                                </div>
-                                            }
+                                  <owl-carousel-o [options]="ProductsSlider">
+                                    @for(product of profileData.data.userProducts ; track product.ID){
+                                      <ng-template carouselSlide>
+                                        <app-product-card [product]="product"></app-product-card>
+                                      </ng-template>
+                                    }
+                                  </owl-carousel-o>
                                 </div>
-
-
                             </div>
+                          }
 
                             <hr>
 
                             <!-- Dicover Our Products Slider -->
-                            <h1 class="sub-header mt-5 pt-4">Discover our Products</h1>
+                            <h1 class="sub-header mt-2 pt-4">{{'DiscoverourProducts' | translate}}</h1>
                             <div class="related-product__carousel">
+                              <owl-carousel-o [options]="ProductsSlider">
                                 @for(product of products ; track product.ID){
-                                    <div class="item">
-                                        <app-product-card [product]="product"></app-product-card>
-                                    </div>
+                                  <ng-template carouselSlide>
+                                    <app-product-card [product]="product"></app-product-card>
+                                  </ng-template>
                                 }
+                              </owl-carousel-o>
                             </div>
                         </div>
                     </div>
+                  }
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-        // Alert
-        function DeactivateAccount(){
-            alert("By deactivating your account, you cannot access your account. if you want to get your account back just contact one of our customer service.")
-        }
-        function DeleteAccount(){
-            alert("By Deleting your account, all your data will be truncated from our system so please think again.")
-        }
-
-        $(document).ready(function() {
-        // Add click event for the navigation tabs
-            $('.list-group-flush li a').click(function(e) {
-                e.preventDefault();
-                var targetDiv = $(this).attr('href');
-                $('.list-group-flush li a').removeClass('active');
-                $('div').removeClass('show active');
-                $(this).addClass('active');
-                $(targetDiv).addClass('show active');
-            });
-        });
-    </script>
 
