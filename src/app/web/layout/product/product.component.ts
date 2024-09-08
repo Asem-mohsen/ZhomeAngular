@@ -9,11 +9,13 @@ import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser'; 
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '../../../Services/translation/translation.service';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule , CommonModule],
+  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule , CommonModule , TranslateModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -26,7 +28,7 @@ export class ProductComponent {
   productPlatforms: any[] = [];
   isAdded : boolean = false;
   activeTab : string = '';
-
+  currentLang : string = 'en'
   collapseStates: { [key: string]: boolean } = {
     'description': true,
     'faq': true,
@@ -112,15 +114,19 @@ export class ProductComponent {
     nav: true
   }
 
-  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService , private _titleService: Title){}
+  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService , private _titleService: Title, private translationService : TranslationService){}
   // ActivatedRoute => to extract any param form the url
 
   ngOnInit(): void {
 
+    this.currentLang = this.translationService.getLanguage();
+
     this._ActivatedRoute.paramMap.subscribe((res) => {
       this.productID = res.get('productId');
+      
       this._ProductService.getOneProduct(this.productID).subscribe({
 
+        
         next: (res) => {
           this.products = res.data['Recommended-Products'];
           this.product = res.data.Product;

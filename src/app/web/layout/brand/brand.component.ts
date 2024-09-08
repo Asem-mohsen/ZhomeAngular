@@ -4,11 +4,12 @@ import { ProductCardComponent } from "../../additions/product-card/product-card.
 import { BrandService } from '../../../Services/brands/brand.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Brand } from '../../../Interfaces/brand';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-brand',
   standalone: true,
-  imports: [ProductCardComponent , CarouselModule , RouterLink],
+  imports: [ProductCardComponent , CarouselModule , RouterLink, TranslateModule],
   templateUrl: './brand.component.html',
   styleUrl: './brand.component.css'
 })

@@ -7,17 +7,20 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProductsService } from '../../../Services/products/products.service';
 import { Product } from '../../../Interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { TranslationService } from '../../../Services/translation/translation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-platform',
   standalone: true,
-  imports: [RouterLink , ProductCardComponent, CarouselModule],
+  imports: [RouterLink , ProductCardComponent, CarouselModule , TranslateModule],
   templateUrl: './platform.component.html',
   styleUrl: './platform.component.css'
 })
 export class PlatformComponent implements OnInit{
 
   platforms: Platform[] = [];
+  currentLang : string = 'en'
 
   // Sliders
   ProductsSlider: OwlOptions = {
@@ -47,13 +50,15 @@ export class PlatformComponent implements OnInit{
     nav: false
   }
 
-  constructor(private _PlatformService : PlatformService){}
+  constructor(private translationService : TranslationService ,private _PlatformService : PlatformService){}
 
   ngOnInit(): void
   {
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/platforms')
     }
+
+    this.currentLang = this.translationService.getLanguage();
 
     this._PlatformService.getPlatfromsUserShow().subscribe((res) => {
       this.platforms = res.data.platforms;

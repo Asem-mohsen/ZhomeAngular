@@ -5,16 +5,19 @@ import { CategoriesService } from '../../../Services/categories/categories.servi
 import { RouterLink } from '@angular/router';
 import { NgStyle } from '@angular/common';
 import { ProductCardComponent } from '../../additions/product-card/product-card.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationService } from '../../../Services/translation/translation.service';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [RouterLink , CarouselModule , NgStyle , ProductCardComponent],
+  imports: [RouterLink , CarouselModule , NgStyle , ProductCardComponent , TranslateModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
 export class CategoryComponent {
 
+  currentLang : string = 'en'
 
   categories: Category[] = [];
 
@@ -46,13 +49,15 @@ export class CategoryComponent {
     nav: false
   }
 
-  constructor(private _CategoriesService : CategoriesService){}
+  constructor(private translationService : TranslationService , private _CategoriesService : CategoriesService){}
 
   ngOnInit(): void
   {
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/categories')
     }
+
+    this.currentLang = this.translationService.getLanguage();
 
     this._CategoriesService.getCategories().subscribe((res) => {
       this.categories = Object.values(res.data);

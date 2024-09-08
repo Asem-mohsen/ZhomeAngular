@@ -2,12 +2,12 @@
       <div class="container">
           <div class="row">
               <div class="col-md-12">
-                  <h1 class="page-title" class="text-white">Zhome</h1>
+                  <h1 class="page-title" class="text-white">{{ 'Zhome' | translate }}</h1>
                   <div class="breadcrumbs">
                   <span class="item">
-                      <a routerLink="home" class="text-white">Home /</a>
+                      <a routerLink="/home" class="text-white">{{ 'Home' | translate }} /</a>
                   </span>
-                  <span class="item" class="text-white">ContactUs</span>
+                  <span class="item" class="text-white">{{ 'ContactUs' | translate }}</span>
                   </div>
               </div>
           </div>
@@ -25,10 +25,10 @@
                       <div class="contact-one__content">
                           <div class="row no-gutters">
                               <div class="col-lg-12">
-                                  <h3 class="contact-one__title">Zhome</h3>
-                                  <p class="contact-one__text">Location</p>
-                                  <p class="contact-one__text"><a href=""> phone here</a></p>
-                                  <p class="contact-one__text"><a href="mailto:Zhome@gmail.com">Email</a></p>
+                                  <h3 class="contact-one__title">{{ 'Zhome' | translate }}</h3>
+                                  <p class="contact-one__text">{{ 'ZhomeLocation' | translate }}</p>
+                                  <p class="contact-one__text"><a href=""> {{zhomeContact.Phone}}</a></p>
+                                  <p class="contact-one__text"><a href="mailto:Zhome@gmail.com">{{ 'ZhomeEmail' | translate }}</a></p>
                               </div>
                           </div>
                       </div>
@@ -38,36 +38,35 @@
               <div class="col-lg-6">
                   <form method="POST" class="contact-one__form">
                       <div class="row">
-                              <input type="hidden" name="UserID" value="">
                               <div class="col-lg-12">
                                   <p class="contact-one__field">
-                                      <label for="UserNameContactUs">Name</label>
+                                      <label for="UserNameContactUs">{{ 'ContactName' | translate }}</label>
                                       <input type="text" name="Name" id="UserNameContactUs"  value="">
                                   </p>
                               </div>
                               <div class="col-lg-6">
                                   <p class="contact-one__field">
-                                      <label for="UserEmailContactUs">Email</label>
+                                      <label for="UserEmailContactUs">{{ 'ContactEmail' | translate }}</label>
                                       <input type="email" name="email" id="UserEmailContactUs" value="" required>
                                   </p>
                               </div>
                               <div class="col-lg-6">
                                   <p class="contact-one__field">
-                                      <label for="UserPhoneContactUs">Phone</label>
+                                      <label for="UserPhoneContactUs">{{ 'ContactPhone' | translate }}</label>
                                       <input type="tel" name="Phone" id="UserPhoneContactUs" pattern="[0-9]*" value="" >
                                   </p>
                               </div>
                           <div class="col-lg-12">
                               <p class="contact-one__field">
-                                  <label for="UserSubjectContactUs">Subject</label>
+                                  <label for="UserSubjectContactUs">{{ 'ContactSubject' | translate }}</label>
                                   <input type="text" name="subject" id="UserSubjectContactUs" required>
                               </p>
                           </div>
                           <div class="col-lg-12">
                               <p class="contact-one__field">
-                                  <label for="UserQuestionContactUs">Message</label>
+                                  <label for="UserQuestionContactUs">{{ 'ContactMessage' | translate }}</label>
                                   <textarea name="UsersQuestion" id="UserQuestionContactUs" required></textarea>
-                                  <button type="submit" class="thm-btn contact-one__btn">Send Message</button>
+                                  <button type="submit" class="thm-btn contact-one__btn">{{ 'SendMessage' | translate }}</button>
                               </p>
                           </div>
                       </div> 

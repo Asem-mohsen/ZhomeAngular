@@ -2,15 +2,15 @@
 <section class="mt-5">
     <div class="container mt-5 pt-5 mb-4">
         <div class="block-title text-center">
-            <p class="block-title__tag-line text-center">Zhome</p>
-            <h1 class="text-center">Brands</h1>
+            <p class="block-title__tag-line text-center">{{'Zhome' | translate}}</p>
+            <h1 class="text-center">{{'Brands' | translate}}</h1>
         </div>
     </div>
 </section>
 
 <!-- Slider for Brands -->
 <section class="mt-5">
-    <div class="slider customer-logos border-none"> <!-- class -> slider customer-logos  to be slidable-->
+    <div class="slider customer-logos border-none">
       <owl-carousel-o [options]="BrandsSlider">
         @for (brand of brands; track $index) {
           <ng-template carouselSlide>
@@ -27,39 +27,39 @@
 
 <!-- Brands -->
 @for (brand of brands; track $index) {
-    <section class="SectionNumber" [id]="brand.Brand">
-        <div class="container">
-            <div class="PlatformSection">
-                <div class="PlatformTop">
-                    <h2>{{brand.Brand}}</h2>
-                    <img [src]="brand.CoverImg" [alt]="brand.Brand" style="object-fit: contain;height: 300px;">
-                </div>
-                <div class="container">
-                    <div class="PlatformDesc">
-                        <p>{{brand.MainDescription}}</p>
-                    </div>
+  <section class="SectionNumber" [id]="brand.Brand">
+      <div class="container">
+          <div class="PlatformSection">
+              <div class="PlatformTop">
+                  <h2>{{brand.Brand}}</h2>
+                  <img [src]="brand.CoverImg" [alt]="brand.Brand" style="object-fit: contain;height: 300px;">
+              </div>
+              <div class="container">
+                  <div class="PlatformDesc">
+                      <p>{{brand.MainDescription}}</p>
+                  </div>
 
-                    <!-- Products Related -->
-                    <div class="category-Name mt-5 pt-5">
-                        <h3>Related Products</h3>
-                        <a routerLink="">Discover More<i class="fa fa-arrow-right"></i></a>
-                    </div>
-                    <div class="related-product__carousel mt-3 mb-4">
-                      <owl-carousel-o [options]="ProductsSlider">
-                        @for (product of brand.products; track product.ID) {
-                          <ng-template carouselSlide>
-                            <div class="item">
-                              <app-product-card [product]="product"></app-product-card>
-                            </div>
-                          </ng-template>
-                        }
-                      </owl-carousel-o>
+                  <!-- Products Related -->
+                  <div class="category-Name mt-5 pt-5">
+                      <h3>{{'RelatedProducts' | translate}}</h3>
+                      <a routerLink="">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
+                  </div>
+                  <div class="related-product__carousel mt-3 mb-4">
+                    <owl-carousel-o [options]="ProductsSlider">
+                      @for (product of brand.products; track product.ID) {
+                        <ng-template carouselSlide>
+                          <div class="item">
+                            <app-product-card [product]="product"></app-product-card>
+                          </div>
+                        </ng-template>
+                      }
+                    </owl-carousel-o>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 }
 
 

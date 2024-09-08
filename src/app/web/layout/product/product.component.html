@@ -3,10 +3,15 @@
     <!-- Header -->
     <div class="container pt-3">
         <ul class="list-unstyled thm-breadcrumb thm-breadcrumb__two">
-            <li><a routerLink="/home">Home : </a></li>
-            <li><a routerLink="/shop">Shop :</a></li>
+            <li><a routerLink="/home">{{ 'Home' | translate }} : </a></li>
+            <li><a routerLink="/shop">{{ 'Shop' | translate }} :</a></li>
             <li>
-                {{product.Name | titlecase }}
+                @if(currentLang === 'ar'){
+                    {{product.ArabicName | titlecase }}
+                }
+                @else{
+                    {{product.Name | titlecase }}
+                }
             </li>
         </ul>
     </div>
@@ -55,15 +60,27 @@
                                 }
 
                                 <p class="product-details__text">
-                                    {{ product.Description }}
+                                    @if(currentLang === 'ar'){
+                                        {{ product.ArabicDescription }}
+                                    }
+                                    @else{
+                                        {{ product.Description }}
+                                    }
+                                    
                                 </p>
                                 <p class="product-details__categories">
-                                    <span class="text-uppercase"> Category </span>
+                                    <span class="text-uppercase"> {{ 'Category' | translate }} </span>
                                     <a routerLink="/category">
-                                        {{ product.subcategory.category.Category }}
+                                        @if(currentLang === 'ar'){
+                                            {{ product.subcategory.category.ArabicName }}
+                                        }
+                                        @else{
+                                            {{ product.subcategory.category.Category }}
+                                        }
+                                        
                                     </a>
                                     <br />
-                                    <span class="text-uppercase"> Brand  </span>
+                                    <span class="text-uppercase"> {{ 'Brand' | translate }}  </span>
                                     <a routerLink="/brand">
                                         {{ product.brand.Brand }}
                                     </a>
@@ -78,29 +95,29 @@
                                       <button (click)="incrementQuantity()" [disabled]="quantity >= product.Quantity">+</button>
                                     </div>
                                     <button (click)="addToCart(product.ID , quantity)" class="thm-btn product-details__cart-btn ml-3">
-                                      Add to Cart <span>+</span>
+                                        {{ 'AddtoCart' | translate }} <span>+</span>
                                     </button>
                                   }
                                   @else if(product.Quantity <= 0){
-                                    <p class='OutStock'> Out of Stock </p>
+                                    <p class='OutStock'> {{ 'OutofStock' | translate }} </p>
                                   }
                                 </div>
                                 @if(product.Quantity > 0){
                                     <p class="product-details__availabelity">
-                                        <span>Availability</span>
-                                        <i class='fa-solid fa-check'></i> Available In stock
+                                        <span>{{ 'Availability' | translate }}</span>
+                                        <i class='fa-solid fa-check'></i> {{ 'AvailableInstock' | translate }}
                                     </p>
                                 }
                                 @else{
                                     <p class="product-details__availabelity">
-                                        <span>Availability</span>
-                                        <span style='color: red;'><i class='fa-solid fa-xmark' style='color: red;'></i> CurrentlyOutofstock </span>
+                                        <span>{{ 'Availability' | translate }}</span>
+                                        <span style='color: red;'><i class='fa-solid fa-xmark' style='color: red;'></i>{{ 'CurrentlyOutofstock' | translate }}  </span>
                                     </p>
                                 }
 
                                 <div class="Product-Platforms DisplayFlex">
                                     @for(platform of productPlatforms ; track $index){
-                                        <a href="">
+                                        <a>
                                             <div class="platform">
                                                 <img [src]="platform.Logo" [alt]="platform.Platform">
                                                 <p>{{platform.Platform}}</p>
@@ -120,7 +137,13 @@
                     <div class="col-lg-12">
                         <div class="container d-grid justify-content-center">
                             <h2 class="ProductDetails-Text">
-                               {{product.product_details.Title}}
+                                @if(currentLang === 'ar'){
+                                    {{product.product_details.ArabicTitle}}
+                                }
+                                @else{
+                                    {{product.product_details.Title}}
+                                }
+                               
                             </h2>
                             <div class="Images-ProductsDetails">
                                 <div class="Image-One-ProductDetails fadeInUp">
@@ -131,7 +154,7 @@
                                 <div class="text-one-ProductDetails">
                                     <div class="top-text">
                                         <img [src]="product.brand.Logo" [alt]="product.brand.Brand">
-                                        <h3>Brand</h3>
+                                        <h3>{{ 'Brand' | translate }}</h3>
                                     </div>
                                     <div class="bottom-text">
                                         <p>
@@ -143,7 +166,7 @@
                                 <div class="text-one-ProductDetails">
                                     <div class="top-text">
                                     <i class="fa-solid fa-folder"></i>
-                                    <h3>Platform</h3>
+                                    <h3>{{ 'Platform' | translate }}</h3>
                                     </div>
                                     <div class="bottom-text">
                                         <div class="Product-Platforms">
@@ -162,11 +185,11 @@
                                     <div class="text-one-ProductDetails">
                                         <div class="top-text">
                                             <i class="fa-solid fa-gears"></i>
-                                            <h3>Professional Installation</h3>
+                                            <h3>{{ 'ProfessionalInstallation' | translate }}</h3>
                                         </div>
                                         <div class="bottom-text">
                                             <p>
-                                                Professional Installation {{ product.InstallationCost | currency:'EGP' }}.
+                                                {{ 'TextProfessionalInstallation' | translate }} {{ product.InstallationCost | currency:'EGP' }}.
                                             </p>
                                         </div>
                                     </div>
@@ -174,7 +197,7 @@
                                 <div class="text-one-ProductDetails">
                                     <div class="top-text">
                                         <i class="fa-solid fa-house-signal"></i>
-                                        <h3>Technology</h3>
+                                        <h3>{{ 'Technology' | translate }}</h3>
                                     </div>
                                     <div class="bottom-text">
                                         <p>
@@ -219,7 +242,7 @@
                     <!-- Expert Review -->
                     <div class="mt-4" style="border-bottom:1px solid #eeee; ">
                         <div class="product-details__review-form">
-                            <h2 class="mb-4 text-center">Expert Review</h2>
+                            <h2 class="mb-4 text-center">{{ 'ExpertReview' | translate }}</h2>
                             <!-- Reviews -->
                             <div class="product-details__review mb-4">
                                 <div class="ExpertReview m-auto mt-5">
@@ -233,11 +256,17 @@
                                                     <div class="product-details__review-top-left">
                                                         <h3 class="product-details__review-title">{{product.evaluations.admin}}</h3>
                                                         <span class="product-details__review-sep">-</span>
-                                                        <span class="product-details__review-date">Expert Eng</span>
+                                                        <span class="product-details__review-date">{{ 'ExpertEng' | translate }}</span>
                                                     </div>
                                                 </div>
                                                 <p class="product-details__review-text">
-                                                    {{product.evaluations.Evaluation}}
+                                                    @if(currentLang === 'ar'){
+                                                        {{product.evaluations.ArabicEvaluation}}
+                                                    }
+                                                    @else{
+                                                        {{product.evaluations.Evaluation}}
+                                                    }
+                                                    
                                                 </p>
                                             </div>
                                         </div>
@@ -252,7 +281,13 @@
                     <div class="col-lg-6">
                         <div class="product-details__content ProductDetails_Section_last">
                                 <h3 class="product-details__title">
-                                    {{product.product_details.Title}}
+                                    @if(currentLang === 'ar'){
+                                        {{product.product_details.ArabicTitle2}}
+                                    }
+                                    @else{
+                                        {{product.product_details.Title}}
+                                    }
+                                    
                                 </h3>
                                 <ul>
                                     <li>
@@ -262,7 +297,7 @@
                                     <li>
                                         <span><i class="fa-solid fa-check"></i></span>
                                         <p>
-                                            Compitable With
+                                            {{ 'CompitableWith' | translate }}
                                             @for(platform of productPlatforms ; track $index){
                                                     {{platform.Platform}}
                                             }
@@ -278,23 +313,18 @@
 
                                     <li>
                                         <span><i class="fa-solid fa-check"></i></span>
-                                        <p> Free Transportation</p>
+                                        <p>{{ 'FreeTransportation' | translate }}</p>
                                     </li>
 
                                     @if(product.InstallationCost){
                                         <li>
                                             <span><i class="fa-solid fa-check"></i></span>
-                                            <p>Professional Installation {{ product.InstallationCost | currency:'EGP' }}</p>
+                                            <p>{{ 'TextProfessionalInstallation' | translate }}{{ product.InstallationCost | currency:'EGP' }}</p>
                                         </li>
                                     }
 
                                 </ul>
                                 <div class="product-details__button-block d-grid gap-1">
-                                    <input type='hidden' name='Quantity' [value]="product.Quantity" />
-                                    @if(product.sale){
-                                        <input type="hidden" name="PriceAfterSale" [value]="product.sale.PriceAfter">
-                                    }
-
                                     @if(product.Quantity > 0){
                                       <button
                                         type="button"
@@ -303,7 +333,7 @@
                                         title="Add to Cart"
                                       >
                                       @if(!isAdded){
-                                        Add to Cart
+                                       {{ 'AddtoCart' | translate }}
                                       }
                                       @else {
                                         <i class="fa-solid fa-check"></i>
@@ -311,7 +341,7 @@
                                       </button>
                                     }
                                     @else if(product.Quantity <= 0){
-                                        <p class='OutStock text-center' style='font-size: 20px;'> Out of Stock</p>
+                                        <p class='OutStock text-center' style='font-size: 20px;'>{{ 'OutofStock' | translate }}</p>
                                     }
                                 </div>
                         </div>
@@ -334,7 +364,7 @@
                             <div class="accrodion-grp" data-grp-name="product-details__accrodion">
                                 <div class="accrodion">
                                     <div class="accrodion-title">
-                                        <a (click)="toggleCollapse('description')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['description']"  [ngClass]="{'collapsed': collapseStates['description']}" class="accordion-toggle">Product Description</a>
+                                        <a (click)="toggleCollapse('description')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['description']"  [ngClass]="{'collapsed': collapseStates['description']}" class="accordion-toggle">{{ 'ProductDescription' | translate }}</a>
                                     </div>
                                     <div class="collapse" id="Description" [ngClass]="{'collapse': collapseStates['description'], 'show': !collapseStates['description']}">
                                         <div class="inner">
@@ -343,32 +373,32 @@
                                                 <div class="Product-spacification">
                                                     <div class="container">
                                                         <div class="Details">
-                                                            <h5>Capacity</h5>
+                                                            <h5>{{ 'Capacity' | translate }}</h5>
                                                             <div class="Details-info">
-                                                                <p>Capacity(m)</p>
+                                                                <p>{{ 'Capacity' | translate }}(m)</p>
                                                                 <span>{{ product.product_details.Capacity + 'm'}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="Details">
-                                                            <h5>Noise</h5>
+                                                            <h5>{{ 'Noise' | translate }}</h5>
                                                             <div class="Details-info">
-                                                                <p>Noise Level(dBA)</p>
+                                                                <p>{{ 'NoiseLevel' | translate }}(dBA)</p>
                                                                 <span>50 dBA</span>
                                                             </div>
                                                         </div>
                                                         <div class="Details">
-                                                            <h5> Physical Specification</h5>
+                                                            <h5> {{ 'PhysicalSpecification' | translate }}</h5>
                                                             <div class="many-details">
                                                                 <div class="Details-info">
-                                                                    <p>Net Dimension(WxHxD)</p>
+                                                                    <p>{{ 'NetDimension' | translate }}(WxHxD)</p>
                                                                     <span>{{ product.product_details.Width + 'x' + product.product_details.Height +  'x' + product.product_details.Length}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
-                                                                    <p>Net Weight(kg)</p>
+                                                                    <p>{{ 'NetWeight' | translate }}(kg)</p>
                                                                     <span>{{ product.product_details.Weight + 'KG'}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
-                                                                    <p>Color</p>
+                                                                    <p>{{ 'Color' | translate }}</p>
                                                                     <div class="Colorsdiv">
                                                                         @if(product.product_details.Color){
                                                                             <span class="color" [ngStyle]="{'background-color': product.product_details.Color}">
@@ -388,7 +418,7 @@
                                                         </div>
                                                         @if(product.product_details.AirPurification){
                                                             <div class="Details">
-                                                                <h5>Air Purification</h5>
+                                                                <h5>{{ 'AirPurification' | translate }}</h5>
                                                                 <div class="many-details">
                                                                     <div class="Details-info">
                                                                         <p>Indcator (cleanliness)</p>
@@ -425,7 +455,7 @@
                                                         }
                                                         @if(product.product_details.PowerConsumption){
                                                             <div class="Details">
-                                                                <h5>Electrical Date</h5>
+                                                                <h5>{{ 'ElectricalDate' | translate }}</h5>
                                                                 <div class="Details-info">
                                                                     <p>Power Consumption(W)</p>
                                                                     <span>{{ product.product_details.PowerConsumption +' W' }}</span>
@@ -442,7 +472,7 @@
                                 @if(product.faqs && product.faqs.length > 0){
                                     <div class="accrodion">
                                         <div class="accrodion-title">
-                                            <a (click)="toggleCollapse('faq')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['faq']"  [ngClass]="{'collapsed': collapseStates['faq']}" class="accordion-toggle">Technical Details</a>
+                                            <a (click)="toggleCollapse('faq')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['faq']"  [ngClass]="{'collapsed': collapseStates['faq']}" class="accordion-toggle">{{ 'TechnicalDetails' | translate }}</a>
                                         </div>
                                         <div class="collapse " id="FAQ" [ngClass]="{'collapse': collapseStates['faq'], 'show': !collapseStates['faq']}">
                                             <div class="inner">
@@ -474,7 +504,7 @@
                                 @if(product.product_details.Video){
                                     <div class="accrodion">
                                         <div class="accrodion-title">
-                                            <a (click)="toggleCollapse('video')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['video']"  [ngClass]="{'collapsed': collapseStates['video']}" class="accordion-toggle">Video</a>
+                                            <a (click)="toggleCollapse('video')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['video']"  [ngClass]="{'collapsed': collapseStates['video']}" class="accordion-toggle">{{ 'Video' | translate }}</a>
                                         </div> 
                                         <div class="collapse" id="Video" [ngClass]="{'collapse': collapseStates['video'], 'show': !collapseStates['video']}">
                                             <div class="inner">
@@ -498,7 +528,7 @@
         <!-- You may also like -->
         <section>
             <div class="container">
-                <h3 class="related-product__title">You May Also Like</h3>
+                <h3 class="related-product__title">{{ 'YouMayAlsoLike' | translate }}</h3>
                 <div class="related-product__carousel">
                     <owl-carousel-o [options]="ProductsSlider">
                         @for(product of products ; track $index){
@@ -513,62 +543,5 @@
                 </div>
             </div>
         </section>
-
-    <script>
-        $(document).ready(function () {
-            $('.additional-image, .product-details__img-popup').click(function () {
-                var imageUrl = $(this).closest('.additional-image, .product-details__image').find('img').attr('src');
-                $('.product-details__image img').attr('src', imageUrl);
-                $('.product-details__img-popup').attr('href', imageUrl);
-            });
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const cardSlider = document.querySelector(".card-slider");
-        const prevButton = document.querySelector(".prev-button");
-        const nextButton = document.querySelector(".next-button");
-        const featureContainer = document.querySelector(".feature-container");
-        let currentPosition = 0;
-        const cardWidth = 360 + 40; // card width + margin
-
-        function updateSliderPosition() {
-            cardSlider.style.transform = `translateX(${currentPosition}px)`;
-        }
-
-        function checkButtonsState() {
-            const totalWidth = featureContainer.scrollWidth;
-            const visibleWidth = featureContainer.offsetWidth;
-
-            prevButton.disabled = currentPosition >= 0;
-            nextButton.disabled = currentPosition <= visibleWidth - totalWidth;
-        }
-
-        nextButton.addEventListener("click", () => {
-            const visibleWidth = featureContainer.offsetWidth;
-            const totalWidth = featureContainer.scrollWidth;
-            currentPosition = Math.max(visibleWidth - totalWidth, currentPosition - cardWidth);
-            updateSliderPosition();
-            checkButtonsState();
-        });
-
-        prevButton.addEventListener("click", () => {
-            currentPosition = Math.min(0, currentPosition + cardWidth);
-            updateSliderPosition();
-            checkButtonsState();
-        });
-
-        // Initial check for buttons state
-        checkButtonsState();
-
-        // Recheck on window resize
-        window.addEventListener('resize', () => {
-            currentPosition = 0;
-            updateSliderPosition();
-            checkButtonsState();
-        });
-        });
-    </script>
 
 }

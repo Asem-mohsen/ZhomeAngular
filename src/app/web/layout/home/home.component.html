@@ -7,14 +7,14 @@
     "
   >
     <div class="parent-home">
-      <p id="Welcome">Welcome to</p>
-      <h1>Zhome</h1>
-      <p id="welcome-text">One simple ecosystem for smart living solutions.</p>
+      <p id="Welcome">{{'Welcome' | translate}}</p>
+      <h1>{{'Zhome' | translate}}</h1>
+      <p id="welcome-text">{{'SliderTextTwo' | translate}}</p>
 
       <div class="parent-buttons">
-        <a routerLink="/tools" class="DesignButton">Design</a>
+        <a routerLink="/tools" class="DesignButton">{{'Design' | translate}}</a>
         <hr />
-        <a routerLink="/shop" class="ShopButton">Shop Now</a>
+        <a routerLink="/shop" class="ShopButton">{{'ShopNowButton' | translate}}</a>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
 <!-- Text -->
 <section>
   <div class="container">
-    <h2 class="Home-Text">Build a smart home to uplift meaningful moments.</h2>
+    <h2 class="Home-Text">{{'ToolTextBelowSlider' | translate}}</h2>
     <div class="Images-Home">
       <div class="Image-One">
         <img
@@ -35,7 +35,7 @@
           <a routerLink="/tools" class="HomeImageInButton">
             <div class="d-grid justify-items-center gap-1 text-center g-1">
               <i class="fa-solid fa-house"></i>
-              <p class="text-white">Get Your Design</p>
+              <p class="text-white">{{'GetYourDesignButton' | translate}}</p>
             </div>
           </a>
         </div>
@@ -50,7 +50,7 @@
           <a routerLink="/tools" class="HomeImageInButton">
             <div class="d-grid justify-items-center gap-1 text-center g-1">
               <i class="fa-solid fa-house"></i>
-              <p class="text-white">Get Your Design</p>
+              <p class="text-white">{{'GetYourDesignButton' | translate}}</p>
             </div>
           </a>
         </div>
@@ -58,24 +58,21 @@
     </div>
     <div class="Text-under-images">
       <div class="text-one">
-        <h3>Design Online</h3>
+        <h3>{{'DesignOnline' | translate}}</h3>
         <p>
-          'Use ZHome online tool and follow our simple questions to design your
-          preferred system in minutes!
+          {{'DesignOnlineText' | translate}}
         </p>
       </div>
       <div class="text-one">
-        <h3>Personal Advice</h3>
+        <h3>{{'PersonalAdvice' | translate}}</h3>
         <p>
-          Our team of experts is there for you to answer all questions and
-          customize your dream home individually.
+          {{'PersonalAdviceText' | translate}}
         </p>
       </div>
       <div class="text-one">
-        <h3>Professional Installation</h3>
+        <h3>{{'ProfessionalInstallation' | translate}}</h3>
         <p>
-          Choose your preferred installation time, and our experienced local
-          team will install it for you hassle-free!
+          {{'ProfessionalInstallationText' | translate}}
         </p>
       </div>
     </div>
@@ -101,7 +98,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <section id="StartYourSystem">
   <div class="container">
-    <h2 class="heading">Start Your Own System</h2>
+    <h2 class="heading">{{'StartYourOwnSystem' | translate}}</h2>
     <ul class="nav nav-tabs nav-primary" role="tablist">
       <li class="nav-item" role="presentation">
         <a
@@ -330,7 +327,7 @@
       </div>
 
       <a routerLink="/shop" class="cta ShopNowButton">
-        <span class="hover-underline-animation">Shop Now</span>
+        <span class="hover-underline-animation">{{'ShopNowButton' | translate}}</span>
         <svg
           viewBox="0 0 46 16"
           height="10"
@@ -352,7 +349,7 @@
 
 <!-- testmonials -->
 <section class="testmonials">
-  <h2>Testmonials</h2>
+  <h2>{{'Testmonials' | translate}}</h2>
   <div class="tests">
     <div
       *ngFor="let tab of tabs; let i = index"
@@ -402,30 +399,12 @@
 
 </section>
 
-<script>
-  let card = document.querySelectorAll(".testmo");
-  let contentBox = document.querySelectorAll(".contentBox");
-
-  for (let i = 0; i < card.length; i++) {
-    card[i].addEventListener("mouseover", function () {
-      for (let i = 0; i < contentBox.length; i++) {
-        contentBox[i].className = "contentBox";
-      }
-      document.getElementById(this.dataset.id).className = "contentBox active";
-
-      for (let i = 0; i < card.length; i++) {
-        card[i].className = "testmo";
-      }
-      this.className = "testmo active";
-    });
-  }
-</script>
 
 <!-- Control You Home -->
 <section>
   <div class="container ControlHomeCont">
     <div class="ControlHome HomeSmallNone">
-      <h2>Control Your Home</h2>
+      <h2>{{'ControlYourHome' | translate}}</h2>
       <img
         loading="lazy"
         src="./assets/imgs/UI/website/Home/control-home/Exterior-II-scaled.jpg"
@@ -434,9 +413,8 @@
       />
       <div class="svg svg1">
         <p class="text-block">
-          <b>Energy Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeEnergy' | translate}}</b> <br />
+          {{'ControlHomeEnergyText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -447,9 +425,8 @@
       </div>
       <div class="svg svg2">
         <p class="text-block">
-          <b>Alarm Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeAlarm' | translate}}</b> <br />
+          {{'ControlHomeAlarmText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -460,9 +437,8 @@
       </div>
       <div class="svg svg3">
         <p class="text-block">
-          <b>Light System</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeLight' | translate}}</b> <br />
+          {{'ControlHomeLightText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -473,9 +449,8 @@
       </div>
       <div class="svg svg4">
         <p class="text-block">
-          <b>Sound System</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeSound' | translate}}</b> <br />
+          {{'ControlHomeSoundText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -486,9 +461,8 @@
       </div>
       <div class="svg svg5">
         <p class="text-block">
-          <b> Garage Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeGarage' | translate}}</b> <br />
+          {{'ControlHomeGarageText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -499,9 +473,8 @@
       </div>
       <div class="svg svg6">
         <p class="text-block">
-          <b>Lock System</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeLock' | translate}}</b> <br />
+          {{'ControlHomeLockText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -512,9 +485,8 @@
       </div>
       <div class="svg svg7">
         <p class="text-block">
-          <b>Battery Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeBattery' | translate}}</b> <br />
+          {{'ControlHomeBatteryText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -525,9 +497,8 @@
       </div>
       <div class="svg svg8">
         <p class="text-block">
-          <b>AC Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeAC' | translate}}</b> <br />
+          {{'ControlHomeACText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -538,9 +509,8 @@
       </div>
       <div class="svg svg9">
         <p class="text-block">
-          <b>Camera Control</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeCamera' | translate}}</b> <br />
+          {{'ControlHomeCameraText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -551,9 +521,8 @@
       </div>
       <div class="svg svg10">
         <p class="text-block">
-          <b>Electricity Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeElectricity' | translate}}</b> <br />
+          {{'ControlHomeElectricityText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -564,9 +533,8 @@
       </div>
       <div class="svg svg11">
         <p class="text-block">
-          <b>Shutter Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeShutter' | translate}}</b> <br />
+          {{'ControlHomeShutterText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -577,9 +545,8 @@
       </div>
       <div class="svg svg12">
         <p class="text-block">
-          <b>Irrigation Management</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeIrrigation' | translate}}</b> <br />
+          {{'ControlHomeIrrigationText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -590,9 +557,8 @@
       </div>
       <div class="svg svg13">
         <p class="text-block">
-          <b>Electrical broom</b> <br />
-          Always keep an eye on the energy production of your solar system as
-          well as your energy consumption
+          <b>{{'ControlHomeElectrical' | translate}}</b> <br />
+          {{'ControlHomeElectricalText' | translate}}
         </p>
         <img
           loading="lazy"
@@ -615,8 +581,8 @@
         alt="Cutomer Service"
       />
       <div class="Info">
-        <h4>Expert Consultation</h4>
-        <p>Our Smart Home Experts will advise you for the best solution.</p>
+        <h4>{{'FunctionsExpertOne' | translate}}</h4>
+        <p>{{'FunctionsExpertOneText' | translate}}</p>
       </div>
     </div>
     <div class="Features">
@@ -626,8 +592,8 @@
         alt="Guarantee"
       />
       <div class="Info">
-        <h4>Function Guarantee</h4>
-        <p>We offer function guarantee with all our products</p>
+        <h4>{{'FunctionsGuaranteeTwo' | translate}}</h4>
+        <p>{{'FunctionsGuaranteeTwoText' | translate}}</p>
       </div>
     </div>
     <div class="Features">
@@ -637,9 +603,9 @@
         alt="Main Source"
       />
       <div class="Info">
-        <h4>Main Source</h4>
+        <h4>{{'FunctionsSourceThree' | translate}}</h4>
         <p style="max-height: 79px">
-          We are the only trusted source for all your Smart Home needs.
+          {{'FunctionsSourceThreeText' | translate}}
         </p>
       </div>
     </div>
@@ -650,8 +616,8 @@
         alt="Free Shipping"
       />
       <div class="Info">
-        <h4>Free Shipping</h4>
-        <p>Enjoy our free shipping costs and get Free return period.</p>
+        <h4>{{'FunctionsShippingFour' | translate}}</h4>
+        <p>{{'FunctionsShippingFourText' | translate}}</p>
       </div>
     </div>
   </div>
@@ -668,9 +634,9 @@
         "
       >
         <h3 class="fw-bold text-dark">
-          Discover our products and bundles made especially for your dream home
+          {{'ShopTextHome' | translate}}
         </h3>
-        <a routerLink="/shop" class="buttonBlack">Shop Now</a>
+        <a routerLink="/shop" class="buttonBlack">{{'ShopNowButton' | translate}}</a>
       </div>
       <div
         class="Products-home"
@@ -679,9 +645,9 @@
         "
       >
         <h3>
-          Use our customized tool to build your home or office in just few steps
+          {{'ToolTextHome' | translate}}
         </h3>
-        <a routerLink="/tools"> Discover Our Tool</a>
+        <a routerLink="/tools">{{'DiscoverOurToolButton' | translate}}</a>
       </div>
     </div>
   </div>
@@ -692,7 +658,7 @@
   <div class="container">
     <!-- Platforms -->
     <div class="Platfroms">
-      <h3>Zhome Compability</h3>
+      <h3>{{'ZhomeCompability' | translate}}</h3>
       <div class="d-flex g-2 Platfroms-slider">
         @for (platform of platforms; track $index){
 

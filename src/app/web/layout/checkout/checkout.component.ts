@@ -8,11 +8,12 @@ import { CheckoutData } from '../../../Interfaces/checkout';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentsService } from '../../../Services/payments/payments.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule],
+  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule, TranslateModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })

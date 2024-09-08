@@ -10,11 +10,12 @@ import { ApiResponse, CartItem } from "../../../Interfaces/cart";
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../Interfaces/product';
 import { NavbarComponent } from '../../additions/navbar/navbar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [RouterLink , CarouselModule , ProductCardComponent , CurrencyPipe, TitleCasePipe , FormsModule],
+  imports: [RouterLink , CarouselModule , ProductCardComponent , CurrencyPipe, TitleCasePipe , FormsModule , TranslateModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

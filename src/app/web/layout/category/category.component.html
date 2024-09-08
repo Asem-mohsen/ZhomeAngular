@@ -2,8 +2,8 @@
     <section>
         <div class="container mt-5 pt-5 mb-4">
             <div class="block-title text-center">
-                <p class="block-title__tag-line text-center">Zhome</p>
-                <h1 class="text-center">Categories</h1>
+                <p class="block-title__tag-line text-center">{{'Zhome' | translate}}</p>
+                <h1 class="text-center">{{'Categories' | translate}}</h1>
             </div>
         </div>
     </section>
@@ -15,7 +15,12 @@
               <a [routerLink]="[]" fragment="{{category.Category}}">
                     <div class="slide Categories">
                         <p class="text-center pr-0">
-                            {{category.Category}}
+                            @if(currentLang === 'ar'){
+                                {{category.ArabicName}}
+                            }
+                            @else {
+                                {{category.Category}}
+                            }
                         </p>
                     </div>
                 </a>
@@ -37,11 +42,21 @@
                             <div class="item slider-one__slider-1" >
                                 <div class="container bottom-slider">
                                     <a class="thm-btn slider-one__btn">
-                                        {{category.Category}}
+                                        @if(currentLang === 'ar'){
+                                            {{category.ArabicName}}
+                                        }
+                                        @else {
+                                            {{category.Category}}
+                                        }
                                     </a>
                                     <h2 class="slider-one__title">
-                                        Discover The Products Of
-                                        {{category.Category}}
+                                        {{'DiscoverTheProductsOf' | translate}}
+                                        @if(currentLang === 'ar'){
+                                            {{category.ArabicName}}
+                                        }
+                                        @else {
+                                            {{category.Category}}
+                                        }
                                     </h2>
                                 </div>
                             </div>
@@ -57,7 +72,12 @@
                                                 <div class="box-shop SubCategory-onlineshop" [ngStyle]="{'background-image': 'url(' + subcategory.image + ')'}">
                                                 </div>
                                                 <p>
-                                                    {{subcategory.SubName}}
+                                                    @if(currentLang === 'ar'){
+                                                        {{subcategory.SubArabicName}}
+                                                    }
+                                                    @else {
+                                                        {{subcategory.SubName}}
+                                                    }
                                                 </p>
                                             </a>
 
@@ -70,9 +90,14 @@
                     <section>
                         <div class="category-Name">
                             <h3>
-                              {{category.Category + " Products"}}
+                                @if(currentLang === 'ar'){
+                                    {{category.ArabicName +  " منتجات"}}
+                                }
+                                @else {
+                                    {{category.Category + " Products"}}
+                                }
                             </h3>
-                            <a>Discover More<i class="fa fa-arrow-right"></i></a>
+                            <a>{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
                         </div>
                         <div class="related-product__carousel mt-5 mb-5">
                           <owl-carousel-o [options]="ProductsSlider">

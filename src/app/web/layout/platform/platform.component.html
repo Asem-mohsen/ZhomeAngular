@@ -1,8 +1,8 @@
 <section>
   <div class="container pt-5 mt-5 mb-4">
     <div class="block-title text-center">
-      <p class="block-title__tag-line text-center">Zhome</p>
-      <h1 class="text-center">Platforms</h1>
+      <p class="block-title__tag-line text-center">{{ 'Zhome' | translate }}</p>
+      <h1 class="text-center">{{ 'Platforms' | translate }}</h1>
     </div>
   </div>
 </section>
@@ -31,7 +31,12 @@
       <div class="container">
         <div class="PlatformDesc">
           <p>
-            {{ platform.MainDescription }}
+            @if(currentLang === 'ar'){
+              {{ platform.ArabicDescription }}
+            }
+            @else{
+              {{ platform.MainDescription }}
+            }
           </p>
         </div>
         <div id="accordion">
@@ -46,7 +51,7 @@
                   aria-expanded="true"
                   aria-controls="FAQ"
                 >
-                  FAQ
+                {{ 'FAQ' | translate }}
                 </button>
               </h5>
             </div>
@@ -80,7 +85,7 @@
                       aria-expanded="true"
                       aria-controls="Video"
                     >
-                      Video
+                    {{ 'Video' | translate }}
                     </button>
                   </h5>
                 </div>
@@ -106,8 +111,8 @@
 
         <!-- Products Related -->
         <div class="category-Name mt-5 pt-4">
-          <h3>Related Products</h3>
-          <a routerLink="/shop">Discover More<i class="fa fa-arrow-right"></i></a>
+          <h3>{{ 'RelatedProducts' | translate }}</h3>
+          <a routerLink="/shop">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right"></i></a>
         </div>
         <owl-carousel-o [options]="ProductsSlider">
           @for (product of platform.products; track product.ID){
