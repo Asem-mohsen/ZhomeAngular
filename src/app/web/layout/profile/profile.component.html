@@ -145,7 +145,7 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="numbers">
-                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.Name}} Orders </p>
+                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.Name}} {{'Orders' | translate}} </p>
                                                         <h5 class="font-weight-bolder text-center" >
                                                             {{profileData.data.orderCount}}
                                                         </h5>
@@ -168,7 +168,7 @@
 
                             <!--Track Order-->
 
-                            <h1 class="sub-header">Track Order</h1>
+                            <h1 class="sub-header">{{'TrackOrder' | translate}}</h1>
                             <!-- <div class="card">
                                 <div class="Success-invoice">
                                     <div class="invoice text-center">
@@ -181,24 +181,24 @@
                                                     <ul>
                                                         <li>{{ ucfirst(strtolower($order->Name)) }}</li>
                                                         <li>x{{ 'x' . $order->Quantity }}</li>
-                                                        <li>{{__('messages.Pice') . $invoce->Total . "EGP"}}</li>
+                                                        <li>{{'Pice' | translate}} . $invoce->Total . "EGP"}}</li>
                                                         @if($Invoice['WithInstallation'] != 0)
-                                                            <li>{{__('messages.InstallationPrice') . $invoce->InstallationCost . "EGP"}} </li>
+                                                            <li>{{'InstallationPrice' | translate}} . $invoce->InstallationCost . "EGP"}} </li>
                                                         @endif
                                                     </ul>
                                                 </div>
                                         @endforeach
                                     </div> -->
 
-                                        <!-- <p>{{__('messages.DeliveryFees') . $order->DeliveryCost}}</p>
-                                        <p> {{__('messages.EstimatedArrivalDate') . date('d-M h:i A', strtotime($order->DeliveryEstimatedArrivalTime)) }}</p>
+                                        <!-- <p>{{'DeliveryFees' | translate}} . $order->DeliveryCost}}</p>
+                                        <p> {{'EstimatedArrivalDate' | translate}} . date('d-M h:i A', strtotime($order->DeliveryEstimatedArrivalTime)) }}</p>
                                         <div class="Invoice-totals"> -->
                                             <!--the user used a promocode-->
                                         <!-- @if($order->PromoCodeID)
-                                            <p>{{__('messages.PromoUsed') . $PromocodeUsed->Promocode}}</p>
-                                            <p>{{__('messages.Total') . $PromocodeUsed->Total . "EGP"}}</p>
+                                            <p>{{'PromoUsed' | translate}} . $PromocodeUsed->Promocode}}</p>
+                                            <p>{{'Total' | translate}} . $PromocodeUsed->Total . "EGP"}}</p>
                                         @else
-                                            <p>{{__('messages.Total') . $TotalSum->Total . "EGP"}}</p>
+                                            <p>{{'Total' | translate}} . $TotalSum->Total . "EGP"}}</p>
                                         @endif
 
                                         </div>
@@ -209,7 +209,7 @@
 
                             <!-- Purchased -->
                           @if(profileData.data.userProducts){
-                            <h1 class="sub-header">Your Past Orders</h1>
+                            <h1 class="sub-header">{{'YourPastOrders' | translate}} </h1>
                             <div class="row">
                                 <div class="related-product__carousel">
                                   <owl-carousel-o [options]="ProductsSlider">

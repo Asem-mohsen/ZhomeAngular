@@ -44,9 +44,9 @@
               <!-- Search -->
               <div class="breadcrumbs">
                 <span class="item">
-                    <a routerLink="/home" style="color: #d1d1d1;">Home /</a>
+                    <a routerLink="/home" style="color: #d1d1d1;">{{'Home' | translate}} /</a>
                 </span>
-                  <span class="item text-black">Shop</span>
+                  <span class="item text-black">{{'Shop' | translate}}</span>
               </div>
               <div class="input-wrapper mb-0">
                 <button class="icon-search">
@@ -101,13 +101,13 @@
 
                   <!-- Price Range -->
                   <div class="widget price mb-3" *ngIf="isBrowser">
-                      <h6 class="widget-title mb-3">{{ 'Filter by Price' }}</h6>
+                      <h6 class="widget-title mb-3">{{'ApplyFilter' | translate}}</h6>
                       <div class="widget-desc">
                         <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice"  [options]="priceOptions"></ngx-slider>
                       </div>
                   </div>
 
-                  <button class="btn btn-secondary reset-button" (click)="resetFilters()">Reset Filters</button>
+                  <button class="btn btn-secondary reset-button" (click)="resetFilters()">{{'ResetChoices' | translate}}</button>
                 </div>
             </div>
             <!-- Products -->

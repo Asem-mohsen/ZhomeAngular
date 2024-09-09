@@ -161,17 +161,15 @@ export class ToolComponent {
     const value = selectElement.value;
   
     if (!value) {
-      // Handle the case where the value is null or undefined
       return;
     }
   
     this.selectedCountry = value;
     this.isCitySelectDisabled = false;
   
-    // Assuming getCities is a method in your cityService that fetches cities based on the country code
     this.countryCitiesService.getCities(value).subscribe({
       next: (data) => {
-        this.cities = data.data; // Adjust according to your API response
+        this.cities = data.data;
       },
       error: (error) => console.error('Error fetching cities:', error)
     });

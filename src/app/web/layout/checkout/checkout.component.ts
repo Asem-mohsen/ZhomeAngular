@@ -1,5 +1,5 @@
 import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, NgFor } from '@angular/common';
 import { OrdersService } from './../../../Services/orders/orders.service';
 import { Component , Signal, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
@@ -9,11 +9,12 @@ import { AuthService } from '../../../Services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentsService } from '../../../Services/payments/payments.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { CountriesCitiesService } from '../../../Services/countries-cities/countries-cities.service';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule, TranslateModule],
+  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule, TranslateModule ,NgFor],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
@@ -22,11 +23,17 @@ export class CheckoutComponent {
   orderData !: CheckoutData ;
   isLogged : boolean = false
 
+  countries: { name: string; flag: string; code: string }[] = [];
+  cities: { name: string }[] = [];
+  selectedCountry: string = '';
+  selectedCity: string = '';
+  isCitySelectDisabled: boolean = true;
+
   // Signals for the total and saved amount
   total = signal<number>(0);
   savedAmount = signal<number>(0);
 
-  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService , private _router : Router){}
+  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService , private _router : Router, private countryCitiesService: CountriesCitiesService){}
 
   // steps
   step : number = 1;
@@ -106,6 +113,38 @@ export class CheckoutComponent {
         this.savedAmount.set(res.data.savedAmount || 0);
         this.step = 4;
       },
+    });
+  }
+
+  loadCountries(): void {
+    this.countryCitiesService.getCountries().subscribe({
+      next: (data) => {
+        this.countries = data.map((country: any) => ({
+          name: country.name.common,
+          flag: country.flags.png,
+          code: country.cca2
+        }));
+      },
+      error: (error) => console.error('Error fetching countries:', error)
+    });
+  }
+
+  onCountryChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const value = selectElement.value;
+  
+    if (!value) {
+      return;
+    }
+  
+    this.selectedCountry = value;
+    this.isCitySelectDisabled = false;
+  
+    this.countryCitiesService.getCities(value).subscribe({
+      next: (data) => {
+        this.cities = data.data;
+      },
+      error: (error) => console.error('Error fetching cities:', error)
     });
   }
 

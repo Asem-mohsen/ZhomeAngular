@@ -27,18 +27,18 @@
       <h2>Zhome</h2>
       <h3>{{'AlwaysInControl' | translate}}</h3>
       <div class="text-footer">
-        <p>01122334434</p>
-        <p>{{'FindusIn' | translate}} Egypt - Emarites</p>
+        <p>{{zhomeContact.Phone + " - " + zhomeContact.Phone2}}</p>
+        <p>{{'FindusIn' | translate}} {{zhomeContact.Market + " and " + zhomeContact.Market2}}</p>
       </div>
 
       <p class="Download">{{'DownloadApp' | translate}}</p>
       <button>
         <i class="fa-brands fa-android"></i>
-        Android
+        {{'Android' | translate}}
       </button>
       <button>
         <i class="fa-brands fa-apple"></i>
-        IOS
+        {{'IOS' | translate}}
       </button>
     </div>
 

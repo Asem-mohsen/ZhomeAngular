@@ -39,6 +39,6 @@ export const appConfig: ApplicationConfig = {
         deps: [HttpClient]
       }
     })),
-    provideHttpClient(withFetch() ,withInterceptors([authInterceptor , errorInterceptor , spinnerLoadingInterceptor])), provideAnimationsAsync()
+    provideHttpClient(withFetch() ,withInterceptors([authInterceptor , errorInterceptor , spinnerLoadingInterceptor])), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

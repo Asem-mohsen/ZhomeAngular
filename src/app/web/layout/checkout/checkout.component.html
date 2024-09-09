@@ -305,11 +305,13 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserCountry">{{ 'Country' | translate }}</label>
-                                              <select id="UserCountry" formControlName="Country" class="form-control">
+                                              <select id="UserCountry" formControlName="Country" class="form-control" (change)="onCountryChange($event)">
                                                   <option disabled selected hidden>{{ 'SelectCountry' | translate }}</option>
-                                                  <!-- <option [value]="orderData.Orders.Country" selected>{{orderData.Orders.Country}}</option> -->
-                                                  <option value="United Arab Emarits">United Arab Emarits</option>
-                                                  <option value="Egypt">Egypt</option>
+                                                  <option *ngFor="let country of countries" [value]="country.code">
+                                                    <img [src]="country.flag" alt="{{ country.name }}" style="width: 20px; margin-right: 5px;">
+                                                    {{ country.name }}
+                                                  </option>
+
                                               </select>
                                                 @if (userInfo.get('Country')?.errors &&
                                                     userInfo.get('Country')?.touched) {
@@ -327,9 +329,11 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserCity">{{ 'City' | translate }}</label>
-                                              <select id="UserCity" formControlName="City" class="form-control">
+                                              <select id="UserCity" formControlName="City" [disabled]="isCitySelectDisabled" [(ngModel)]="selectedCity" class="form-control">
                                                   <option disabled selected hidden>{{ 'SelectCity' | translate }}</option>
-                                                  <option avalue="cairo"  selected>cairo</option>
+                                                  <option *ngFor="let city of cities" [value]="city.name">
+                                                    {{ city.name }}
+                                                  </option>
                                               </select>
                                                 @if (userInfo.get('City')?.errors &&
                                                     userInfo.get('City')?.touched) {
