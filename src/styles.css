@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 :root {
   --mainColor: #154352;
   --secondaryColor: #2bbfb0;
@@ -32,6 +33,13 @@ ul {
 }
 p {
   margin: 0;
+  line-height: 1.5 !important;
+}
+h1,h2,h3,h4,h5,h6{
+  line-height: 1 !important;
+}
+.h6, h6 {
+  font-size: 1rem !important;
 }
 .justify-items-center {
   justify-items: center !important;
@@ -42,7 +50,7 @@ p {
 /* Icon */
 a.ZhomeName {
   color: white !important;
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   font-size: 23px;
   width: 120px;
   text-align: center;
@@ -55,8 +63,8 @@ a.ZhomeName {
   margin-bottom: 20px;
 }
 
-html, body { height: 100%; }
+/* html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

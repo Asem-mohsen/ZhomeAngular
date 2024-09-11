@@ -1,13 +1,15 @@
 import { Component, OnInit , ViewEncapsulation} from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { CartService } from '../../../Services/cart/cart.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink , RouterLinkActive , TranslateModule],
+  imports: [RouterLink , RouterLinkActive , TranslateModule , CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   encapsulation: ViewEncapsulation.None
@@ -15,10 +17,12 @@ import { TranslateModule } from '@ngx-translate/core';
 export class NavbarComponent implements  OnInit {
 
   isLoggedIn: boolean = false;
-
-  constructor(private _AuthService: AuthService , private _cartService : CartService) { }
-
   cartCount: number = 0;
+  currentRoute: string = '';
+
+  constructor(private _AuthService: AuthService , private _cartService : CartService , private _router : Router) { }
+
+
 
   ngOnInit(): void {
     this.isLoggedIn = this._AuthService.isAuthenticated();
@@ -27,12 +31,23 @@ export class NavbarComponent implements  OnInit {
       this.cartCount = count;
     });
 
-    // Initial fetch
     this._cartService.getCartCount().subscribe();
 
+
+    // Subscribe to router events to track current route
+    this._router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.currentRoute = event.urlAfterRedirects;
+      });
+
   }
-  
+
   logout() {
     this._AuthService.signOutAllSessions()
+  }
+
+  isRoute(paths: string[]): boolean {
+    return paths.some(path => this.currentRoute.includes(path));
   }
 }

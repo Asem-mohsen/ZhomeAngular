@@ -1,31 +1,7 @@
 .MainProposal {
   min-height: 750px;
 }
-nav {
-  border-bottom: 1px solid #eeee;
-}
 
-.navbar-nav .nav-item .nav-link,
-.navbar-nav .nav-item .nav-link .nav-link i {
-  color: black !important;
-}
-.horizontal-line {
-  border: 1px solid black;
-}
-.JoinUs {
-  color: white;
-  border: 1px solid white;
-  padding: 7px 15px;
-  border-radius: 4px;
-  transition: all 0.6s ease-out;
-  background: linear-gradient(to right, transparent 50%, #154352 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-.JoinUs:hover {
-  color: black;
-  border: 1px solid var(--mainColor);
-}
 /* End */
 a {
   text-decoration: none !important;

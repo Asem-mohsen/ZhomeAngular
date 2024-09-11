@@ -5,11 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../../Services/translation/translation.service';
 import { ContactService } from '../../../Services/contact/contact.service';
 import { Contact } from '../../../Interfaces/contact';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink , TranslateModule],
+  imports: [RouterLink , TranslateModule , NgIf],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })

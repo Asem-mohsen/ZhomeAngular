@@ -302,7 +302,7 @@
         "FreeDelivery":"Free Delivery",
         "EGP":"EGP",
         "BuildyourDreamHome":"Build your Dream Home",
-        "BuildyourDreamHomeText":">Use our tool and build your dream home within few seconds ",
+        "BuildyourDreamHomeText":"Use our tool and build your dream home within few seconds ",
         "DiscoverourProducts":"Discover our Products ",
         "DiscoverourProductsText":"Navigate to our main website to see how the user interact with our features",
         "CheckTheNewest":"Check The Newest",
@@ -333,7 +333,7 @@
         "ShippingInformation":"Shipping Information",
         "TotalWithDelivery" :"Total With Delivery",
         "Back": "Back",
-        
+
         "Filters":"Filters",
         "Sales":"Sales",
         "BuildToolShop":"Build your desired home with our tool",

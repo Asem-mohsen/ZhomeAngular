@@ -61,10 +61,11 @@ export class RegisterComponent implements OnInit{
     if (this.registerForm.valid) {
       this._AuthService.sendRegister(this.registerForm.value).subscribe({
         next: (res) => {
-          //Register
-          const token = res.data.token;
-          localStorage.setItem('userToken', token);
+
+          this._AuthService.saveToken(res.data.user.token);
+
           this.isLoading = false
+
           this._router.navigate(['home']);
         },
         error: (err) => {

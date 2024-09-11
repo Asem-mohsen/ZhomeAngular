@@ -6,12 +6,11 @@
   font-size: 20px;
 }
 .navbar-brand{
-  padding: 18px;
+  padding: 22px;
   font-size: 21px;
   color: white;
   background-color: var(--mainColor);
 }
-
 .JoinUs{
   color: white;
   border: 1px solid white;
@@ -23,6 +22,7 @@
   background-position: right bottom;
 }
 .JoinUs:hover {
+  color: white;
   background-position: left bottom;
 }
 .nav-link{
@@ -44,6 +44,7 @@
 .navbar-brand:focus, .navbar-brand:hover {
   color: white !important;
 }
+
 .count{
   color: white;
   position: absolute;
@@ -55,4 +56,62 @@
   text-align: center;
   top: -8px;
   left: 11px;
+}
+
+nav.navbar-blacked{
+
+  border-bottom: 1px solid #eeee;
+
+  .nav-item .nav-link {
+    color: #3c3c3c;
+  }
+  .nav-link i {
+    color: #3c3c3c !important;
+  }
+  .horizontal-line {
+    border: 1px solid black;
+  }
+  .JoinUs {
+    color: white;
+    border: 1px solid white;
+    padding: 7px 15px;
+    border-radius: 4px;
+    transition: all 0.6s ease-out;
+    background: linear-gradient(to right, transparent 50%, #154352 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .JoinUs:hover {
+    color: black;
+    border: 1px solid var(--mainColor);
+    background-position: left bottom;
+  }
+}
+
+nav.navbar-shop{
+
+  .nav-item .nav-link {
+    color: #3c3c3c;
+  }
+  .nav-link i {
+    color: #3c3c3c !important;
+  }
+  .horizontal-line {
+    border: 1px solid black;
+  }
+  .JoinUs {
+    color: white;
+    border: 1px solid white;
+    padding: 7px 15px;
+    border-radius: 4px;
+    transition: all 0.6s ease-out;
+    background: linear-gradient(to right, transparent 50%, #154352 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .JoinUs:hover {
+    color: black;
+    border: 1px solid var(--mainColor);
+    background-position: left bottom;
+  }
 }

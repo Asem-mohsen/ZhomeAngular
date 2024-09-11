@@ -15,19 +15,19 @@
 </div>
 
 <!-- Scroll to Top -->
-<a href="#" data-target="html" class="scroll-to-target scroll-to-top">
+<a data-target="html" class="scroll-to-target scroll-to-top">
   <i class="fa fa-arrow-turn-up"></i>
 </a>
 
 <!-- Footer -->
-<section class="MainFooter">
+<section class="MainFooter" *ngIf="zhomeContact">
   <div class="Footer">
     <div class="left-footer">
       <!-- Logo -->
       <h2>Zhome</h2>
       <h3>{{'AlwaysInControl' | translate}}</h3>
       <div class="text-footer">
-        <p>{{zhomeContact.Phone + " - " + zhomeContact.Phone2}}</p>
+        <p>{{"0"+ zhomeContact.Phone + " - " + "0" + zhomeContact.Phone2}}</p>
         <p>{{'FindusIn' | translate}} {{zhomeContact.Market + " and " + zhomeContact.Market2}}</p>
       </div>
 

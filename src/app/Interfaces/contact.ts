@@ -6,8 +6,8 @@ export interface Contact {
     Location2: string;
     Market: string;
     Market2: string;
-    Phone: number;
-    Phone2: number;
+    Phone: string;
+    Phone2: string;
     Owner: string;
     NumberofEmp: number;
     WebsiteLink: string;
