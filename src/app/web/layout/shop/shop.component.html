@@ -15,7 +15,7 @@
   <div class="row p-0 m-0">
       <div class="col-md-9 main-img p-0 m-0">
         <owl-carousel-o [options]="ShopSlider">
-          @for (bundle of shopData.All_Bundles; track $index) {
+          @for (bundle of shopData?.All_Bundles; track $index) {
           <ng-template carouselSlide>
             <img [src]="bundle.MainImage" class="w-100" [alt]="bundle.Name">
           </ng-template>
@@ -36,7 +36,7 @@
     <h1 id="ShopByCategory"> {{'Categories' | translate}}</h1>
     <div class="categories-shop">
       <owl-carousel-o [options]="CategorySlider">
-        @for (category of shopData.All_Categories; track $index) {
+        @for (category of shopData?.All_Categories; track $index) {
         <ng-template carouselSlide>
           <div class="category-shop">
             <a [routerLink]="['/shop/filters']">

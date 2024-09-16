@@ -67,7 +67,7 @@ export class ToolComponent {
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/tools')
     }
-    
+
     this.loadCountries();
 
     this.categories.forEach((category) => {
@@ -159,14 +159,14 @@ export class ToolComponent {
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const value = selectElement.value;
-  
+
     if (!value) {
       return;
     }
-  
+
     this.selectedCountry = value;
     this.isCitySelectDisabled = false;
-  
+
     this.countryCitiesService.getCities(value).subscribe({
       next: (data) => {
         this.cities = data.data;

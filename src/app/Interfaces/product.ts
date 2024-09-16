@@ -42,6 +42,7 @@ export interface ProductImages{
     created_at: string;
     updated_at: string;
 }
+
 export interface Technology {
     Technology: string;
 }
@@ -72,6 +73,7 @@ export interface ProductDetails{
     created_at: string;
     updated_at: string;
 }
+
 export interface Features{
     ID: 3;
     Feature: string;

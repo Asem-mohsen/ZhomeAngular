@@ -9,7 +9,7 @@
         </a>
       <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"  id="PlatformsExamples">
           @for (platform of platforms; track $index) {
-              <label [for]="'Platform'+platform.ID" class="checkbox PlatformCheckBox">
+              <label [for]="'Platform'+platform.ID" class="checkbox PlatformCheckBox" [ngClass]="{ 'checked-label': selectedPlatforms.includes(platform.ID) }">
                   <input type="checkbox" [id]="'Platform'+platform.ID" class="PlatformCheckInput" [value]="'Platform'+platform.ID"  (change)="onPlatformChange($event, platform.ID)">
                   <img [src]="platform.Logo" [alt]="platform.Platform">
                   {{platform.Platform}}

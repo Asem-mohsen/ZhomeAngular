@@ -2,13 +2,13 @@
 <nav
   class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0"
   [ngClass]="{
-    'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout']),
+    'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design']),
     'navbar-home': isRoute(['/home']),
     'navbar-shop': isRoute(['/shop'])
   }"
 >
   <div class="container">
-    <a class="navbar-brand" routerLink="home">Zhome</a>
+    <a class="navbar-brand" routerLink="/home">Zhome</a>
     <button
       class="navbar-toggler"
       type="button"

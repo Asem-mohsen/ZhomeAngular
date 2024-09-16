@@ -43,7 +43,7 @@ section.MainFooter {
   border: none;
   padding: 10px 20px;
   width: 150px;
-  margin: 0px 2px;
+  /* margin: 0px 2px; */
 }
 .left-footer button i {
   padding-right: 8px;

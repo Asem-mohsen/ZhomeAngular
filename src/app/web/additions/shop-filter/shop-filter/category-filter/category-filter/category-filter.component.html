@@ -9,15 +9,9 @@
       </a>
       <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"  class="menu-list checkbox-list">
         @for (category of categories; track $index) {
-          <label class="checkbox CategoryCheckBox">
+          <label class="checkbox CategoryCheckBox" [ngClass]="{ 'checked-label-category': selectedCategories.includes(category.ID) }">
             <input type="checkbox" class="CategoryCheckInput" [value]="category.ID" (change)="onCategoryChange($event ,category.ID)" />
-            {{ category.Category }}
-            @if(currentLang === 'ar'){
-                {{ category.ArabicName}}
-            }
-            @else{
-                {{ category.Category}}
-            }
+            {{ currentLang === 'ar' ? category.ArabicName : category.Category }}
           </label>
         }
       </div>

@@ -9,7 +9,7 @@
           </a>
         <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"   class="collapse collapsing menu-list checkbox-list" id="BrandsExamples">
             @for (brand of brands; track $index) {
-                <label [for]="'Brand '+brand.ID" class="checkbox BrandsCheckBox">
+                <label [for]="'Brand '+brand.ID" class="checkbox BrandsCheckBox" [ngClass]="{ 'checked-label': selectedBrands.includes(brand.ID) }">
                     <input type="checkbox" class="BrandCheckInput" [id]="'Brand '+brand.ID"  (change)="onBrandChange($event , brand.ID)" >
                     <img [src]="brand.Logo" [alt]="brand.Brand">
                 </label>

@@ -413,13 +413,13 @@ div.SubCategory-onlineshop {
   padding: 15px 0;
   margin: 25px 0;
 }
-input[type="checkbox"]:checked {
-  border: 2px solid var(--mainColor);
+
+.checked-label {
+  border: 1px solid var(--mainColor) !important;
 }
-.filter-checkbox:checked + label {
-  border: 2px solid var(--mainColor);
-  border-radius: 4px;
-  padding: 4px;
+.checked-label-category{
+  font-weight: bold;
+  color: var(--mainColor);
 }
 .Logo {
   display: flex;
@@ -510,7 +510,7 @@ input[type="checkbox"]:checked {
   font-size: 15px;
 }
 .FilterTransform .BrandsCheckBox {
-  margin: 4px;
+  margin: 3px;
   border: 1px solid #eeee;
   border-radius: 11px;
   cursor: pointer;
@@ -624,7 +624,6 @@ input[type="checkbox"]:checked {
   margin-top: 20px;
 }
 .CategoryCheckBox {
-  font-weight: bold;
   display: block;
   cursor: pointer;
   text-align: center;
@@ -722,34 +721,8 @@ div.BundlesButton a:hover {
     border-radius: 8px !important;
     padding: 13px 0px !important;
   }
-  div.BundlesButton {
-    display: none !important;
-  }
   .collapse:not(.show) {
     display: none !important;
-  }
-
-  .shop-category .Product-Platforms {
-    margin: 0px 20px !important;
-    justify-content: center !important;
-  }
-
-  .ShopNowInCart a {
-    margin-top: 25px !important;
-    margin: auto;
-    border-radius: 12px;
-    background-color: #ffffff40 !important;
-    border: 1px solid white !important;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    color: black !important;
-    font-size: 18px !important;
-    font-weight: bold;
-  }
-  .container .col-lg-12 .ShopNowInCart {
-    margin-top: 27px !important;
-    height: auto !important;
   }
 }
 

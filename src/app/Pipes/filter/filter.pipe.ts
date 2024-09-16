@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from '../../Interfaces/product';
+import { Product, Technology } from '../../Interfaces/product';
 
 @Pipe({
   name: 'filter',
@@ -23,7 +23,8 @@ export class FilterPipe implements PipeTransform {
       const matchesPlatform = !platform.length || product.platforms.some(p => platform.includes(p.ID));
 
       // Filter based on selected technologies
-      const matchesTechnology = !technology.length || product.technologies.some(t => technology.includes(t.Technology));
+      const matchesTechnology = !technology.length ||
+        (product.technologies && product.technologies.some((t: { Technology: string }) => technology.includes(t.Technology)));
 
       // Filter based on price
       const matchesPrice = product.Price >= minPrice && product.Price <= maxPrice;

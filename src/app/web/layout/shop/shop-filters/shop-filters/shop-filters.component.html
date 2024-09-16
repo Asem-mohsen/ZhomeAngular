@@ -10,7 +10,7 @@
               </ng-template>
               }
             </owl-carousel-o>
-    
+
           </div>
           <div class="col-md-3 side-imgs p-0 m-0">
             <img src="assets/imgs/UI/website/Shop/Escritorio.jpg" class="w-100" alt="">
@@ -40,7 +40,7 @@
         <div class="container" style="max-width: 1220px;">
 
           <div class="row align-items-center my-4">
-            <div class="col-md-6 d-flex gap-3 align-items-center">
+            <div class="col-md-6 d-flex gap-3 align-items-center search-title">
               <!-- Search -->
               <div class="breadcrumbs">
                 <span class="item">
@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <mat-paginator 
+              <mat-paginator
                 [length]="filteredProducts.length"
                 [pageSize]="itemsPerPage"
                 [pageSizeOptions]="[]"
@@ -70,7 +70,7 @@
           </div>
 
 
-          
+
           <div class="row">
             <!-- Filter -->
             <div class="col-4 col-md-4 col-lg-2 FilterTransform MainFilter">
@@ -101,7 +101,7 @@
 
                   <!-- Price Range -->
                   <div class="widget price mb-3" *ngIf="isBrowser">
-                      <h6 class="widget-title mb-3">{{'ApplyFilter' | translate}}</h6>
+                      <h6 class="widget-title mb-3">{{'Price' | translate}}</h6>
                       <div class="widget-desc">
                         <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice"  [options]="priceOptions"></ngx-slider>
                       </div>

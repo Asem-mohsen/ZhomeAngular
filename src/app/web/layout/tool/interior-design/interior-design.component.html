@@ -1,0 +1,121 @@
+<section class="mt-5 pt-5">
+  <div class="wrapper">
+
+      <form method="POST" enctype="multipart/form-data">
+          <div id="wizard" class="wizard clearfix vertical mt-5 p-0">
+            <div class="content clearfix">
+
+              @if(step === 1){
+                <section>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                          <p class="m-0 section-name">Which of these rooms do you want to furnish ?</p>
+                        </div>
+                        <div class="col-md-6">
+                          <app-room-selection (roomSelected)="onRoomsSelected($event)"></app-room-selection>
+                        </div>
+                        <div class="d-flex gap-2 mt-3">
+                          <a class="buttons" (click)="nextWithRooms()">Next</a>
+                        </div>
+                    </div>
+                </section>
+              }
+
+              @if(step === 2){
+                <section>
+                  <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <p class="m-0 section-name">Select the rooms that you see yourself in</p>
+                    </div>
+                    <div class="col-md-7">
+
+                      <app-room-design-display [selectedRooms]="selectedRooms"></app-room-design-display>
+
+                    </div>
+
+                    <div class="d-flex gap-2 mt-3">
+                      <a class="buttons" (click)="next()">Next</a>
+                      <a class="buttons" (click)="back()">Previous</a>
+                    </div>
+                  </div>
+                </section>
+              }
+
+              @if(step === 3){
+                <section>
+                  <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <p class="m-0 section-name">Which of these furniture items do you love?</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="bedroom-boxes items-furniture">
+                            <!-- {{-- Chairs --}} -->
+                            <div class="row">
+                                <h4>Armchairs</h4>
+                                <div class="items-furniture-box">
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI" value="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI">
+                                        <label class="m-0" for="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI" value="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI">
+                                        <label class="m-0" for="6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/6hdCwWvAK5Gplg8dLMKSJq1RjjbQQy0jYZxTPjhI.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="7uHL8iyczMEm0AVIhE3iz9Wp9MciUlqlbp9HZCWD" value="7uHL8iyczMEm0AVIhE3iz9Wp9MciUlqlbp9HZCWD">
+                                        <label class="m-0" for="7uHL8iyczMEm0AVIhE3iz9Wp9MciUlqlbp9HZCWD">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/7uHL8iyczMEm0AVIhE3iz9Wp9MciUlqlbp9HZCWD.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="C7b37UKsvsCy9d21C6FmF2OKhUOJD5daMiGAY8Pu" value="C7b37UKsvsCy9d21C6FmF2OKhUOJD5daMiGAY8Pu">
+                                        <label class="m-0" for="C7b37UKsvsCy9d21C6FmF2OKhUOJD5daMiGAY8Pu">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/C7b37UKsvsCy9d21C6FmF2OKhUOJD5daMiGAY8Pu.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="ezjV8nIUbrtzuMNPgMAQVvcCBJKO4YDPXM5NbA5J" value="ezjV8nIUbrtzuMNPgMAQVvcCBJKO4YDPXM5NbA5J">
+                                        <label class="m-0" for="ezjV8nIUbrtzuMNPgMAQVvcCBJKO4YDPXM5NbA5J">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/ezjV8nIUbrtzuMNPgMAQVvcCBJKO4YDPXM5NbA5J.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="fRHaDKWlycivBtRZ9xZgHIpaCuNRVmVsWJV80voX" value="fRHaDKWlycivBtRZ9xZgHIpaCuNRVmVsWJV80voX">
+                                        <label class="m-0" for="fRHaDKWlycivBtRZ9xZgHIpaCuNRVmVsWJV80voX">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/fRHaDKWlycivBtRZ9xZgHIpaCuNRVmVsWJV80voX.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                    <div class="room-box-interior">
+                                        <input type="checkbox" name="bedrooms" id="gs5F2WCXePU7PBokYBUjHh7QpcN6KMXw4Q0znHt6" value="gs5F2WCXePU7PBokYBUjHh7QpcN6KMXw4Q0znHt6">
+                                        <label class="m-0" for="gs5F2WCXePU7PBokYBUjHh7QpcN6KMXw4Q0znHt6">
+                                            <img src="./assets/imgs/Admin/img/web/Tools/InteriorDesign/BedRooms/gs5F2WCXePU7PBokYBUjHh7QpcN6KMXw4Q0znHt6.webp" class="interior-img" width="100" alt="bedroom">
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
+                      <a class="buttons" (click)="next()">Next</a>
+                      <a class="buttons" (click)="back()">Previous</a>
+                    </div>
+                  </div>
+                </section>
+              }
+            </div>
+          </div>
+      </form>
+  </div>
+</section>

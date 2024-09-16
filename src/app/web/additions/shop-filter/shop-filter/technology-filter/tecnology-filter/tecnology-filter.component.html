@@ -7,12 +7,12 @@
                 [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}"></i>
           </div>
       </a>
-      <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}"  id="TechnologiesExamples">
+      <div [ngClass]="{'collapse': isCollapsed, 'collapsing': !isCollapsed, 'show': !isCollapsed}" class="mt-3"  id="TechnologiesExamples">
         @for (technology of technologies; track $index) {
-              <label [for]="technology" class="checkbox TechCheckBox">
-                  <input type="checkbox" [id]="technology" class="TechCheckInput" [value]="technology" >
-                  {{technology}}
-              </label>
+          <label [for]="technology" class="checkbox TechCheckBox" [ngClass]="{ 'checked-label': selectedTechnology.includes(technology) }">
+              <input type="checkbox" [id]="technology" class="TechCheckInput" [value]="technology" (change)="onTechnologyChange($event, technology)">
+              {{technology}}
+          </label>
           }
       </div>
   </div>

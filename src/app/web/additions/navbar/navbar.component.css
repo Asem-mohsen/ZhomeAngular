@@ -1,9 +1,38 @@
-.navbar-nav {
-    gap: 30px;
+nav.navbar-home{
+
+  position: absolute;
+
+  .navbar-nav .nav-item .nav-link{
+    color:white;
+    font-size: 20px;
+  }
+  .JoinUs{
+    color: white;
+    border: 1px solid white;
+    padding: 7px 15px;
+    border-radius: 4px;
+    transition: all .6s ease-out;
+    background: linear-gradient(to right, #154352 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+  }
+  .JoinUs:hover {
+    color: white;
+    background-position: left bottom;
+  }
+  .horizontal-line{
+    border: 1px solid white;
+    height: 30px;
+  }
+  .nav-link i{
+    color: white;
+    padding: 5px;
+  }
+
 }
-.navbar-nav .nav-item .nav-link{
-  color:white;
-  font-size: 20px;
+/* Common */
+.navbar-nav {
+  gap: 30px;
 }
 .navbar-brand{
   padding: 22px;
@@ -11,35 +40,13 @@
   color: white;
   background-color: var(--mainColor);
 }
-.JoinUs{
-  color: white;
-  border: 1px solid white;
-  padding: 7px 15px;
-  border-radius: 4px;
-  transition: all .6s ease-out;
-  background: linear-gradient(to right, #154352 50%, transparent 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-.JoinUs:hover {
-  color: white;
-  background-position: left bottom;
-}
 .nav-link{
   font-size: 16px;
 }
-.horizontal-line{
-  border: 1px solid white;
-  height: 30px;
-}
-.nav-link i{
-  color: white;
-  padding: 5px;
-}
+
 .nav-link:hover i{
   transition: all 0.4s;
   color: var(--mainColor);
-
 }
 .navbar-brand:focus, .navbar-brand:hover {
   color: white !important;

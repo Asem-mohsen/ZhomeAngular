@@ -78,7 +78,8 @@ export const routes: Routes = [
       {path:'profile/edit' , loadComponent: ()=> import('./web/layout/profile/edit-profile/edit/edit.component').then((c)=>c.EditComponent) , canActivate: [authGuard] , title: 'Edit Profile'},
       {path:'services',loadComponent: ()=> import('./web/layout/service/service.component').then((c)=>c.ServiceComponent) , title: 'Services'},
       {path:'checkout',loadComponent: ()=> import('./web/layout/checkout/checkout.component').then((c)=>c.CheckoutComponent) , title: 'Checkout'},
-      {path: 'tools',loadComponent: ()=> import('./web/layout/tool/tool.component').then((c)=>c.ToolComponent), title: 'Tools' },
+      {path: 'tools',loadComponent: ()=> import('./web/layout/tool/tool.component').then((c)=>c.ToolComponent), title: 'Proposal' },
+      {path: 'interior-design',loadComponent: ()=> import('./web/layout/tool/interior-design/interior-design.component').then((c)=>c.InteriorDesignComponent), title: 'Interior Design' },
     ]
 
   },

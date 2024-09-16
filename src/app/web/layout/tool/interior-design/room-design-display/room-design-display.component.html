@@ -1,0 +1,13 @@
+<div class="bedroom-boxes room-boxs">
+  @for(design of getFilteredDesigns(); track $index){
+    <div class="room-box-interior" [ngClass]="{ checked: design.checked }">
+      <input type="checkbox" [id]="design.id" [value]="design.id"  [checked]="design.checked" (change)="toggleCheck(design)">
+      <label class="m-0" [for]="design.id">
+          <img [src]="design.image" class="interior-img" width="100" alt="bedroom">
+          @if(design.checked){
+            <span class="checkmark">&#10004;</span>
+          }
+      </label>
+  </div>
+  }
+</div>

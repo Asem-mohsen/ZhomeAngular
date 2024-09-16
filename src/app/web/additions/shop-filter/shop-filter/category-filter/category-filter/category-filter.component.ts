@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output , ViewEncapsulation } from '@angular/core';
-import { ShopService } from '../../../../../../Services/Pages/Shop/shop.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../../../../../Services/translation/translation.service';
@@ -20,7 +19,7 @@ export class CategoryFilterComponent {
 
   isCollapsed = true;
 
-  constructor(private shopService: ShopService,private translationService : TranslationService) {}
+  constructor(private translationService : TranslationService) {}
 
   selectedCategories: string[] = [];
 

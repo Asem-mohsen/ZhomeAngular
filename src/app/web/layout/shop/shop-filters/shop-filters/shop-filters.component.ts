@@ -130,13 +130,13 @@ export class ShopFiltersComponent {
           this.totalProducts = this.filteredProducts.length;
           this.minPrice = this.filterData.Filter_Data.minPrice;
           this.maxPrice = this.filterData.Filter_Data.maxPrice;
-  
+
           this.priceOptions = {
             ...this.priceOptions,
             floor: this.minPrice,
             ceil: this.maxPrice,
           };
-  
+
           // this.applyFilters();
           this.applyPagination();
         }
@@ -160,14 +160,23 @@ export class ShopFiltersComponent {
     }
 
     resetFilters(): void {
+      // Reset the filter criteria
       this.selectedFilters = {
         category: [],
         brand: [],
         platform: [],
         technology: [],
       };
+      this.minPrice = this.filterData.Filter_Data.minPrice;
+      this.maxPrice = this.filterData.Filter_Data.maxPrice;
+
+      // Reset the filtered products to include all products
       this.filteredProducts = [...this.products];
+
+      // Reset search word and pagination
       this.searchWord = '';
+      this.currentPage = 0;
+      this.applyPagination();
     }
 
     applyPagination() {
@@ -175,7 +184,7 @@ export class ShopFiltersComponent {
       const end = start + this.itemsPerPage;
       this.paginatedProducts = this.filteredProducts.slice(start, end);
     }
-  
+
     onPageChange(event: PageEvent) {
       this.currentPage = event.pageIndex;
       this.itemsPerPage = event.pageSize;

@@ -18,20 +18,21 @@ export class TecnologyFilterComponent {
 
   isCollapsed = true;
 
-  @Input() technologies: any[] = [];
+  @Input() technologies: string[] = [];
 
   @Output() filterChange = new EventEmitter<string[]>();
 
   selectedTechnology: string[] = [];
 
-  onPlatformChange(event: any, Technology: string) {
+  onTechnologyChange(event: any, technology: string) {
     if (event.target.checked) {
-      this.selectedTechnology.push(Technology);
+      this.selectedTechnology.push(technology);
     } else {
-      this.selectedTechnology = this.selectedTechnology.filter(id => id !== Technology);
+      this.selectedTechnology = this.selectedTechnology.filter(t => t !== technology);
     }
     this.filterChange.emit(this.selectedTechnology);
   }
+
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;

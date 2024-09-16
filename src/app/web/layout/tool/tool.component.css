@@ -13,71 +13,7 @@ a {
 ul.menu__inner {
   margin: 0;
 }
-.ErrorMessages {
-  top: 88px !important;
-}
-.ErrorMessages .alert {
-  width: auto !important;
-  font-size: 13px;
-  border-right: 4px solid #155724 !important;
-}
-@media (max-width: 767px) {
-  .wizard .steps {
-    display: none;
-  }
-  .block-title.text-center {
-    display: none;
-  }
 
-  #header {
-    border-bottom: none !important;
-  }
-  .wizard .content .section-heading {
-    font-size: 29px;
-  }
-  nav.navbar {
-    border-bottom: none !important;
-  }
-  .MainProposal {
-    min-height: auto;
-  }
-  .wizard .content .bd-wizard-step-title {
-    font-size: 20px;
-    margin: 15px 0px;
-    text-align: center;
-  }
-  .wizard .content p {
-    font-size: 13px;
-  }
-  .wizard .content .purpose-radios-wrapper .purpose-radio {
-    margin-bottom: 8px;
-  }
-  .wizard .content .purpose-radio .purpose-radio-label {
-    height: 80px;
-    flex-direction: row;
-    justify-content: left !important;
-  }
-  .wizard .content .purpose-radio .purpose-radio-label .label-icon {
-    font-size: 40px !important;
-    margin: 0 20px;
-    margin-bottom: 0;
-    width: 44px !important;
-    height: auto;
-  }
-  .wizard .content .purpose-radio .purpose-radio-label .label-text {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .wizard .Proposal-Platforms .purpose-radio .purpose-radio-label {
-    height: 80px !important;
-    gap: 0;
-    width: -webkit-fill-available !important;
-  }
-  #wizard-p-5 .Proposal-Platforms .purpose-radio .purpose-radio-label {
-    padding-left: 20px;
-    gap: 10px !important;
-  }
-}
 .block-title__tag-line {
   margin: 0;
   color: #a5a5a5;

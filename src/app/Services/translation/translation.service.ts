@@ -44,7 +44,10 @@ export class TranslationService {
   }
 
   getLanguage(): string {
-    return localStorage.getItem('lang') || this.defaultLang;
+    if (isPlatformBrowser(this.platformId)) {
+     return localStorage.getItem('lang') || this.defaultLang;
+    }
+    return this.defaultLang ;
   }
 
 }

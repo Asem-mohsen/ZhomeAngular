@@ -141,7 +141,7 @@ section.auth .box .content {
   position: absolute;
   right: 0;
   width: -moz-available;
-  height: 100% !important;
+  height: 100%;
 }
 .small-sidenav-ul {
   display: grid;

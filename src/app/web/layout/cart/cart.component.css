@@ -270,8 +270,8 @@ div.Image-One {
   display: inline-block;
 }
 div.Splitted .SplittedProduct_1 img.BigWidth {
-  width: 563px !important;
-  height: 395px !important;
+  width: 563px;
+  height: 395px;
   border-radius: 6px;
   margin-left: 10px;
 }

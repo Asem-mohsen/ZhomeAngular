@@ -1,0 +1,15 @@
+
+<div class="room-boxs">
+    @for(room of rooms; track $index){
+      <div class="room-box-interior" [ngClass]="{ checked: room.checked }">
+        <input type="checkbox" [value]="room.name" [id]="room.id" [checked]="room.checked" (change)="toggleCheck(room)">
+        <label [for]="room.id" class="m-0">
+            <img [src]="room.image" [alt]="room.name" class="interior-img" width="100">
+            <p class="mb-2 text-center">{{ room.name }}</p>
+            @if(room.checked){
+              <span class="checkmark">&#10004;</span>
+            }
+        </label>
+      </div>
+    }
+</div>
