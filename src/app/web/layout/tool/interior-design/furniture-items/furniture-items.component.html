@@ -1,0 +1,9 @@
+<div class="furniture-box-interior" [ngClass]="{ checked: furniture.checked }">
+  <input type="checkbox" [id]="furniture.id" [value]="furniture.id"  [checked]="furniture.checked" (change)="toggleCheck(furniture)">
+  <label class="m-0" [for]="furniture.id">
+      <img [src]="furniture.urls.small" class="interior-img" width="100" alt="bedroom">
+      @if(furniture.checked){
+        <span class="checkmark">&#10004;</span>
+      }
+  </label>
+</div>

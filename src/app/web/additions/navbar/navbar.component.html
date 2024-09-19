@@ -2,9 +2,9 @@
 <nav
   class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0"
   [ngClass]="{
-    'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design']),
-    'navbar-home': isRoute(['/home']),
-    'navbar-shop': isRoute(['/shop'])
+    'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design' , '/categories' , '/brands' , '/platforms' , '/services' , '/proposal']),
+    'navbar-home': isRoute(['/home', '/shop', '/about', '/contact']),
+    'navbar-shop': isRoute([])
   }"
 >
   <div class="container">
@@ -24,9 +24,9 @@
       class="collapse navbar-collapse justify-content-between"
       id="navbarSupportedContent"
       [ngClass]="{
-        'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout']),
-        'navbar-home': isRoute(['/home']),
-        'navbar-shop': isRoute(['/shop'])
+        'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design' , '/categories' , '/brands' , '/platforms' , '/services']),
+        'navbar-home': isRoute(['/home', '/shop', '/about', '/contact']),
+        'navbar-shop': isRoute([])
       }"
     >
       <ul class="navbar-nav mb-2 mb-lg-0 align-items-center mx-auto"

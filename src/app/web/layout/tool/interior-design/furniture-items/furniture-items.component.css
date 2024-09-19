@@ -1,0 +1,42 @@
+.furniture-box-interior {
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 250px;
+  height: 250px;
+}
+.furniture-box-interior:hover{
+    transition: ease-out 0.4s;
+    box-shadow: 0px 0px 5px 1px #c1c1c1;
+}
+.furniture-box-interior.checked {
+    border-color: var(--mainColor) !important;
+    height: fit-content;
+}
+.furniture-box-interior .interior-img{
+  width: 250px !important;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.furniture-box-interior .checkmark {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    background-color: var(--mainColor);
+    font-size: 15px;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.furniture-box-interior.checked .checkmark {
+  display: flex;
+}
+
+.furniture-box-interior input[type="checkbox"] {
+  display: none;
+}

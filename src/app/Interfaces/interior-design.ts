@@ -11,3 +11,10 @@ export interface RoomDesign {
   image: string;
   checked: boolean;
 }
+
+export interface Furniture{
+  id: string;
+  name: string;
+  image: string;
+  checked: boolean;
+}

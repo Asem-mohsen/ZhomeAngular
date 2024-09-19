@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiResponse, CartItem } from "../../../Interfaces/cart";
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../Interfaces/product';
-import { NavbarComponent } from '../../additions/navbar/navbar.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -85,9 +84,8 @@ export class CartComponent{
       localStorage.setItem('currentPage', '/cart')
     }
 
-    if(this._AuthService.isAuthenticated() != null) {
-      this.isLogged = true
-    }
+    this.isLogged = this._AuthService.isAuthenticated();
+
 
     this.loadCartItems();
   }

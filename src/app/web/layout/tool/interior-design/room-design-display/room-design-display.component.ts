@@ -27,9 +27,8 @@ export class RoomDesignDisplayComponent {
   }
 
   loadImages() {
-    console.log(this.selectedRooms);
     this.selectedRooms.forEach(room => {
-      this._InteriorDesignService.getRoomImages(room.name).subscribe(response => {
+      this._InteriorDesignService.getRoomImages(room.name + " design furnitures").subscribe(response => {
         this.roomDesigns.push(...response.results.map((img: any) => ({
           id: img.id,
           roomId: room.id,

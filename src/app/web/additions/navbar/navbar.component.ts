@@ -22,8 +22,6 @@ export class NavbarComponent implements  OnInit {
 
   constructor(private _AuthService: AuthService , private _cartService : CartService , private _router : Router) { }
 
-
-
   ngOnInit(): void {
     this.isLoggedIn = this._AuthService.isAuthenticated();
 
@@ -31,13 +29,13 @@ export class NavbarComponent implements  OnInit {
       this.cartCount = count;
     });
 
+    this.currentRoute = this._router.url;
+
     this._cartService.getCartCount().subscribe();
 
-
-    // Subscribe to router events to track current route
     this._router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd)) // Type narrowing here
+      .subscribe((event: NavigationEnd) => {
         this.currentRoute = event.urlAfterRedirects;
       });
 
