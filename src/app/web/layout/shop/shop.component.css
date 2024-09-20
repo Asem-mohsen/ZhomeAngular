@@ -383,6 +383,7 @@ h1#ShopByCategory {
 }
 .category-Name h3{
   position:relative;
+  font-size:25px;
 }
 .category-Name span {
   font-size: 19px;

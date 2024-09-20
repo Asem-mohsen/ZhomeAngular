@@ -10,6 +10,7 @@
 
 .palette {
   cursor: pointer;
+  position: relative;
 }
 
 .color-box {
@@ -40,14 +41,16 @@ button {
   justify-content: center;
   align-items: center;
 }
-.palettes-container.checked .checkmark {
+.palette.checked .checkmark {
   display: flex;
 }
 
-.palettes-container input[type="checkbox"] {
+.palette input[type="checkbox"] {
   display: none;
 }
-
+.palette label{
+  cursor: pointer;
+}
 .create-palette{
   border: 1px solid #cccc;
   width: 150px;

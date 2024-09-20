@@ -42,7 +42,7 @@
           <a class="nav-link" routerLink="shop">{{'Shop' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="tools">{{'Design' | translate}}</a>
+          <a class="nav-link" routerLink="proposal">{{'Design' | translate}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="about">{{'About' | translate}}</a>
@@ -57,7 +57,7 @@
 
         <hr class="horizontal-line mx-2" />
         @if(!isLoggedIn) {
-        <a class="nav-link"
+        <a class="nav-link" (click)="toggleSearchPopup()"
           ><i class="fa-solid fa-magnifying-glass"></i
         ></a>
         } @else {
@@ -75,3 +75,28 @@
     </div>
   </div>
 </nav>
+
+@if(isSearchVisible){
+  <div class="search-popup"  @popupAnimation (click)="closePopupOnOutsideClick($event)" (keydown)="handleKeyPress($event)">
+    <div class="search-popup-content">
+      <div class="search-popup-header">
+        <input
+          type="text"
+          placeholder="Search for Pages"
+          [(ngModel)]="searchQuery"
+          (input)="searchPages()"
+          class="search-input"
+        />
+      </div>
+      <div class="search-results">
+        <ul>
+          @for(page of filteredPages ; track $index){
+            <li (click)="navigateToPage(page)">
+              <a>{{ page.name }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+}

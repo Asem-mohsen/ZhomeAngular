@@ -1,22 +1,3 @@
-/* Navbar for specific pages */
-.header{
-  border-bottom: 1px solid #eeee;
-}
-.menu .menu__inner .menu__item .menu__link , .nav-icon i{
-  color: black
-}
-#Icons .separator {
-  border-left: 1px solid black;
-}
-a.menu__link.JoinUsBtn {
-  border: 1px solid #154352;
-  color: black;
-}
-a.menu__link.JoinUsBtn:hover{
-  color: white;
-}
-/* End */
-
 .bottom-slider {
   display: flex;
   gap: 50px;
@@ -29,6 +10,15 @@ a.menu__link.JoinUsBtn:hover{
   width: 176px;
   border-radius: 35px;
 }
+.category-Name h3{
+  font-size: 21px !important;
+}
+.category-Name {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 767px) {
   .Category-Product {
       margin-top: 20px;

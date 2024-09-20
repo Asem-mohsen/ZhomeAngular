@@ -1,21 +1,3 @@
-  /* Navbar for specific pages */
-.header{
-    border-bottom: 1px solid #eeee;
-}
-.menu .menu__inner .menu__item .menu__link , .nav-icon i{
-    color: black
-}
-#Icons .separator {
-    border-left: 1px solid black;
-}
-a.menu__link.JoinUsBtn {
-    border: 1px solid #154352;
-    color: black;
-}
-a.menu__link.JoinUsBtn:hover{
-    color: white;
-}
-/* End */
 section.SectionNumber:nth-child(even) {
         background-color: aliceblue;
 }
@@ -46,8 +28,8 @@ section.SectionNumber:nth-child(even) {
         width: -webkit-fill-available !important;
     }
 }
-.slick-track{
-    margin:auto;
+.category-Name h3{
+  font-size: 21px !important;
 }
 
 .brands {

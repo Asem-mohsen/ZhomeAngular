@@ -1,13 +1,15 @@
 <div class="palettes-container">
   @for(palette of palettes ; track $index){
-    <div class="palette" (click)="selectPalette(palette)">
+    <div class="palette" (click)="selectPalette(palette)"  [ngClass]="{ checked: palette.checked }">
       <input type="checkbox" [id]="'palette' + palette.id" [value]="palette.id" [(ngModel)]="palette.checked" (change)="toggleCheck(palette)">
-      @for(color of palette.colors ; track $index){
-        <div [style.background-color]="color" class="color-box"></div>
-      }
-      @if(palette.checked){
-        <span class="checkmark">&#10004;</span>
-      }
+      <label class="m-0" [for]="'palette' + palette.id">
+        @for(color of palette.colors ; track $index){
+          <div [style.background-color]="color" class="color-box"></div>
+        }
+        @if(palette.checked){
+          <span class="checkmark">&#10004;</span>
+        }
+      </label>
     </div>
   }
   <div class="create-palette" (click)="openPopup()">
@@ -32,7 +34,7 @@
           }
           <button class="clear" (click)="clearCustomPalette()">Clear Palette</button>
         </div>
-        
+
       </div>
     </div>
   }

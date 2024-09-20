@@ -69,9 +69,8 @@
             </div>
           </div>
 
-
-
           <div class="row">
+
             <!-- Filter -->
             <div class="col-4 col-md-4 col-lg-2 FilterTransform MainFilter">
               <div class="shop_sidebar_area">
@@ -110,6 +109,7 @@
                   <button class="btn btn-secondary reset-button" (click)="resetFilters()">{{'ResetChoices' | translate}}</button>
                 </div>
             </div>
+
             <!-- Products -->
             <div class="col-12 col-md-8 col-lg-10">
                 <div class="shop_grid_product_area">
@@ -118,6 +118,9 @@
                           <div class="item">
                             <app-product-card [product]="product"></app-product-card>
                           </div>
+                        }
+                        @empty {
+                          <img src="./assets/imgs/UI/website/Shop/noProductsFound.png" style="width:50%" class="m-auto" alt="No Products Found">
                         }
                     </div>
                 </div>
