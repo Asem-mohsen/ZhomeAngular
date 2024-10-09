@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, afterNextRender } from '@angular/core';
+import { Component, OnInit, inject, afterNextRender, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BrandService } from '../../../Services/brands/brand.service';
 import { Brand } from '../../../Interfaces/brand';
@@ -6,7 +6,7 @@ import { PlatformService } from '../../../Services/platforms/platform.service';
 import { Platform } from '../../../Interfaces/platform';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslateModule } from '@ngx-translate/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor, isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit{
     rtl: true,
   }
 
-  constructor(private _BrandService: BrandService , private _PlatformService : PlatformService)
+  constructor(private _BrandService: BrandService , private _PlatformService : PlatformService , @Inject(PLATFORM_ID) private platformId: Object)
   {
 
   }
@@ -106,13 +106,15 @@ export class HomeComponent implements OnInit{
       localStorage.setItem('currentPage', '/home')
     }
 
-    this._BrandService.getBrands().subscribe((result) => {
-      this.brands = result.data.Brands;
-    })
+    if (isPlatformBrowser(this.platformId)) {
+      this._BrandService.getBrands().subscribe((result) => {
+        this.brands = result.data.Brands;
+      })
 
-    this._PlatformService.getPlatfroms().subscribe((allPlatforms) => {
-      this.platforms = allPlatforms.data.Platforms;
-    })
+      this._PlatformService.getPlatfroms().subscribe((allPlatforms) => {
+        this.platforms = allPlatforms.data.Platforms;
+      })
+    }
   }
 
   selectTab(tab: string) {

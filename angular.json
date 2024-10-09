@@ -16,6 +16,9 @@
             "outputPath": "dist/zhome",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "ua-parser-js"
+            ],
             "polyfills": [
               "zone.js"
             ],
@@ -52,13 +55,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "10mb",
-                  "maximumError": "20mb"
+                  "maximumWarning": "30mb",
+                  "maximumError": "40mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "20kb",
+                  "maximumError": "25kb"
                 }
               ],
               "outputHashing": "all"

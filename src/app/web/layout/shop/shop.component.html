@@ -15,7 +15,7 @@
   <div class="row p-0 m-0">
       <div class="col-md-9 main-img p-0 m-0">
         <owl-carousel-o [options]="ShopSlider">
-          @for (bundle of shopData?.All_Bundles; track $index) {
+          @for (bundle of bundles ; track $index) {
           <ng-template carouselSlide>
             <img [src]="bundle.MainImage" class="w-100" [alt]="bundle.Name">
           </ng-template>
@@ -120,7 +120,7 @@
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
-                  @for (product of shopData.Category1_to_show.Products; track $index) {
+                  @for (product of categoryProducts; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
@@ -147,7 +147,7 @@
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
-                  @for (product of shopData.Category2_to_show.Products; track $index) {
+                  @for (product of category2Products; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
@@ -171,7 +171,7 @@
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
-                  @for (product of shopData.Brand_to_show.Products; track $index) {
+                  @for (product of BrandProducts; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
@@ -195,7 +195,7 @@
             <div class="card-body pl-0">
               <div class="related-product__carousel">
                 <owl-carousel-o [options]="ProductsSlider">
-                  @for (product of shopData.All_Products_On_Sale; track $index) {
+                  @for (product of productsOnSale; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
@@ -229,7 +229,7 @@
           background-image: url(assets/imgs/UI/website/Shop/AlexaImage2.jpg);
         "
       >
-        <div class="overlay-button" style="width: 85%">
+        <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
             <h3>{{ bundle.Name }}</h3>
             <p>{{ bundle.brand.Brand }}</p>
@@ -243,7 +243,7 @@
           background-image: url(assets/imgs/UI/website/Shop/Escritorio.jpg);
         "
       >
-        <div class="overlay-button" style="width: 85%">
+        <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
             <h3>{{ bundle.Name }}</h3>
             <p>{{ bundle.brand.Brand }}</p>
@@ -267,7 +267,7 @@
           background-image: url(assets/imgs/UI/website/Shop/james-mcdonald-74nIYjsOY88-unsplash.jpg);
         "
       >
-        <div class="overlay-button" style="width: 85%">
+        <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
             <h3>{{ bundle.Name }}</h3>
             <p>{{ bundle.brand.Brand }}</p>
@@ -280,15 +280,15 @@
 </section>
 
 <!-- Promocode -->
-@if(shopData.Promocode){
+@if(promocode){
   <section>
     <div class="container">
       <div class="promocode" style="background-image: url('./assets/imgs/UI/website/Shop/pexels-eric-anada-1495580.jpg')">
           <div class="promoInfo">
               <h2>{{'FreshSale' | translate}}</h2>
-              <p>{{'SaveUpTo' | translate}} {{shopData.Promocode.Save + "%"}} </p>
+              <p>{{'SaveUpTo' | translate}} {{promocode.Save + "%"}} </p>
               <h3>{{'WithPromo' | translate}}</h3><br>
-              <span>{{shopData.Promocode.Promocode}}</span>
+              <span>{{promocode.Promocode}}</span>
           </div>
           <div class="countdown" id="countdown">
               <div class="num">
@@ -344,7 +344,7 @@
   <div class="container Category-selected-shop">
     <!-- Category and Sub of that Category -->
 
-    <section>
+    <section *ngIf="category1">
       <div class="boxes-shop SubCategory-OnlineShop">
         <div class="category-Name">
           <h3>
@@ -357,9 +357,9 @@
           ></a>
         </div>
 
-        @if(shopData.Category1_to_show.Category.subcategories){
+        @if(category1.subcategories){
         <div class="Subs mt-3">
-          @for (subcategory of shopData.Category1_to_show.Category.subcategories ; track $index) {
+          @for (subcategory of category1.subcategories ; track $index) {
           <a class="ToTheSubPage">
             <div
               class="box-shop SubCategory-OnlineShop-Circled"
@@ -379,7 +379,7 @@
     <section>
       <div class="related-product__carousel mt-5 mb-5 pb-3">
         <owl-carousel-o [options]="ProductsSlider">
-          @for (product of shopData.Category1_to_show.Products; track $index) {
+          @for (product of categoryProducts; track $index) {
           <ng-template carouselSlide>
             <div class="item">
               <app-product-card [product]="product"></app-product-card>
@@ -398,7 +398,7 @@
     <!-- Select Bundles -->
     <h2 class="Home-Text">{{ 'BundlesMadeforYou' | translate }}</h2>
     <div class="Bundles Images-Home">
-      @for (bundle of shopData.All_Bundles; track $index) {
+      @for (bundle of bundles; track $index) {
 
       <div class="Bundle-Shop Image-One">
         <img [src]="bundle.MainImage" class="BigWidth" [alt]="bundle.Name" />
@@ -421,7 +421,7 @@
 </section>
 
 <!-- Sub Categories of one category and thier product -->
-<section>
+<section *ngIf="category2">
   <div class="container Category-selected-shop">
     <!-- Category and Sub of that Category -->
     <section>
@@ -436,9 +436,9 @@
             >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
-        @if(shopData.Category2_to_show.Category.subcategories){
+        @if(category2.subcategories){
         <div class="Subs mt-3">
-          @for (subcategory of shopData.Category2_to_show.Category.subcategories ; track $index) {
+          @for (subcategory of category2.subcategories ; track $index) {
 
           <a class="ToTheSubPage">
             <div
@@ -459,7 +459,7 @@
     <section>
       <div class="related-product__carousel mt-5 mb-5 pb-3">
         <owl-carousel-o [options]="ProductsSlider">
-          @for (product of shopData.Category2_to_show.Products; track $index) {
+          @for (product of category2Products; track $index) {
           <ng-template carouselSlide>
             <div class="item">
               <app-product-card [product]="product"></app-product-card>
@@ -495,14 +495,14 @@
 <section>
   <div class="container mt-5 pt-3">
     <!-- Product From The Selected Brand -->
-    <section>
+    <section *ngIf="brand">
       <div class="Category-Product mt-4 justify-content-between">
         <h3>{{ brand.Brand + " Products" }}</h3>
         <a >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
       </div>
       <div class="related-product__carousel mt-5 mb-5">
         <owl-carousel-o [options]="ProductsSlider">
-          @for (product of shopData.Brand_to_show.Products ; track $index) {
+          @for (product of BrandProducts ; track $index) {
           <ng-template carouselSlide>
             <div class="item">
               <app-product-card [product]="product"></app-product-card>
@@ -538,7 +538,7 @@
                 width="17"
                 viewBox="0 0 576 512"
               >
-                <!-- <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></path> -->
+              <path transform="translate(30)"  id="Path_10" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path>
               </svg>
               <span class="hover-underline-animation">{{ 'BuildYourHomeButton' | translate }}</span>
             </a>
@@ -552,7 +552,7 @@
 <section class="mt-5 pt-2">
   <div class="Brand shop-slider-brands">
     <owl-carousel-o [options]="BrandsSlider">
-      @for (brand of shopData.All_Brands; track $index){
+      @for (brand of brands; track $index){
       <ng-template carouselSlide>
         <img
 

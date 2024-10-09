@@ -137,9 +137,9 @@ section.auth .box .content {
   display: flex;
   justify-content: center;
   padding: 20px;
-  border-left: 1px solid #eeee;
+  border-right: 1px solid #eeee;
   position: absolute;
-  right: 0;
+  left: 0;
   width: -moz-available;
   height: 100%;
 }

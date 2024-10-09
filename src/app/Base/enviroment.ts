@@ -1,7 +1,8 @@
 export enum environment
 {
-    baseURL = 'http://127.0.0.1:8000',
-    localURL = '',
+    baseURL = 'https://slategrey-falcon-219814.hostingersite.com',
+    webURL = '',
+    webAdminURL = 'https://slategrey-falcon-219814.hostingersite.com',
 
     // Unsplash Images
     UnsplashURL = 'https://api.unsplash.com/search/photos',

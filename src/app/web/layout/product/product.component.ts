@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../Services/products/products.service';
 import { Product, ProductImages } from '../../../Interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { NgStyle, CurrencyPipe, TitleCasePipe, CommonModule } from '@angular/common';
+import { NgStyle, CurrencyPipe, TitleCasePipe, CommonModule, isPlatformBrowser } from '@angular/common';
 import { ProductCardComponent } from "../../additions/product-card/product-card.component";
 import { CartService } from '../../../Services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
-import { Title } from '@angular/platform-browser'; 
+import { Title } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../../Services/translation/translation.service';
 
@@ -114,45 +114,44 @@ export class ProductComponent {
     nav: true
   }
 
-  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService , private _titleService: Title, private translationService : TranslationService){}
+  constructor(private _ProductService : ProductsService , private _ActivatedRoute : ActivatedRoute , private _cartService : CartService , private toastr: ToastrService , private _titleService: Title, private translationService : TranslationService, @Inject(PLATFORM_ID) private platformId: Object){}
   // ActivatedRoute => to extract any param form the url
 
   ngOnInit(): void {
 
     this.currentLang = this.translationService.getLanguage();
 
-    this._ActivatedRoute.paramMap.subscribe((res) => {
-      this.productID = res.get('productId');
-      
-      this._ProductService.getOneProduct(this.productID).subscribe({
+    if (isPlatformBrowser(this.platformId)) {
+      this._ActivatedRoute.paramMap.subscribe((res) => {
+        this.productID = res.get('productId');
 
-        
-        next: (res) => {
-          this.products = res.data['Recommended-Products'];
-          this.product = res.data.Product;
-          this.productImages = res.data.Product.images;
-          this.productPlatforms = res.data.Product.platforms;
+        this._ProductService.getOneProduct(this.productID).subscribe({
 
-          if (this.product?.Name) {
-            this._titleService.setTitle(this.product.Name);
+
+          next: (res) => {
+            this.products = res.data['Recommended-Products'];
+            this.product = res.data.Product;
+            this.productImages = res.data.Product.images;
+            this.productPlatforms = res.data.Product.platforms;
+
+            if (this.product?.Name) {
+              this._titleService.setTitle(this.product.Name);
+            }
+
           }
+        });
 
+        if (typeof localStorage != 'undefined') {
+          localStorage.setItem('currentPage', `/product/${this.productID}`)
         }
+
       });
-
-      if (typeof localStorage != 'undefined') {
-        localStorage.setItem('currentPage', `/product/${this.productID}`)
-      }
-
-    });
-
-    
-
+    }
 
   }
 
   quantity: number = 1;
-  
+
   addToCart(id: number, quantity?: number): void {
     this._cartService.storeCart(id, quantity).subscribe({
       next : (res) => {

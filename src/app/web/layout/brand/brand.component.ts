@@ -1,10 +1,11 @@
 import { Router, RouterLink } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ProductCardComponent } from "../../additions/product-card/product-card.component";
 import { BrandService } from '../../../Services/brands/brand.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Brand } from '../../../Interfaces/brand';
 import { TranslateModule } from '@ngx-translate/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-brand',
@@ -72,7 +73,7 @@ export class BrandComponent {
     nav: false
   }
 
-  constructor(private _BrandsService : BrandService){}
+  constructor(private _BrandsService : BrandService, @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
 
@@ -80,8 +81,10 @@ export class BrandComponent {
       localStorage.setItem('currentPage', '/brands')
     }
 
-    this._BrandsService.getBrandsPage().subscribe((res) => {
-      this.brands = res.data.brands;
-    })
+    if(isPlatformBrowser(this.platformId)){
+      this._BrandsService.getBrandsPage().subscribe((res) => {
+        this.brands = res.data.brands;
+      })
+    }
   }
 }

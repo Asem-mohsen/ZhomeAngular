@@ -1,4 +1,4 @@
-<!-- Cart -> Checkout -> Payment -->
+Cart -> Checkout -> Payment
 <section>
     <div class="container">
         <div class="CartHeader">
@@ -27,7 +27,7 @@
                         <h4>{{ 'ReceiptSummary' | translate }}</h4>
                         <!-- Product One -->
                         <div class="smallSummary">
-                            @for (order of orderData.Orders; track $index) {
+                            @for (order of orders; track $index) {
                                 <ul>
                                     <div class="product-checkout-page">
                                         <img [src]="order.product.MainImage" class="w-100" [alt]="order.product.Name">

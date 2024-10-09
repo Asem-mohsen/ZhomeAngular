@@ -1,11 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { Component , OnDestroy , Input, OnInit} from '@angular/core';
+import { Component , OnDestroy , OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CategoriesService } from '../../../Services/categories/categories.service';
 import { Category } from '../../../Interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { BrandService } from '../../../Services/brands/brand.service';
 import { Brand } from '../../../Interfaces/brand';
 import { ShopService } from '../../../Services/Pages/Shop/shop.service';
 import { Product } from '../../../Interfaces/product';
@@ -22,12 +20,17 @@ export class ShopComponent implements OnInit, OnDestroy{
   categories : Category[] = []
   shopData !: any ;
   productsOnSale: Product[] = [];
-  bundle!: Product;
+  bundle!: Product | null;
   category1 !:Category;
   category2 !: Category;
   brand !: Brand ;
-
+  categoryProducts !: Product[];
+  category2Products !: Product[];
+  BrandProducts !: Product[];
   activeTab: string = 'Recommended';
+  bundles !: Product [];
+  brands !: Brand [];
+  promocode !: any;
 
   countdownInterval: any;
   timeLeft: { days: number; hours: number; minutes: number; seconds: number } = {
@@ -154,28 +157,35 @@ export class ShopComponent implements OnInit, OnDestroy{
     nav: true,
   }
 
-  constructor(private _ShopService : ShopService){}
+  constructor(private _ShopService : ShopService , @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
     if (typeof localStorage != 'undefined') {
       localStorage.setItem('currentPage', '/shop')
     }
 
-    this._ShopService.getShopPage().subscribe({
-      next: (res) => {
-        if (res && res.data) {
-          this.shopData = res.data;
-          this.productsOnSale = res.data.All_Products_On_Sale || [];
-          this.bundle = res.data.Bundle_to_Show as Product || null;
-          this.category1 = res.data.Category1_to_show?.Category as Category || null;
-          this.category2 = res.data.Category2_to_show?.Category as Category || null;
-          this.brand = res.data.Brand_to_show?.Brand as Brand || null;
-          if (this.shopData?.Promocode?.EndsIn) {
-            this.startCountdown(this.shopData.Promocode.EndsIn);
-          }
-        }
-      },
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      this._ShopService.getShopPage().subscribe({
+        next: (res) => {
+            this.shopData = res.data;
+            this.bundles = res.data.All_Bundles ;
+            this.productsOnSale = res.data.All_Products_On_Sale ;
+            this.bundle = res.data.Bundle_to_Show as Product ;
+            this.category1 = res.data.Category1_to_show?.Category as Category ;
+            this.category2 = res.data.Category2_to_show?.Category as Category ;
+            this.categoryProducts = res.data.Category1_to_show?.Products ;
+            this.category2Products = res.data.Category2_to_show?.Products ;
+            this.brand = res.data.Brand_to_show?.Brand as Brand || null;
+            this.brands = res.data.All_Brands ;
+            this.BrandProducts = res.data.Brand_to_show.Products;
+            this.promocode = res.data.Promocode;
+            if (res.data.Promocode.EndsIn) {
+              this.startCountdown(res.data.Promocode.EndsIn);
+            }
+
+        },
+      });
+    }
   }
 
   selectTab(tab: string) {

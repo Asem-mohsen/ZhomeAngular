@@ -12,6 +12,6 @@ export class ServiceService {
 
   getServices(): Observable<any>
   {
-    return this.http.get(`${environment.baseURL}/api/services/`);
+    return this.http.get(`${environment.baseURL}/api/services`);
   }
 }

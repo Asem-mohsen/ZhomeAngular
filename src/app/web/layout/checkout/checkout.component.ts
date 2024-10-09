@@ -1,9 +1,9 @@
+import { Order } from './../../../Interfaces/checkout';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, CurrencyPipe, NgFor } from '@angular/common';
+import { CommonModule, CurrencyPipe, NgFor , isPlatformBrowser } from '@angular/common';
 import { OrdersService } from './../../../Services/orders/orders.service';
-import { Component , Signal, signal } from '@angular/core';
+import { Component , Inject, PLATFORM_ID, Signal, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { CheckoutData } from '../../../Interfaces/checkout';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -21,6 +21,7 @@ import { CountriesCitiesService } from '../../../Services/countries-cities/count
 export class CheckoutComponent {
 
   orderData !: CheckoutData ;
+  orders !: Order[] ;
   isLogged : boolean = false
 
   countries: { name: string; flag: string; code: string }[] = [];
@@ -33,7 +34,7 @@ export class CheckoutComponent {
   total = signal<number>(0);
   savedAmount = signal<number>(0);
 
-  constructor(private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService , private _router : Router, private countryCitiesService: CountriesCitiesService){}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object , private _ordersService : OrdersService , private _authService : AuthService , private _toaster : ToastrService , private paymentService : PaymentsService , private _router : Router, private countryCitiesService: CountriesCitiesService){}
 
   // steps
   step : number = 1;
@@ -61,16 +62,18 @@ export class CheckoutComponent {
       localStorage.setItem('currentPage', '/checkout')
     }
 
-    this.loadCheckoutAndUserDetails();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadCheckoutAndUserDetails();
 
-    this.isLogged = this._authService.isAuthenticated();
-
+      this.isLogged = this._authService.isAuthenticated();
+    }
   }
 
   loadCheckoutAndUserDetails() {
     this._ordersService.checkoutOrders().subscribe({
       next: (res) => {
         this.orderData = res.data;
+        this.orders = res.data.Orders;
         this.total.set(res.data.total);
 
         this.userInfo.patchValue({ // patch value is used to set the data on the form
@@ -132,14 +135,14 @@ export class CheckoutComponent {
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const value = selectElement.value;
-  
+
     if (!value) {
       return;
     }
-  
+
     this.selectedCountry = value;
     this.isCitySelectDisabled = false;
-  
+
     this.countryCitiesService.getCities(value).subscribe({
       next: (data) => {
         this.cities = data.data;

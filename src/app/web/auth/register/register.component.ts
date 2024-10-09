@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
@@ -10,7 +10,7 @@ import UAParser from 'ua-parser-js';
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule , CommonModule],
   templateUrl: './register.component.html',
-  styleUrl: './../login/login.component.css'
+  styleUrls: ['./../login/login.component.css' , './register.component.css']
 })
 export class RegisterComponent implements OnInit{
 

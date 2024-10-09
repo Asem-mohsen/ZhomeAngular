@@ -1,9 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule ,isPlatformBrowser} from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
 import UAParser from 'ua-parser-js';
+import { environment } from '../../../Base/enviroment';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   errorMsg: string = '';
   isLoading : boolean = false ;
   show: boolean = false;
-  constructor(private _AuthService: AuthService, private _router: Router) { }
+  constructor(private _AuthService: AuthService, private _router: Router , @Inject(PLATFORM_ID) private platformId: any) { }
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -68,8 +69,10 @@ export class LoginComponent implements OnInit {
               this._AuthService.currentUserDate.next(res.user);
               this._router.navigate(['home']);
             } else if (res.admin) {
+
               this._AuthService.currentUserDate.next(res.admin);
-              this._router.navigate(['admin/dashboard']);
+
+              this.navigateToExternalAdminUrl();
             }
           } else {
             this.errorMsg = 'No token received from server';
@@ -94,4 +97,13 @@ export class LoginComponent implements OnInit {
     passwordInput.type = this.show ? 'text' : 'password';
   }
 
+  navigateToExternalAdminUrl() {
+    const webAdminURL = environment.webAdminURL;
+
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href = webAdminURL;
+    }
+  }
+
 }
+

@@ -8,7 +8,8 @@ import { TranslationService } from '../../../../../../Services/translation/trans
   standalone: true,
   imports: [CommonModule , TranslateModule],
   templateUrl: './category-filter.component.html',
-  styleUrl: '../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css',
+  styleUrls:['./category-filter.component.css'],
+  // styleUrl: '../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css',
   encapsulation: ViewEncapsulation.None
 
 })
