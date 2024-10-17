@@ -102,7 +102,7 @@ hr.border-bottom {
   padding: 10px;
   height: 60px;
   text-align: center;
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
 }
 .nav-shop ul {
   display: flex;
@@ -118,7 +118,7 @@ hr.border-bottom {
 }
 .nav-shop a:hover {
   transition-duration: 0.3s;
-  color: var(--MainColor);
+  color: var(--mainColor);
 }
 .menu {
   list-style: none;
@@ -293,7 +293,7 @@ h2.ProductDetails-Text {
   height: 90px;
 }
 .ProductDetails_Section_last ul li span i {
-  color: var(--MainColor);
+  color: var(--mainColor);
 }
 
 h4[aria-expanded="false"]::before {
@@ -450,7 +450,7 @@ h1#ShopByCategory {
   font-size: 30px;
 }
 .Onsale {
-  background: var(--MainColor);
+  background: var(--mainColor);
   position: absolute;
   top: 0px;
   right: 40px;
@@ -523,18 +523,18 @@ div.SubCategory-onlineshop {
   position: relative;
 }
 .Images-Home div.Image-One img.BigWidth {
-  width: 400px !important;
+  width: 400px ;
 }
 .Bundle-Shop.Image-One:hover img {
   transition: width 1.5s ease-in-out;
   width: 400px !important;
 }
 .Bundle-Shop.shrink:hover img.BigWidth {
-  width: 276px !important;
+  width: 276px ;
 }
 
 .Bundle-Shop.Image-One img {
-  width: 276px !important;
+  width: 276px ;
   height: 330px !important;
   margin-left: 0 !important;
 }
@@ -704,8 +704,8 @@ a#BuildHomeCta {
 }
 .CartHeader p.Passed::before {
   content: "";
-  background-color: var(--MainColor);
-  border-color: var(--MainColor);
+  background-color: var(--mainColor);
+  border-color: var(--mainColor);
 }
 
 .Product-spacification {
@@ -778,9 +778,13 @@ div.Splitted .SplittedProduct_1 img.SmallSize {
   .container {
     max-width: 1129px;
   }
+  .nav-tabs .nav-link {
+    color: black;
+  }
   .nav li a.active {
     border: none;
-    border-bottom: 2px solid var(--MainColor);
+    color: var(--mainColor);
+    border-bottom: 2px solid var(--mainColor);
     background-color: transparent;
   }
   .card {
@@ -1037,7 +1041,7 @@ div.Splitted .SplittedProduct_1 img.SmallSize {
 }
 .overlay-button button:hover,
 .overlay-button-two button:hover {
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: white;
 }
 a.HomeImageInButton i {
@@ -1084,11 +1088,11 @@ div.Images-Home {
   padding: 10px;
 }
 .Button-shop-home {
-  border: 1px solid var(--MainColor);
+  border: 1px solid var(--mainColor);
   border-radius: 14px;
   padding: 10px 32px;
   position: relative;
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: white;
   margin: auto;
   display: block;
@@ -1325,11 +1329,11 @@ div.Images-Home {
   padding: 10px;
 }
 .Button-shop-home {
-  border: 1px solid var(--MainColor);
+  border: 1px solid var(--mainColor);
   border-radius: 14px;
   padding: 10px 32px;
   position: relative;
-  background-color: var(--MainColor);
+  background-color: var(--mainColor);
   color: white;
   margin: auto;
   display: block;

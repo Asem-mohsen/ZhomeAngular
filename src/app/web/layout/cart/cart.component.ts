@@ -64,7 +64,7 @@ export class CartComponent{
         loop: false
       },
       400: {
-        items: 2,
+        items: 1,
         loop: true
       },
       740: {

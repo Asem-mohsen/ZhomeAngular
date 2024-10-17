@@ -40,7 +40,12 @@
   padding-top: 6px;
   overflow: hidden;
   -webkit-box-align: start !important;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-one__content-right{
+  min-height: 45px;
 }
 .product-one__title {
   color: #302e2f;

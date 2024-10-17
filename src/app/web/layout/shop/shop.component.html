@@ -39,10 +39,10 @@
         @for (category of shopData?.All_Categories; track $index) {
         <ng-template carouselSlide>
           <div class="category-shop">
-            <a [routerLink]="['/shop/filters']">
+            <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">
               <img [src]="category.MainImage" [alt]="category.Category" />
             </a>
-            <a [routerLink]="['/shop/filters']">
+            <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">
               {{ category.Category }}
             </a>
           </div>
@@ -119,14 +119,11 @@
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
-                <owl-carousel-o [options]="ProductsSlider">
+                <owl-carousel-o *ngIf="activeTab === 'Recommended'" [options]="ProductsSlider">
                   @for (product of categoryProducts; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
                   </ng-template>
-                  }
-                  @empty {
-                  <i class="fa-solid fa-spinner"></i>
                   }
                 </owl-carousel-o>
               </div>
@@ -146,7 +143,7 @@
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
-                <owl-carousel-o [options]="ProductsSlider">
+                <owl-carousel-o *ngIf="activeTab === 'All'" [options]="ProductsSlider">
                   @for (product of category2Products; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
@@ -170,7 +167,7 @@
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
-                <owl-carousel-o [options]="ProductsSlider">
+                <owl-carousel-o *ngIf="activeTab === 'MostPopular'" [options]="ProductsSlider">
                   @for (product of BrandProducts; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
@@ -194,7 +191,7 @@
           <div class="card">
             <div class="card-body pl-0">
               <div class="related-product__carousel">
-                <owl-carousel-o [options]="ProductsSlider">
+                <owl-carousel-o  *ngIf="activeTab === 'OnSale'" [options]="ProductsSlider">
                   @for (product of productsOnSale; track $index) {
                   <ng-template carouselSlide>
                     <app-product-card [product]="product"></app-product-card>
@@ -319,7 +316,7 @@
   <div class="container">
     <div class="category-Name mt-5">
       <h3>{{ 'FreshSaleText' | translate }}</h3>
-      <a>{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
+      <a routerLink="/shop/filters" >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
     </div>
     <div class="related-product__carousel mt-3 mb-5">
       <owl-carousel-o [options]="ProductsSlider">
@@ -352,7 +349,7 @@
             <br />
             <span>{{ 'Category' | translate }}</span>
           </h3>
-          <a routerLink=""
+          <a routerLink="/shop/filters"  [queryParams]="{ category: category1.ID }"
             >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
@@ -360,7 +357,7 @@
         @if(category1.subcategories){
         <div class="Subs mt-3">
           @for (subcategory of category1.subcategories ; track $index) {
-          <a class="ToTheSubPage">
+          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category1.ID }">
             <div
               class="box-shop SubCategory-OnlineShop-Circled"
               [style]="'background-image: url(' + subcategory.image + ')'"
@@ -432,7 +429,7 @@
             <br />
             <span>{{ 'Category' | translate }}</span>
           </h3>
-          <a routerLink=""
+          <a routerLink="/shop/filters"  [queryParams]="{ category: category2.ID }"
             >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
@@ -440,7 +437,7 @@
         <div class="Subs mt-3">
           @for (subcategory of category2.subcategories ; track $index) {
 
-          <a class="ToTheSubPage">
+          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category2.ID }">
             <div
               class="box-shop SubCategory-OnlineShop-Circled"
               [style]="'background-image: url(' + subcategory.image + ')'"
@@ -481,7 +478,7 @@
     "
   >
     <div class="bottom-slider">
-      <a href="" class="thm-btn slider-one__btn">{{ 'ExploreBundles' | translate }}</a>
+      <a routerLink="/shop/filters" class="thm-btn slider-one__btn">{{ 'ExploreBundles' | translate }}</a>
       <h2 class="slider-one__title">
         {{'PackagesAndBundles' | translate }}
         <br />
@@ -498,7 +495,7 @@
     <section *ngIf="brand">
       <div class="Category-Product mt-4 justify-content-between">
         <h3>{{ brand.Brand + " Products" }}</h3>
-        <a >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
+        <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.ID }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
       </div>
       <div class="related-product__carousel mt-5 mb-5">
         <owl-carousel-o [options]="ProductsSlider">
@@ -527,7 +524,7 @@
             alt="Design Your Home"
           />
         </a>
-        <div class="ToolOnlineShop">
+        <div class="ToolOnlineShop d-flex flex-column gap-3">
           <h3>{{ 'ToolOnlineShop' | translate }}</h3>
           <div>
             <a routerLink="/tools" class="cta ShopNowButton" id="BuildHomeCta">

@@ -1,7 +1,7 @@
 import { ShopService } from './../../../../../Services/Pages/Shop/shop.service';
 import { Component, Inject, NgModule, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Product } from '../../../../../Interfaces/product';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductCardComponent } from '../../../../additions/product-card/product-card.component';
 import { CategoryFilterComponent } from "../../../../additions/shop-filter/shop-filter/category-filter/category-filter/category-filter.component";
 import { BrandFilterComponent } from '../../../../additions/shop-filter/shop-filter/brand-filter/brand-filter/brand-filter.component';
@@ -20,7 +20,7 @@ import { MatPaginatorModule , PageEvent} from '@angular/material/paginator';
 @Component({
   selector: 'app-shop-filters',
   standalone: true,
-  imports: [RouterLink,ProductCardComponent, NgIf , MatPaginatorModule , CarouselModule , CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent , SearchPipe , FormsModule , CommonModule , FilterPipe , TranslateModule , NgxSliderModule],
+  imports: [RouterLink , ProductCardComponent , NgIf , MatPaginatorModule , CarouselModule , CategoryFilterComponent , BrandFilterComponent , PlatformFilterComponent , TecnologyFilterComponent , SearchPipe , FormsModule , CommonModule , FilterPipe , TranslateModule , NgxSliderModule],
   templateUrl: './shop-filters.component.html',
   styleUrl: './shop-filters.component.css'
 })
@@ -30,13 +30,14 @@ export class ShopFiltersComponent {
   isBrowser: boolean;
 
   paginatedProducts: Product[] = [];
-  currentPage: number = 0; // Page index starts at 0
+  currentPage: number = 0;
   itemsPerPage: number = 10;
   totalProducts: number = 0;
 
-  constructor(private _ShopService : ShopService , @Inject(PLATFORM_ID) private platformId: object){
+  constructor(private _ShopService : ShopService , @Inject(PLATFORM_ID) private platformId: object , private route: ActivatedRoute , private router : Router){
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
+
   @ViewChild(MatPaginatorModule) paginator!: MatPaginatorModule;
 
   filterData: any = {
@@ -116,6 +117,21 @@ export class ShopFiltersComponent {
       }
 
       if (this.isBrowser) {
+        // Subscribe to query parameters changes
+        this.route.queryParams.subscribe((params) => {
+          if (params['category']) {
+            this.selectedFilters.category = [Number(params['category'])];
+          }
+          if (params['platform']) {
+            this.selectedFilters.platform = [Number(params['platform'])];
+          }
+          if (params['brand']) {
+            this.selectedFilters.brand =[Number(params['brand'])];
+          }
+
+          this.applyFilters();
+        });
+
         this.setupSlider();
       }
 
@@ -137,7 +153,6 @@ export class ShopFiltersComponent {
             ceil: this.maxPrice,
           };
 
-          // this.applyFilters();
           this.applyPagination();
         }
       });
@@ -177,6 +192,8 @@ export class ShopFiltersComponent {
       this.searchWord = '';
       this.currentPage = 0;
       this.applyPagination();
+
+      this.router.navigate(['/shop/filters']);
     }
 
     applyPagination() {

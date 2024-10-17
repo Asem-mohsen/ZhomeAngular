@@ -51,7 +51,7 @@ export class ProductComponent {
         items: 1
       },
       400: {
-        items: 2
+        items: 1
       },
       740: {
         items: 3

@@ -1,5 +1,5 @@
 <section>
-  <div class="container pt-5 mt-5 mb-4">
+  <div class="container mt-5 mb-4">
     <div class="block-title text-center">
       <p class="block-title__tag-line text-center">{{ 'Zhome' | translate }}</p>
       <h1 class="text-center">{{ 'Platforms' | translate }}</h1>
@@ -11,7 +11,7 @@
 <section class="mt-5">
   <div class="notSilder">
     @for (platform of platforms; track $index){
-      <a [routerLink]="" [fragment]="platform.Platform">
+      <a [routerLink]="[]" [fragment]="platform.Platform">
         <div class="slide platform">
           <img [src]="platform.Logo" [alt]="platform.Platform" />
           <p>{{ platform.Platform }}</p>
@@ -22,7 +22,7 @@
 </section>
 
 @for (platform of platforms; track $index){
-  <section class="SectionNumber" [id]="platform.Platform">
+  <section class="SectionNumber p-2" [id]="platform.Platform">
     <div class="PlatformSection">
       <div class="PlatformTop">
         <h2>{{ platform.Platform }}</h2>
@@ -112,7 +112,7 @@
         <!-- Products Related -->
         <div class="category-Name mt-5 pt-4">
           <h3>{{ 'RelatedProducts' | translate }}</h3>
-          <a routerLink="/shop">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right"></i></a>
+          <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.ID }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right"></i></a>
         </div>
         <owl-carousel-o [options]="ProductsSlider">
           @for (product of platform.products; track product.ID){

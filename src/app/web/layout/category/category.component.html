@@ -1,120 +1,112 @@
 
-    <section>
-        <div class="container categories-page mt-5 pt-5 mb-4">
-            <div class="block-title text-center">
-                <p class="block-title__tag-line text-center">{{'Zhome' | translate}}</p>
-                <h1 class="text-center">{{'Categories' | translate}}</h1>
-            </div>
-        </div>
-    </section>
+<section>
+  <div class="container categories-page mt-5 mb-4">
+      <div class="block-title text-center">
+          <p class="block-title__tag-line text-center">{{'Zhome' | translate}}</p>
+          <h1 class="text-center">{{'Categories' | translate}}</h1>
+      </div>
+  </div>
+</section>
 
-    <!-- All Categories header -->
-    <section class="mt-5">
-        <div class="notSilder pb-5 border-none">
-            @for(category of categories; track $index ){
-              <a [routerLink]="[]" fragment="{{category.Category}}">
-                    <div class="slide Categories">
-                        <p class="text-center pr-0">
+<!-- All Categories header -->
+<section class="mt-5">
+  <div class="notSilder pb-5 border-none">
+      @for(category of categories; track $index ){
+        <a [routerLink]="[]" [fragment]="category.Category">
+              <div class="slide Categories">
+                  <p class="text-center pr-0">
+                      @if(currentLang === 'ar'){
+                        {{category.ArabicName}}
+                      }
+                      @else {
+                        {{category.Category}}
+                      }
+                  </p>
+              </div>
+          </a>
+        }
+  </div>
+</section>
+
+<!-- All Categories and thier sub -->
+<section>
+    <div class="container">
+
+        <!-- Category -->
+        <section class="all-Category">
+
+            @for (category of categories; track $index) {
+
+                <section class="slider-one" style="top:0;" [id]="category.Category">
+                    <div class="backgroud-category" [ngStyle]="{'background-image': 'url(' +  category.MainImage + ')'}">
+                        <div class="slider-one__slider-1" >
+                            <div class="container bottom-slider">
+                                <h2 class="slider-one__title">
+                                    {{'DiscoverTheProductsOf' | translate}}
+                                    @if(currentLang === 'ar'){
+                                        {{category.ArabicName}}
+                                    }
+                                    @else {
+                                        {{category.Category}}
+                                    }
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Sub of that Category -->
+                <section>
+                  <div class="boxes-shop SubCategory-OnlineShop justify-content-center">
+
+                              @for (subcategory of category.subcategories ; track $index) {
+
+                                  <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category.ID }">
+                                      <div class="box-shop SubCategory-onlineshop" [ngStyle]="{'background-image': 'url(' + subcategory.image + ')'}">
+                                      </div>
+                                      <p>
+                                          @if(currentLang === 'ar'){
+                                              {{subcategory.SubArabicName}}
+                                          }
+                                          @else {
+                                              {{subcategory.SubName}}
+                                          }
+                                      </p>
+                                  </a>
+
+                              }
+
+                  </div>
+                </section>
+
+                <!-- Product From The Selected Category -->
+                <section>
+                    <div class="category-Name">
+                        <h3>
                             @if(currentLang === 'ar'){
-                              {{category.ArabicName}}
+                                {{category.ArabicName +  " منتجات"}}
                             }
                             @else {
-                              {{category.Category}}
+                                {{category.Category + " Products"}}
                             }
-                        </p>
+                        </h3>
+                        <a routerLink="/shop/filters"  [queryParams]="{ category: category.ID }">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
                     </div>
-                </a>
+                    <div class="related-product__carousel mt-5 mb-5">
+                      <owl-carousel-o [options]="ProductsSlider">
+                        @for (product of category.products; track $index) {
+                          <ng-template carouselSlide>
+                            <div class="item">
+                              <app-product-card [product]="product"></app-product-card>
+                            </div>
+                          </ng-template>
+                        }
+                      </owl-carousel-o>
+                    </div>
+                </section>
+
               }
-        </div>
-    </section>
 
-    <!-- All Categories and thier sub -->
-    <section>
-        <div class="container">
+        </section>
 
-            <!-- Category -->
-            <section class="all-Category">
-
-                @for (category of categories; track $index) {
-
-                    <section class="slider-one" style="top:0;" [id]="category.Category">
-                        <div class="backgroud-category" [ngStyle]="{'background-image': 'url(' +  category.MainImage + ')'}">
-                            <div class="item slider-one__slider-1" >
-                                <div class="container bottom-slider">
-                                    <a class="thm-btn slider-one__btn">
-                                        @if(currentLang === 'ar'){
-                                            {{category.ArabicName}}
-                                        }
-                                        @else {
-                                            {{category.Category}}
-                                        }
-                                    </a>
-                                    <h2 class="slider-one__title">
-                                        {{'DiscoverTheProductsOf' | translate}}
-                                        @if(currentLang === 'ar'){
-                                            {{category.ArabicName}}
-                                        }
-                                        @else {
-                                            {{category.Category}}
-                                        }
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- Sub of that Category -->
-                    <section>
-                            <div class="boxes-shop SubCategory-OnlineShop justify-content-center">
-
-                                        @for (subcategory of category.subcategories ; track $index) {
-
-                                            <a class="ToTheSubPage">
-                                                <div class="box-shop SubCategory-onlineshop" [ngStyle]="{'background-image': 'url(' + subcategory.image + ')'}">
-                                                </div>
-                                                <p>
-                                                    @if(currentLang === 'ar'){
-                                                        {{subcategory.SubArabicName}}
-                                                    }
-                                                    @else {
-                                                        {{subcategory.SubName}}
-                                                    }
-                                                </p>
-                                            </a>
-
-                                        }
-
-                            </div>
-                    </section>
-
-                    <!-- Product From The Selected Category -->
-                    <section>
-                        <div class="category-Name">
-                            <h3>
-                                @if(currentLang === 'ar'){
-                                    {{category.ArabicName +  " منتجات"}}
-                                }
-                                @else {
-                                    {{category.Category + " Products"}}
-                                }
-                            </h3>
-                            <a>{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
-                        </div>
-                        <div class="related-product__carousel mt-5 mb-5">
-                          <owl-carousel-o [options]="ProductsSlider">
-                            @for (product of category.products; track $index) {
-                              <ng-template carouselSlide>
-                                <div class="item">
-                                  <app-product-card [product]="product"></app-product-card>
-                                </div>
-                              </ng-template>
-                            }
-                          </owl-carousel-o>
-                        </div>
-                    </section>
-
-                  }
-
-            </section>
-
-        </div>
-    </section>
+    </div>
+</section>

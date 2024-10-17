@@ -11,7 +11,7 @@ import { tap } from 'rxjs/operators';
 export class CartService {
 
   cartItems = signal<CartItem[]>([]);
-  
+
   private cartCountSubject = new BehaviorSubject<number>(0);
   cartCount$ = this.cartCountSubject.asObservable();
 
@@ -58,7 +58,7 @@ export class CartService {
 
   checkout(): Observable<any>
   {
-    return this._http.get(`${environment.baseURL}/api/checkout/`);
+    return this._http.get(`${environment.baseURL}/api/checkout`);
   }
 
   getCartCount(): Observable<any> {

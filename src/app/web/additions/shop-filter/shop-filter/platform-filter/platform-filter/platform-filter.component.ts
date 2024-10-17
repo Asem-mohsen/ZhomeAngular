@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output  ,ViewEncapsulation} from '@angular/core';
-import { ShopService } from '../../../../../../Services/Pages/Shop/shop.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -8,14 +7,13 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule ,TranslateModule],
   templateUrl: './platform-filter.component.html',
-  styleUrls:['./platform-filter.component.css'],
-  // styleUrl: '../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css',
+  styleUrls:['./platform-filter.component.css','../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css'],
   encapsulation: ViewEncapsulation.None
 
 })
 export class PlatformFilterComponent {
 
-  constructor(private shopService: ShopService) {}
+  constructor() {}
 
   @Input() platforms: any[] = [];
   @Output() filterChange = new EventEmitter<string[]>();

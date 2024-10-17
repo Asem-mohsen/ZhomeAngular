@@ -28,7 +28,7 @@
       <div class="Image-One">
         <img
           loading="lazy"
-          src="./assets/imgs/UI/website/Home/Sliders/r-architecture-rOk4VSMS3Ck-unsplash.jpg"
+          src="/assets/imgs/UI/website/Home/Sliders/r-architecture-rOk4VSMS3Ck-unsplash.jpg"
           alt="Zhome Design"
         />
         <div class="overlay-button">
@@ -43,7 +43,7 @@
       <div class="Image-Two">
         <img
           loading="lazy"
-          src="./assets/imgs/UI/website/Home/Sliders/james-mcdonald-74nIYjsOY88-unsplash.jpg"
+          src="/assets/imgs/UI/website/Home/Sliders/james-mcdonald-74nIYjsOY88-unsplash.jpg"
           alt="Zhome Design"
         />
         <div class="overlay-button-two">
@@ -668,7 +668,7 @@
               [alt]="platform.Platform"
               [title]="platform.Platform"
             />
-            <a routerLink="/platforms">{{ platform.Platform }}</a>
+            <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.ID }">{{ platform.Platform }}</a>
           </div>
 
       }

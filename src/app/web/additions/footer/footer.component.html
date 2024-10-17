@@ -1,8 +1,8 @@
 <!-- Search  -->
-<div class="search-popup">
-  <div class="search-popup__overlay custom-cursor__overlay">
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+<div class="search-popup" [class.active]="isSearchPopupVisible" (mousemove)="onMouseMove($event)">
+  <div class="search-popup__overlay custom-cursor__overlay" (click)="closeSearchPopup()">
+    <div class="cursor"  [ngStyle]="cursorStyle"></div>
+    <div class="cursor-follower"  [ngStyle]="cursorFollowerStyle"></div>
   </div>
   <div class="search-popup__inner">
     <form action="#" class="search-popup__form">
@@ -15,7 +15,7 @@
 </div>
 
 <!-- Scroll to Top -->
-<a data-target="html" class="scroll-to-target scroll-to-top">
+<a data-target="html" class="scroll-to-target scroll-to-top" [class.visible]="isScrollButtonVisible" (click)="scrollToTop()">
   <i class="fa fa-arrow-turn-up"></i>
 </a>
 
@@ -46,14 +46,15 @@
 
     <div class="right-footer mr-0">
       <h3>{{'Subscription' | translate}}</h3>
-      <p>{{'SubscriptionText' | translate}}</p>
-      <div class="subscriptions">
+      <p class="mt-2 mb-3">{{'SubscriptionText' | translate}}</p>
+      <div class="subscriptions" [formGroup]="subscriptionForm">
         <input
           type="text"
           class="form-control"
           id="inputEmail"
-          name="Email"
+          formControlName="email"
           placeholder="{{'EmailPlaceholder' | translate}}"
+          [ngClass]="{'email-success': emailSuccess}"
           required
         />
       </div>

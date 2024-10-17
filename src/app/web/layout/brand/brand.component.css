@@ -1,3 +1,13 @@
+.block-title__tag-line {
+  margin: 0;
+  color: #a5a5a5;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 1em;
+  border-top: 2px solid var(--mainColor);
+  padding-top: 20px;
+  display: inline-block;
+}
 section.SectionNumber:nth-child(even) {
         background-color: aliceblue;
 }
@@ -30,6 +40,9 @@ section.SectionNumber:nth-child(even) {
 }
 .category-Name h3{
   font-size: 21px !important;
+}
+.SectionNumber {
+  padding: 25px;
 }
 
 .brands {

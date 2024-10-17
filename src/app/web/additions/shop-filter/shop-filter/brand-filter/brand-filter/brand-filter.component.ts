@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output , ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output  } from '@angular/core';
 import { ShopService } from '../../../../../../Services/Pages/Shop/shop.service';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -8,9 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule , TranslateModule],
   templateUrl: './brand-filter.component.html',
-  // styleUrl: '../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css',
-  styleUrls:['./brand-filter.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls:['./brand-filter.component.css','../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css'],
 })
 export class BrandFilterComponent {
 
@@ -19,7 +17,7 @@ export class BrandFilterComponent {
 
   isCollapsed = true;
 
-  constructor(private shopService: ShopService) {}
+  constructor() {}
 
   selectedBrands: string[] = [];
 

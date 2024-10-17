@@ -1,7 +1,7 @@
 export enum environment
 {
     baseURL = 'https://slategrey-falcon-219814.hostingersite.com',
-    webURL = '',
+    webURL  = 'https://orangered-curlew-529745.hostingersite.com/home',
     webAdminURL = 'https://slategrey-falcon-219814.hostingersite.com',
 
     // Unsplash Images

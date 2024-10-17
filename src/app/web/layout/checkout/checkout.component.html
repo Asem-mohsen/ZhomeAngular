@@ -1,4 +1,3 @@
-Cart -> Checkout -> Payment
 <section>
     <div class="container">
         <div class="CartHeader">
@@ -55,9 +54,11 @@ Cart -> Checkout -> Payment
                     @if(savedAmount() > 0){
                       <h6 id="saved-amount">{{ 'Saved' | translate }}: {{ savedAmount() | currency: 'EGP' }}</h6>
                     }
-                    <h6 id="FinalCheckoutHide">
-                        {{ 'Total' | translate }} <span id="FinalCheckout">{{ total() | currency: 'EGP' }}</span>
-                    </h6>
+                    @if(isLogged){
+                      <h6 id="FinalCheckoutHide">
+                          {{ 'Total' | translate }} <span id="FinalCheckout">{{ total() | currency: 'EGP' }}</span>
+                      </h6>
+                    }
                 </div>
 
                 <div class="mb-4 wizard clearfix">
@@ -184,7 +185,7 @@ Cart -> Checkout -> Payment
                                     <div id="signInOverlay" class="overlaySignIn">
                                         <div class="cardOverlay" id="signInCard">
                                             <h2>{{ 'ZhomeCommunity' | translate }}</h2>
-                                            <p style="font-size: 13px;">{{ 'ZhomeCommunityText' | translate }}</p>
+                                            <p class="m-3" style="font-size: 13px;">{{ 'ZhomeCommunityText' | translate }}</p>
                                             <div class="Div-Overlay-Sign">
                                                 <div class="InnerDiv-Overlay">
                                                     <a routerLink="/login" class="ButtonSignInOverlay"><img src="assets/imgs/UI/website/Cart/refer.png" alt="Sign In"></a>

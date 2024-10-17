@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Technology } from './../../../../../../Interfaces/product';
-import { Component, EventEmitter, Input, Output ,ViewEncapsulation } from '@angular/core';
-import { ShopService } from '../../../../../../Services/Pages/Shop/shop.service';
+import { Component, EventEmitter, Input, Output  } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -9,13 +7,11 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule , TranslateModule],
   templateUrl: './tecnology-filter.component.html',
-  styleUrls:['./tecnology-filter.component.css'],
-  // styleUrl: '../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css',
-  encapsulation: ViewEncapsulation.None
+  styleUrls:['./tecnology-filter.component.css','../../../../../layout/shop/shop-filters/shop-filters/shop-filters.component.css'],
 })
 export class TecnologyFilterComponent {
 
-  constructor(private shopService: ShopService) {}
+  constructor() {}
 
   isCollapsed = true;
 

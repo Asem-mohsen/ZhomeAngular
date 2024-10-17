@@ -1,27 +1,26 @@
-import { Component, ElementRef, HostListener, Inject, OnInit , PLATFORM_ID, ViewEncapsulation} from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, EventEmitter, Inject, OnInit , Output, PLATFORM_ID, ViewEncapsulation} from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { CartService } from '../../../Services/cart/cart.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { filter } from 'rxjs/operators';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink , RouterLinkActive , TranslateModule , CommonModule , FormsModule],
+  imports: [RouterLink , RouterLinkActive , TranslateModule , CommonModule , FormsModule , NgbCollapseModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements  OnInit {
 
+  isMenuCollapsed : boolean = true;
   isLoggedIn: boolean = false;
   cartCount: number = 0;
-  currentRoute: string = '';
-  searchQuery : string = '';
-  isSearchVisible : boolean = false;
+
+  @Output() searchIconClicked = new EventEmitter<void>();
 
   filteredPages: any[] = [];
   pages = [
@@ -35,27 +34,19 @@ export class NavbarComponent implements  OnInit {
     { name: 'Proposal', link: '/proposal' },
   ];
 
-  constructor(private _AuthService: AuthService , private _cartService : CartService , private _router : Router , private eRef: ElementRef,  @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private _AuthService: AuthService , private _cartService : CartService  ,@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this._AuthService.isAuthenticated();
-
-    this.currentRoute = this._router.url;
 
     if (isPlatformBrowser(this.platformId)) {
 
       this._cartService.cartCount$.subscribe(count => {
         this.cartCount = count;
       });
-  
+
       this._cartService.getCartCount().subscribe();
     }
-
-    this._router.events
-      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.currentRoute = event.urlAfterRedirects;
-      });
 
   }
 
@@ -63,51 +54,8 @@ export class NavbarComponent implements  OnInit {
     this._AuthService.signOutAllSessions()
   }
 
-  isRoute(paths: string[]): boolean {
-    return paths.some(path => this.currentRoute.includes(path));
-  }
-
-  toggleSearchPopup() {
-    this.isSearchVisible = !this.isSearchVisible;
-  }
-
-  closeSearchPopup() {
-    this.isSearchVisible = false;
-    this.searchQuery = '';
-    this.filteredPages = [];
-  }
-
-  searchPages() {
-    const query = this.searchQuery.toLowerCase();
-
-    this.filteredPages = this.pages.filter(page =>
-      page.name.toLowerCase().includes(query)
-    );
-  }
-
-  navigateToPage(page : any) {
-    this.closeSearchPopup();
-    this._router.navigate([page.link]);
-  }
-
-
-  @HostListener('document:click', ['$event'])
-  closePopupOnOutsideClick(event: Event) {
-    if (this.isSearchVisible && !this.eRef.nativeElement.contains(event.target)) {
-      this.closeSearchPopup();
-    }
-  }
-
-  handleClose(event: MouseEvent) {
-    if (event.target === document.querySelector('.search-popup')) {
-      this.closeSearchPopup();
-    }
-  }
-
-  handleKeyPress(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.closeSearchPopup();
-    }
+  openSearch() {
+    this.searchIconClicked.emit();
   }
 
 }

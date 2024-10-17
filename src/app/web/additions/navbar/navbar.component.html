@@ -1,40 +1,15 @@
-<!-- position-absolute -->
 <nav
-  class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0"
-  [ngClass]="{
-    'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design' , '/categories' , '/brands' , '/platforms' , '/services' , '/proposal']),
-    'navbar-home': isRoute(['/home', '/shop', '/about', '/contact']),
-    'navbar-shop': isRoute([])
-  }"
+  class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0 navbar-home"
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/home">Zhome</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
     <div
+      [ngbCollapse]="isMenuCollapsed"
       class="collapse navbar-collapse justify-content-between"
       id="navbarSupportedContent"
-      [ngClass]="{
-        'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout' , '/interior-design' , '/categories' , '/brands' , '/platforms' , '/services']),
-        'navbar-home': isRoute(['/home', '/shop', '/about', '/contact']),
-        'navbar-shop': isRoute([])
-      }"
     >
-      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center mx-auto"
-        [ngClass]="{
-          'navbar-blacked': isRoute(['/tools', '/product', '/cart', '/checkout']),
-          'navbar-home': isRoute(['/home']),
-          'navbar-shop': isRoute(['/shop'])
-        }">
+      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center mx-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="home">{{'Home' | translate}}</a>
         </li>
@@ -57,7 +32,7 @@
 
         <hr class="horizontal-line mx-2" />
         @if(!isLoggedIn) {
-        <a class="nav-link" (click)="toggleSearchPopup()"
+        <a class="nav-link" (click)="openSearch()"
           ><i class="fa-solid fa-magnifying-glass"></i
         ></a>
         } @else {
@@ -75,28 +50,3 @@
     </div>
   </div>
 </nav>
-
-@if(isSearchVisible){
-  <div class="search-popup"  @popupAnimation (click)="closePopupOnOutsideClick($event)" (keydown)="handleKeyPress($event)">
-    <div class="search-popup-content">
-      <div class="search-popup-header">
-        <input
-          type="text"
-          placeholder="Search for Pages"
-          [(ngModel)]="searchQuery"
-          (input)="searchPages()"
-          class="search-input"
-        />
-      </div>
-      <div class="search-results">
-        <ul>
-          @for(page of filteredPages ; track $index){
-            <li (click)="navigateToPage(page)">
-              <a>{{ page.name }}</a>
-            </li>
-          }
-        </ul>
-      </div>
-    </div>
-  </div>
-}

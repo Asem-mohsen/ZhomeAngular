@@ -1,0 +1,104 @@
+<nav
+  class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0"
+
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home">Zhome</a>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+    <div
+      [ngbCollapse]="isMenuCollapsed"
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarSupportedContent"
+
+    >
+
+      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center mx-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="shop">{{'Shop' | translate}}</a>
+        </li>
+
+        <li class="nav-item" (mouseenter)="showCategories = true" (mouseleave)="showCategories = true">
+          <a class="nav-link">{{ 'Categories' | translate }}</a>
+          @if(showCategories)
+          {
+            <div class="hover-content categories">
+              <ul class="categories-list">
+                @for (category of categories; track $index) {
+                  <li class="category">
+                    <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">{{ category.Category }}</a>
+                  </li>
+                }
+                <li class="category"><a routerLink="categories" class="view-all">View All</a></li>
+              </ul>
+            </div>
+          }
+
+        </li>
+
+        <li class="nav-item" (mouseenter)="showBrands = true" (mouseleave)="showBrands = true">
+          <a class="nav-link">{{ 'Brands' | translate }}</a>
+          @if(showBrands)
+          {
+            <div class="hover-content brands">
+              <ul class="brands-list">
+                @for (brand of brands; track $index) {
+                  <li class="brand">
+                    <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.ID }">
+                      <img [src]="brand.Logo" [alt]="brand.Brand">
+                    </a>
+                  </li>
+                }
+                <li class="brand"><a routerLink="brands" class="view-all">View All</a></li>
+              </ul>
+            </div>
+          }
+
+        </li>
+
+        <li class="nav-item" (mouseenter)="showPlatforms = true" (mouseleave)="showPlatforms = true">
+          <a class="nav-link">{{ 'Platforms' | translate }}</a>
+          @if(showPlatforms)
+          {
+            <div class="hover-content platforms">
+              <ul>
+                @for (platform of platforms; track $index) {
+                  <li class="platform">
+                    <a routerLink="/shop/filters" [queryParams]="{ platform: platform.ID }">{{ platform.Platform }}</a>
+                  </li>
+                }
+                <li class="platform"><a routerLink="platforms" class="view-all">View All</a></li>
+              </ul>
+            </div>
+          }
+
+        </li>
+
+      </ul>
+      <div class="icons d-flex align-items-center gap-1">
+        @if(!isLoggedIn) {
+        <a class="nav-link JoinUs" routerLink="login">{{'JoinUs' | translate}}</a>
+        } @else {
+        <a class="nav-link JoinUs" routerLink="profile">{{'Profile' | translate}}</a>
+        }
+
+        <hr class="horizontal-line mx-2" />
+        @if(!isLoggedIn) {
+        <a class="nav-link" (click)="openSearch()"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></a>
+        } @else {
+        <a class="nav-link cursor-pointer" title="{{'LogOut' | translate}}" (click)="logout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+        }
+        <a class="nav-link position-relative" routerLink="cart"
+          ><i class="fa-solid fa-shopping-cart"></i
+        >
+        <span class="count" id="cart-count">{{ cartCount }}</span>
+
+      </a>
+      </div>
+    </div>
+  </div>
+</nav>

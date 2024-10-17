@@ -4,7 +4,9 @@
   style="height: 390px"
 >
   <div class="product-one__image">
-    <img [src]="product.MainImage" [alt]="product.Name" height="270px" />
+    <a [routerLink]="['/product', product.ID]">
+      <img [src]="product.MainImage" [alt]="product.Name" height="270px" />
+    </a>
   </div>
   <div class="product-one__content">
     <div class="product-one__content-left">

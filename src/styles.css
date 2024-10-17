@@ -1,16 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: 'Open Sans';
-  src: url('/assets/fonts/open-sans/OpenSans-Regular.woff2') format('woff2'),
-       url('/assets/fonts/open-sans/OpenSans-Regular.woff') format('woff');
+  src: url('/assets/fonts/static/OpenSans-Regular.woff2') format('woff2'),
+       url('/assets/fonts/static/OpenSans-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('/assets/fonts/open-sans/OpenSans-Bold.woff2') format('woff2'),
-       url('/assets/fonts/open-sans/OpenSans-Bold.woff') format('woff');
+  src: url('/assets/fonts/static/OpenSans-Bold.woff2') format('woff2'),
+       url('/assets/fonts/static/OpenSans-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
@@ -80,6 +80,15 @@ a.ZhomeName {
 
 @media (max-width: 576px) {
 
+  /* navbar brand on small screen */
+  .navbar-brand {
+    padding: 10px !important;
+    font-size: 30px !important;
+    color: var(--mainColor) !important;
+    background-color: transparent !important;
+    letter-spacing: 3px;
+  }
+
   /* Login and sign up */
   .auth {
     display: block;
@@ -97,7 +106,7 @@ a.ZhomeName {
       justify-content: center !important;
       padding: 20px;
       border-left: none !important;
-      border-top: 1px solid #eeee;
+      border-bottom: 1px solid #eeee;
       width: -webkit-fill-available;
       height: fit-content !important;
       position: relative !important;
@@ -136,7 +145,7 @@ a.ZhomeName {
     display: grid !important;
 
     .Image-One img {
-      width: -webkit-fill-available !important;
+      width: 100% !important;
       height: 233px !important;
       border-radius: 5px !important;
       margin-left: 0!important;
@@ -342,11 +351,13 @@ a.ZhomeName {
     font-weight: 500 !important;
   }
   .category-Name span {
-    right: -78px !important;
-    margin-top: 0px  !important;
+    display: none;
+    /* right: -78px !important;
+    margin-top: 0px  !important; */
   }
   .Fixed-bundle{
     margin-top: 40px  !important;
+    background-attachment: local !important;
     .bottom-slider{
       flex-direction: column-reverse !important;
       gap: 19px !important;
@@ -354,6 +365,7 @@ a.ZhomeName {
       text-align: center !important;
       top: unset !important;
       transform: unset !important;
+      padding: 10px;
     }
   }
   .Category-Product{
@@ -765,6 +777,15 @@ a.ZhomeName {
 /* Medium (576px to 768px) */
 @media (min-width: 577px) and (max-width: 768px) {
 
+  /* navbar brand on small screen */
+  .navbar-brand {
+    padding: 10px !important;
+    font-size: 30px !important;
+    color: var(--mainColor) !important;
+    background-color: white !important;
+    letter-spacing: 3px;
+    }
+
   /* Login and sign up */
   .auth {
     display: block;
@@ -782,7 +803,7 @@ a.ZhomeName {
       justify-content: center !important;
       padding: 20px;
       border-left: none !important;
-      border-top: 1px solid #eeee;
+      border-bottom: 1px solid #eeee;
       width: -webkit-fill-available;
       height: fit-content !important;
       position: relative !important;
@@ -1024,11 +1045,13 @@ a.ZhomeName {
     font-weight: 500 !important;
   }
   .category-Name span {
-    right: -78px !important;
-    margin-top: 0px  !important;
+    display: none;
+    /* right: -78px !important;
+    margin-top: 0px  !important; */
   }
   .Fixed-bundle{
     margin-top: 40px  !important;
+    background-attachment: local !important;
     .bottom-slider{
       flex-direction: column-reverse !important;
       gap: 19px !important;
@@ -1036,6 +1059,7 @@ a.ZhomeName {
       text-align: center !important;
       top: unset !important;
       transform: unset !important;
+      padding: 10px;
     }
   }
   .Category-Product{

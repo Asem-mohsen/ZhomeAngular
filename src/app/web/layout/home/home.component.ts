@@ -7,6 +7,8 @@ import { Platform } from '../../../Interfaces/platform';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, NgFor, isPlatformBrowser } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
+import { environment } from '../../../Base/enviroment';
 
 
 @Component({
@@ -95,7 +97,7 @@ export class HomeComponent implements OnInit{
     rtl: true,
   }
 
-  constructor(private _BrandService: BrandService , private _PlatformService : PlatformService , @Inject(PLATFORM_ID) private platformId: Object)
+  constructor(private metaService: Meta, private _BrandService: BrandService , private _PlatformService : PlatformService , @Inject(PLATFORM_ID) private platformId: Object)
   {
 
   }
@@ -114,8 +116,20 @@ export class HomeComponent implements OnInit{
       this._PlatformService.getPlatfroms().subscribe((allPlatforms) => {
         this.platforms = allPlatforms.data.Platforms;
       })
+
+      this.metaService.addTags([
+        { name: 'description', content: 'Zhome is a technology platform that sells hardware and smart technologies, and many other items' },
+        { property: 'og:description', content: 'Explore cutting-edge hardware and smart technologies, including smart outlook doors, only at Your Website.' },
+        { property: 'og:url', content: `${environment.webURL}/current-page-path` }, // dynamically set the URL
+        { property: 'og:title', content: 'Zhome - Smart Technology Platform' },
+        { property: 'og:image', content: `./assets/dist/img/web/Logo/Icon.png` },
+        { name: 'twitter:card', content: 'summary_large_image' }
+      ]);
+
     }
   }
+
+
 
   selectTab(tab: string) {
     this.activeTab = tab;

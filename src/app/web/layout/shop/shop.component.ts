@@ -57,7 +57,7 @@ export class ShopComponent implements OnInit, OnDestroy{
         loop: false
       },
       400: {
-        items: 2,
+        items: 1,
         loop: true
       },
       740: {
@@ -87,7 +87,7 @@ export class ShopComponent implements OnInit, OnDestroy{
         items: 2
       },
       400: {
-        items: 4
+        items: 2
       },
       740: {
         items: 5
@@ -114,7 +114,7 @@ export class ShopComponent implements OnInit, OnDestroy{
         items: 2
       },
       400: {
-        items: 4
+        items: 2
       },
       740: {
         items: 5
@@ -191,7 +191,6 @@ export class ShopComponent implements OnInit, OnDestroy{
   selectTab(tab: string) {
     this.activeTab = tab;
   }
-
 
   startCountdown(endDate: string): void {
     const endDateTime = new Date(endDate).getTime();

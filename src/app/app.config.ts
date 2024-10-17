@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -23,6 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes  , withInMemoryScrolling({
+    anchorScrolling: 'enabled',
     scrollPositionRestoration: 'top'
   })),
     provideClientHydration(),
@@ -30,7 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideToastr(),
     importProvidersFrom(HttpClientModule ,
       RouterModule ,
-      BrowserAnimationsModule , CarouselModule , ToastrModule , SwiperModule , NgxSpinnerModule , NgxSliderModule,
+      BrowserAnimationsModule , CarouselModule , ToastrModule , SwiperModule , NgxSpinnerModule , NgxSliderModule, NgbCollapseModule,
       TranslateModule.forRoot({
       defaultLanguage : 'en',
       loader: {
