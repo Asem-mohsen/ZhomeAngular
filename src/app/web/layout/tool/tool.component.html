@@ -144,8 +144,8 @@
                   </div>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -226,8 +226,8 @@
                   </div>
                 }
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -267,8 +267,8 @@
                   }
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -316,8 +316,8 @@
                   </div>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -335,12 +335,12 @@
                 <div class="purpose-radios-wrapper Proposal-Platforms">
                   @for (platform of platforms; track $index) {
                     <div class="purpose-radio mb-3">
-                        <input type="radio" formControlName="Platform" [id]="platform.Platform" class="purpose-radio-input PlatformsInputs" [value]="platform.Platform">
-                        <label [for]="platform.Platform" class="purpose-radio-label">
+                        <input type="radio" formControlName="Platform" [id]="platform.name" class="purpose-radio-input PlatformsInputs" [value]="platform.name">
+                        <label [for]="platform.name" class="purpose-radio-label">
                         <span class="label-icon">
-                            <img [src]="platform.Logo" class="label-icon-default" [alt]="platform.Platform">
+                            <img [src]="platform.image_url" class="label-icon-default" [title]="platform.name" [alt]="platform.name">
                         </span>
-                        <span class="label-text">{{platform.Platform}}</span>
+                        <span class="label-text">{{platform.name}}</span>
                         </label>
                     </div>
                   }
@@ -362,8 +362,8 @@
                   </div>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -426,8 +426,8 @@
                   </div>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -535,8 +535,8 @@
                   </div>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <a class="buttons" (click)="next()">Next</a>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <a class="buttons" (click)="next()">Next</a>
                 </div>
               </section>
             }
@@ -597,8 +597,8 @@
                   <p class="mb-2">{{'Country' | translate}} : <span id="enteredCountry" *ngIf="toolData.value.Country">{{ toolData.value.Country }}</span></p>
                 </div>
                 <div class="d-flex gap-2 mt-3">
-                  <button type="submit" class="buttons">Save</button>
                   <a class="buttons" (click)="back()">Previous</a>
+                  <button type="submit" class="buttons">Save</button>
                 </div>
               </section>
             }

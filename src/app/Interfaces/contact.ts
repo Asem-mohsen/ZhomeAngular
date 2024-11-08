@@ -1,18 +1,23 @@
 export interface Contact {
-  ID: number;
-  Name: string;
-  Address: string;
-  Location: string;
-  Location2: string;
-  Market: string;
-  Market2: string;
-  Phone: string;
-  Phone2: string;
-  Owner: string;
-  NumberofEmp: number;
-  WebsiteLink: string;
-  OtherLinks: string | null;
-  Redirecting: boolean;
+  id: number;
+  title: string;
+  tagline: string;
+  meta_title: string;
+  meta_description: string;
+  phones: ContactPhones[];
+  markets: ContactMarkets[];
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface ContactPhones {
+  phone: string;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface ContactMarkets {
+  market: string;
   created_at: string;
   updated_at: string | null;
 }

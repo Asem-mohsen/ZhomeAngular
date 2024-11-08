@@ -527,7 +527,7 @@ div.SubCategory-onlineshop {
 }
 .Bundle-Shop.Image-One:hover img {
   transition: width 1.5s ease-in-out;
-  width: 400px !important;
+  /* width: 400px !important; */
 }
 .Bundle-Shop.shrink:hover img.BigWidth {
   width: 276px ;
@@ -536,6 +536,7 @@ div.SubCategory-onlineshop {
 .Bundle-Shop.Image-One img {
   width: 276px ;
   height: 330px !important;
+  object-fit: cover;
   margin-left: 0 !important;
 }
 .Fixed-bundle {

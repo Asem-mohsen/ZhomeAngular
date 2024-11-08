@@ -1,26 +1,24 @@
 import { Product } from "./product";
 
 export interface CartItem {
-  ID: number;
-  UserID: number;
-  CartID: string;
-  ProductID: number;
-  Price: number;
-  Quantity: number;
-  Status: number;
-  Total:number;
+  id: number;
+  user_id: number;
+  product_id: number;
+  price: number;
+  quantity: number;
+  status: string;
+  with_installation: number;
+  is_on_sale: string;
+  total_amount:number;
+  session_id : string;
   created_at: string;
   updated_at: string;
   product: Product;
 }
 
 export interface ApiResponse {
-  message: string;
-  data: {
-    count: number;
-    total: number;
-    totalSaved: number
-    cartItems: CartItem[];
-    products: Product[];
-  };
+  items: CartItem[]
+  count: number;
+  total_amount: number;
+  total_saved: number
 }

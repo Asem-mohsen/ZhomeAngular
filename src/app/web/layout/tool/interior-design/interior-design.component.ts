@@ -14,11 +14,12 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { FurnitureItemsComponent } from './furniture-items/furniture-items.component';
 import { InteriorDesignService } from '../../../../Services/tools/interior-design/interior-design.service';
 import { ColorPaletteComponent } from "./color-palette/color-palette.component";
+import { HomeTypeComponent } from "./home-type/home-type.component";
 
 @Component({
   selector: 'app-interior-design',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ReactiveFormsModule, NgIf, FormsModule, NgFor, RoomSelectionComponent, RoomDesignDisplayComponent, CarouselModule, FurnitureItemsComponent, ColorPaletteComponent],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, NgIf, FormsModule, NgFor, RoomSelectionComponent, RoomDesignDisplayComponent, CarouselModule, FurnitureItemsComponent, ColorPaletteComponent, HomeTypeComponent],
   templateUrl: './interior-design.component.html',
   styleUrl: './interior-design.component.css'
 })
@@ -49,7 +50,7 @@ export class InteriorDesignComponent {
   chairFurniture: any[] = [];
   sofaFurniture: any[] = [];
   diningFurniture: any[] = [];
-  
+
   FurnitureSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -87,7 +88,7 @@ export class InteriorDesignComponent {
   }
 
   onRoomsSelected(selectedRooms: Room[]) {
-    
+
     this.selectedRooms = selectedRooms;
   }
 
@@ -95,7 +96,7 @@ export class InteriorDesignComponent {
     const hasBedroom = this.selectedRooms.some(room =>room.name.toLowerCase() === 'bedrooms' || room.name.toLowerCase() === "kid's room" );
     const hasDinning = this.selectedRooms.some(room =>room.name.toLowerCase() === 'dinning rooms');
     const hasLiving  = this.selectedRooms.some(room => room.name.toLowerCase()=== "Living Rooms");
-    
+
     this._InteriorDesignService.getFurnitureImages('modern living room armchair').subscribe(data => {
       this.chairFurniture = data.results;
     });
@@ -106,7 +107,7 @@ export class InteriorDesignComponent {
       this._InteriorDesignService.getFurnitureImages('modern bedroom furniture').subscribe(data => {
         this.bedroomFurniture = data.results;
       });
-  
+
       this._InteriorDesignService.getFurnitureImages('modern wardrobe design').subscribe(data => {
         this.wardrobeFurniture = data.results;
       });

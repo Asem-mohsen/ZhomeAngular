@@ -10,6 +10,7 @@ import { ApiResponse, CartItem } from "../../../Interfaces/cart";
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../Interfaces/product';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductsService } from '../../../Services/products/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,7 @@ export class CartComponent{
   isLogged : boolean = false ;
 
   cartItems = signal<CartItem[]>([]);
-  products = signal<Product[]>([]);
+  products : Product [] = [];
 
   total = signal(0);
 
@@ -32,20 +33,20 @@ export class CartComponent{
   totalSaved = signal(0);
 
   count = computed(() => {
-    return this.cartItems().reduce((acc, item) => acc + Number(item.Quantity), 0);
+    return this.cartItems().reduce((acc, item) => acc + Number(item.quantity), 0);
   });
 
   countOfProducts = computed(() => this.cartItems().length);
 
   subtotal = computed(() => {
     return this.cartItems().reduce((acc, item) => {
-      const itemTotal = Number(item.Quantity) * Number(item.Price);
-      const installationPrice = Number(this.installationPrices()[item.product.ID] || 0);
+      const itemTotal = Number(item.quantity) * Number(item.price);
+      const installationPrice = Number(this.installationPrices()[item.product.id] || 0);
       return acc + itemTotal + installationPrice;
     }, 0);
   });
 
-  constructor(private _cartService : CartService  , private _AuthService : AuthService , private toastr: ToastrService , private _router : Router){}
+  constructor(private _cartService : CartService  , private _AuthService : AuthService , private toastr: ToastrService , private _router : Router , private _products : ProductsService){}
 
   // Sliders
   ProductsSlider: OwlOptions = {
@@ -86,20 +87,29 @@ export class CartComponent{
 
     this.isLogged = this._AuthService.isAuthenticated();
 
-
     this.loadCartItems();
+
+    this.loadProducts();
   }
 
 
   loadCartItems(): void {
     this._cartService.getCart().subscribe({
       next: (response: ApiResponse) => {
-        this.cartItems.set(response.data.cartItems);
-        this.total.set(response.data.total);
-        this.products.set(response.data.products);
-        this.totalSaved.set(response.data.totalSaved);
+        this.cartItems.set(response.items);
+        this.total.set(response.total_amount);
+        this.totalSaved.set(response.total_saved);
       }
     });
+  }
+
+  loadProducts():void
+  {
+    this._products.getProductsCard().subscribe({
+      next: (response) => {
+        this.products = response.data.products;
+      }
+    })
   }
 
   removeProduct(id : number)
@@ -137,9 +147,9 @@ export class CartComponent{
 
     const currentPrices = { ...this.installationPrices() };
     if (isChecked) {
-      currentPrices[item.product.ID] = Number(item.product.InstallationCost) || 0;
+      currentPrices[item.product.id] = Number(item.product.installation_cost) || 0;
     } else {
-      delete currentPrices[item.product.ID];
+      delete currentPrices[item.product.id];
     }
     this.installationPrices.set(currentPrices);
     this.updateTotal();
@@ -157,9 +167,9 @@ export class CartComponent{
 
   // Spinner Quantity
   incrementQuantity(item: CartItem) {
-    if (item.Quantity < item.product.Quantity) {
-      item.Quantity++;
-      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe({
+    if (item.quantity < item.product.quantity) {
+      item.quantity++;
+      this._cartService.updateQuantity(item.product.id, item.quantity).subscribe({
         next: (res) => {
           this.loadCartItems();
         }
@@ -168,9 +178,9 @@ export class CartComponent{
   }
 
   decrementQuantity(item: CartItem) {
-    if (item.Quantity > 1) {
-      item.Quantity--;
-      this._cartService.updateQuantity(item.product.ID, item.Quantity).subscribe({
+    if (item.quantity > 1) {
+      item.quantity--;
+      this._cartService.updateQuantity(item.product.id, item.quantity).subscribe({
         next: (res) => {
           this.loadCartItems();
         }

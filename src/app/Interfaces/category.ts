@@ -2,19 +2,19 @@ import { Product } from "./product";
 import { Subcategory } from "./subcategory";
 
 export interface Category {
-    ID: number;
-    Category: string;
-    ArabicName: string;
-    MainImage: string;
-    Description: string;
-    ArabicDescription: string;
-    OtherDescription: string;
-    OtherArabicDescription: string;
-    HasSub: number;
-    created_at: string | null;
+    id: number;
+    name: string;
+    ar_name: string;
+    image_url: string;
+    description: string;
+    ar_description: string;
+    additional_description: string;
+    ar_additional_description: string;
+    has_sub: number;
+    subcategories_count :number;
+    products_count : number
+    created_at: string;
     updated_at: string;
-    ArchivedOn: string | null;
-    DeletedOn: string | null;
     subcategories: Subcategory[];
     products : Product[] | null;
 }

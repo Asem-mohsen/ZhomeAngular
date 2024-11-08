@@ -17,6 +17,11 @@ export class ProductsService {
 
   getOneProduct(id : string | null): Observable<any>
   {
-    return this._http.get(`${environment.baseURL}/api/products/${id}/userView`);
+    return this._http.get(`${environment.baseURL}/api/products/${id}/show`);
+  }
+
+  getProductsCard(): Observable<any>
+  {
+    return this._http.get(`${environment.baseURL}/api/products/product-card`);
   }
 }

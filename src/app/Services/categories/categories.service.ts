@@ -12,7 +12,7 @@ export class CategoriesService {
 
   getCategories() :Observable<any>
   {
-    return this._http.get(`${environment.baseURL}/api/category/user/categories`);
+    return this._http.get(`${environment.baseURL}/api/category/categories`);
   }
 
 }

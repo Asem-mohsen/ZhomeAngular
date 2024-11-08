@@ -1,8 +1,8 @@
-import { Order } from './../../../Interfaces/checkout';
-import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Order, UserData } from './../../../Interfaces/checkout';
+import { FormGroup, Validators, FormControl, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { CommonModule, CurrencyPipe, NgFor , isPlatformBrowser } from '@angular/common';
 import { OrdersService } from './../../../Services/orders/orders.service';
-import { Component , Inject, PLATFORM_ID, Signal, signal } from '@angular/core';
+import { Component , Inject, PLATFORM_ID, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CheckoutData } from '../../../Interfaces/checkout';
 import { AuthService } from '../../../Services/auth/auth.service';
@@ -10,11 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 import { PaymentsService } from '../../../Services/payments/payments.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CountriesCitiesService } from '../../../Services/countries-cities/countries-cities.service';
+import { UserInfoFormComponent } from '../../additions/components/user-info-form/user-info-form.component';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule, TranslateModule ,NgFor],
+  imports: [RouterLink , CurrencyPipe , ReactiveFormsModule , CommonModule, TranslateModule ,NgFor , UserInfoFormComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
@@ -27,7 +28,6 @@ export class CheckoutComponent {
   countries: { name: string; flag: string; code: string }[] = [];
   cities: { name: string }[] = [];
   selectedCountry: string = '';
-  selectedCity: string = '';
   isCitySelectDisabled: boolean = true;
 
   // Signals for the total and saved amount
@@ -40,21 +40,21 @@ export class CheckoutComponent {
   step : number = 1;
 
   userInfo: FormGroup = new FormGroup({
-    CartID: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
-    Address: new FormControl(null, [Validators.required]),
-    Phone: new FormControl(null, [Validators.required]),
-    Name: new FormControl(null, [Validators.required , Validators.minLength(3)]),
-    UserShippingAddress: new FormControl(null, [Validators.required]),
-    Country: new FormControl(null, [Validators.required]),
-    City: new FormControl(null, [Validators.required]),
-    Building: new FormControl(null, [Validators.required]),
-    Floor: new FormControl(null, [Validators.required]),
-    Apartment: new FormControl(null, [Validators.required]),
+    street_address: new FormControl(null, [Validators.required]),
+    phone: new FormControl(null, [Validators.required]),
+    name: new FormControl(null, [Validators.required]),
+    lastName: new FormControl(null, [Validators.required , Validators.minLength(3)]),
+    firstName: new FormControl(null, [Validators.required , Validators.minLength(3)]),
+    country: new FormControl(null, [Validators.required]),
+    city: new FormControl(null, [Validators.required]),
+    building: new FormControl(null, [Validators.required]),
+    floor: new FormControl(null, [Validators.required]),
+    apartment: new FormControl(null, [Validators.required]),
   });
 
   checkPromocodeForm: FormGroup = new FormGroup({
-    promoCode: new FormControl('', [Validators.required])
+    promotion: new FormControl('', [Validators.required])
   });
 
   ngOnInit(): void {
@@ -63,7 +63,10 @@ export class CheckoutComponent {
     }
 
     if (isPlatformBrowser(this.platformId)) {
+
       this.loadCheckoutAndUserDetails();
+
+      this.loadCountries();
 
       this.isLogged = this._authService.isAuthenticated();
     }
@@ -72,16 +75,27 @@ export class CheckoutComponent {
   loadCheckoutAndUserDetails() {
     this._ordersService.checkoutOrders().subscribe({
       next: (res) => {
-        this.orderData = res.data;
-        this.orders = res.data.Orders;
+        this.orders = res.data.orders;
         this.total.set(res.data.total);
 
-        this.userInfo.patchValue({ // patch value is used to set the data on the form
-          CartID: res.data.CartID,
-          email: res.data.User?.email,
-          Address: res.data.User?.Address,
-          Phone: res.data.User?.Phone,
-          Name: res.data.User?.Name,
+        const phones = Array.isArray(res.data.user.phones) ? res.data.user.phones : [res.data.user.phones];
+
+        // Split name into first and last names
+        const fullName = res.data.user.name || '';
+        const nameParts = fullName.trim().split(' ');
+        const firstName = nameParts[0] || ''; // The first part as first name
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        this.userInfo.patchValue({
+          email: res.data.user.email,
+          address: res.data.user.address?.street_address,
+          phone: phones[0] || '',
+          name: fullName,
+          firstName: firstName,
+          lastName: lastName,
+          building: res.data.user.address?.building ,
+          floor: res.data.user.address?.floor,
+          apartment: res.data.user.address?.apartment ,
         });
       }
     });
@@ -90,7 +104,12 @@ export class CheckoutComponent {
 
   submitUserInfo()
   {
-    this._ordersService.saveUserInfo(this.userInfo.value).subscribe({
+    const userInfoData: UserData = {
+      ...this.userInfo.value,
+      phone: [this.userInfo.value.phone]
+    };
+
+    this._ordersService.saveUserInfo(userInfoData).subscribe({
       next : (res)=>{
         this._toaster.success('Saved Successfully');
         this.step = 3;
@@ -108,9 +127,9 @@ export class CheckoutComponent {
   }
 
   checkPromocode() {
-    const promoCodeValue = this.checkPromocodeForm.get('promoCode')?.value;
+    const promotion = this.checkPromocodeForm.get('promotion')?.value;
 
-    this._ordersService.checkPromocode(promoCodeValue, this.total()).subscribe({
+    this._ordersService.checkPromocode(promotion, this.total()).subscribe({
       next: (res) => {
         this.total.set(res.data.total);
         this.savedAmount.set(res.data.savedAmount || 0);
@@ -149,14 +168,13 @@ export class CheckoutComponent {
       },
       error: (error) => console.error('Error fetching cities:', error)
     });
+
   }
 
 
   cashPay()
   {
-    console.log(this.userInfo.value);
-    console.log(this.userInfo.value.CartID);
-    this.paymentService.createCashPayment(this.userInfo.value.CartID , this.total()).subscribe({
+    this.paymentService.createCashPayment(this.total()).subscribe({
       next : (res) => {
         if (res.success == true) {
           this._router.navigate(['/cart']);
@@ -168,13 +186,10 @@ export class CheckoutComponent {
 
   cardPay()
   {
-    this.paymentService.createPayment(this.total(), this.userInfo.value.CartID).subscribe({
+    this.paymentService.createPayment(this.total()).subscribe({
       next : (response) => {
-        if (response.success) {
-          window.location.href = response.url;
-        } else {
-          console.error('Failed to create checkout session:', response.error);
-        }
+          console.log(this.total());
+          window.location.href = response.payment_link;
       }
     });
   }

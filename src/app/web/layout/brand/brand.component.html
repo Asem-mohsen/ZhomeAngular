@@ -14,9 +14,9 @@
       <owl-carousel-o [options]="BrandsSlider">
         @for (brand of brands; track $index) {
           <ng-template carouselSlide>
-            <a [routerLink]="[]" [fragment]="brand.Brand" class="customer-logos-brands">
+            <a [routerLink]="[]" [fragment]="brand.name" class="customer-logos-brands">
               <div class="slide brands">
-                  <img [src]="brand.Logo" [alt]="brand.Brand" class="w-100 brand-logo" style="object-fit:contain;">
+                  <img [src]="brand.image_url" [alt]="brand.name" [title]="brand.name" class="w-100 brand-logo" style="object-fit:contain;">
               </div>
             </a>
           </ng-template>
@@ -27,26 +27,26 @@
 
 <!-- Brands -->
 @for (brand of brands; track $index) {
-  <section class="SectionNumber" [id]="brand.Brand">
+  <section class="SectionNumber" [id]="brand.name">
       <div class="container">
           <div class="PlatformSection">
               <div class="PlatformTop">
-                  <h2>{{brand.Brand}}</h2>
-                  <img [src]="brand.CoverImg" [alt]="brand.Brand" style="object-fit: contain;height: 300px;">
+                  <h2>{{brand.name}}</h2>
+                  <img [src]="brand.image_url" [alt]="brand.name">
               </div>
               <div class="container">
                   <div class="PlatformDesc">
-                      <p>{{brand.MainDescription}}</p>
+                      <p>{{brand.description}}</p>
                   </div>
 
                   <!-- Products Related -->
                   <div class="category-Name mt-5 pt-5">
                       <h3>{{'RelatedProducts' | translate}}</h3>
-                      <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.ID }">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
+                      <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.id }">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
                   </div>
                   <div class="related-product__carousel mt-3 mb-4">
                     <owl-carousel-o [options]="ProductsSlider">
-                      @for (product of brand.products; track product.ID) {
+                      @for (product of brand.products; track product.id) {
                         <ng-template carouselSlide>
                           <div class="item">
                             <app-product-card [product]="product"></app-product-card>

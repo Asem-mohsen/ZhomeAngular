@@ -1,16 +1,15 @@
+import { Product } from "./product";
+
 export interface Brand {
-  ID:     number;
-  Brand:  string;
-  Logo:   string;
-  CoverImg: string | null;
-  MainDescription:   string;
-  OtherDescription:  string;
-  MainArabic: string;
-  OtherArabicDescription: string | null;
+  id:    number;
+  name:  string;
+  image_url:string;
+  description:string;
+  additional_description:  string;
+  ar_description: string;
+  ar_additional_description: string | null;
   updated_at: string;
   created_at: string | null;
-  ArchivedOn: string | null;
-  DeletedOn:  string | null;
-  products:   any[];
+  products: Product[];
 }
 

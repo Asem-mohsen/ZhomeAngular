@@ -15,8 +15,4 @@ export class BrandService {
     return this._http.get(`${environment.baseURL}/api/brands`);
   }
 
-  getBrandsPage() :Observable<any>
-  {
-    return this._http.get(`${environment.baseURL}/api/brands/userShow`);
-  }
 }

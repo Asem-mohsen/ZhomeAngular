@@ -9,7 +9,7 @@ export class SearchPipe implements PipeTransform {
 
   transform(productList : Product[] ,word: string): Product[] {
 
-    return productList.filter( (product)=> product.Name.toLowerCase().includes(word.toLowerCase()) );
+    return productList.filter( (product)=> product.translations.name.toLowerCase().includes(word.toLowerCase()) );
 
   }
 

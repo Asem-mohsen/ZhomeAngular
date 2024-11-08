@@ -8,7 +8,6 @@ export interface CheckoutResponse {
 }
 
 export interface CheckoutData {
-  CartID: string;
   firstName: string;
   lastName: string;
   total: number;
@@ -17,57 +16,41 @@ export interface CheckoutData {
 }
 
 export interface Order {
-  ID: number;
-  UserID: number;
-  CartID: string;
-  Name: string | null;
-  Email: string | null;
-  Phone: string | null;
-  Address: string | null;
-  City: string | null;
-  Building: string | null;
-  Floor: string | null;
-  Apartment: string | null;
-  Country: string | null;
-  ProductID: number;
-  Price: number;
-  Quantity: number;
-  WithInstallation: number;
-  DeliveryFees: number | null;
-  Total: number | null;
-  PromoCodeID: number | null;
-  Saving: number | null;
-  TotalAfterSaving: number | null;
-  Status: number;
-  created_at: string;
-  TransactionID: number | null;
-  Location: string | null;
-  SessionID: string | null;
-  updated_at: string;
-  ArchivedOn: string | null;
-  DeletedOn: string | null;
+  id: number;
+  user_id: number;
+  product_id: number;
+  price: number;
+  quantity: number;
+  with_installation: number;
+  total_amount: number;
+  status: string;
+  is_on_sale: string;
+  transaction_id: string | null;
+  session_id: string | null;
   product: Product;
-  transaction: Transaction | null;
-  promocode: PromoCode | null;
+  promocode: Promotion | null;
+  created_at: string;
+  updated_at: string;
 }
 
-export interface UserData {
-  CartID: string;
-  Name: string;
-  Email: string;
-  Phone: string;
-  Address: string;
-  City: string;
-  Building: string;
-  Floor: string;
-  Apartment: string;
-  Country: string;
+export interface Promotion {
+  id: number;
+  code:string;
+  valid_unti : string;
+  valid_from : string;
+  discount_amount : string;
 }
 
-export interface Transaction {
-
-}
-
-export interface PromoCode {
-
+export interface UserData{
+  email : string;
+  name : string;
+  firstName : string;
+  lastName : string;
+  street_address : string;
+  floor : string;
+  apartment : string;
+  phone : string[];
+  building : string;
+  city: string;
+  country: string;
 }

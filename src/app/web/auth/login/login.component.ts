@@ -65,15 +65,10 @@ export class LoginComponent implements OnInit {
           if (res.token) {
             this._AuthService.saveToken(res.token);
 
-            if (res.user) {
-              this._AuthService.currentUserDate.next(res.user);
-              this._router.navigate(['home']);
-            } else if (res.admin) {
+            this._AuthService.currentUserDate.next(res.user);
+            
+            this._router.navigate(['home']);
 
-              this._AuthService.currentUserDate.next(res.admin);
-
-              this.navigateToExternalAdminUrl();
-            }
           } else {
             this.errorMsg = 'No token received from server';
           }

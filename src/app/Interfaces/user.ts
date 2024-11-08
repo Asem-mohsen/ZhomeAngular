@@ -5,33 +5,34 @@ export interface User {
   google_id: string | null;
   FacebookID: string | null;
   session_id: string;
-  Name: string;
+  name: string;
   email: string;
-  Status: number;
-  Phone: number;
-  Address: string;
-  verification_code: string | null;
-  email_verified_at: string | null;
+  role_id:number;
+  status: string;
+  zip_code:string;
+  phones: string[]; 
+  address?: Address | null; 
+  email_verified_at: string;
   created_at: string;
   updated_at: string;
   remember_token: string | null;
-  ArchivedOn: string | null;
-  DeletedOn: string | null;
   products: Product[] | null;
 }
 
-export interface Admin {
-  id: number;
-  Name: string;
-  DOB: string;
-  Phone: number;
-  email: string;
-  Address: string;
-  RoleID: number;
-  Active: number;
-  IsAdmin: number;
-  created_at: string | null;
-  updated_at: string;
+export interface Address {
+  user_id : number;
+  country : string;
+  city : string;
+  street_address : string;
+  apartment : string;
+  floor : string;
+  building : string;
+}
+
+export interface ApiResponse {
+  user: User;
+  orderCount: any[]; 
+  userProducts: any[];
 }
 
 export interface AuthResponse {
@@ -39,29 +40,7 @@ export interface AuthResponse {
   message: string;
   data: {
     token: string;
-    user?: User;
-    admin?: Admin;
+    user: User;
   };
   error: any;
-}
-
-
-export interface OrderStatistics {
-  UserID: number;
-  MinOrderDate: string;
-  TotalNumberOfOrders: number;
-}
-
-export interface profileResponse {
-  success: boolean;
-  message: string;
-  data: {
-    user: User;
-    userProducts:Product[] ;
-    orderCount: number;
-    totalPayments: number;
-    products: Product[];
-    orderStatistics: OrderStatistics;
-  };
-  error: {};
 }

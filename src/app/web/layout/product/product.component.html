@@ -7,10 +7,10 @@
             <li><a routerLink="/shop">{{ 'Shop' | translate }} :</a></li>
             <li>
                 @if(currentLang === 'ar'){
-                    {{product.ArabicName | titlecase }}
+                    {{product.translations.name | titlecase }}
                 }
                 @else{
-                    {{product.Name | titlecase }}
+                    {{product.translations.name | titlecase }}
                 }
             </li>
         </ul>
@@ -22,7 +22,7 @@
                 <div class="row RowReverseInArabic justify-content-center">
                     <div class="col-lg-6">
                         <div class="product-details__image">
-                            <img class="img-fluid MainUpperImage" [src]="product.MainImage" width="500px" height="500px" [alt]="product.Name" />
+                            <img class="img-fluid MainUpperImage" [src]="product.image_url" width="500px" height="500px" [alt]="product.translations.name" />
                             <a href="#" class="product-details__img-popup img-popup">
                                 <i class="fa fa-search"></i>
                             </a>
@@ -34,7 +34,7 @@
                                       <ng-template carouselSlide>
                                         <div class="swiper-slide">
                                             <div class="additional-image m-2">
-                                                <img class="img-fluid h-100" [src]="image.Image" style="width:130px;object-fit: cover;" [alt]="product.Name" />
+                                                <img class="img-fluid h-100" [src]="image.url" style="width:130px;object-fit: cover;" [alt]="product.translations.name" />
                                             </div>
                                         </div>
                                       </ng-template>
@@ -48,23 +48,23 @@
                         <div class="product-details__content ">
                             <!-- Product With Sale -->
                                 <h1 class="product-details__title">
-                                    {{product.Name}}
+                                    {{product.translations.name}}
                                 </h1>
                                 @if(product.sale){
-                                    <input type="hidden" name="PriceAfterSale" [value]="product.sale.PriceAfter" >
-                                    <p class="product-details__price">{{ product.sale.PriceAfter | currency:'EGP' }} </p>
-                                    <p class="product-details__price" style="text-decoration: line-through; font-size:19px">{{ product.Price | currency:'EGP' }}</p>
+                                    <input type="hidden" name="PriceAfterSale" [value]="product.sale.sale_price" >
+                                    <p class="product-details__price">{{ product.sale.sale_price | currency:'EGP' }} </p>
+                                    <p class="product-details__price" style="text-decoration: line-through; font-size:19px">{{ product.price | currency:'EGP' }}</p>
                                 }
                                 @else{
-                                    <p class="product-details__price">{{ product.Price | currency:'EGP' }}</p>
+                                    <p class="product-details__price">{{ product.price | currency:'EGP' }}</p>
                                 }
 
                                 <p class="product-details__text">
                                     @if(currentLang === 'ar'){
-                                        {{ product.ArabicDescription }}
+                                        {{ product.translations.description }}
                                     }
                                     @else{
-                                        {{ product.Description }}
+                                        {{ product.translations.description }}
                                     }
 
                                 </p>
@@ -72,37 +72,37 @@
                                     <span class="text-uppercase"> {{ 'Category' | translate }} </span>
                                     <a routerLink="/category">
                                         @if(currentLang === 'ar'){
-                                            {{ product.subcategory.category.ArabicName }}
+                                            {{ product.subcategory.category.ar_name }}
                                         }
                                         @else{
-                                            {{ product.subcategory.category.Category }}
+                                            {{ product.subcategory.category.name }}
                                         }
 
                                     </a>
                                     <br />
                                     <span class="text-uppercase"> {{ 'Brand' | translate }}  </span>
                                     <a routerLink="/brand">
-                                        {{ product.brand.Brand }}
+                                        {{ product.brand.name }}
                                     </a>
                                 </p>
 
                                 <div class="product-details__button-block d-grid gap-1">
-                                  <input type='hidden' name='Quantity' [value]="product.Quantity" />
-                                  @if(product.Quantity > 0){
+                                  <input type='hidden' name='Quantity' [value]="product.quantity" />
+                                  @if(product.quantity > 0){
                                     <div class="quantity-spinner">
                                       <button (click)="decrementQuantity()" [disabled]="quantity <= 1">-</button>
-                                      <input type="number" [(ngModel)]="quantity" min="1" [max]="product.Quantity" [id]="'quantity-'+product.ID">
-                                      <button (click)="incrementQuantity()" [disabled]="quantity >= product.Quantity">+</button>
+                                      <input type="number" [(ngModel)]="quantity" min="1" [max]="product.quantity" [id]="'quantity-'+product.id">
+                                      <button (click)="incrementQuantity()" [disabled]="quantity >= product.quantity">+</button>
                                     </div>
-                                    <button (click)="addToCart(product.ID , quantity)" class="thm-btn product-details__cart-btn ml-3">
+                                    <button (click)="addToCart(product.id , quantity)" class="thm-btn product-details__cart-btn ml-3">
                                         {{ 'AddtoCart' | translate }} <span>+</span>
                                     </button>
                                   }
-                                  @else if(product.Quantity <= 0){
+                                  @else if(product.quantity <= 0){
                                     <p class='OutStock'> {{ 'OutofStock' | translate }} </p>
                                   }
                                 </div>
-                                @if(product.Quantity > 0){
+                                @if(product.quantity > 0){
                                     <p class="product-details__availabelity">
                                         <span>{{ 'Availability' | translate }}</span>
                                         <i class='fa-solid fa-check'></i> {{ 'AvailableInstock' | translate }}
@@ -119,8 +119,8 @@
                                     @for(platform of productPlatforms ; track $index){
                                         <a>
                                             <div class="platform">
-                                                <img [src]="platform.Logo" [alt]="platform.Platform">
-                                                <p>{{platform.Platform}}</p>
+                                                <img [src]="platform.image_url" [alt]="platform.name">
+                                                <p>{{platform.name}}</p>
                                             </div>
                                         </a>
                                     }
@@ -138,27 +138,27 @@
                         <div class="container d-grid justify-content-center">
                             <h2 class="ProductDetails-Text">
                                 @if(currentLang === 'ar'){
-                                    {{product.product_details.ArabicTitle}}
+                                    {{product.translations.title}}
                                 }
                                 @else{
-                                    {{product.product_details.Title}}
+                                    {{product.translations.title}}
                                 }
 
                             </h2>
                             <div class="Images-ProductsDetails">
                                 <div class="Image-One-ProductDetails fadeInUp">
-                                    <img [src]="product.product_details.CoverImage" alt="Cover Image">
+                                    <img [src]="product.image_url" alt="Cover Image">
                                 </div>
                             </div>
                             <div class="Text-under-images-ProductDetails">
                                 <div class="text-one-ProductDetails">
                                     <div class="top-text">
-                                        <img [src]="product.brand.Logo" [alt]="product.brand.Brand">
+                                        <img [src]="product.brand.image_url" [alt]="product.brand.name">
                                         <h3>{{ 'Brand' | translate }}</h3>
                                     </div>
                                     <div class="bottom-text">
                                         <p>
-                                            {{ product.Name + ' is a ' + product.brand.Brand}}
+                                            {{ product.translations.name + ' is a ' + product.brand.name}}
                                         </p>
                                     </div>
 
@@ -173,15 +173,15 @@
                                             @for(platform of productPlatforms ; track $index){
                                                 <a href="">
                                                     <div class="platform">
-                                                        <img [src]="platform.Logo" [alt]="platform.Platform">
-                                                        <p>{{platform.Platform}}</p>
+                                                        <img [src]="platform.image_url" [alt]="platform.name">
+                                                        <p>{{platform.name}}</p>
                                                     </div>
                                                 </a>
                                             }
                                         </div>
                                     </div>
                                 </div>
-                                @if(product.InstallationCost){
+                                @if(product.installation_cost){
                                     <div class="text-one-ProductDetails">
                                         <div class="top-text">
                                             <i class="fa-solid fa-gears"></i>
@@ -189,7 +189,7 @@
                                         </div>
                                         <div class="bottom-text">
                                             <p>
-                                                {{ 'TextProfessionalInstallation' | translate }} {{ product.InstallationCost | currency:'EGP' }}.
+                                                {{ 'TextProfessionalInstallation' | translate }} {{ product.installation_cost | currency:'EGP' }}.
                                             </p>
                                         </div>
                                     </div>
@@ -222,10 +222,10 @@
                                               @for (feature of product.features; track $index) {
                                                   <ng-template carouselSlide>
                                                       <div class="Feature-details">
-                                                          <img [src]="feature.Image" [alt]="feature.Feature">
+                                                          <img [src]="feature.image_url" [alt]="feature.name">
                                                           <div class="bottom-text">
-                                                          <h3>{{feature.Feature}}</h3>
-                                                          <p>{{feature.Description}}</p>
+                                                          <h3>{{feature.name}}</h3>
+                                                          <p>{{feature.description}}</p>
                                                           </div>
                                                       </div>
                                                   </ng-template>
@@ -245,33 +245,32 @@
                             <h2 class="mb-4 text-center">{{ 'ExpertReview' | translate }}</h2>
                             <!-- Reviews -->
                             <div class="product-details__review mb-4">
-                                <div class="ExpertReview m-auto mt-5">
-                                    <div class="product-details__review-form">
-                                        <div class="product-details__review-single">
-                                            <div class="product-details__review-left">
-                                                <img src="assets/dist/img/avatar2.png" width="70px" height="70px" alt="Image" />
-                                            </div>
-                                            <div class="product-details__review-right">
-                                                <div class="product-details__review-top">
-                                                    <div class="product-details__review-top-left">
-                                                        <h3 class="product-details__review-title">{{product.evaluations.admin}}</h3>
-                                                        <span class="product-details__review-sep">-</span>
-                                                        <span class="product-details__review-date">{{ 'ExpertEng' | translate }}</span>
-                                                    </div>
-                                                </div>
-                                                <p class="product-details__review-text">
-                                                    @if(currentLang === 'ar'){
-                                                        {{product.evaluations.ArabicEvaluation}}
-                                                    }
-                                                    @else{
-                                                        {{product.evaluations.Evaluation}}
-                                                    }
+                              @for(review of product.reviews ; track $index){
 
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="ExpertReview m-auto mt-5">
+                                  <div class="product-details__review-form">
+                                      <div class="product-details__review-single">
+                                          <div class="product-details__review-left">
+                                              <img src="assets/dist/img/avatar2.png" width="70px" height="70px" alt="Image" />
+                                          </div>
+                                          <div class="product-details__review-right">
+                                              <div class="product-details__review-top">
+                                                  <div class="product-details__review-top-left">
+                                                      <h3 class="product-details__review-title">{{'User'}}</h3>
+                                                      <span class="product-details__review-sep">-</span>
+                                                      <span class="product-details__review-date">{{ 'ExpertEng' | translate }}</span>
+                                                  </div>
+                                              </div>
+                                              <p class="product-details__review-text">
+                                                  {{ currentLang === 'ar' ? review.ar_comment : review.comment }}
+                                              </p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              }
+
                             </div>
                         </div>
                     </div>
@@ -281,25 +280,19 @@
                     <div class="col-lg-6">
                         <div class="product-details__content ProductDetails_Section_last">
                                 <h3 class="product-details__title">
-                                    @if(currentLang === 'ar'){
-                                        {{product.product_details.ArabicTitle2}}
-                                    }
-                                    @else{
-                                        {{product.product_details.Title}}
-                                    }
-
+                                  {{ currentLang === 'ar' ? product.translations.title : product.translations.title }}
                                 </h3>
                                 <ul>
                                     <li>
                                         <span><i class="fa-solid fa-check"></i></span>
-                                        <p>{{product.brand.Brand + " Brand" }} </p>
+                                        <p>{{product.brand.name + " Brand" }} </p>
                                     </li>
                                     <li>
                                         <span><i class="fa-solid fa-check"></i></span>
                                         <p>
                                             {{ 'CompitableWith' | translate }}
                                             @for(platform of productPlatforms ; track $index){
-                                                    {{platform.Platform}}
+                                                    {{platform.name}}
                                             }
                                             Platfrom
                                         </p>
@@ -307,7 +300,7 @@
                                     @for(feature of product.features ; track $index){
                                         <li>
                                             <span><i class="fa-solid fa-check"></i></span>
-                                            <p>{{feature.Feature}}</p>
+                                            <p>{{feature.name}}</p>
                                         </li>
                                     }
 
@@ -316,20 +309,20 @@
                                         <p>{{ 'FreeTransportation' | translate }}</p>
                                     </li>
 
-                                    @if(product.InstallationCost){
+                                    @if(product.installation_cost){
                                         <li>
                                             <span><i class="fa-solid fa-check"></i></span>
-                                            <p>{{ 'TextProfessionalInstallation' | translate }}{{ product.InstallationCost | currency:'EGP' }}</p>
+                                            <p>{{ 'TextProfessionalInstallation' | translate }}{{ product.installation_cost | currency:'EGP' }}</p>
                                         </li>
                                     }
 
                                 </ul>
                                 <div class="product-details__button-block d-grid gap-1">
-                                    @if(product.Quantity > 0){
+                                    @if(product.quantity > 0){
                                       <button
                                         type="button"
                                         class="thm-btn product-details__cart-btn"
-                                        (click)="addToCart(product.ID)"
+                                        (click)="addToCart(product.id)"
                                         title="Add to Cart"
                                       >
                                       @if(!isAdded){
@@ -340,7 +333,7 @@
                                       }
                                       </button>
                                     }
-                                    @else if(product.Quantity <= 0){
+                                    @else if(product.quantity <= 0){
                                         <p class='OutStock text-center' style='font-size: 20px;'>{{ 'OutofStock' | translate }}</p>
                                     }
                                 </div>
@@ -348,7 +341,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="product-details__image LastProductDetails">
-                            <img class="img-fluid" [src]="product.MainImage" [alt]="product.Name" />
+                            <img class="img-fluid" [src]="product.image_url" [alt]="product.translations.name" />
                         </div>
                     </div>
                 </div>
@@ -364,7 +357,7 @@
                             <div class="accrodion-grp" data-grp-name="product-details__accrodion">
                                 <div class="accrodion">
                                     <div class="accrodion-title">
-                                        <a (click)="toggleCollapse('description')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['description']"  [ngClass]="{'collapsed': collapseStates['description']}" class="accordion-toggle">{{ 'ProductDescription' | translate }}</a>
+                                        <a (click)="toggleCollapse('description')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['description']"  [ngClass]="{'collapsed': collapseStates['description']}">{{ 'ProductDescription' | translate }}</a>
                                     </div>
                                     <div class="collapse" id="Description" [ngClass]="{'collapse': collapseStates['description'], 'show': !collapseStates['description']}">
                                         <div class="inner">
@@ -376,7 +369,7 @@
                                                             <h5>{{ 'Capacity' | translate }}</h5>
                                                             <div class="Details-info">
                                                                 <p>{{ 'Capacity' | translate }}(m)</p>
-                                                                <span>{{ product.product_details.Capacity + 'm'}}</span>
+                                                                <span>{{ product.dimensions.capacity + 'm'}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="Details">
@@ -391,45 +384,37 @@
                                                             <div class="many-details">
                                                                 <div class="Details-info">
                                                                     <p>{{ 'NetDimension' | translate }}(WxHxD)</p>
-                                                                    <span>{{ product.product_details.Width + 'x' + product.product_details.Height +  'x' + product.product_details.Length}}</span>
+                                                                    <span>{{ product.dimensions.width + 'x' + product.dimensions.height +  'x' + product.dimensions.length}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
                                                                     <p>{{ 'NetWeight' | translate }}(kg)</p>
-                                                                    <span>{{ product.product_details.Weight + 'KG'}}</span>
+                                                                    <span>{{ product.dimensions.weight + 'KG'}}</span>
                                                                 </div>
                                                                 <div class="Details-info">
                                                                     <p>{{ 'Color' | translate }}</p>
                                                                     <div class="Colorsdiv">
-                                                                        @if(product.product_details.Color){
-                                                                            <span class="color" [ngStyle]="{'background-color': product.product_details.Color}">
-                                                                            </span>
-                                                                        }
-                                                                        @else if (product.product_details.Color2){
-                                                                            <span class="color" [ngStyle]="{'background-color': product.product_details.Color2}">
-                                                                            </span>
-                                                                        }
-                                                                        @else if (product.product_details.Color3){
-                                                                            <span class="color" [ngStyle]="{'background-color': product.product_details.Color3}">
-                                                                            </span>
-                                                                        }
+                                                                      @for(color of product.colors ; track $index){
+                                                                        <span class="color" [ngStyle]="{'background-color': color.color}">
+                                                                        </span>
+                                                                      }
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @if(product.product_details.AirPurification){
+                                                        @if(product.dimensions.air_purification){
                                                             <div class="Details">
                                                                 <h5>{{ 'AirPurification' | translate }}</h5>
                                                                 <div class="many-details">
                                                                     <div class="Details-info">
                                                                         <p>Indcator (cleanliness)</p>
-                                                                        <span>{{ product.product_details.AirPurification }}</span>
+                                                                        <span>{{ product.dimensions.air_purification }}</span>
                                                                     </div>
 
-                                                                    @if(product.product_details.PreFilter){
+                                                                    @if(product.dimensions.pre_filter){
                                                                         <div class="Details-info">
                                                                             <p>Pre Filter</p>
                                                                             <span>
-                                                                                @if(product.product_details.PreFilter){
+                                                                                @if(product.dimensions.pre_filter){
                                                                                     Yes
                                                                                 }
                                                                                 @else{
@@ -438,27 +423,27 @@
                                                                             </span>
                                                                         </div>
                                                                     }
-                                                                    @if(product.product_details.DustCollecting){
+                                                                    @if(product.dimensions.dust_collecting){
                                                                         <div class="Details-info">
                                                                             <p>Dust Collecting</p>
-                                                                            <span> {{ product.product_details.DustCollecting ? 'Yes' : 'No' }}</span>
+                                                                            <span> {{ product.dimensions.dust_collecting ? 'Yes' : 'No' }}</span>
                                                                         </div>
                                                                     }
-                                                                    @if(product.product_details.DeodorizingFilter){
+                                                                    @if(product.dimensions.deodorizing_filter){
                                                                         <div class="Details-info">
                                                                             <p>Deodorizing Filter</p>
-                                                                            <span>{{ product.product_details.DeodorizingFilter  ? 'Yes' : 'No' }}</span>
+                                                                            <span>{{ product.dimensions.deodorizing_filter  ? 'Yes' : 'No' }}</span>
                                                                         </div>
                                                                     }
                                                                 </div>
                                                             </div>
                                                         }
-                                                        @if(product.product_details.PowerConsumption){
+                                                        @if(product.dimensions.power_consumption){
                                                             <div class="Details">
                                                                 <h5>{{ 'ElectricalDate' | translate }}</h5>
                                                                 <div class="Details-info">
                                                                     <p>Power Consumption(W)</p>
-                                                                    <span>{{ product.product_details.PowerConsumption +' W' }}</span>
+                                                                    <span>{{ product.dimensions.power_consumption +' W' }}</span>
                                                                 </div>
                                                             </div>
                                                          }
@@ -484,10 +469,10 @@
                                                                 <div class="product-details__review-right">
                                                                     <div class="FAQ"  style="gap: 0px;">
                                                                         <div class="Question">
-                                                                            {{ faq.Question }}
+                                                                            {{ faq.translations.question }}
                                                                         </div>
                                                                         <div class="Answer">
-                                                                            <p class="product-details__review-text mt-3"> {{ faq.Answer }}</p>
+                                                                            <p class="product-details__review-text mt-3"> {{ faq.translations.answer }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -501,22 +486,22 @@
                                     </div>
                                 }
                                 <!-- Video -->
-                                @if(product.product_details.Video){
-                                    <div class="accrodion">
-                                        <div class="accrodion-title">
-                                            <a (click)="toggleCollapse('video')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['video']"  [ngClass]="{'collapsed': collapseStates['video']}" class="accordion-toggle">{{ 'Video' | translate }}</a>
-                                        </div>
-                                        <div class="collapse" id="Video" [ngClass]="{'collapse': collapseStates['video'], 'show': !collapseStates['video']}">
-                                            <div class="inner">
-                                                <div class="product-details__review-form text-center">
-                                                    <!-- Video -->
-                                                    <div class="product-details__review mb-5">
-                                                        <source [src]="product.product_details.Video" type="video/mp4">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                @if(product.video_url){
+                                  <div class="accrodion">
+                                    <div class="accrodion-title">
+                                        <a (click)="toggleCollapse('video')" class="accordion-toggle" role="button" [attr.aria-expanded]="!collapseStates['video']"  [ngClass]="{'collapsed': collapseStates['video']}" class="accordion-toggle">{{ 'Video' | translate }}</a>
                                     </div>
+                                    <div class="collapse" id="Video" [ngClass]="{'collapse': collapseStates['video'], 'show': !collapseStates['video']}">
+                                      <div class="inner">
+                                        <div class="product-details__review-form text-center">
+                                          <!-- Video -->
+                                          <div class="product-details__review mb-5">
+                                              <iframe [src]="product.video_url | safeUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"allowfullscreen></iframe>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 }
                             </div>
                         </div>
@@ -532,12 +517,11 @@
                 <div class="related-product__carousel">
                     <owl-carousel-o [options]="ProductsSlider">
                         @for(product of products ; track $index){
-                            <ng-template carouselSlide>
-                                <div class="item">
-                                    <app-product-card [product]="product"></app-product-card>
-                                </div>
-                            </ng-template>
-
+                          <ng-template carouselSlide>
+                            <div class="item">
+                              <app-product-card [product]="product"></app-product-card>
+                            </div>
+                          </ng-template>
                         }
                     </owl-carousel-o>
                 </div>

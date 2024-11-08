@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit{
       this._AuthService.sendRegister(this.registerForm.value).subscribe({
         next: (res) => {
 
-          this._AuthService.saveToken(res.data.user.token);
+          this._AuthService.saveToken(res.token);
 
           this.isLoading = false
 

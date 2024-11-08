@@ -12,14 +12,14 @@
 <section class="mt-5">
   <div class="notSilder pb-5 border-none">
       @for(category of categories; track $index ){
-        <a [routerLink]="[]" [fragment]="category.Category">
+        <a [routerLink]="[]" [fragment]="category.name">
               <div class="slide Categories">
                   <p class="text-center pr-0">
                       @if(currentLang === 'ar'){
-                        {{category.ArabicName}}
+                        {{category.ar_name}}
                       }
                       @else {
-                        {{category.Category}}
+                        {{category.name}}
                       }
                   </p>
               </div>
@@ -37,17 +37,17 @@
 
             @for (category of categories; track $index) {
 
-                <section class="slider-one" style="top:0;" [id]="category.Category">
-                    <div class="backgroud-category" [ngStyle]="{'background-image': 'url(' +  category.MainImage + ')'}">
+                <section class="slider-one" style="top:0;" [id]="category.name">
+                    <div class="backgroud-category" [ngStyle]="{'background-image': 'url(' +  category.image_url + ')'}">
                         <div class="slider-one__slider-1" >
                             <div class="container bottom-slider">
                                 <h2 class="slider-one__title">
                                     {{'DiscoverTheProductsOf' | translate}}
                                     @if(currentLang === 'ar'){
-                                        {{category.ArabicName}}
+                                        {{category.ar_name}}
                                     }
                                     @else {
-                                        {{category.Category}}
+                                        {{category.name}}
                                     }
                                 </h2>
                             </div>
@@ -60,15 +60,15 @@
 
                               @for (subcategory of category.subcategories ; track $index) {
 
-                                  <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category.ID }">
-                                      <div class="box-shop SubCategory-onlineshop" [ngStyle]="{'background-image': 'url(' + subcategory.image + ')'}">
+                                  <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category.id }">
+                                      <div class="box-shop SubCategory-onlineshop" [ngStyle]="{'background-image': 'url(' + subcategory.image_url + ')'}">
                                       </div>
                                       <p>
                                           @if(currentLang === 'ar'){
-                                              {{subcategory.SubArabicName}}
+                                              {{subcategory.ar_name}}
                                           }
                                           @else {
-                                              {{subcategory.SubName}}
+                                              {{subcategory.name}}
                                           }
                                       </p>
                                   </a>
@@ -83,13 +83,13 @@
                     <div class="category-Name">
                         <h3>
                             @if(currentLang === 'ar'){
-                                {{category.ArabicName +  " منتجات"}}
+                                {{category.ar_name +  " منتجات"}}
                             }
                             @else {
-                                {{category.Category + " Products"}}
+                                {{category.name + " Products"}}
                             }
                         </h3>
-                        <a routerLink="/shop/filters"  [queryParams]="{ category: category.ID }">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
+                        <a routerLink="/shop/filters"  [queryParams]="{ category: category.id }">{{'DiscoverMore' | translate}}<i class="fa fa-arrow-right"></i></a>
                     </div>
                     <div class="related-product__carousel mt-5 mb-5">
                       <owl-carousel-o [options]="ProductsSlider">

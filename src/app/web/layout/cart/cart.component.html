@@ -70,40 +70,40 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div>
                                                     <figure class="prod-thumb">
-                                                        <a [routerLink]="['/product' , item.product.ID]">
-                                                            <img [src]="item.product.MainImage" class="ProductCartImage" [alt]="item.product.Name">
+                                                        <a [routerLink]="['/product' , item.product.id]">
+                                                            <img [src]="item.product.image_url" class="ProductCartImage" [alt]="item.product.translations.name">
                                                         </a>
                                                     </figure>
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center ml-1">
-                                                    <h3 class="prod-title padd-top-20">{{ item.product.Name | titlecase }}</h3>
+                                                    <h3 class="prod-title padd-top-20">{{ item.product.translations.name | titlecase }}</h3>
                                                     @if(item.product.sale){
                                                         <div class="d-flex" style="gap:20px;">
-                                                            <p class="text-xs text-secondary mb-0 fw-bold" style="font-size:17px">{{ item.product.sale.PriceAfter | currency : "EGP"}}</p>
-                                                            <p class="text-xs text-secondary mb-0 BeforeSale" style="text-decoration: line-through; font-size:14px">{{ item.product.Price | currency : "EGP"}}</p>
+                                                            <p class="text-xs text-secondary mb-0 fw-bold" style="font-size:17px">{{ item.product.sale.sale_price | currency : "EGP"}}</p>
+                                                            <p class="text-xs text-secondary mb-0 BeforeSale" style="text-decoration: line-through; font-size:14px">{{ item.product.price | currency : "EGP"}}</p>
                                                         </div>
                                                     }
                                                     @else{
-                                                        <p class="text-xs text-secondary mb-0 BeforeSale" >{{ item.product.Price | currency : "EGP" }}</p>
+                                                        <p class="text-xs text-secondary mb-0 BeforeSale" >{{ item.product.price | currency : "EGP" }}</p>
                                                     }
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="qty">
                                         <div class="quantity-spinner">
-                                            <button (click)="decrementQuantity(item)" [disabled]="item.Quantity <= 1">-</button>
-                                            <input type="number" [(ngModel)]="item.Quantity" min="1" [max]="item.product.Quantity" [id]="'quantity-'+item.product.ID">
-                                            <button (click)="incrementQuantity(item)" [disabled]="item.Quantity >= item.product.Quantity">+</button>
+                                            <button (click)="decrementQuantity(item)" [disabled]="item.quantity <= 1">-</button>
+                                            <input type="number" [(ngModel)]="item.quantity" min="1" [max]="item.product.quantity" [id]="'quantity-'+item.product.id">
+                                            <button (click)="incrementQuantity(item)" [disabled]="item.quantity >= item.product.quantity">+</button>
                                         </div>
                                         </td>
                                         <td for="installmentPriceCheckbox">
-                                            @if(item.product.InstallationCost && item.product.InstallationCost > 0 ){
+                                            @if(item.product.installation_cost && item.product.installation_cost > 0 ){
                                                 <div class="d-flex justify-content-center" style="gap: 20px;">
-                                                    <p class="text-secondary mb-0">{{item.product.InstallationCost | currency : "EGP"}}</p>
+                                                    <p class="text-secondary mb-0">{{item.product.installation_cost | currency : "EGP"}}</p>
                                                     <input type="checkbox"
-                                                    [id]="'installmentPriceCheckbox-' + item.product.ID"
+                                                    [id]="'installmentPriceCheckbox-' + item.product.id"
                                                     class="installments installmentPriceCheckbox"
-                                                    [value]="item.product.InstallationCost"
+                                                    [value]="item.product.installation_cost"
                                                     (change)="toggleInstallation(item, $event)">
                                                 </div>
                                             }
@@ -111,9 +111,9 @@
                                                 <p class="text-secondary mb-0">No Installation Cost</p>
                                             }
                                         </td>
-                                        <td class="sub-total SubTotal p-0">{{ (item.Quantity * item.Price) + (installationPrices()[item.product.ID] || 0) | currency : " EGP "}}</td>
+                                        <td class="sub-total SubTotal p-0">{{ (item.quantity * item.price) + (installationPrices()[item.product.id] || 0) | currency : " EGP "}}</td>
                                         <td class="remove p-1">
-                                            <a class="remove-btn" (click)="removeProduct(item.product.ID)">
+                                            <a class="remove-btn" (click)="removeProduct(item.product.id)">
                                                 <span class="fa fa-x"></span>
                                             </a>
                                         </td>
@@ -259,7 +259,7 @@
         <h3 class="related-product__title">{{'YouMayAlsoLike' | translate}}</h3>
         <div class="related-product__carousel">
           <owl-carousel-o [options]="ProductsSlider">
-            @for (product of products(); track $index) {
+            @for (product of products; track $index) {
               <ng-template carouselSlide>
                 <div class="item">
                   <app-product-card [product]="product"></app-product-card>

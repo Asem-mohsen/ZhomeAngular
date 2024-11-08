@@ -1,11 +1,9 @@
 export interface Sale {
-    ID: number;
-    ProductID: number;
-    Amount: number;
-    PriceAfter: number;
-    StartDate: string;
-    EndDate: string;
-    created_at: string | null;
+    id: number;
+    product_id: number;
+    sale_price: number;
+    start_date: string;
+    end_date: string;
+    created_at: string;
     updated_at: string;
-
 }

@@ -10,11 +10,13 @@ import { SubscriptionsService } from '../../../Services/subscriptions/subscripti
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators , FormBuilder } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { JoinWithDashPipe } from '../../../Pipes/joinWithDash/join-with-dash.pipe';
+import { JoinWithAndPipe } from '../../../Pipes/joinWithAnd/join-with-and.pipe';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [ReactiveFormsModule , RouterLink , TranslateModule , NgIf , NgStyle, CommonModule],
+  imports: [ReactiveFormsModule , RouterLink , TranslateModule , NgIf , NgStyle, CommonModule , JoinWithDashPipe , JoinWithAndPipe],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
@@ -48,7 +50,7 @@ export class FooterComponent implements OnInit{
     if (isPlatformBrowser(this.platformId)) {
       this.contactService.getZhomeData().subscribe({
         next : (res) => {
-          this.zhomeContact = res.data
+          this.zhomeContact = res.data.site
         },
         error: (err) => {
           console.error("Failed to load contact data", err);

@@ -75,9 +75,16 @@ section.SectionNumber:nth-child(even) {
   width: 85%;
   margin: auto;
   text-align: center;
-  margin-top: 40px;
+  /* margin-top: 40px; */
 }
-
+.PlatformTop img {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  object-fit: contain;
+  height: 300px;
+  filter: brightness(1.1);
+}
 .category-Name {
   display: flex;
   justify-content: space-between;

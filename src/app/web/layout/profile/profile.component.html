@@ -18,15 +18,13 @@
     </section>
 
     <!--UnVerified Email-->
-    @if(user.email_verified_at){
-        <section>
-            <div class="container mt-3">
-                <div class="alert alert-warning text-center">
-                    {{'ActivationText' | translate}}
-                </div>
-            </div>
-        </section>
-    }
+      <section *ngIf="user?.email_verified_at">
+          <div class="container mt-3">
+              <div class="alert alert-warning text-center">
+                  {{'ActivationText' | translate}}
+              </div>
+          </div>
+      </section>
 
     <section>
         <div class="container py-5">
@@ -36,9 +34,11 @@
                     <div class="card mb-4" style="border-radius: 14px;">
                         <div class="card-body text-center">
                             <img src="assets/dist/img/avatar.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3">{{user.Name}}</h5>
-                            <p class="text-muted mb-1">{{user.Phone ? "0" + user.Phone : " Edit Phone Number " }}</p>
-                            <p class="text-muted mb-4">{{user.Address ? user.Address : "Edit to add Address"}}</p>
+                            <h5 class="my-3">{{user.name}}</h5>
+                            <p class="text-muted mb-1">
+                              {{ user.phones.length > 0 ? "0" + user.phones[0] : "Edit Phone Number" }}
+                            </p>
+                            <p class="text-muted mb-4">{{ user.address ? user.address.street_address : "Edit to add Address" }}</p>
                         </div>
                     </div>
                     <!-- Side Nav -->
@@ -82,7 +82,7 @@
                                           <p class="mb-0">{{'FullName' | translate}}</p>
                                       </div>
                                       <div class="col-sm-9">
-                                          <p class="text-muted mb-0">{{user.Name}}</p>
+                                          <p class="text-muted mb-0">{{user.name}}</p>
                                       </div>
                                   </div>
                                   <hr>
@@ -92,12 +92,12 @@
                                       </div>
                                       <div class="col-sm-9 RowReverseInArabic d-flex align-items-center flex-wrap gap-4">
                                           <p class="text-muted mb-0">{{user.email}}</p>
-                                          @if(user.email_verified_at){
-                                              <span class="badge badge-warning" style="background-color: #b0860e;">{{'unverified' | translate}}</span>
-                                          }
-                                          @else{
-                                              <span class="badge badge-success">{{'verified' | translate}}</span>
-                                          }
+                                          <span *ngIf="!user?.email_verified_at; else verifiedBadge" class="badge badge-warning" style="background-color: #b0860e;">
+                                            {{ 'unverified' | translate }}
+                                          </span>
+                                          <ng-template #verifiedBadge>
+                                            <span class="badge badge-success">{{ 'verified' | translate }}</span>
+                                          </ng-template>
 
                                       </div>
                                   </div>
@@ -107,7 +107,9 @@
                                           <p class="mb-0">{{'Phone' | translate}}</p>
                                       </div>
                                       <div class="col-sm-9">
-                                          <p class="text-muted mb-0">{{user.Phone ? "0" + user.Phone : " Edit Phone Number " }}</p>
+                                          <p class="text-muted mb-0">
+                                            {{ user.phones.length > 0 ? "0" + user.phones[0] : "Edit Phone Number" }}
+                                          </p>
                                       </div>
                                   </div>
                                   <hr>
@@ -116,7 +118,7 @@
                                           <p class="mb-0">{{'Address' | translate}}</p>
                                       </div>
                                       <div class="col-sm-9">
-                                          <p class="text-muted mb-0">{{user.Address ? user.Address : "Edit to add Address"}}</p>
+                                          <p class="text-muted mb-0">{{user.address ? user.address.street_address : "Edit to add Address"}}</p>
                                       </div>
                                   </div>
                                   <hr>
@@ -145,12 +147,12 @@
                                             <div class="row">
                                                 <div class="col-8">
                                                     <div class="numbers">
-                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.Name}} {{'Orders' | translate}} </p>
+                                                        <p class="text-sm mb-0 text-uppercase font-weight-bold" style="font-size: 25px;">{{user.name}} {{'Orders' | translate}} </p>
                                                         <h5 class="font-weight-bolder text-center" >
-                                                            {{profileData.data.orderCount}}
+                                                            <!-- {{user.orderCount}} -->
                                                         </h5>
                                                         <p class="mb-0 text-center" style="font-size: 16px;font-weight: 700;">
-                                                            {{profileData.data.orderStatistics.MinOrderDate}}
+                                                            <!-- {{user.orderStatistics.MinOrderDate}} -->
                                                         </p>
                                                     </div>
                                                 </div>
@@ -168,8 +170,8 @@
 
                             <!--Track Order-->
 
-                            <h1 class="sub-header">{{'TrackOrder' | translate}}</h1>
-                            <!-- <div class="card">
+                          <!--  <h1 class="sub-header">{{'TrackOrder' | translate}}</h1>
+                             <div class="card">
                                 <div class="Success-invoice">
                                     <div class="invoice text-center">
                                     <p>Order ID [ {{$order->ID}} ]</p>
@@ -202,18 +204,18 @@
                                         @endif
 
                                         </div>
-                                    </div> -->
-                                <!-- </div>
-                            </div> -->
-                            <hr>
+                                    </div>
+                              </div>
+                            </div>
+                            <hr> -->
 
                             <!-- Purchased -->
-                          @if(profileData.data.userProducts){
+                          @if(user.products){
                             <h1 class="sub-header">{{'YourPastOrders' | translate}} </h1>
                             <div class="row">
                                 <div class="related-product__carousel">
                                   <owl-carousel-o [options]="ProductsSlider">
-                                    @for(product of profileData.data.userProducts ; track product.ID){
+                                    @for(product of user.products ; track product.id){
                                       <ng-template carouselSlide>
                                         <app-product-card [product]="product"></app-product-card>
                                       </ng-template>
@@ -229,7 +231,7 @@
                             <h1 class="sub-header mt-2 pt-4">{{'DiscoverourProducts' | translate}}</h1>
                             <div class="related-product__carousel">
                               <owl-carousel-o [options]="ProductsSlider">
-                                @for(product of products ; track product.ID){
+                                @for(product of products ; track product.id){
                                   <ng-template carouselSlide>
                                     <app-product-card [product]="product"></app-product-card>
                                   </ng-template>

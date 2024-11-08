@@ -1,4 +1,4 @@
-<section class="mt-5 pt-5">
+<section class="main-section-interior mt-5 pt-5">
   <div class="wrapper">
 
       <form method="POST" enctype="multipart/form-data">
@@ -9,19 +9,36 @@
                 <section>
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                          <p class="m-0 section-name">Which of these rooms do you want to furnish ?</p>
+                          <p class="m-0 section-name">What type of building do you have ?</p>
                         </div>
                         <div class="col-md-6">
-                          <app-room-selection (roomSelected)="onRoomsSelected($event)"></app-room-selection>
+                          <app-home-type></app-home-type>
                         </div>
                         <div class="d-flex gap-2 mt-4 justify-content-end">
-                          <a class="buttons" (click)="nextWithRooms()">Next</a>
+                          <a class="buttons" (click)="next()">Next</a>
                         </div>
                     </div>
                 </section>
               }
 
               @if(step === 2){
+                <section>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                          <p class="m-0 section-name">Which of these rooms do you want to furnish ?</p>
+                        </div>
+                        <div class="col-md-6">
+                          <app-room-selection (roomSelected)="onRoomsSelected($event)"></app-room-selection>
+                        </div>
+                        <div class="d-flex gap-2 mt-4 justify-content-end">
+                          <a class="buttons" (click)="back()">Previous</a>
+                          <a class="buttons" (click)="nextWithRooms()">Next</a>
+                        </div>
+                    </div>
+                </section>
+              }
+
+              @if(step === 3){
                 <section>
                   <div class="row align-items-center">
                     <div class="col-md-5">
@@ -34,14 +51,14 @@
                     </div>
 
                     <div class="d-flex gap-2 mt-4 justify-content-end">
-                      <a class="buttons" (click)="next()">Next</a>
                       <a class="buttons" (click)="back()">Previous</a>
+                      <a class="buttons" (click)="next()">Next</a>
                     </div>
                   </div>
                 </section>
               }
 
-              @if(step === 3){
+              @if(step === 4){
                 <section>
                   <div class="row align-items-center">
                     <div class="col-md-5">
@@ -129,14 +146,14 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2 mt-4 justify-content-end">
-                      <a class="buttons" (click)="next()">Next</a>
                       <a class="buttons" (click)="back()">Previous</a>
+                      <a class="buttons" (click)="next()">Next</a>
                     </div>
                   </div>
                 </section>
               }
 
-              @if(step === 4){
+              @if(step === 5){
                 <section>
                   <div class="row align-items-center">
                     <div class="col-md-5">
@@ -149,8 +166,8 @@
                     </div>
 
                     <div class="d-flex gap-2 mt-4 justify-content-end">
-                      <!-- <a class="buttons" (click)="next()">Next</a> -->
                       <a class="buttons" (click)="back()">Previous</a>
+                      <!-- <a class="buttons" (click)="next()">Next</a> -->
                     </div>
                   </div>
                 </section>

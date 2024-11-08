@@ -15,4 +15,9 @@ export class ContactService {
     return this.http.get(`${environment.baseURL}/api/contact`);
   }
 
+  sendEmail(data : any) : Observable<any>
+  {
+    return this.http.post(`${environment.baseURL}/api/send-message`, data);
+  }
+
 }

@@ -38,9 +38,9 @@ export class EditComponent {
         this.user = res.data.user;
         this.userInfo.patchValue({ // patch value is used to set the data on the form
           email: this.user.email,
-          Address: this.user.Address,
-          Phone: this.user.Phone,
-          Name: this.user.Name,
+          Address: this.user.address?.street_address,
+          Phone: this.user.phones,
+          Name: this.user.name,
         });
       }
     })

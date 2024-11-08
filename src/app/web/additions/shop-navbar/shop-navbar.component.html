@@ -1,6 +1,5 @@
 <nav
   class="navbar navbar-expand-lg pt-0 w-100 z-3 bg-transparent p-0"
-
 >
   <div class="container">
     <a class="navbar-brand" routerLink="/home">Zhome</a>
@@ -9,7 +8,6 @@
       [ngbCollapse]="isMenuCollapsed"
       class="collapse navbar-collapse justify-content-between"
       id="navbarSupportedContent"
-
     >
 
       <ul class="navbar-nav mb-2 mb-lg-0 align-items-center mx-auto">
@@ -26,7 +24,7 @@
               <ul class="categories-list">
                 @for (category of categories; track $index) {
                   <li class="category">
-                    <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">{{ category.Category }}</a>
+                    <a routerLink="/shop/filters" [queryParams]="{ category: category.id }">{{ category.name }}</a>
                   </li>
                 }
                 <li class="category"><a routerLink="categories" class="view-all">View All</a></li>
@@ -44,8 +42,8 @@
               <ul class="brands-list">
                 @for (brand of brands; track $index) {
                   <li class="brand">
-                    <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.ID }">
-                      <img [src]="brand.Logo" [alt]="brand.Brand">
+                    <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.id }">
+                      <img [src]="brand.image_url" [alt]="brand.name" [title]="brand.name">
                     </a>
                   </li>
                 }
@@ -64,7 +62,7 @@
               <ul>
                 @for (platform of platforms; track $index) {
                   <li class="platform">
-                    <a routerLink="/shop/filters" [queryParams]="{ platform: platform.ID }">{{ platform.Platform }}</a>
+                    <a routerLink="/shop/filters" [queryParams]="{ platform: platform.id }">{{ platform.name }}</a>
                   </li>
                 }
                 <li class="platform"><a routerLink="platforms" class="view-all">View All</a></li>

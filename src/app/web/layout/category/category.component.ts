@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Category } from '../../../Interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoriesService } from '../../../Services/categories/categories.service';
 import { RouterLink } from '@angular/router';
-import { NgStyle } from '@angular/common';
+import { NgStyle, isPlatformBrowser } from '@angular/common';
 import { ProductCardComponent } from '../../additions/product-card/product-card.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../../Services/translation/translation.service';
@@ -37,7 +37,7 @@ export class CategoryComponent {
         items: 1
       },
       400: {
-        items: 2
+        items: 1
       },
       740: {
         items: 3
@@ -49,7 +49,7 @@ export class CategoryComponent {
     nav: false
   }
 
-  constructor(private translationService : TranslationService , private _CategoriesService : CategoriesService){}
+  constructor(private translationService : TranslationService , private _CategoriesService : CategoriesService,  @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void
   {
@@ -59,9 +59,11 @@ export class CategoryComponent {
 
     this.currentLang = this.translationService.getLanguage();
 
-    this._CategoriesService.getCategories().subscribe((res) => {
-      this.categories = Object.values(res.data);
-    })
+    if(isPlatformBrowser(this.platformId)){
+      this._CategoriesService.getCategories().subscribe((res) => {
+        this.categories = res.data.categories;
+      })
+    }
   }
 
 }

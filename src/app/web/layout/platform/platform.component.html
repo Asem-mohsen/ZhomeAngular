@@ -11,10 +11,10 @@
 <section class="mt-5">
   <div class="notSilder">
     @for (platform of platforms; track $index){
-      <a [routerLink]="[]" [fragment]="platform.Platform">
+      <a [routerLink]="[]" [fragment]="platform.name">
         <div class="slide platform">
-          <img [src]="platform.Logo" [alt]="platform.Platform" />
-          <p>{{ platform.Platform }}</p>
+          <img [src]="platform.image_url" [title]="platform.name" [alt]="platform.name" />
+          <p>{{ platform.name }}</p>
         </div>
       </a>
     }
@@ -22,20 +22,20 @@
 </section>
 
 @for (platform of platforms; track $index){
-  <section class="SectionNumber p-2" [id]="platform.Platform">
+  <section class="SectionNumber p-2" [id]="platform.name">
     <div class="PlatformSection">
       <div class="PlatformTop">
-        <h2>{{ platform.Platform }}</h2>
-        <img [src]="platform.Logo" [alt]="platform.Platform" />
+        <h2>{{ platform.name }}</h2>
+        <img [src]="platform.image_url" [title]="platform.name" [alt]="platform.name" />
       </div>
       <div class="container">
         <div class="PlatformDesc">
           <p>
             @if(currentLang === 'ar'){
-              {{ platform.ArabicDescription }}
+              {{ platform.ar_description }}
             }
             @else{
-              {{ platform.MainDescription }}
+              {{ platform.description }}
             }
           </p>
         </div>
@@ -45,26 +45,28 @@
             <div class="FAQTop">
               <h5 class="mb-0">
                 <button
-                  class="btn btn-link"
-                  data-toggle="collapse"
-                  [attr.data-target]="'#FAQ' + platform.ID"
-                  aria-expanded="true"
-                  aria-controls="FAQ"
+                  (click)="toggleCollapse('faq', platform.id)"
+                  class="btn btn-link accordion-toggle"
+                  role="button"
+                  [attr.aria-expanded]="collapseStates['faq-' + platform.id] || false"
+                  [ngClass]="{ 'collapsed': !collapseStates['faq-' + platform.id] }"
                 >
-                {{ 'FAQ' | translate }}
+                  {{ 'FAQ' | translate }}
                 </button>
               </h5>
             </div>
-            <div class="PlatformInfo">
-              @for (faq of platform.faqs; track $index){
-
-              <div
-                class="collapse"
-                [id]="'FAQ' + platform.ID"
-                [attr.aria-labelledby]="platform.Platform"
-                data-parent="#accordion"
+            <div
+              class="PlatformInfo"
+              [id]="'faq-' + platform.id"
+              [attr.aria-labelledby]="platform.name"
+              [ngClass]="{
+                'collapse': !collapseStates['faq-' + platform.id],
+                'show': collapseStates['faq-' + platform.id]
+              }"
               >
-                <div class="PlafromQuestion">
+              @for (faq of platform.faqs; track $index){
+              <div>
+                <div class="PlatformQuestion">
                   <h3>{{ faq.Question }}</h3>
                   <p>{{ faq.Answer }}</p>
                 </div>
@@ -73,31 +75,34 @@
             </div>
           </div>
           }
-          @if (platform.VideoURL != null){
-            <div class="Videos">
+          @if (platform.video_url != null){
+            <div class="Videos mt-2">
               <div id="youtube-player">
                 <div class="FAQTop">
                   <h5 class="mb-0">
                     <button
-                      class="btn btn-link"
-                      data-toggle="collapse"
-                      [attr.data-target]="platform.ID"
-                      aria-expanded="true"
-                      aria-controls="Video"
-                    >
+                    (click)="toggleCollapse('video', platform.id)"
+                    class="btn btn-link accordion-toggle"
+                    role="button"
+                    [attr.aria-expanded]="collapseStates['video-' + platform.id] || false"
+                    [ngClass]="{ 'collapsed': !collapseStates['video-' + platform.id] }"
+                  >
                     {{ 'Video' | translate }}
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  class="collapse"
-                  [id]="'Video' + platform.ID"
-                  [attr.aria-labelledby]="platform.Platform"
-                  data-parent="#accordion"
-                >
+                  </button>
+                </h5>
+              </div>
+              <div
+                class="collapse"
+                [id]="'video-' + platform.id"
+                [attr.aria-labelledby]="platform.name"
+                [ngClass]="{
+                  'collapse': !collapseStates['video-' + platform.id],
+                  'show': collapseStates['video-' + platform.id]
+                }"
+              >
                   <iframe
                     class="PlatformVideo"
-                    [src]="platform.VideoURL"
+                    [src]="platform.video_url | safeUrl"
                     title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -110,12 +115,12 @@
         </div>
 
         <!-- Products Related -->
-        <div class="category-Name mt-5 pt-4">
+        <div class="category-Name pt-3">
           <h3>{{ 'RelatedProducts' | translate }}</h3>
-          <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.ID }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right"></i></a>
+          <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.id }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right"></i></a>
         </div>
         <owl-carousel-o [options]="ProductsSlider">
-          @for (product of platform.products; track product.ID){
+          @for (product of platform.products; track product.id){
             <ng-template carouselSlide>
               <div class="item">
                 <app-product-card [product]="product"></app-product-card>

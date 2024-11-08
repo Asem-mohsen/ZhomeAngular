@@ -29,16 +29,16 @@
                             @for (order of orders; track $index) {
                                 <ul>
                                     <div class="product-checkout-page">
-                                        <img [src]="order.product.MainImage" class="w-100" [alt]="order.product.Name">
+                                        <img [src]="order.product.image_url" class="w-100" [alt]="order.product.translations.name">
                                         <div>
-                                            <li>{{order.product.Name}}</li>
-                                            <li>x{{order.Quantity}}    </li>
-                                            <li>{{ 'Price' | translate }} {{order.Price | currency: " EGP "}}</li>
-                                            @if(order.WithInstallation != 0){
-                                                <li>{{ 'InstallationPrice' | translate }} {{order.product.InstallationCost | currency: " EGP "}}</li>
+                                            <li>{{order.product.translations.name}}</li>
+                                            <li>x{{order.quantity}}    </li>
+                                            <li>{{ 'Price' | translate }} {{order.price | currency: " EGP "}}</li>
+                                            @if(order.with_installation != 0){
+                                                <li>{{ 'InstallationPrice' | translate }} {{order.product.installation_cost | currency: " EGP "}}</li>
                                             }
                                             @if(order.product.sale){
-                                                <li>{{ 'Saved' | translate }}: {{(order.product.Price - order.product.sale.PriceAfter) | currency: " EGP " }}</li>
+                                                <li>{{ 'Saved' | translate }}: {{(order.product.price - order.product.sale.sale_price) | currency: " EGP " }}</li>
                                             }
                                         </div>
                                     </div>
@@ -48,8 +48,8 @@
                     </div>
 
                     <p id="deliveryFees"></p>
-                    @if (checkPromocodeForm.value.promoCode) {
-                      <h6 id="promocode-div">{{ 'Promocode' | translate }} <span id="promocode">{{ checkPromocodeForm.value.promoCode }}</span></h6>
+                    @if (checkPromocodeForm.value.promotion) {
+                      <h6 id="promocode-div">{{ 'Promocode' | translate }} <span id="promocode">{{ checkPromocodeForm.value.promotion }}</span></h6>
                     }
                     @if(savedAmount() > 0){
                       <h6 id="saved-amount">{{ 'Saved' | translate }}: {{ savedAmount() | currency: 'EGP' }}</h6>
@@ -99,178 +99,76 @@
                               @if(isLogged){
 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="UserName" class="form-control-label">{{ 'CheckoutName' | translate }}</label>
-                                                <input class="form-control" id="UserName" type="text" formControlName="Name" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
-                                            <!-- <input class="form-control" type="hidden"  formControlName="FirstName" [value]="orderData.firstName">
-                                                <input class="form-control" type="hidden"  formControlName="LastName"  [value]="orderData.lastName" > -->
-                                                  <input class="form-control" type="hidden" formControlName="CartID">
-                                                  @if (userInfo.get('Name')?.errors &&
-                                                      userInfo.get('Name')?.touched) {
-                                                      <div
-                                                          class="alert danger d-flex align-items-baseline text-danger position-absolute"
-                                                      >
-                                                          <i class="fa-solid fa-xmark"></i>
-                                                          @if(userInfo.get('Name')?.errors?.['required']) {
-                                                          <p>Name field is required</p>
-                                                          } @else if (userInfo.get('Name')?.errors?.['minLength']) {
-                                                          <p>Name should be more than 3 letters</p>
-                                                          }
-                                                      </div>
-                                                  }
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="UserEmail" class="form-control-label">{{ 'CheckoutEmail' | translate }}</label>
-                                            <input class="form-control" id="UserEmail" type="email" formControlName="email" [value]="orderData.User.email" autocomplete="off" [disabled]="isLogged && orderData.User.email_verified_at != null">
-                                            @if (userInfo.get('email')?.errors &&
-                                              userInfo.get('email')?.touched) {
-                                              <div
-                                                  class="alert danger d-flex align-items-baseline text-danger position-absolute"
-                                              >
-                                                  <i class="fa-solid fa-xmark"></i>
-                                                  @if(userInfo.get('email')?.errors?.['required']) {
-                                                  <p>Email field is required</p>
-                                                  } @else if (userInfo.get('email')?.errors?.['email']) {
-                                                  <p>Write a valid email</p>
-                                                  }
-                                              </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="firstName" class="form-control-label">First Name</label>
+                                        <input class="form-control" id="name" type="hidden" formControlName="name">
+                                        <input class="form-control" id="firstName" type="text" formControlName="firstName" autocomplete="off">
+                                          @if (userInfo.get('firstName')?.errors && userInfo.get('firstName')?.touched) {
+                                            <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                              <i class="fa-solid fa-xmark"></i>
+                                              @if(userInfo.get('firstName')?.errors?.['required']) {
+                                              <p>Name field is required</p>
+                                              } @else if (userInfo.get('firstName')?.errors?.['minLength']) {
+                                              <p>Name should be more than 3 letters</p>
                                               }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="UserMainAddress" class="form-control-label">{{ 'CheckoutAddress' | translate }}</label>
-                                            <textarea class="form-control" id="UserMainAddress" formControlName="Address"></textarea>
-                                              @if (userInfo.get('Address')?.errors &&
-                                                  userInfo.get('Address')?.touched) {
-                                                  <div
-                                                      class="alert danger d-flex align-items-baseline text-danger position-absolute"
-                                                  >
-                                                      <i class="fa-solid fa-xmark"></i>
-                                                      @if(userInfo.get('Address')?.errors?.['required']) {
-                                                      <p>Address field is required</p>
-                                                      }
-                                                  </div>
+                                            </div>
+                                          }
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="lastName" class="form-control-label">Last Name</label>
+                                        <input class="form-control" id="lastName" type="text" formControlName="lastName" autocomplete="off">
+                                          @if (userInfo.get('lastName')?.errors && userInfo.get('lastName')?.touched) {
+                                            <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                              <i class="fa-solid fa-xmark"></i>
+                                              @if(userInfo.get('lastName')?.errors?.['required']) {
+                                              <p>Last Name field is required</p>
+                                              } @else if (userInfo.get('lastName')?.errors?.['minLength']) {
+                                              <p>Last Name should be more than 3 letters</p>
                                               }
+                                            </div>
+                                          }
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="UserEmail" class="form-control-label">{{ 'CheckoutEmail' | translate }}</label>
+                                      <input class="form-control" id="UserEmail" type="email" formControlName="email"  autocomplete="off">
+                                      @if (userInfo.get('email')?.errors && userInfo.get('email')?.touched) {
+
+                                        <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            @if(userInfo.get('email')?.errors?.['required']) {
+                                            <p>Email field is required</p>
+                                            } @else if (userInfo.get('email')?.errors?.['email']) {
+                                            <p>Write a valid email</p>
+                                            }
                                         </div>
+                                        }
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="UserPhone" class="form-control-label">{{ 'CheckoutPhone' | translate }}</label>
-                                            <input class="form-control" id="UserPhone" type="number" formControlName="Phone">
-                                              @if (userInfo.get('Phone')?.errors &&
-                                                  userInfo.get('Phone')?.touched) {
-                                                  <div
-                                                      class="alert danger d-flex align-items-baseline text-danger position-absolute"
-                                                  >
-                                                      <i class="fa-solid fa-xmark"></i>
-                                                      @if(userInfo.get('Phone')?.errors?.['required']) {
-                                                      <p>Phone field is required</p>
-                                                      }
-                                                  </div>
-                                              }
-                                        </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="UserPhone" class="form-control-label">{{ 'CheckoutPhone' | translate }}</label>
+                                      <input class="form-control" id="UserPhone" type="number" formControlName="phone">
+                                        @if (userInfo.get('phone')?.errors && userInfo.get('phone')?.touched) {
+                                            <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                                <i class="fa-solid fa-xmark"></i>
+                                                @if(userInfo.get('phone')?.errors?.['required']) {
+                                                <p>Phone field is required</p>
+                                                }
+                                            </div>
+                                        }
                                     </div>
+                                  </div>
                                 </div>
                                 <a class="btn border-none next-button mt-2 d-flex justify-content-end gap-2 align-items-center" (click)="next()">{{ 'Next' | translate }} <i class="fa-solid fa-chevron-right"></i> </a>
                               }
                               @else{
 
-                                <div class="DarkShadow">
-                                    <div id="signInOverlay" class="overlaySignIn">
-                                        <div class="cardOverlay" id="signInCard">
-                                            <h2>{{ 'ZhomeCommunity' | translate }}</h2>
-                                            <p class="m-3" style="font-size: 13px;">{{ 'ZhomeCommunityText' | translate }}</p>
-                                            <div class="Div-Overlay-Sign">
-                                                <div class="InnerDiv-Overlay">
-                                                    <a routerLink="/login" class="ButtonSignInOverlay"><img src="assets/imgs/UI/website/Cart/refer.png" alt="Sign In"></a>
-                                                    <p class="small-txt">{{ 'HaveAccount' | translate }}</p>
-                                                </div>
-                                                <div class="InnerDiv-Overlay">
-                                                    <a routerLink="/register" class="ButtonSignUpOverlay"><img src="assets/imgs/UI/website/Cart/add-user.png" alt="Sign Up"></a>
-                                                    <p class="small-txt">{{ 'ZhomeCommunityNewUser' | translate }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="FirstName" class="form-control-label">{{ 'FirstName' | translate }}</label>
-                                                <input class="form-control" id="FirstName" type="text" autocomplete="off" [disabled]="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="LastName" class="form-control-label">{{ 'LastName' | translate }}</label>
-                                                <input class="form-control" id="LastName" type="text" autocomplete="off" [disabled]="true" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UserEmail" class="form-control-label">{{ 'CheckoutEmail' | translate }}</label>
-                                                <input class="form-control" id="UserEmail" type="email" autocomplete="off" disabled >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UserPhone" class="form-control-label">{{ 'CheckoutPhone' | translate }}</label>
-                                                <input class="form-control" id="UserPhone" type="number" autocomplete="off"[disabled]="true" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UserCity" class="form-control-label">{{ 'City' | translate }}</label>
-                                                <input class="form-control" id="UserCity" type="text"[disabled]="true" >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UserCountry" class="form-control-label">{{ 'Country' | translate }}</label>
-                                                <input class="form-control" id="UserCountry" type="text"[disabled]="true" >
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="UserAddress" class="form-control-label">{{ 'CheckoutAddress' | translate }}</label>
-                                                <textarea class="form-control" id="UserAddress"[disabled]="true" ></textarea>
-                                            </div>
-                                        </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="UserBuilding" class="form-control-label">{{ 'Building' | translate }}</label>
-                                                <input class="form-control" id="UserBuilding" type="text" disabled >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="UserFloor" class="form-control-label">{{ 'Floor' | translate }}</label>
-                                                <input class="form-control" id="UserFloor" type="number" [disabled]="true">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="UserApartment" class="form-control-label">{{ 'Apartment' | translate }}</label>
-                                                <input class="form-control" id="UserApartment" type="number" [disabled]="true">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                <app-user-info-form></app-user-info-form>
 
                               }
                           </div>
@@ -283,29 +181,26 @@
                           <div class="Userform">
                               <h4>{{ 'ShippingInformation' | translate }}</h4>
                                   <div class="row">
-                                      <div class="col-md-12">
-                                          <div class="form-group">
-                                              <label for="UserShippingAddress" class="form-control-label">{{ 'CheckoutAddress' | translate }}</label>
-                                              <textarea class="form-control" id="UserShippingAddress" formControlName="UserShippingAddress"></textarea>
-                                                @if (userInfo.get('UserShippingAddress')?.errors &&
-                                                    userInfo.get('UserShippingAddress')?.touched) {
-                                                    <div
-                                                        class="alert danger d-flex align-items-baseline text-danger position-absolute"
-                                                    >
-                                                        <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('UserShippingAddress')?.errors?.['required']) {
-                                                        <p>Shipping Address field is required</p>
-                                                        }
-                                                    </div>
+                                    <div class="col-md-12">
+                                      <div class="form-group">
+                                        <label for="UserMainAddress" class="form-control-label">{{ 'CheckoutAddress' | translate }}</label>
+                                        <textarea class="form-control" id="UserMainAddress" formControlName="street_address" rows="5"></textarea>
+                                          @if (userInfo.get('street_address')?.errors && userInfo.get('street_address')?.touched) {
+                                            <div class="alert danger d-flex align-items-baseline text-danger position-absolute">
+                                                <i class="fa-solid fa-xmark"></i>
+                                                @if(userInfo.get('street_address')?.errors?.['required']) {
+                                                <p>Address field is required</p>
                                                 }
-                                          </div>
+                                            </div>
+                                          }
                                       </div>
+                                    </div>
                                   </div>
                                   <div class="row">
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserCountry">{{ 'Country' | translate }}</label>
-                                              <select id="UserCountry" formControlName="Country" class="form-control" (change)="onCountryChange($event)">
+                                              <select id="UserCountry" formControlName="country" class="form-control" (change)="onCountryChange($event)">
                                                   <option disabled selected hidden>{{ 'SelectCountry' | translate }}</option>
                                                   <option *ngFor="let country of countries" [value]="country.code">
                                                     <img [src]="country.flag" alt="{{ country.name }}" style="width: 20px; margin-right: 5px;">
@@ -313,13 +208,14 @@
                                                   </option>
 
                                               </select>
-                                                @if (userInfo.get('Country')?.errors &&
-                                                    userInfo.get('Country')?.touched) {
+                                              <input type="hidden" formControlName="countryName">
+                                                @if (userInfo.get('country')?.errors &&
+                                                    userInfo.get('country')?.touched) {
                                                     <div
                                                         class="alert danger d-flex align-items-baseline text-danger position-absolute"
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('Country')?.errors?.['required']) {
+                                                        @if(userInfo.get('country')?.errors?.['required']) {
                                                         <p>Country field is required</p>
                                                         }
                                                     </div>
@@ -329,19 +225,19 @@
                                       <div class="col-md-6">
                                           <div class="form-group">
                                               <label for="UserCity">{{ 'City' | translate }}</label>
-                                              <select id="UserCity" formControlName="City" [disabled]="isCitySelectDisabled" [(ngModel)]="selectedCity" class="form-control">
+                                              <select id="UserCity" formControlName="city" [disabled]="isCitySelectDisabled" class="form-control">
                                                   <option disabled selected hidden>{{ 'SelectCity' | translate }}</option>
                                                   <option *ngFor="let city of cities" [value]="city.name">
                                                     {{ city.name }}
                                                   </option>
                                               </select>
-                                                @if (userInfo.get('City')?.errors &&
-                                                    userInfo.get('City')?.touched) {
+                                                @if (userInfo.get('city')?.errors &&
+                                                    userInfo.get('city')?.touched) {
                                                     <div
                                                         class="alert danger d-flex align-items-baseline text-danger position-absolute"
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('City')?.errors?.['required']) {
+                                                        @if(userInfo.get('city')?.errors?.['required']) {
                                                         <p>City field is required</p>
                                                         }
                                                     </div>
@@ -353,14 +249,14 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserBuilding" class="form-control-label">{{ 'Building' | translate }}</label>
-                                                <input class="form-control" id="UserBuilding" type="text" formControlName="Building">
-                                                @if (userInfo.get('Building')?.errors &&
-                                                    userInfo.get('Building')?.touched) {
+                                                <input class="form-control" id="UserBuilding" type="text" formControlName="building">
+                                                @if (userInfo.get('building')?.errors &&
+                                                    userInfo.get('building')?.touched) {
                                                     <div
                                                         class="alert danger d-flex align-items-baseline text-danger position-absolute"
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('Building')?.errors?.['required']) {
+                                                        @if(userInfo.get('building')?.errors?.['required']) {
                                                         <p>Building field is required</p>
                                                         }
                                                     </div>
@@ -370,14 +266,14 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserFloor" class="form-control-label">{{ 'Floor' | translate }}</label>
-                                              <input class="form-control" id="UserFloor" type="text" formControlName="Floor">
-                                                @if (userInfo.get('Floor')?.errors &&
-                                                    userInfo.get('Floor')?.touched) {
+                                              <input class="form-control" id="UserFloor" type="text" formControlName="floor">
+                                                @if (userInfo.get('floor')?.errors &&
+                                                    userInfo.get('floor')?.touched) {
                                                     <div
                                                         class="alert danger d-flex align-items-baseline text-danger position-absolute"
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('Floor')?.errors?.['required']) {
+                                                        @if(userInfo.get('floor')?.errors?.['required']) {
                                                         <p>Floor field is required</p>
                                                         }
                                                     </div>
@@ -387,14 +283,14 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="UserApartment" class="form-control-label">{{ 'Apartment' | translate }}</label>
-                                              <input class="form-control" id="UserApartment" type="text" formControlName="Apartment">
-                                                @if (userInfo.get('Apartment')?.errors &&
-                                                    userInfo.get('Apartment')?.touched) {
+                                              <input class="form-control" id="UserApartment" type="text" formControlName="apartment">
+                                                @if (userInfo.get('apartment')?.errors &&
+                                                    userInfo.get('apartment')?.touched) {
                                                     <div
                                                         class="alert danger d-flex align-items-baseline text-danger position-absolute"
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
-                                                        @if(userInfo.get('Apartment')?.errors?.['required']) {
+                                                        @if(userInfo.get('apartment')?.errors?.['required']) {
                                                         <p>Apartment field is required</p>
                                                         }
                                                     </div>
@@ -419,7 +315,7 @@
                           <h4 class="text-center mb-5" style="font-size: 30px;">{{ 'Promocode' | translate }}</h4>
                           <div class="PromocodeInput">
                               <div class="form-group d-flex align-items-center">
-                                  <input class="form-control" type="text" id="promoCodeInput" formControlName="promoCode" placeholder="Promocode" autocomplete="off">
+                                  <input class="form-control" type="text" id="promoCodeInput" formControlName="promotion" placeholder="Promocode" autocomplete="off">
                                   <button class="btn btn-primary p-2" type="submit" id="checkPromoCodeButton">{{ 'Check' | translate }}</button>
                               </div>
                           </div>

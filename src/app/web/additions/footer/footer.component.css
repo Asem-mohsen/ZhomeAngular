@@ -18,7 +18,7 @@ section.MainFooter {
   font-size: 21px;
   background-color: var(--mainColor);
   width: 105px;
-  height: 105px;
+  height: 90px;
   display: grid;
   align-items: center;
 }

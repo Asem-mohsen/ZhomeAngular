@@ -5,7 +5,7 @@ import { environment } from '../../Base/enviroment';
 import { BehaviorSubject, Observable , tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { Admin, User, AuthResponse, profileResponse } from '../../Interfaces/user';
+import { User } from '../../Interfaces/user';
 import { isPlatformBrowser } from '@angular/common';
 import { ApiResponse } from '../../Interfaces/cart';
 
@@ -16,7 +16,7 @@ export class AuthService {
 
   private tokenKey = 'authToken';
 
-  currentUserDate: BehaviorSubject<Admin | User | null> = new BehaviorSubject<Admin | User | null>(null);
+  currentUserDate: BehaviorSubject< User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(private _http: HttpClient, private _router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
@@ -82,7 +82,7 @@ export class AuthService {
     return this._http.post(`${environment.baseURL}/api/users/deactivate` , []);
   }
 
-  getCurrentUser(): User | Admin | null {
+  getCurrentUser(): User | null {
     return this.currentUserDate.getValue();
   }
 

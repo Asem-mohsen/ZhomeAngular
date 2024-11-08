@@ -2,110 +2,133 @@ import { Brand } from "./brand";
 import { Platform } from "./platform";
 import { Sale } from "./sale";
 import { Subcategory } from "./subcategory";
-import { Admin } from "./user";
 
 export interface Product {
-    ID: number;
-    Name: string;
-    ArabicName: string;
-    Description: string;
-    ArabicDescription: string;
-    Price: number;
-    Quantity: number;
-    MainImage: string;
-    InstallationCost: number;
-    SubCategoryID: number;
-    BrandID: number;
-    IsBundle: number;
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    image_url: string;
+    installation_cost: number;
+    subcategory_id: number;
+    brand_id: number;
+    is_bundle: number;
+    video_url: string;
     created_at: string;
     updated_at: string;
-    AddedBy: number;
-    UpdatedBy: number | null;
-    ArchivedOn: string | null;
-    DeletedOn: string | null;
+    added_by: number;
+    updated_by: number | null;
+
     brand: Brand;
     platforms: Platform[];
+    translations : Translation;
+    reviews: Review[];
+    colors: Color[];
+    dimensions: Dimensions;
     subcategory: Subcategory;
     sale: Sale;
     technologies: Technology[];
-    images: ProductImages[];
+    other_images: Media[];
     features: Features[];
-    product_details:ProductDetails;
-    evaluations: Evaluations;
     faqs: Faqs[];
 }
 
-export interface ProductImages{
-    ID: number;
-    ProductID : number;
-    Image: string;
-    created_at: string;
-    updated_at: string;
+export interface Media {
+  id: number;
+  url: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Technology {
-    Technology: string;
-}
-
-export interface ProductDetails{
-    ID: number;
-    ProductID: number;
-    Title: string;
-    Title2: string;
-    ArabicTitle:string;
-    ArabicTitle2:string;
-    CoverImage: string;
-    Video: string;
-    Width: string;
-    Height: string;
-    Length: string;
-    Color: string;
-    Color2: string | null;
-    Color3: string | null;
-    Capacity:  string | null;
-    NoiseLevel:  string | null;
-    Weight:  string | null;
-    PowerConsumption: string | null;
-    AirPurification:  string | null;
-    PreFilter:  string | null;
-    DeodorizingFilter:  string | null;
-    DustCollecting:  string | null;
+    id: number;
+    name : string;
+    description: string;
+    ar_description: string;
+    image_url : string;
     created_at: string;
     updated_at: string;
+}
+
+
+
+export interface Review {
+  id: number;
+  product_id: number;
+  user_id: number;
+  comment: string;
+  ar_comment: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Translation {
+  id: number;
+  product_id: number;
+  locale: string;
+  name: string;
+  description: string;
+  additional_description: string;
+  title: string;
+  second_title: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Color {
+  product_id: number;
+  color: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Dimensions {
+  product_id: number;
+  width: string;
+  height: string;
+  length: string;
+  capacity: string;
+  noise_level: string;
+  weight: string;
+  power_consumption: string;
+  pre_filter: string;
+  dust_collecting: string;
+  deodorizing_filter: string;
+  air_purification: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Features{
-    ID: 3;
-    Feature: string;
-    Description: string;
-    Description_ar: string | null;
-    Image: string;
+    id: 3;
+    name: string;
+    description: string;
+    ar_description: string;
+    image_url: string;
     created_at: string;
     updated_at: string;
     pivot: {
-        ProductID: number;
-        FeatureID: number;
+        product_id: number;
+        feature_id: number;
     }
 }
 
-export interface Evaluations{
-    ID: number;
-    ExpertID: number;
-    Evaluation: string;
-    ArabicEvaluation: string;
-    ProductID: number;
+export interface Faqs{
+    id: number;
+    product_id: number;
     created_at: string;
     updated_at: string;
-    admin: Admin;
-}
 
-export interface Faqs{
-    ID: number;
-    ExpertID: number;
-    Question: string;
-    Answer: string;
-    ArabicQuestion: string | null;
-    ArabicAnswer: string | null;
-    created_at: string | null;
-    updated_at: string | null;
+    translations : {
+      id: string;
+      faq_id: number;
+      locale: string;
+      question : string;
+      answer: string;
+      created_at: string;
+      updated_at: string ;
+    }
+
 }

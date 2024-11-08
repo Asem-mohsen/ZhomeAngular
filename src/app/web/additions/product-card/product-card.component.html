@@ -1,28 +1,28 @@
 <div
   class="item product-one__single"
-  [id]="'Product-' + product.ID"
+  [id]="'Product-' + product.id"
   style="height: 390px"
 >
   <div class="product-one__image">
-    <a [routerLink]="['/product', product.ID]">
-      <img [src]="product.MainImage" [alt]="product.Name" height="270px" />
+    <a [routerLink]="['/product', product.id]">
+      <img [src]="product.image_url" [alt]="product.translations.name" [title]="product.translations.name" height="270px" />
     </a>
   </div>
   <div class="product-one__content">
     <div class="product-one__content-left">
       <h3 class="product-one__title">
-        <a [routerLink]="['/product', product.ID]">{{
-          product.Name | titlecase
+        <a [routerLink]="['/product', product.id]">{{
+          product.translations.name | titlecase
         }}</a>
       </h3>
-      <p class="description-product">Brand: {{ product.brand.Brand }} <br /></p>
+      <p class="description-product">Brand: {{ product.brand.name }} <br /></p>
       <div class="d-flex gap-1">
         @for (platform of product.platforms; track $index) {
         <a
-          [routerLink]="['/shop/filter/platform', platform.ID]"
-          [title]="platform.Platform + ' Platform'"
+          [routerLink]="['/shop/filter/platform', platform.id]"
+          [title]="platform.name + ' Platform'"
         >
-          <img [src]="platform.Logo" class="Platform-flex-img" />
+          <img [src]="platform.image_url"  [alt]="platform.name" [title]="platform.name" class="Platform-flex-img" />
         </a>
         }
       </div>
@@ -33,25 +33,25 @@
       @if (product.sale) {
       <div class="d-grid gap-1">
         <p class="product-one__text">
-          {{ product.sale.PriceAfter | currency : "EGP" }}
+          {{ product.sale.sale_price | currency : "EGP" }}
         </p>
         <p
           class="product-one__text"
           style="text-decoration: line-through; font-size: 14px"
         >
-          {{ product.Price | currency : "EGP" }}
+          {{ product.price | currency : "EGP" }}
         </p>
       </div>
       } @else {
-      <p class="product-one__text">{{ product.Price | currency : "EGP" }}</p>
-      } @if (product.Quantity <= 0) {
+      <p class="product-one__text">{{ product.price | currency : "EGP" }}</p>
+      } @if (product.quantity <= 0) {
       <p class="OutStock">Out of Stock</p>
       } @else {
       <button
         [ngClass]="{'added-successfully': isAdded}"
         type="button"
         class="product-one__cart-btn add-to-cart-btn"
-        (click)="addToCart(product.ID)"
+        (click)="addToCart(product.id)"
         title="Add to Cart"
       >
       @if(!isAdded){

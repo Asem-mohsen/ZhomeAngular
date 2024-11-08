@@ -10,11 +10,11 @@ export class PaymentsService {
 
   constructor(private http: HttpClient) {}
 
-  createPayment(amount: number, cartID: string): Observable<any> {
-    return this.http.post(`${environment.baseURL}/api/payment/create-payment`, { amount, cartID });
+  createPayment(amount: number): Observable<any> {
+    return this.http.post(`${environment.baseURL}/api/payment/create-payment`, { amount });
   }
 
-  createCashPayment(CartID: string , amount: number): Observable<any> {
-    return this.http.post(`${environment.baseURL}/api/payment/cash-payment`, { CartID , amount  });
+  createCashPayment(amount: number): Observable<any> {
+    return this.http.post(`${environment.baseURL}/api/payment/cash-payment`, { amount  });
   }
 }

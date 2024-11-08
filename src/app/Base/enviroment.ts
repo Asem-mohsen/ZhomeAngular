@@ -1,6 +1,6 @@
 export enum environment
 {
-    baseURL = 'https://slategrey-falcon-219814.hostingersite.com',
+    baseURL = 'http://127.0.0.1:8000',
     webURL  = 'https://orangered-curlew-529745.hostingersite.com/home',
     webAdminURL = 'https://slategrey-falcon-219814.hostingersite.com',
 

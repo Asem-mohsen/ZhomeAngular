@@ -82,9 +82,10 @@ export class BrandComponent {
     }
 
     if(isPlatformBrowser(this.platformId)){
-      this._BrandsService.getBrandsPage().subscribe((res) => {
+      this._BrandsService.getBrands().subscribe((res) => {
         this.brands = res.data.brands;
       })
     }
+
   }
 }

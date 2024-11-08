@@ -1,0 +1,90 @@
+<div class="DarkShadow">
+  <div id="signInOverlay" class="overlaySignIn">
+      <div class="cardOverlay" id="signInCard">
+          <h2>{{ 'ZhomeCommunity' | translate }}</h2>
+          <p class="m-3" style="font-size: 13px;">{{ 'ZhomeCommunityText' | translate }}</p>
+          <div class="Div-Overlay-Sign">
+              <div class="InnerDiv-Overlay">
+                  <a routerLink="/login" class="ButtonSignInOverlay"><img src="assets/imgs/UI/website/Cart/refer.png" alt="Sign In"></a>
+                  <p class="small-txt">{{ 'HaveAccount' | translate }}</p>
+              </div>
+              <div class="InnerDiv-Overlay">
+                  <a routerLink="/register" class="ButtonSignUpOverlay"><img src="assets/imgs/UI/website/Cart/add-user.png" alt="Sign Up"></a>
+                  <p class="small-txt">{{ 'ZhomeCommunityNewUser' | translate }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row mt-2">
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="FirstName" class="form-control-label">{{ 'FirstName' | translate }}</label>
+              <input class="form-control" id="FirstName" type="text" autocomplete="off" [disabled]="true">
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="LastName" class="form-control-label">{{ 'LastName' | translate }}</label>
+              <input class="form-control" id="LastName" type="text" autocomplete="off" [disabled]="true" >
+          </div>
+      </div>
+  </div>
+  <div class="row">
+
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="UserEmail" class="form-control-label">{{ 'CheckoutEmail' | translate }}</label>
+              <input class="form-control" id="UserEmail" type="email" autocomplete="off" disabled >
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="UserPhone" class="form-control-label">{{ 'CheckoutPhone' | translate }}</label>
+              <input class="form-control" id="UserPhone" type="number" autocomplete="off"[disabled]="true" >
+          </div>
+      </div>
+  </div>
+  <div class="row">
+
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="UserCity" class="form-control-label">{{ 'City' | translate }}</label>
+              <input class="form-control" id="UserCity" type="text"[disabled]="true" >
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-group">
+              <label for="UserCountry" class="form-control-label">{{ 'Country' | translate }}</label>
+              <input class="form-control" id="UserCountry" type="text"[disabled]="true" >
+          </div>
+      </div>
+
+  </div>
+  <div class="col-md-12">
+          <div class="form-group">
+              <label for="UserAddress" class="form-control-label">{{ 'CheckoutAddress' | translate }}</label>
+              <textarea class="form-control" id="UserAddress"[disabled]="true" ></textarea>
+          </div>
+      </div>
+  <div class="row">
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="UserBuilding" class="form-control-label">{{ 'Building' | translate }}</label>
+              <input class="form-control" id="UserBuilding" type="text" disabled >
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="UserFloor" class="form-control-label">{{ 'Floor' | translate }}</label>
+              <input class="form-control" id="UserFloor" type="number" [disabled]="true">
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label for="UserApartment" class="form-control-label">{{ 'Apartment' | translate }}</label>
+              <input class="form-control" id="UserApartment" type="number" [disabled]="true">
+          </div>
+      </div>
+
+  </div>
+</div>

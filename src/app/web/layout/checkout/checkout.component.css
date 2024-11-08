@@ -383,62 +383,9 @@ div.PayNow button.PayButton {
   background-color: var(--mainColor);
 }
 
-.DarkShadow {
-  position: relative;
-}
-.overlaySignIn {
-  display: flex;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgb(89 89 89 / 23%);
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-}
 
-.cardOverlay {
-  background: #fff;
-  width: 505px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  position: relative;
-}
-@media (max-width: 767px) {
-  .cardOverlay {
-    width: 90%; /* Adjust width as needed for smaller screens */
-  }
-}
 
-/*.close-btn {*/
-/*    position: absolute;*/
-/*    top: 10px;*/
-/*    right: 10px;*/
-/*    cursor: pointer;*/
-/*    font-size: 20px;*/
-/*    color: #555;*/
-/*}*/
-.Div-Overlay-Sign {
-  display: flex;
-  gap: 35px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-a.ButtonSignInOverlay,
-a.ButtonSignUpOverlay {
-  border: 1px solid #e4e4e4;
-  padding: 10px;
-  background-color: #e4e4e4;
-  border-radius: 10px;
-  min-height: 100px;
-  min-width: 150px;
-}
-.InnerDiv-Overlay img {
-  width: 73px;
-  margin: auto;
-}
+
 
 p.Continue-Shopping {
   cursor: pointer;
@@ -450,16 +397,7 @@ p.Continue-Shopping {
   width: 180px;
   margin: auto;
 }
-.InnerDiv-Overlay {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-}
-.InnerDiv-Overlay p.small-txt {
-  font-size: 14px;
-  margin-top: 8px;
-}
+
 .wizard .content .form-control {
   padding: 5px;
   min-height: 50px;

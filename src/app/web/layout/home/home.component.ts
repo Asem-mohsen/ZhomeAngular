@@ -110,11 +110,11 @@ export class HomeComponent implements OnInit{
 
     if (isPlatformBrowser(this.platformId)) {
       this._BrandService.getBrands().subscribe((result) => {
-        this.brands = result.data.Brands;
+        this.brands = result.data.brands;
       })
 
-      this._PlatformService.getPlatfroms().subscribe((allPlatforms) => {
-        this.platforms = allPlatforms.data.Platforms;
+      this._PlatformService.getPlatfroms().subscribe((res) => {
+        this.platforms = res.data.platforms;
       })
 
       this.metaService.addTags([

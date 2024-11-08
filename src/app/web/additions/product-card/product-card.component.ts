@@ -16,8 +16,6 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class ProductCardComponent implements OnInit {
 
-
-
   @Input() product!: Product;
   isAdded: boolean = false;
 

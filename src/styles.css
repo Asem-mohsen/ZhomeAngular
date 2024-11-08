@@ -119,6 +119,9 @@ a.ZhomeName {
     .ZhomeName {
       width: 45%;
     }
+    .box{
+      width: 100% !important;
+    }
     .box .form {
       display: block !important;
       width: 100% !important;
@@ -714,6 +717,23 @@ a.ZhomeName {
     margin: 0px !important;
   }
 
+  /* Interior desing */
+  .main-section-interior{
+    padding-top: 0px !important;
+
+    .row{
+      gap: 25px;
+    }
+    .content.clearfix p.section-name{
+      font-size: 24px !important;
+      border-left: 5px solid var(--mainColor) !important;
+      padding-left: 17px !important;
+    }
+    .bedroom-boxes{
+      justify-content: center !important;
+    }
+
+  }
 
   /* Footer */
   .MainFooter{
@@ -1361,6 +1381,23 @@ a.ZhomeName {
     margin: 0px !important;
   }
 
+  /* Interior desing */
+  .main-section-interior{
+    padding-top: 0px !important;
+
+    .row{
+      gap: 25px;
+    }
+    .content.clearfix p.section-name{
+      font-size: 24px !important;
+      border-left: 5px solid var(--mainColor) !important;
+      padding-left: 17px !important;
+    }
+    .bedroom-boxes{
+      justify-content: center !important;
+    }
+
+  }
 
   /* Footer */
   .MainFooter{

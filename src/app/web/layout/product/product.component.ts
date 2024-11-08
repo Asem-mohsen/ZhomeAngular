@@ -1,7 +1,7 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../Services/products/products.service';
-import { Product, ProductImages } from '../../../Interfaces/product';
+import { Product, Media } from '../../../Interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgStyle, CurrencyPipe, TitleCasePipe, CommonModule, isPlatformBrowser } from '@angular/common';
 import { ProductCardComponent } from "../../additions/product-card/product-card.component";
@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationService } from '../../../Services/translation/translation.service';
+import { SafeUrlPipe } from '../../../Pipes/safeUrl/safe-url.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule , CommonModule , TranslateModule],
+  imports: [RouterLink, CarouselModule, NgStyle, ProductCardComponent , CurrencyPipe , TitleCasePipe , FormsModule , CommonModule , TranslateModule , SafeUrlPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -24,10 +25,9 @@ export class ProductComponent {
   products: Product[] = [];
   productID !: string | null;
   product !: Product ;
-  productImages: ProductImages[] = [];
+  productImages: Media[] = [];
   productPlatforms: any[] = [];
   isAdded : boolean = false;
-  activeTab : string = '';
   currentLang : string = 'en'
   collapseStates: { [key: string]: boolean } = {
     'description': true,
@@ -129,13 +129,13 @@ export class ProductComponent {
 
 
           next: (res) => {
-            this.products = res.data['Recommended-Products'];
-            this.product = res.data.Product;
-            this.productImages = res.data.Product.images;
-            this.productPlatforms = res.data.Product.platforms;
+            this.products = res.data.recommended_products;
+            this.product = res.data.product;
+            this.productImages = res.data.product.media;
+            this.productPlatforms = res.data.product.platforms;
 
-            if (this.product?.Name) {
-              this._titleService.setTitle(this.product.Name);
+            if (this.product.translations.name) {
+              this._titleService.setTitle(this.product.translations.name);
             }
 
           }
@@ -171,12 +171,12 @@ export class ProductComponent {
     if (!this.product || !this.product.technologies) return '';
 
     return this.product.technologies
-      .map(technology => technology.Technology)
+      .map(technology => technology.name)
       .join(' - ');
   }
 
   incrementQuantity() {
-    if (this.quantity < this.product.Quantity) {
+    if (this.quantity < this.product.quantity) {
       this.quantity++;
     }
   }
@@ -185,10 +185,6 @@ export class ProductComponent {
     if (this.quantity > 1) {
       this.quantity--;
     }
-  }
-
-  selectTab(tab: string) {
-    this.activeTab = tab;
   }
 
   toggleCollapse(section: string) {

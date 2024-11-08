@@ -13,7 +13,7 @@ export class OrdersService {
 
   checkoutOrders() : Observable<any>
   {
-    return this._http.get<CheckoutResponse>(`${environment.baseURL}/api/checkout/`);
+    return this._http.get<CheckoutResponse>(`${environment.baseURL}/api/checkout`);
   }
 
   saveUserInfo(data : UserData) : Observable<any>

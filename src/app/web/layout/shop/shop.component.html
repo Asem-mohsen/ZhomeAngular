@@ -15,9 +15,9 @@
   <div class="row p-0 m-0">
       <div class="col-md-9 main-img p-0 m-0">
         <owl-carousel-o [options]="ShopSlider">
-          @for (bundle of bundles ; track $index) {
+          @for (product of products ; track $index) {
           <ng-template carouselSlide>
-            <img [src]="bundle.MainImage" class="w-100" [alt]="bundle.Name">
+            <img [src]="product.image_url" class="w-100" [alt]="product.translations.name">
           </ng-template>
           }
         </owl-carousel-o>
@@ -36,14 +36,14 @@
     <h1 id="ShopByCategory"> {{'Categories' | translate}}</h1>
     <div class="categories-shop">
       <owl-carousel-o [options]="CategorySlider">
-        @for (category of shopData?.All_Categories; track $index) {
+        @for (category of shopData.categories; track $index) {
         <ng-template carouselSlide>
           <div class="category-shop">
-            <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">
-              <img [src]="category.MainImage" [alt]="category.Category" />
+            <a routerLink="/shop/filters" [queryParams]="{ category: category.id }">
+              <img [src]="category.image_url" [alt]="category.name" [title]="category.name" />
             </a>
-            <a routerLink="/shop/filters" [queryParams]="{ category: category.ID }">
-              {{ category.Category }}
+            <a routerLink="/shop/filters" [queryParams]="{ category: category.id }">
+              {{ category.name }}
             </a>
           </div>
         </ng-template>
@@ -228,8 +228,8 @@
       >
         <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
-            <h3>{{ bundle.Name }}</h3>
-            <p>{{ bundle.brand.Brand }}</p>
+            <h3>{{ bundle.translations.name }}</h3>
+            <p>{{ bundle.brand.name }}</p>
           </div>
           <a>Read More</a>
         </div>
@@ -242,8 +242,8 @@
       >
         <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
-            <h3>{{ bundle.Name }}</h3>
-            <p>{{ bundle.brand.Brand }}</p>
+            <h3>{{ bundle.translations.name }}</h3>
+            <p>{{ bundle.brand.name }}</p>
           </div>
           <a>Read More</a>
         </div>
@@ -266,8 +266,8 @@
       >
         <div *ngIf="bundle" class="overlay-button" style="width: 85%">
           <div class="Info-bundle">
-            <h3>{{ bundle.Name }}</h3>
-            <p>{{ bundle.brand.Brand }}</p>
+            <h3>{{ bundle.translations.name }}</h3>
+            <p>{{ bundle.brand.name }}</p>
           </div>
           <a>Read More</a>
         </div>
@@ -283,9 +283,9 @@
       <div class="promocode" style="background-image: url('./assets/imgs/UI/website/Shop/pexels-eric-anada-1495580.jpg')">
           <div class="promoInfo">
               <h2>{{'FreshSale' | translate}}</h2>
-              <p>{{'SaveUpTo' | translate}} {{promocode.Save + "%"}} </p>
+              <p>{{'SaveUpTo' | translate}} {{promocode.discount_amount + "%"}} </p>
               <h3>{{'WithPromo' | translate}}</h3><br>
-              <span>{{promocode.Promocode}}</span>
+              <span>{{promocode.code}}</span>
           </div>
           <div class="countdown" id="countdown">
               <div class="num">
@@ -345,11 +345,11 @@
       <div class="boxes-shop SubCategory-OnlineShop">
         <div class="category-Name">
           <h3>
-            {{ category1.Category }}
+            {{ category1.name }}
             <br />
             <span>{{ 'Category' | translate }}</span>
           </h3>
-          <a routerLink="/shop/filters"  [queryParams]="{ category: category1.ID }"
+          <a routerLink="/shop/filters"  [queryParams]="{ category: category1.id }"
             >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
@@ -357,13 +357,13 @@
         @if(category1.subcategories){
         <div class="Subs mt-3">
           @for (subcategory of category1.subcategories ; track $index) {
-          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category1.ID }">
+          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category1.id }">
             <div
               class="box-shop SubCategory-OnlineShop-Circled"
-              [style]="'background-image: url(' + subcategory.image + ')'"
+              [style]="'background-image: url(' + subcategory.image_url + ')'"
             ></div>
             <p>
-              {{ subcategory.SubName }}
+              {{ subcategory.name }}
             </p>
           </a>
           }
@@ -395,18 +395,18 @@
     <!-- Select Bundles -->
     <h2 class="Home-Text">{{ 'BundlesMadeforYou' | translate }}</h2>
     <div class="Bundles Images-Home">
-      @for (bundle of bundles; track $index) {
+      @for (product of products; track $index) {
 
       <div class="Bundle-Shop Image-One">
-        <img [src]="bundle.MainImage" class="BigWidth" [alt]="bundle.Name" />
+        <img [src]="product.image_url" class="BigWidth" [alt]="product.translations.name"  [title]="product.translations.name" />
         <div class="overlay-button" style="width: 250px">
           <div class="Info-bundle">
             <h3>
-              {{ bundle.Name }}
+              {{ product.translations.name }}
             </h3>
-            <p>{{ bundle.brand.Brand }}</p>
+            <p>{{ product.brand.name }}</p>
           </div>
-          <a [routerLink]="['/product', bundle.ID]" class="btn btn-info"
+          <a [routerLink]="['/product', product.id]" class="btn btn-info"
             >Read More</a
           >
         </div>
@@ -425,11 +425,11 @@
       <div class="boxes-shop SubCategory-OnlineShop">
         <div class="category-Name">
           <h3>
-            {{ category2.Category }}
+            {{ category2.name }}
             <br />
             <span>{{ 'Category' | translate }}</span>
           </h3>
-          <a routerLink="/shop/filters"  [queryParams]="{ category: category2.ID }"
+          <a routerLink="/shop/filters"  [queryParams]="{ category: category2.id }"
             >{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i
           ></a>
         </div>
@@ -437,13 +437,13 @@
         <div class="Subs mt-3">
           @for (subcategory of category2.subcategories ; track $index) {
 
-          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category2.ID }">
+          <a class="ToTheSubPage" routerLink="/shop/filters"  [queryParams]="{ category: category2.id }">
             <div
               class="box-shop SubCategory-OnlineShop-Circled"
-              [style]="'background-image: url(' + subcategory.image + ')'"
+              [style]="'background-image: url(' + subcategory.image_url + ')'"
             ></div>
             <p>
-              {{ subcategory.SubName }}
+              {{ subcategory.name }}
             </p>
           </a>
           }
@@ -494,8 +494,8 @@
     <!-- Product From The Selected Brand -->
     <section *ngIf="brand">
       <div class="Category-Product mt-4 justify-content-between">
-        <h3>{{ brand.Brand + " Products" }}</h3>
-        <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.ID }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
+        <h3>{{ brand.name + " Products" }}</h3>
+        <a routerLink="/shop/filters"  [queryParams]="{ brand: brand.id }">{{ 'DiscoverMore' | translate }}<i class="fa fa-arrow-right ml-2"></i></a>
       </div>
       <div class="related-product__carousel mt-5 mb-5">
         <owl-carousel-o [options]="ProductsSlider">
@@ -553,9 +553,9 @@
       <ng-template carouselSlide>
         <img
 
-          [src]="brand.Logo"
-          [alt]="brand.Brand"
-          [title]="brand.Brand"
+          [src]="brand.image_url"
+          [alt]="brand.name"
+          [title]="brand.name"
         />
       </ng-template>
       }

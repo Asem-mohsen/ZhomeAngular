@@ -1,15 +1,15 @@
 import { Category } from "./category";
 
 export interface Subcategory {
-    ID: number;
-    SubName: string;
-    SubArabicName: string;
-    image: string;
-    SubDescription: string;
-    ArabicDescription: string;
-    Status: number;
-    MainCategoryID: number;
-    created_at: string | null;
+    id: number;
+    name: string;
+    ar_name: string;
+    image_url: string;
+    description: string;
+    ar_description: string;
+    status: string;
+    category_id: number;
+    created_at: string;
     updated_at: string;
     category: Category;
 }

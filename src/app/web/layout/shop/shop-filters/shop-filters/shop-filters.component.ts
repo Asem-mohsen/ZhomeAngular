@@ -16,6 +16,7 @@ import { Options , LabelType} from '@angular-slider/ngx-slider';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CarouselModule , OwlOptions } from 'ngx-owl-carousel-o';
 import { MatPaginatorModule , PageEvent} from '@angular/material/paginator';
+import { TranslationService } from '../../../../../Services/translation/translation.service';
 
 @Component({
   selector: 'app-shop-filters',
@@ -34,7 +35,7 @@ export class ShopFiltersComponent {
   itemsPerPage: number = 10;
   totalProducts: number = 0;
 
-  constructor(private _ShopService : ShopService , @Inject(PLATFORM_ID) private platformId: object , private route: ActivatedRoute , private router : Router){
+  constructor(private translationService : TranslationService, private _ShopService : ShopService , @Inject(PLATFORM_ID) private platformId: object , private route: ActivatedRoute , private router : Router){
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
@@ -52,6 +53,8 @@ export class ShopFiltersComponent {
   };
 
   products : Product [] = [];
+  item: any;
+  currentLang : string = 'en'
 
   filteredProducts: Product[] = [];
 
@@ -117,24 +120,52 @@ export class ShopFiltersComponent {
       }
 
       if (this.isBrowser) {
+
+        this.currentLang = this.translationService.getLanguage();
+
         // Subscribe to query parameters changes
         this.route.queryParams.subscribe((params) => {
-          if (params['category']) {
-            this.selectedFilters.category = [Number(params['category'])];
-          }
-          if (params['platform']) {
-            this.selectedFilters.platform = [Number(params['platform'])];
-          }
-          if (params['brand']) {
-            this.selectedFilters.brand =[Number(params['brand'])];
+
+          const hasFilters = !!params['category'] || !!params['platform'] || !!params['brand'];
+          if (!hasFilters) {
+
+            this.setupSlider();
+
+          } else {
+
+            if (params['category']) {
+              this.selectedFilters.category = [Number(params['category'])];
+              this.getItem('category' , this.selectedFilters.category )
+            }
+            if (params['platform']) {
+              this.selectedFilters.platform = [Number(params['platform'])];
+              this.getItem('platform' , this.selectedFilters.platform )
+            }
+            if (params['brand']) {
+              this.selectedFilters.brand =[Number(params['brand'])];
+              this.getItem('brand' , this.selectedFilters.brand )
+            }
+
+            this.applyFilters();
+
           }
 
-          this.applyFilters();
         });
 
         this.setupSlider();
       }
 
+    }
+
+    getItem(type: string, id: number) {
+      this.item = undefined;
+      this._ShopService.fetchItem(type, id).subscribe({
+        next: (res) => {
+          this.item = res.data;
+          console.log("Item fetched:", this.item);
+        },
+
+      });
     }
 
     setupSlider() {
@@ -173,6 +204,7 @@ export class ShopFiltersComponent {
       this.filteredProducts = new FilterPipe().transform(this.products, filters);
       this.applyPagination();
     }
+
 
     resetFilters(): void {
       // Reset the filter criteria

@@ -451,7 +451,10 @@ div.SubCategory-onlineshop {
   width: 200px;
   padding: 10px;
 }
-
+.sub-box-filter a:hover{
+  transition: all 0.4s;
+  color: var(--mainColor);
+}
 .Images-Home div.Image-One img.BigWidth {
   width: 400px !important;
 }
@@ -726,7 +729,7 @@ div.BundlesButton a:hover {
   }
 }
 
-.collapse {
+.FilterTransform .collapse {
   display: none;
 }
 
@@ -741,7 +744,7 @@ div.BundlesButton a:hover {
   display: block;
   max-height: 1000px;
   height: auto;
-
+  margin-top: 14px;
 }
 
 /* Add a smooth transition effect when opening and closing */

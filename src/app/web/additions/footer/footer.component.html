@@ -24,11 +24,17 @@
   <div class="Footer">
     <div class="left-footer">
       <!-- Logo -->
-      <h2>Zhome</h2>
+      <h2>{{zhomeContact.title}}</h2>
       <h3>{{'AlwaysInControl' | translate}}</h3>
       <div class="text-footer">
-        <p>{{"0"+ zhomeContact.Phone + " - " + "0" + zhomeContact.Phone2}}</p>
-        <p>{{'FindusIn' | translate}} {{zhomeContact.Market + " and " + zhomeContact.Market2}}</p>
+        <p>
+          {{ zhomeContact.phones | joinWithDash }}
+        </p>
+
+        <p>
+          {{ 'FindusIn' | translate }}
+          {{ zhomeContact.markets | joinWithAnd }}
+        </p>
       </div>
 
       <p class="Download">{{'DownloadApp' | translate}}</p>
@@ -81,7 +87,7 @@
             <a routerLink="/about">{{'Zhome' | translate}}</a>
           </li>
           <li>
-            <a routerLink="/services">{{'Services' | translate}}</a>
+            <a routerLink="/interior-design">{{'Interior-design' | translate}}</a>
           </li>
           <li>
             <a routerLink="/contact">{{'ContactUs' | translate}}</a>

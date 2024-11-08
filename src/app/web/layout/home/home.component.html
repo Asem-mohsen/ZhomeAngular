@@ -86,7 +86,7 @@
       <owl-carousel-o [options]="BrandsSlider">
         @for (brand of brands; track $index){
           <ng-template carouselSlide>
-            <img loading="lazy" [src]="brand.Logo" [alt]="brand.Brand" [title]="brand.Brand" />
+            <img loading="lazy" [src]="brand.image_url" [alt]="brand.name" [title]="brand.name" />
           </ng-template>
         }
       </owl-carousel-o>
@@ -664,11 +664,11 @@
           <div class="Platform-home">
             <img
               loading="lazy"
-              [src]="platform.Logo"
-              [alt]="platform.Platform"
-              [title]="platform.Platform"
+              [src]="platform.image_url"
+              [alt]="platform.name"
+              [title]="platform.name"
             />
-            <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.ID }">{{ platform.Platform }}</a>
+            <a routerLink="/shop/filters"  [queryParams]="{ platform: platform.id }">{{ platform.name }}</a>
           </div>
 
       }

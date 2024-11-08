@@ -15,8 +15,4 @@ export class PlatformService {
     return this._http.get(`${environment.baseURL}/api/platforms`)
   }
 
-  getPlatfromsUserShow() : Observable<any>
-  {
-    return this._http.get(`${environment.baseURL}/api/platforms/userShow`)
-  }
 }

@@ -171,10 +171,6 @@ h2.ProductDetails-Text {
   border-radius: 27px;
   transform: translateX(143px);
 }
-.ProductDetails_Section_last button {
-  border-radius: 27px;
-  transform: translateX(143px);
-}
 
 .thm-btn {
   border: none;
@@ -193,19 +189,21 @@ h2.ProductDetails-Text {
 .LastProductDetails img {
   border-radius: 5px;
   border: 1px solid #ececec;
-  height: 606px;
+  /* height: 606px; */
+  height: auto;
   width: 547px;
   object-fit: cover;
 }
 .ProductDetails_Section_last ul {
-  margin-bottom: 39px;
-  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-top: 25px;
+  padding-left: 10px;
 }
 .ProductDetails_Section_last ul li {
   display: flex;
   gap: 15px;
   align-items: normal;
-  margin: 20px 0;
+  margin: 17px 0;
 }
 .product-details .product-details__image .MainUpperImage {
   height: 450px;
@@ -230,7 +228,7 @@ h4[aria-expanded="false"]::before {
 }
 .product-details {
   padding-top: 20px;
-  padding-bottom: 120px;
+  padding-bottom: 80px;
 }
 .product-details__image {
   position: relative;

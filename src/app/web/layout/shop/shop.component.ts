@@ -6,7 +6,8 @@ import { Category } from '../../../Interfaces/category';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Brand } from '../../../Interfaces/brand';
 import { ShopService } from '../../../Services/Pages/Shop/shop.service';
-import { Product } from '../../../Interfaces/product';
+import { Product} from '../../../Interfaces/product';
+import { Promotion } from '../../../Interfaces/checkout';
 import { ProductCardComponent } from '../../additions/product-card/product-card.component';
 @Component({
   selector: 'app-shop',
@@ -28,9 +29,9 @@ export class ShopComponent implements OnInit, OnDestroy{
   category2Products !: Product[];
   BrandProducts !: Product[];
   activeTab: string = 'Recommended';
-  bundles !: Product [];
+  products : Product[] = [];
   brands !: Brand [];
-  promocode !: any;
+  promocode !: Promotion;
 
   countdownInterval: any;
   timeLeft: { days: number; hours: number; minutes: number; seconds: number } = {
@@ -168,19 +169,19 @@ export class ShopComponent implements OnInit, OnDestroy{
       this._ShopService.getShopPage().subscribe({
         next: (res) => {
             this.shopData = res.data;
-            this.bundles = res.data.All_Bundles ;
-            this.productsOnSale = res.data.All_Products_On_Sale ;
+            this.products = res.data.bundles ;
+            this.productsOnSale = res.data.onSale ;
             this.bundle = res.data.Bundle_to_Show as Product ;
-            this.category1 = res.data.Category1_to_show?.Category as Category ;
-            this.category2 = res.data.Category2_to_show?.Category as Category ;
-            this.categoryProducts = res.data.Category1_to_show?.Products ;
-            this.category2Products = res.data.Category2_to_show?.Products ;
-            this.brand = res.data.Brand_to_show?.Brand as Brand || null;
-            this.brands = res.data.All_Brands ;
-            this.BrandProducts = res.data.Brand_to_show.Products;
-            this.promocode = res.data.Promocode;
-            if (res.data.Promocode.EndsIn) {
-              this.startCountdown(res.data.Promocode.EndsIn);
+            this.category1 = res.data.Category1_to_show as Category ;
+            this.category2 = res.data.Category2_to_show as Category ;
+            this.categoryProducts = res.data.Category1_to_show?.products ;
+            this.category2Products = res.data.Category2_to_show?.products ;
+            this.brand = res.data.Brand_to_show as Brand || null;
+            this.brands = res.data.brands ;
+            this.BrandProducts = res.data.Brand_to_show.products;
+            this.promocode = res.data.promotions;
+            if (res.data.promotions.valid_until) {
+              this.startCountdown(res.data.promotions.valid_until);
             }
 
         },

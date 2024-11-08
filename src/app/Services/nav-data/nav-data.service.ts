@@ -11,6 +11,6 @@ export class NavDataService {
   constructor(private http: HttpClient) {}
 
   getNavData(): Observable<any> {
-    return this.http.get(`${environment.baseURL}/api/nav-data`);
+    return this.http.get(`${environment.baseURL}/api/shop/nav-data`);
   }
 }

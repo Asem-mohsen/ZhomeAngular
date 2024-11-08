@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Inject, Output, PLATFORM_ID, ViewEncapsulation} from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive , NavigationEnd } from '@angular/router';
 import { AuthService } from '../../../Services/auth/auth.service';
 import { CartService } from '../../../Services/cart/cart.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,6 +10,7 @@ import { Category } from '../../../Interfaces/category';
 import { Brand } from '../../../Interfaces/brand';
 import { Platform } from '../../../Interfaces/platform';
 import { NavDataService } from '../../../Services/nav-data/nav-data.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop-navbar',
@@ -54,17 +55,17 @@ export class ShopNavbarComponent {
       this.loadNavData();
 
       this._cartService.getCartCount().subscribe();
+
     }
 
   }
 
-
   loadNavData(): void {
     this._navData.getNavData().subscribe({
       next : (res) => {
-        this.categories = res.data.categories.slice(0, 10);
-        this.brands = res.data.brands.slice(0, 11);
-        this.platforms = res.data.platforms;
+        this.categories = res.data.navbar_data.categories.slice(0, 10);
+        this.brands = res.data.navbar_data.brands.slice(0, 11);
+        this.platforms = res.data.navbar_data.platforms;
       }
     });
   }
